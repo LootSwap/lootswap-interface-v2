@@ -1,6 +1,6 @@
-import tokens from './tokens'
+// import tokens from './tokens'
 import { FarmConfig } from './types'
-
+// TODO: might not need
 const priceHelperLps: FarmConfig[] = [
   /**
    * These LPs are just used to help with price calculation for MasterChef LPs (farms.ts).
@@ -9,16 +9,6 @@ const priceHelperLps: FarmConfig[] = [
    * Prices are then fetched for all farms (masterchef + priceHelperLps).
    * Before storing to redux, farms without a PID are filtered out.
    */
-  {
-    pid: null,
-    lpSymbol: 'QSD-BNB LP',
-    lpAddresses: {
-      97: '',
-      56: '0x7b3ae32eE8C532016f3E31C8941D937c59e055B9',
-    },
-    token: tokens.qsd,
-    quoteToken: tokens.wbnb,
-  },
 ]
 
 export default priceHelperLps

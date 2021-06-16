@@ -2,23 +2,18 @@ import { getAddress } from 'utils/addressHelpers'
 
 describe('getAddress', () => {
   const address = {
-    56: '0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82',
-    97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
+    1666600000: '0xbDa99C8695986B45a0dD3979cC6f3974D9753D30',
+    1666700000: '0xCb14544950B6d81b9D0ff73af7876E50d64d6e8E',
   }
 
-  it(`get address for mainnet (chainId 56)`, () => {
-    process.env.REACT_APP_CHAIN_ID = '56'
-    const expected = address[56]
+  it(`get address for mainnet (chainId 1666600000)`, () => {
+    process.env.REACT_APP_CHAIN_ID = '1666600000'
+    const expected = address[1666600000]
     expect(getAddress(address)).toEqual(expected)
   })
-  it(`get address for testnet (chainId 97)`, () => {
-    process.env.REACT_APP_CHAIN_ID = '97'
-    const expected = address[97]
-    expect(getAddress(address)).toEqual(expected)
-  })
-  it(`get address for any other network (chainId 31337)`, () => {
-    process.env.REACT_APP_CHAIN_ID = '31337'
-    const expected = address[56]
+  it(`get address for testnet (chainId 1666700000)`, () => {
+    process.env.REACT_APP_CHAIN_ID = '1666700000'
+    const expected = address[1666700000]
     expect(getAddress(address)).toEqual(expected)
   })
 })

@@ -1,3 +1,4 @@
+// TODO: needs to be cleaned up
 export const EN = { code: 'en', language: 'English' }
 export const AR = { code: 'ar', language: 'العربية' }
 export const BN = { code: 'bn', language: 'বাংলা' }

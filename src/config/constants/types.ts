@@ -1,6 +1,8 @@
 export interface Address {
+  1666700000?: string
+  1666600000?: string
   97?: string
-  56: string
+  56?: string
 }
 
 export interface Token {

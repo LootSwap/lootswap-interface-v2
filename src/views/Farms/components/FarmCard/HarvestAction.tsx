@@ -23,9 +23,10 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
   const cakePrice = usePriceCakeBusd()
   const dispatch = useAppDispatch()
   const rawEarningsBalance = account ? getBalanceNumber(earnings) : 0
-  const displayBalance = rawEarningsBalance.toLocaleString()
+  const displayBalance = rawEarningsBalance.toFixed(6).toString()
   const earningsBusd = rawEarningsBalance ? new BigNumber(rawEarningsBalance).multipliedBy(cakePrice).toNumber() : 0
-
+  // TODO change cake name and also see if dispatch(fetchFarmUserDataAsync)/useHarvest(pid) runs correctly.. maybe add more UI interaction
+  // ** (notes) this is effecting the cards not farm rows
   return (
     <Flex mb="8px" justifyContent="space-between" alignItems="center">
       <Heading color={rawEarningsBalance === 0 ? 'textDisabled' : 'text'}>

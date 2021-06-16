@@ -16,7 +16,13 @@ const getFarmBaseTokenPrice = (farm: Farm, quoteTokenFarm: Farm, bnbPriceBusd: B
     return hasTokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : BIG_ZERO
   }
 
-  if (farm.quoteToken.symbol === 'wBNB') {
+  // TODO check logic TMU multiplying token to bnb price
+  if (
+    farm.quoteToken.symbol === 'wBNB' ||
+    farm.quoteToken.symbol === 'bscBUSD' ||
+    farm.quoteToken.symbol === 'WONE' ||
+    farm.quoteToken.symbol === 'LOOT'
+  ) {
     return hasTokenPriceVsQuote ? bnbPriceBusd.times(farm.tokenPriceVsQuote) : BIG_ZERO
   }
 
@@ -37,7 +43,12 @@ const getFarmBaseTokenPrice = (farm: Farm, quoteTokenFarm: Farm, bnbPriceBusd: B
       : BIG_ZERO
   }
 
-  if (quoteTokenFarm.quoteToken.symbol === 'BUSD') {
+  if (
+    quoteTokenFarm.quoteToken.symbol === 'BUSD' ||
+    quoteTokenFarm.quoteToken.symbol === 'bscBUSD' ||
+    quoteTokenFarm.quoteToken.symbol === 'bscBNB' ||
+    quoteTokenFarm.quoteToken.symbol === 'WONE'
+  ) {
     const quoteTokenInBusd = quoteTokenFarm.tokenPriceVsQuote
     return hasTokenPriceVsQuote && quoteTokenInBusd
       ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd)
@@ -49,7 +60,7 @@ const getFarmBaseTokenPrice = (farm: Farm, quoteTokenFarm: Farm, bnbPriceBusd: B
 }
 
 const getFarmQuoteTokenPrice = (farm: Farm, quoteTokenFarm: Farm, bnbPriceBusd: BigNumber): BigNumber => {
-  if (farm.quoteToken.symbol === 'BUSD') {
+  if (farm.quoteToken.symbol === 'BUSD' || farm.quoteToken.symbol === 'bscBUSD') {
     return BIG_ONE
   }
 
@@ -69,13 +80,22 @@ const getFarmQuoteTokenPrice = (farm: Farm, quoteTokenFarm: Farm, bnbPriceBusd: 
     return quoteTokenFarm.tokenPriceVsQuote ? new BigNumber(quoteTokenFarm.tokenPriceVsQuote) : BIG_ZERO
   }
 
+  // TODO check logic also not UNI and CAKE wrong info
+  if (quoteTokenFarm.quoteToken.symbol === 'bscBUSD') {
+    return quoteTokenFarm.tokenPriceVsQuote ? new BigNumber(quoteTokenFarm.tokenPriceVsQuote) : BIG_ZERO
+  }
+
+  if (quoteTokenFarm.quoteToken.symbol === 'WONE') {
+    return quoteTokenFarm.tokenPriceVsQuote ? bnbPriceBusd.times(quoteTokenFarm.tokenPriceVsQuote) : BIG_ZERO
+  }
+
   return BIG_ZERO
 }
 
+// TODO need to work more on  this
 const fetchFarmsPrices = async (farms) => {
-  const bnbBusdFarm = farms.find((farm: Farm) => farm.pid === 252)
-  const bnbPriceBusd = bnbBusdFarm.tokenPriceVsQuote ? BIG_ONE.div(bnbBusdFarm.tokenPriceVsQuote) : BIG_ZERO
-
+  const lootbusdFarm = farms.find((farm: Farm) => farm.pid === 9)
+  const bnbPriceBusd = lootbusdFarm.tokenPriceVsQuote ? BIG_ONE.div(lootbusdFarm.tokenPriceVsQuote) : BIG_ZERO // TODO: change variable name
   const farmsWithPrices = farms.map((farm) => {
     const quoteTokenFarm = getFarmFromTokenSymbol(farms, farm.quoteToken.symbol)
     const baseTokenPrice = getFarmBaseTokenPrice(farm, quoteTokenFarm, bnbPriceBusd)

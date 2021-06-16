@@ -12,6 +12,7 @@ export interface FarmWithBalance extends FarmConfig {
   balance: BigNumber
 }
 
+// calls current user rewards for farm
 const useFarmsWithBalance = () => {
   const [farmsWithBalances, setFarmsWithBalances] = useState<FarmWithBalance[]>([])
   const { account } = useWeb3React()
@@ -21,7 +22,7 @@ const useFarmsWithBalance = () => {
     const fetchBalances = async () => {
       const calls = farmsConfig.map((farm) => ({
         address: getMasterChefAddress(),
-        name: 'pendingCake',
+        name: 'pendingReward',
         params: [farm.pid, account],
       }))
 

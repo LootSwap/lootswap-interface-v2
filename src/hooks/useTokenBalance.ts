@@ -3,6 +3,7 @@ import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { getBep20Contract, getCakeContract } from 'utils/contractHelpers'
 import { BIG_ZERO } from 'utils/bigNumber'
+import { ZERO_DEAD_ADDRESS } from 'config'
 import useWeb3 from './useWeb3'
 import useRefresh from './useRefresh'
 import useLastUpdated from './useLastUpdated'
@@ -30,7 +31,7 @@ const useTokenBalance = (tokenAddress: string) => {
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const contract = getBep20Contract(tokenAddress, web3)
+      const contract = getBep20Contract(tokenAddress, web3) // TODO change Bep20Contract name to be Erc20Contract
       try {
         const res = await contract.methods.balanceOf(account).call()
         setBalanceState({ balance: new BigNumber(res), fetchStatus: SUCCESS })
@@ -57,7 +58,7 @@ export const useTotalSupply = () => {
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const cakeContract = getCakeContract()
+      const cakeContract = getCakeContract() // TODO change getCakeContract -> getLootContract
       const supply = await cakeContract.methods.totalSupply().call()
       setTotalSupply(new BigNumber(supply))
     }
@@ -75,8 +76,8 @@ export const useBurnedBalance = (tokenAddress: string) => {
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const contract = getBep20Contract(tokenAddress, web3)
-      const res = await contract.methods.balanceOf('0x000000000000000000000000000000000000dEaD').call()
+      const contract = getBep20Contract(tokenAddress, web3) // TODO rename getBep20Contract
+      const res = await contract.methods.balanceOf(ZERO_DEAD_ADDRESS).call()
       setBalance(new BigNumber(res))
     }
 

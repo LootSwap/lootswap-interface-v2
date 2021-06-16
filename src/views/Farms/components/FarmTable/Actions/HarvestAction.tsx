@@ -28,7 +28,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
   if (!earningsBigNumber.isZero()) {
     earnings = getBalanceNumber(earningsBigNumber)
     earningsBusd = new BigNumber(earnings).multipliedBy(cakePrice).toNumber()
-    displayBalance = earnings.toLocaleString()
+    displayBalance = earnings.toFixed(6).toString()
   }
 
   const [pendingTx, setPendingTx] = useState(false)
@@ -52,7 +52,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
   return (
     <ActionContainer>
       <ActionTitles>
-        <Title>CAKE </Title>
+        <Title>{t('LOOT')} </Title>
         <Subtle>{t('Earned').toUpperCase()}</Subtle>
       </ActionTitles>
       <ActionContent>

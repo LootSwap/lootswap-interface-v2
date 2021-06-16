@@ -1,14 +1,6 @@
 import BigNumber from 'bignumber.js'
-import { DEFAULT_GAS_LIMIT, DEFAULT_TOKEN_DECIMAL } from 'config'
+import { DEFAULT_GAS_LIMIT, DEFAULT_GAS_PRICE, DEFAULT_TOKEN_DECIMAL, ZERO_ADDRESS } from 'config'
 import { ethers } from 'ethers'
-import { Pair, TokenAmount, Token } from '@pancakeswap-libs/sdk'
-import { getLpContract, getMasterchefContract } from 'utils/contractHelpers'
-import farms from 'config/constants/farms'
-import { getAddress, getCakeAddress } from 'utils/addressHelpers'
-import tokens from 'config/constants/tokens'
-import { getWeb3WithArchivedNodeProvider } from './web3'
-import { getBalanceAmount } from './formatBalance'
-import { BIG_ZERO } from './bigNumber'
 
 export const approve = async (lpContract, masterChefContract, account) => {
   return lpContract.methods
@@ -17,109 +9,57 @@ export const approve = async (lpContract, masterChefContract, account) => {
 }
 
 export const stake = async (masterChefContract, pid, amount, account) => {
-  if (pid === 0) {
-    return masterChefContract.methods
-      .enterStaking(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
-      .send({ from: account, gas: DEFAULT_GAS_LIMIT })
-      .on('transactionHash', (tx) => {
-        return tx.transactionHash
-      })
-  }
+  const referral = ZERO_ADDRESS
+  const estGas = await masterChefContract.methods
+    .deposit(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString(), referral)
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('stake().estGas failed', error)
+    })
 
   return masterChefContract.methods
-    .deposit(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
-    .send({ from: account, gas: DEFAULT_GAS_LIMIT })
+    .deposit(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString(), referral)
+    .send({ from: account, gas: estGas })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
 }
 
 export const unstake = async (masterChefContract, pid, amount, account) => {
-  if (pid === 0) {
-    return masterChefContract.methods
-      .leaveStaking(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
-      .send({ from: account, gas: DEFAULT_GAS_LIMIT })
-      .on('transactionHash', (tx) => {
-        return tx.transactionHash
-      })
-  }
+  const referral = ZERO_ADDRESS
+  const estGas = await masterChefContract.methods
+    .withdraw(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString(), referral)
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('unstake().estGas failed', error)
+    })
 
   return masterChefContract.methods
-    .withdraw(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
-    .send({ from: account, gas: DEFAULT_GAS_LIMIT })
+    .withdraw(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString(), referral)
+    .send({ from: account, gas: estGas })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
 }
 
 export const harvest = async (masterChefContract, pid, account) => {
-  if (pid === 0) {
-    return masterChefContract.methods
-      .leaveStaking('0')
-      .send({ from: account, gas: DEFAULT_GAS_LIMIT })
-      .on('transactionHash', (tx) => {
-        return tx.transactionHash
-      })
-  }
+  const estGas = await masterChefContract.methods
+    .claimReward(pid)
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('harvest().estGas failed', error)
+    })
 
   return masterChefContract.methods
-    .deposit(pid, '0')
-    .send({ from: account, gas: DEFAULT_GAS_LIMIT })
+    .claimReward(pid)
+    .send({ from: account, gas: estGas })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
-}
-
-const chainId = parseInt(process.env.REACT_APP_CHAIN_ID, 10)
-const cakeBnbPid = 251
-const cakeBnbFarm = farms.find((farm) => farm.pid === cakeBnbPid)
-
-const CAKE_TOKEN = new Token(chainId, getCakeAddress(), 18)
-const WBNB_TOKEN = new Token(chainId, tokens.wbnb.address[chainId], 18)
-const CAKE_BNB_TOKEN = new Token(chainId, getAddress(cakeBnbFarm.lpAddresses), 18)
-
-/**
- * Returns the total CAKE staked in the CAKE-BNB LP
- */
-export const getUserStakeInCakeBnbLp = async (account: string, block?: number) => {
-  try {
-    const archivedWeb3 = getWeb3WithArchivedNodeProvider()
-    const masterContract = getMasterchefContract(archivedWeb3)
-    const cakeBnbContract = getLpContract(getAddress(cakeBnbFarm.lpAddresses), archivedWeb3)
-    const totalSupplyLP = await cakeBnbContract.methods.totalSupply().call(undefined, block)
-    const reservesLP = await cakeBnbContract.methods.getReserves().call(undefined, block)
-    const cakeBnbBalance = await masterContract.methods.userInfo(cakeBnbPid, account).call(undefined, block)
-
-    const pair: Pair = new Pair(
-      new TokenAmount(CAKE_TOKEN, reservesLP._reserve0.toString()),
-      new TokenAmount(WBNB_TOKEN, reservesLP._reserve1.toString()),
-    )
-    const cakeLPBalance = pair.getLiquidityValue(
-      pair.token0,
-      new TokenAmount(CAKE_BNB_TOKEN, totalSupplyLP.toString()),
-      new TokenAmount(CAKE_BNB_TOKEN, cakeBnbBalance.amount.toString()),
-      false,
-    )
-
-    return new BigNumber(cakeLPBalance.toSignificant(18))
-  } catch (error) {
-    console.error(`CAKE-BNB LP error: ${error}`)
-    return BIG_ZERO
-  }
-}
-
-/**
- * Gets the cake staked in the main pool
- */
-export const getUserStakeInCakePool = async (account: string, block?: number) => {
-  try {
-    const archivedWeb3 = getWeb3WithArchivedNodeProvider()
-    const masterContract = getMasterchefContract(archivedWeb3)
-    const response = await masterContract.methods.userInfo(0, account).call(undefined, block)
-
-    return getBalanceAmount(new BigNumber(response.amount))
-  } catch (error) {
-    console.error('Error getting stake in CAKE pool', error)
-    return BIG_ZERO
-  }
 }

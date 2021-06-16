@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components'
 import { Flex, Text, Skeleton } from '@pancakeswap/uikit'
 import { Farm } from 'state/types'
 import { provider as ProviderType } from 'web3-core'
-import { getBscScanAddressUrl } from 'utils/bscscan'
+import { getHarmonyScanAddressUrl } from 'utils/harmonyscan'
 import { useTranslation } from 'contexts/Localization'
 import ExpandableSectionButton from 'components/ExpandableSectionButton'
 import { BASE_ADD_LIQUIDITY_URL } from 'config'
@@ -92,7 +92,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account }
       : ''
 
   const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANCAKE', '')
-  const earnLabel = farm.dual ? farm.dual.earnLabel : 'CAKE'
+  const earnLabel = farm.dual ? farm.dual.earnLabel : 'LOOT'
 
   const farmAPR = farm.apr && farm.apr.toLocaleString('en-US', { maximumFractionDigits: 2 })
 
@@ -101,8 +101,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account }
     tokenAddress: farm.token.address,
   })
   const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
-  const lpAddress = farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]
-  const isPromotedFarm = farm.token.symbol === 'CAKE'
+  // const lpAddress = farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]
+  const isPromotedFarm = farm.token.symbol === 'LOOT'
 
   return (
     <FCard isPromotedFarm={isPromotedFarm}>
@@ -142,8 +142,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account }
       <ExpandingWrapper expanded={showExpandableSection}>
         <DetailsSection
           removed={removed}
-          bscScanAddress={getBscScanAddressUrl(farm.lpAddresses[process.env.REACT_APP_CHAIN_ID])}
-          infoAddress={`https://pancakeswap.info/pair/${lpAddress}`}
+          harmonyScanAddress={getHarmonyScanAddressUrl(farm.lpAddresses[process.env.REACT_APP_CHAIN_ID])}
+          infoAddress=""
           totalValueFormatted={totalValueFormatted}
           lpLabel={lpLabel}
           addLiquidityUrl={addLiquidityUrl}

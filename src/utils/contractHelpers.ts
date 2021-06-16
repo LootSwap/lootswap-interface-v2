@@ -8,7 +8,7 @@ import { getCakeAddress, getMasterChefAddress } from 'utils/addressHelpers'
 // ABI
 import bep20Abi from 'config/abi/erc20.json'
 import lpTokenAbi from 'config/abi/lpToken.json'
-import cakeAbi from 'config/abi/cake.json'
+import cakeAbi from 'config/abi/governancetoken.json'
 import masterChef from 'config/abi/masterchef.json'
 import { DEFAULT_GAS_PRICE } from 'config'
 import { getSettings, getGasPriceInWei } from './settings'
@@ -22,15 +22,20 @@ const getContract = (abi: any, address: string, web3?: Web3, account?: string) =
   })
 }
 
+// TODO refactor name of the function getBep20Contract -> getErc20Contract
 export const getBep20Contract = (address: string, web3?: Web3) => {
   return getContract(bep20Abi, address, web3)
 }
 export const getLpContract = (address: string, web3?: Web3) => {
   return getContract(lpTokenAbi, address, web3)
 }
+
+// TODO refactor name of the function getCakeContract -> getLootContract
 export const getCakeContract = (web3?: Web3) => {
   return getContract(cakeAbi, getCakeAddress(), web3)
 }
+
+// TODO refactor name of the function getMasterchefContract -> getMasterLooterContract
 export const getMasterchefContract = (web3?: Web3) => {
   return getContract(masterChef, getMasterChefAddress(), web3)
 }

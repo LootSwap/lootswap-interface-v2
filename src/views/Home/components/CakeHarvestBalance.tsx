@@ -25,7 +25,7 @@ const CakeHarvestBalance = () => {
     }
     return accum + earningNumber.div(DEFAULT_TOKEN_DECIMAL).toNumber()
   }, 0)
-  const cakePriceBusd = usePriceCakeBusd()
+  const cakePriceBusd = usePriceCakeBusd() // TODO rename variable
   const earningsBusd = new BigNumber(earningsSum).multipliedBy(cakePriceBusd).toNumber()
 
   if (!account) {

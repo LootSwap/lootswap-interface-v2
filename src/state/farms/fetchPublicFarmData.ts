@@ -93,6 +93,7 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
   const allocPoint = info ? new BigNumber(info.allocPoint?._hex) : BIG_ZERO
   const poolWeight = totalAllocPoint ? allocPoint.div(new BigNumber(totalAllocPoint)) : BIG_ZERO
 
+  // TODO: Not sure I like this multiplier logic: `${allocPoint.div(1000000000000000000).toString()}X`
   return {
     tokenAmountMc: tokenAmountMc.toJSON(),
     quoteTokenAmountMc: quoteTokenAmountMc.toJSON(),
@@ -102,7 +103,7 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
     lpTotalInQuoteToken: lpTotalInQuoteToken.toJSON(),
     tokenPriceVsQuote: quoteTokenAmountTotal.div(tokenAmountTotal).toJSON(),
     poolWeight: poolWeight.toJSON(),
-    multiplier: `${allocPoint.div(100).toString()}X`,
+    multiplier: `${allocPoint.div(1000000000000000000).toString()}X`,
   }
 }
 

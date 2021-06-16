@@ -1,29 +1,40 @@
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
-import { BscConnector } from '@binance-chain/bsc-connector'
-import { ConnectorNames } from '@pancakeswap/uikit'
+import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import Web3 from 'web3'
 import getNodeUrl from './getRpcUrl'
 
-const POLLING_INTERVAL = 12000
-const rpcUrl = getNodeUrl()
-const chainId = parseInt(process.env.REACT_APP_CHAIN_ID, 10)
+export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1666700000')
 
-const injected = new InjectedConnector({ supportedChainIds: [chainId] })
+enum ConnectorNames {
+  Injected = 'injected',
+  WalletConnect = 'walletconnect',
+  WalletLink = 'walletlink',
+}
+
+const POLLING_INTERVAL = 15000
+const rpcUrl = getNodeUrl()
+
+const injected = new InjectedConnector({ supportedChainIds: [NETWORK_CHAIN_ID] })
 
 const walletconnect = new WalletConnectConnector({
-  rpc: { [chainId]: rpcUrl },
-  bridge: 'https://pancakeswap.bridge.walletconnect.org/',
+  rpc: { [NETWORK_CHAIN_ID]: rpcUrl },
+  bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: POLLING_INTERVAL,
 })
 
-const bscConnector = new BscConnector({ supportedChainIds: [chainId] })
+const walletlink = new WalletLinkConnector({
+  url: rpcUrl,
+  appName: 'Lootswap',
+  appLogoUrl:
+    'https://mpng.pngfly.com/20181202/bex/kisspng-emoji-domain-unicorn-pin-badges-sticker-unicorn-tumblr-emoji-unicorn-iphoneemoji-5c046729264a77.5671679315437924251569.jpg',
+})
 
 export const connectorsByName: { [connectorName in ConnectorNames]: any } = {
   [ConnectorNames.Injected]: injected,
   [ConnectorNames.WalletConnect]: walletconnect,
-  [ConnectorNames.BSC]: bscConnector,
+  [ConnectorNames.WalletLink]: walletlink,
 }
 
 export const getLibrary = (provider): Web3 => {
