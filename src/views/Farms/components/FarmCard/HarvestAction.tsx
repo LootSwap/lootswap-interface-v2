@@ -8,6 +8,7 @@ import { useHarvest } from 'hooks/useHarvest'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useWeb3React } from '@web3-react/core'
 import { usePriceCakeBusd } from 'state/hooks'
+import { DISPLAY_DECIMAL_FORMAT_PREF } from 'config'
 import CardBusdValue from '../../../Home/components/CardBusdValue'
 
 interface FarmCardActionsProps {
@@ -23,7 +24,10 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
   const cakePrice = usePriceCakeBusd()
   const dispatch = useAppDispatch()
   const rawEarningsBalance = account ? getBalanceNumber(earnings) : 0
-  const displayBalance = rawEarningsBalance.toFixed(6).toString()
+  const displayBalance =
+    rawEarningsBalance === 0
+      ? rawEarningsBalance.toLocaleString()
+      : rawEarningsBalance.toFixed(DISPLAY_DECIMAL_FORMAT_PREF).toString()
   const earningsBusd = rawEarningsBalance ? new BigNumber(rawEarningsBalance).multipliedBy(cakePrice).toNumber() : 0
   // TODO change cake name and also see if dispatch(fetchFarmUserDataAsync)/useHarvest(pid) runs correctly.. maybe add more UI interaction
   // ** (notes) this is effecting the cards not farm rows

@@ -10,6 +10,7 @@ import { usePriceCakeBusd } from 'state/hooks'
 import { useHarvest } from 'hooks/useHarvest'
 import { useTranslation } from 'contexts/Localization'
 import { useCountUp } from 'react-countup'
+import { DISPLAY_DECIMAL_FORMAT_PREF } from 'config'
 
 import { ActionContainer, ActionTitles, Title, Subtle, ActionContent, Earned, Staked } from './styles'
 
@@ -28,7 +29,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
   if (!earningsBigNumber.isZero()) {
     earnings = getBalanceNumber(earningsBigNumber)
     earningsBusd = new BigNumber(earnings).multipliedBy(cakePrice).toNumber()
-    displayBalance = earnings.toFixed(6).toString()
+    displayBalance = earnings.toFixed(DISPLAY_DECIMAL_FORMAT_PREF).toString()
   }
 
   const [pendingTx, setPendingTx] = useState(false)

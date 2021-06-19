@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useCountUp } from 'react-countup'
 import { Text } from '@pancakeswap/uikit'
+import { DISPLAY_DECIMAL_FORMAT_PREF } from 'config'
 
 export interface CardValueProps {
   value: number
@@ -28,7 +29,7 @@ const CardValue: React.FC<CardValueProps> = ({
     separator: ',',
     decimals:
       // eslint-disable-next-line no-nested-ternary
-      decimals !== undefined ? decimals : value < 0 ? 4 : value > 1e5 ? 0 : 3,
+      decimals !== undefined ? decimals : value < 0 ? 4 : value > 1e5 ? 0 : DISPLAY_DECIMAL_FORMAT_PREF,
   })
 
   const updateValue = useRef(update)

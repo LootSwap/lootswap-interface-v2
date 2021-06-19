@@ -10,11 +10,12 @@ import Menu from './components/Menu'
 import SuspenseWithChunkError from './components/SuspenseWithChunkError'
 import ToastListener from './components/ToastListener'
 import PageLoader from './components/PageLoader'
-import EasterEgg from './components/EasterEgg'
+// import EasterEgg from './components/EasterEgg'
 import history from './routerHistory'
 
 // Route-based code splitting
-// Only pool is included in the main bundle because of it's the most visited page
+// Only do not include lazy() for other pages and only include them in the main bundle IF you expect it to be the  most visited page
+// EX: Home, Farms and NotFound are all imported "lazyily" because they will be the least likely for page visits
 const Home = lazy(() => import('./views/Home'))
 const Farms = lazy(() => import('./views/Farms'))
 const NotFound = lazy(() => import('./views/NotFound'))
@@ -55,7 +56,7 @@ const App: React.FC = () => {
           </Switch>
         </SuspenseWithChunkError>
       </Menu>
-      <EasterEgg iterations={2} />
+      {/* <EasterEgg iterations={2} /> */} {/* TODO want to modify EasterEgg to something fun */}
       <ToastListener />
     </Router>
   )
