@@ -8,6 +8,7 @@ import useAuth from 'hooks/useAuth'
 import { usePriceCakeBusd } from 'state/hooks'
 import config from './config'
 
+// TODO: Have to fork UikitMenu
 const Menu = (props) => {
   const { account } = useWeb3React()
   const { login, logout } = useAuth()

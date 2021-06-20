@@ -11,15 +11,11 @@ export const getCustomMeta = (path: string, t: ContextApi['t']): PageMeta => {
   switch (path) {
     case '/':
       return {
-        title: `${t('Home')} | ${t('PancakeSwap')}`,
+        title: `${t('Home')} | ${t('LootSwap')}`,
       }
-    case '/farms':
+    case '/questlog':
       return {
-        title: `${t('Farms')} | ${t('PancakeSwap')}`,
-      }
-    case '/pools':
-      return {
-        title: `${t('Pools')} | ${t('PancakeSwap')}`,
+        title: `${t('Quest Log')} | ${t('LootSwap')}`,
       }
     default:
       return null

@@ -22,37 +22,25 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     ],
   },
   {
-    label: t('Farms'),
+    label: t('Quest Log'),
     icon: 'FarmIcon',
-    href: '/farms',
+    href: '/questlog',
   },
   {
     label: t('More'),
     icon: 'MoreIcon',
     items: [
       {
-        label: t('Contact'),
-        href: 'https://docs.pancakeswap.finance/contact-us',
-      },
-      {
-        label: t('Voting'),
-        href: 'https://voting.pancakeswap.finance',
-      },
-      {
         label: t('Github'),
-        href: 'https://github.com/pancakeswap',
+        href: 'https://github.com/LootSwap',
       },
       {
         label: t('Docs'),
-        href: 'https://docs.pancakeswap.finance',
+        href: 'https://docs.lootswap.finance',
       },
       {
         label: t('Blog'),
-        href: 'https://pancakeswap.medium.com',
-      },
-      {
-        label: t('Merch'),
-        href: 'https://pancakeswap.creator-spring.com/',
+        href: 'https://lootswap.medium.com',
       },
     ],
   },

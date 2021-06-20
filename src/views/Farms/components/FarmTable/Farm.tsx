@@ -40,7 +40,7 @@ const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid }) => {
     if (rawStakedBalance) {
       return (
         <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
-          {t('Farming')}
+          {t('Questing')}
         </Text>
       )
     }
@@ -50,7 +50,7 @@ const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid }) => {
 
   return (
     <Container>
-      <IconImage src={`/images/farms/${image}.svg`} alt="icon" width={40} height={40} mr="8px" />
+      <IconImage src={`/images/questlog/${image}.svg`} alt="icon" width={40} height={40} mr="8px" />
       <div>
         {handleRenderFarming()}
         <Text bold>{label}</Text>
