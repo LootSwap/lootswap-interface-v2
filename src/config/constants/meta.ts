@@ -4,7 +4,7 @@ import { PageMeta } from './types'
 export const DEFAULT_META: PageMeta = {
   title: 'LootSwap',
   description: 'AMM and yield farm on Harmony Smart Chain',
-  image: 'https://pancakeswap.finance/images/hero.png', // TODO: change picture
+  image: 'https://pancakeswap.finance/images/lootswap.png',
 }
 
 export const getCustomMeta = (path: string, t: ContextApi['t']): PageMeta => {

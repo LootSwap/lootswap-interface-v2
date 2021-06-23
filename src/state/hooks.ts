@@ -33,16 +33,14 @@ export const usePollFarmsData = (includeArchive = false) => {
 
 /**
  * Fetches the "core" farm data used globally
- * 1 = bscBUSD-WONE LP
- * 5 = LOOT-WONE LP
+ * 9 = LOOT-BUSD LP
  */
 export const usePollCoreFarmData = () => {
   const dispatch = useAppDispatch()
   const { fastRefresh } = useRefresh()
   const web3 = getWeb3NoAccount()
-
   useEffect(() => {
-    dispatch(fetchFarmsPublicDataAsync([1, 5])) // TODO: investigate this more
+    dispatch(fetchFarmsPublicDataAsync([9])) // initially retrieve loot in busd amount and render information to home
   }, [dispatch, fastRefresh, web3])
 }
 

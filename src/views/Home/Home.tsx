@@ -9,23 +9,12 @@ import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 
 const Hero = styled.div`
   align-items: center;
-  background-image: url('/images/pan-bg-mobile.svg');
-  background-repeat: no-repeat;
-  background-position: top center;
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin: auto;
   margin-bottom: 32px;
-  padding-top: 116px;
   text-align: center;
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    background-image: url('/images/pan-bg2.svg'), url('/images/pan-bg.svg');
-    background-position: left center, right center;
-    height: 165px;
-    padding-top: 0;
-  }
 `
 
 const Cards = styled(BaseLayout)`
@@ -61,7 +50,7 @@ const Home: React.FC = () => {
   return (
     <Page>
       <Hero>
-        <Heading as="h1" scale="xl" mb="24px" color="secondary">
+        <Heading as="h1" scale="xl" mb="24px" color="#2271E4">
           {t('LootSwap')}
         </Heading>
         <Text>{t('AMM and yield farm on Harmony Network.')}</Text>
