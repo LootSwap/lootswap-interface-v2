@@ -36,7 +36,7 @@ const Multiplier: React.FunctionComponent<MultiplierProps> = ({ multiplier }) =>
       {t('The multiplier represents the amount of LOOT rewards each farm gets.')}
       <br />
       <br />
-      {t('For example, if a 1x farm was getting 1 LOOT per block, a 40x farm would be getting 40 LOOT per block.')}
+      {t('For example, if a 1x quest was getting 1 LOOT per block, a 40x quest would be getting 40 LOOT per block.')}
     </div>
   )
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, {

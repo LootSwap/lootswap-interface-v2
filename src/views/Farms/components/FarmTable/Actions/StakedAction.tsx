@@ -100,7 +100,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
     return (
       <ActionContainer>
         <ActionTitles>
-          <Subtle>{t('Start Farming').toUpperCase()}</Subtle>
+          <Subtle>{t('Start Questing').toUpperCase()}</Subtle>
         </ActionTitles>
         <ActionContent>
           <UnlockButton width="100%" />
@@ -162,7 +162,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
     return (
       <ActionContainer>
         <ActionTitles>
-          <Subtle>{t('Start Farming').toUpperCase()}</Subtle>
+          <Subtle>{t('Start Questing').toUpperCase()}</Subtle>
         </ActionTitles>
         <ActionContent>
           <Skeleton width={180} marginBottom={28} marginTop={14} />
@@ -174,7 +174,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
   return (
     <ActionContainer>
       <ActionTitles>
-        <Subtle>{t('Enable Farm').toUpperCase()}</Subtle>
+        <Subtle>{t('Enable Quest').toUpperCase()}</Subtle>
       </ActionTitles>
       <ActionContent>
         <Button width="100%" disabled={requestedApproval} onClick={handleApprove} variant="secondary">
