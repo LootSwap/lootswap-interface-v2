@@ -2,7 +2,8 @@ import React, { useEffect, useCallback, useState, useMemo, useRef } from 'react'
 import { Route, useRouteMatch, useLocation } from 'react-router-dom'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
-import { Image, Heading, RowType, Toggle, Text } from '@pancakeswap/uikit'
+import { Toggle, Text } from '@lootswap/uikit'
+import { Image, RowType, Heading } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
@@ -354,13 +355,15 @@ const Farms: React.FC = () => {
             <ToggleView viewMode={viewMode} onToggle={(mode: ViewMode) => setViewMode(mode)} />
             <ToggleWrapper>
               <Toggle checked={stakedOnly} onChange={() => setStakedOnly(!stakedOnly)} scale="sm" />
-              <Text> {t('Staked only')}</Text>
+              <Text color="#fff"> {t('Staked only')}</Text>
             </ToggleWrapper>
             <FarmTabButtons hasStakeInFinishedFarms={stakedInactiveFarms.length > 0} />
           </ViewControls>
           <FilterContainer>
             <LabelWrapper>
-              <Text textTransform="uppercase">{t('Sort by')}</Text>
+              <Text textTransform="uppercase" color="#fff">
+                {t('Sort by')}
+              </Text>
               <Select
                 options={[
                   {
@@ -388,7 +391,9 @@ const Farms: React.FC = () => {
               />
             </LabelWrapper>
             <LabelWrapper style={{ marginLeft: 16 }}>
-              <Text textTransform="uppercase">{t('Search')}</Text>
+              <Text textTransform="uppercase" color="#fff">
+                {t('Search')}
+              </Text>
               <SearchInput onChange={handleChangeQuery} placeholder="Search Quest Log" />
             </LabelWrapper>
           </FilterContainer>
