@@ -1,5 +1,6 @@
 import { MenuEntry } from '@lootswap/uikit'
 import { ContextApi } from 'contexts/Localization/types'
+import { BASE_SWAP_URL, BASE_LIQUIDITY_POOL_URL } from 'config'
 
 const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
   {
@@ -14,11 +15,11 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     items: [
       {
         label: t('Exchange'),
-        href: '#swap',
+        href: BASE_SWAP_URL,
       },
       {
         label: t('Liquidity'),
-        href: '#liquidity',
+        href: BASE_LIQUIDITY_POOL_URL,
       },
     ],
   },
@@ -52,10 +53,6 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
         label: t('Github'),
         href: 'https://github.com/LootSwap',
       },
-      // {
-      //   label: t('Docs'),
-      //   href: 'https://docs.lootswap.finance',
-      // },
       {
         label: t('Blog'),
         href: 'https://lootswapfinance.medium.com/',
