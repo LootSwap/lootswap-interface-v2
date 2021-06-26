@@ -5,7 +5,6 @@ import { useTranslation } from 'contexts/Localization'
 import Page from 'components/layout/Page'
 import FarmStakingCard from 'views/Home/components/FarmStakingCard'
 import CakeStats from 'views/Home/components/CakeStats'
-import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 
 const Hero = styled.div`
   align-items: center;
@@ -53,15 +52,12 @@ const Home: React.FC = () => {
         <Heading as="h1" scale="xl" mb="24px" color="#2271E4">
           {t('LootSwap')}
         </Heading>
-        <Text>{t('AMM and yield farm on Harmony Network.')}</Text>
+        <Text color="#FFF">{t('AMM and yield farm on Harmony Protocol.')}</Text>
       </Hero>
       <div>
         <Cards>
           <FarmStakingCard />
-        </Cards>
-        <Cards>
           <CakeStats />
-          <TotalValueLockedCard />
         </Cards>
       </div>
     </Page>

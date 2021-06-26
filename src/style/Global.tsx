@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 // eslint-disable-next-line import/no-unresolved
-import { PancakeTheme } from '@pancakeswap/uikit/dist/theme'
+import { PancakeTheme } from '@lootswap/uikit/dist/theme'
 
 declare module 'styled-components' {
   /* eslint-disable @typescript-eslint/no-empty-interface */
@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     background-color: ${({ theme }) => theme.colors.background};
-    background:  url(/images/decorations/background/lootswap-bg-fade.webp), url(/images/decorations/background/lootswap-bg-fade.png), ${({
+    background:  url(/images/decorations/background/lootswap-bg.webp), url(/images/decorations/background/lootswap-bg.png), ${({
       theme,
     }) => theme.colors.background};
     background-repeat: no-repeat;

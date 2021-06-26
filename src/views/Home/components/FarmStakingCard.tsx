@@ -60,7 +60,7 @@ const FarmedStakingCard = () => {
     <StyledFarmStakingCard>
       <CardBody>
         <Heading scale="xl" mb="24px">
-          {t('LOOT liquidity mining')}
+          {t('LOOT Questing Rewards')}
         </Heading>
         <CardImage src="/images/loot.svg" alt="loot logo" width={64} height={64} />
         <Block>

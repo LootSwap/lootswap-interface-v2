@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useTotalSupply, useBurnedBalance } from 'hooks/useTokenBalance'
 import { useTranslation } from 'contexts/Localization'
+import { useGetStats } from 'hooks/api'
 import { getCakeAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
 
@@ -26,19 +27,27 @@ const CakeStats = () => {
   const burnedBalance = getBalanceNumber(useBurnedBalance(getCakeAddress()))
   const cakeSupply = totalSupply ? getBalanceNumber(totalSupply) - burnedBalance : 0
 
+  // TVL
+  const data = useGetStats()
+  const tvl = data ? data.tvl.toLocaleString('en-US', { maximumFractionDigits: 0 }) : null
+
   return (
     <StyledCakeStats>
       <CardBody>
-        <Heading scale="xl" mb="24px">
+        <Heading scale="xl" mb="24px" color="primary">
           {t('LOOT Stats')}
         </Heading>
         <Row>
-          <Text fontSize="14px">{t('Total LOOT Supply')}</Text>
-          {cakeSupply && <CardValue fontSize="14px" value={cakeSupply} />}
+          <Text fontSize="24px">{t('Total LOOT Supply')}</Text>
+          {cakeSupply && <CardValue fontSize="24px" value={cakeSupply} />}
         </Row>
         <Row>
-          <Text fontSize="14px">{t('Total LOOT Burned')}</Text>
-          <CardValue fontSize="14px" decimals={0} value={burnedBalance} />
+          <Text fontSize="24px">{t('Total LOOT Burned')}</Text>
+          <CardValue fontSize="24px" decimals={0} value={burnedBalance} />
+        </Row>
+        <Row>
+          <Text fontSize="24px">{`${t('Total Value Locked (TVL)')} - ${t('Across All LPs')}`}</Text>
+          <CardValue fontSize="24px" decimals={0} value={Number(tvl)} />
         </Row>
       </CardBody>
     </StyledCakeStats>

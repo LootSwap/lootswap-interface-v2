@@ -104,7 +104,7 @@
   "Total LOOT Burned": "Total de LOOT quemados",
   "New LOOT/block": "Nuevo LOOT/bloque",
   "Quests & Staking": "Granjas e inversiones",
-  "LOOT liquidity mining": "LOOT liquidity mining",
+  "LOOT Questing Rewards": "LOOT Questing Rewards",
   "LOOT to Harvest": "LOOT para cosechar",
   "LOOT in Wallet": "LOOT en el monedero",
   "Collecting LOOT": "Recoger LOOT",
@@ -123,7 +123,7 @@
   "Total Pot:": "Total del bote:",
   "Staking Pool": "Pool de inversión",
   "LootSwap": "LootSwap",
-  "AMM and yield farm on Harmony Network.": "Los Creadores de Mercado Automatizados (AMM) y de yield farming #1 en Binance Smart Chain.",
+  "AMM and yield farm on Harmony Protocol.": "Los Creadores de Mercado Automatizados (AMM) y de yield farming #1 en Binance Smart Chain.",
   "Stake LOOT to earn new tokens.": "Invierte en LOOT para ganar nuevos tokens.",
   "Launch Time": "Fecha de lanzamiento",
   "For Sale": "En venta",
@@ -560,5 +560,9 @@
   "Total amount of %symbol% staked in this quest": "Cantidad total de %symbol% invertido en este pool",
   "These quest are no longer distributing rewards. Please unstake your tokens.": "Estos pools ya no distribuyen recompensas. Retira tus tokens.",
   "Max. stake per user": "Inversión máxima por usuario",
-  "You have claimed your rewards!": "You have claimed your rewards!"
+  "You have claimed your rewards!": "You have claimed your rewards!",
+  "Analytics": "Analítica",
+  "Trade": "Comercio",
+  "TX Success - Log": "TX Success - Log",
+  "Across All LPs": "A través de todos los LP"
 }

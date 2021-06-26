@@ -16,7 +16,7 @@ describe('Config farms', () => {
   })
 
   it.each(farmsToTest)('Farm %d has the correct token addresses', async (pid, farm) => {
-    const tokenAddress = farm.token.address[56]
+    const tokenAddress = farm.token.address[1666600000]
     const quoteTokenAddress = farm.quoteToken.address[1666600000]
     const lpContract = getLpContract(farm.lpAddresses[1666600000])
 
@@ -35,7 +35,7 @@ describe('Config farms', () => {
     const tokenContract = getBep20Contract(farm.token.address[1666600000])
     const quoteTokenContract = getBep20Contract(farm.quoteToken.address[1666600000])
 
-    const tokenAmount = await tokenContract.methods.balanceOf(farm.lpAddresses[56]).call()
+    const tokenAmount = await tokenContract.methods.balanceOf(farm.lpAddresses[1666600000]).call()
     const quoteTokenAmount = await quoteTokenContract.methods.balanceOf(farm.lpAddresses[1666600000]).call()
 
     expect(parseInt(tokenAmount, 10)).toBeGreaterThan(0)

@@ -77,7 +77,7 @@ const farms: FarmConfig[] = [
   },
   {
     pid: 8,
-    lpSymbol: 'WONE-bscMatic',
+    lpSymbol: 'ONE-bscMatic',
     lpAddresses: {
       1666600000: '0xa1e2AE67A7Bf888AA8F702a6f07FC1196BFEEe33',
       1666700000: '',
@@ -98,7 +98,7 @@ const farms: FarmConfig[] = [
   },
   {
     pid: 10,
-    lpSymbol: '1UNI-1ETH',
+    lpSymbol: '1ETH-1UNI',
     lpAddresses: {
       1666600000: '0xb8ce0515381009932020d359edA6263353De63B1',
       1666700000: '',

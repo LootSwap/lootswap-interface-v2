@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+// TODO: clean up page might not be needed
 // Only support specific token pairs until we find a method to validate token pairs
 export enum TokenPair {
   BNBUSDT = 'bnbusdt',

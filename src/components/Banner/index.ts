@@ -1,1 +1,2 @@
-export { default as Banner } from './Banner'
+const Banner = './Banner'
+export { Banner as default }

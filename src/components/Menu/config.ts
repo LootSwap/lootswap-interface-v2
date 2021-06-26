@@ -1,4 +1,4 @@
-import { MenuEntry } from '@pancakeswap/uikit'
+import { MenuEntry } from '@lootswap/uikit'
 import { ContextApi } from 'contexts/Localization/types'
 
 const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
@@ -9,7 +9,8 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
   },
   {
     label: t('Trade'),
-    icon: 'TradeIcon',
+    icon: 'SwapOneIcon',
+    type: 'svg',
     items: [
       {
         label: t('Exchange'),
@@ -23,8 +24,25 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
   },
   {
     label: t('Quest Log'),
-    icon: 'FarmIcon',
+    icon: 'ErrorIcon',
+    type: 'svg',
     href: '/questlog',
+  },
+  {
+    label: t('Guilds'),
+    icon: 'GuildIcon',
+    type: 'svg',
+    items: [
+      {
+        label: t('Coming Soon'),
+        href: '#',
+      },
+    ],
+  },
+  {
+    label: t('Analytics'),
+    icon: 'InfoIcon',
+    href: 'https://analytics.lootswap.finance/',
   },
   {
     label: t('More'),
@@ -34,13 +52,13 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
         label: t('Github'),
         href: 'https://github.com/LootSwap',
       },
-      {
-        label: t('Docs'),
-        href: 'https://docs.lootswap.finance',
-      },
+      // {
+      //   label: t('Docs'),
+      //   href: 'https://docs.lootswap.finance',
+      // },
       {
         label: t('Blog'),
-        href: 'https://lootswap.medium.com',
+        href: 'https://lootswapfinance.medium.com/',
       },
     ],
   },
