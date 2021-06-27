@@ -11,6 +11,7 @@ export interface CardValueProps {
   prefix?: string
   bold?: boolean
   color?: string
+  prefixOverride?: string
 }
 
 const CardValue: React.FC<CardValueProps> = ({
@@ -21,6 +22,7 @@ const CardValue: React.FC<CardValueProps> = ({
   prefix = '',
   bold = true,
   color = 'text',
+  prefixOverride = '',
 }) => {
   const { countUp, update } = useCountUp({
     start: 0,
@@ -40,7 +42,7 @@ const CardValue: React.FC<CardValueProps> = ({
 
   return (
     <Text bold={bold} fontSize={fontSize} style={{ lineHeight }} color={color}>
-      {prefix}
+      {prefixOverride || prefix}
       {countUp}
     </Text>
   )

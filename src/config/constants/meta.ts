@@ -11,7 +11,7 @@ export const getCustomMeta = (path: string, t: ContextApi['t']): PageMeta => {
   switch (path) {
     case '/':
       return {
-        title: `${t('Home')} | ${t('LootSwap')}`,
+        title: `${t('LootSwap')}`,
       }
     case '/questlog':
       return {
