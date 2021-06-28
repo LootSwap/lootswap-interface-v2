@@ -32,7 +32,10 @@
   "Total Liquidity": "Liquidez total",
   "View on BscScan": "Ver en BscScan",
   "View on HarmonyScan": "Ver en HarmonyScan",
-  "Loot price": "Precio del LOOT",
+  "Loot price": "Precio del Loot",
+  "LOOT price": "Precio del LOOT",
+  "LOOT Total Market Cap": "LOOT Total Market Cap",
+  "LOOT Circ. Market Cap": "LOOT Circ. Market Cap",
   "%asset% Tokens Earned": "%asset% tokens ganados",
   "%num% blocks until farming ends": "%num% de bloques para que finalice el farming",
   "Coming Soon...": "Próximamente...",
@@ -88,7 +91,7 @@
   "Pending Confirmation": "Confirmación pendiente",
   "Approx. time before next lottery start": "Tiempo aproximado antes de la próxima lotería",
   "Approve LOOT": "LOOT aprobado",
-  "IFO: Initial Farm Offerings": "IFO: Oferta inicial de la granja",
+  "IFO: Initial Quest Offerings": "IFO: Oferta inicial de la granja",
   "Buy new tokens with a brand new token sale model.": "Compra nuevos tokens con un nuevo modelo de venta de tokens.",
   "You get the tokens.": "Tú obtienes los tokens.",
   "Want to launch your own IFO?": "¿Deseas lanzar tu propio IFO?",
@@ -565,5 +568,6 @@
   "Trade": "Comercio",
   "TX Success - Log": "TX Success - Log",
   "Across All LPs": "A través de todos los LP",
-  "LOOT": "LOOT"
+  "LOOT": "LOOT",
+  "Reddit": "Reddit"
 }

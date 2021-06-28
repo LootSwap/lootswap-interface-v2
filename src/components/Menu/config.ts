@@ -57,6 +57,10 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
         label: t('Blog'),
         href: 'https://lootswapfinance.medium.com/',
       },
+      {
+        label: t('Reddit'),
+        href: 'https://www.reddit.com/r/Lootswap/',
+      },
     ],
   },
 ]
