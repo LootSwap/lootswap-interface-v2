@@ -42,10 +42,10 @@ const CakeStats = () => {
   const lootPrice = usePriceCakeBusd().toNumber()
   const lootBalance = lootPrice || 0
   const unlockTotalSupply = useUnlockTotalSupply()
+  const circulationSupply = unlockTotalSupply ? getBalanceNumber(unlockTotalSupply) : 0
   const circulationMrkCap =
     lootPrice && unlockTotalSupply ? (getBalanceNumber(unlockTotalSupply) - burnedBalance) * lootPrice : 0
   const totalMrkCap = lootPrice && totalSupply ? (getBalanceNumber(totalSupply) - burnedBalance) * lootPrice : 0
-
   const data = useGetStats()
   const tvl = data ? data.tvl.toLocaleString('en-US', { maximumFractionDigits: 0 }) : null
 
@@ -55,6 +55,10 @@ const CakeStats = () => {
         <Heading scale="xl" mb="24px" color="primary">
           {t('LOOT Stats')}
         </Heading>
+        <Row>
+          <Text fontSize="24px">{t('LOOT in Circ.')}</Text>
+          {circulationSupply && <CardValue fontSize="24px" value={circulationSupply} />}
+        </Row>
         <Row>
           <Text fontSize="24px">{t('Total LOOT Supply')}</Text>
           {cakeSupply && <CardValue fontSize="24px" value={cakeSupply} />}

@@ -195,6 +195,11 @@ const Farms: React.FC = () => {
           )
         case 'liquidity':
           return orderBy(farms, (farm: FarmWithStakedValue) => Number(farm.liquidity), 'desc')
+
+        case 'community':
+          return orderBy(farms, (farm: FarmWithStakedValue) => farm.isCommunity, 'asc')
+        case 'core':
+          return orderBy(farms, (farm: FarmWithStakedValue) => farm.isCommunity, 'desc')
         default:
           return farms
       }
@@ -385,6 +390,14 @@ const Farms: React.FC = () => {
                   {
                     label: t('Liquidity'),
                     value: 'liquidity',
+                  },
+                  {
+                    label: t('Community'),
+                    value: 'community',
+                  },
+                  {
+                    label: t('Core'),
+                    value: 'core',
                   },
                 ]}
                 onChange={handleSortOptionChange}

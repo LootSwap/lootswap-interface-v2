@@ -10,13 +10,6 @@ export const fetchFarmUserAllowances = async (account: string, farmsToFetch: Far
 
   const calls = farmsToFetch.map((farm) => {
     const lpContractAddress = getAddress(farm.lpAddresses)
-    // TODO: remove logging
-    // if (farm.pid === 9) {
-    //   console.log('lpContractddress', lpContractAddress)
-    //   console.log('lpaddress', farm.lpAddresses)
-    //   console.log('account', account)
-    //   console.log('masterChefAddress', masterChefAddress)
-    // }
     return { address: lpContractAddress, name: 'allowance', params: [account, masterChefAddress] }
   })
 
