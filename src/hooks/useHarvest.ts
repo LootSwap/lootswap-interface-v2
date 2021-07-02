@@ -1,7 +1,9 @@
 import { useCallback } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { harvest } from 'utils/callHelpers'
-import { useMasterchef } from './useContract'
+import { useAppDispatch } from 'state'
+import { lootMarketHarvestStaking, harvest } from 'utils/callHelpers'
+import { updateUserBalance, updateUserPendingReward } from 'state/actions'
+import { useMasterchef, useLootMarketContract } from './useContract'
 
 export const useHarvest = (farmPid: number) => {
   const { account } = useWeb3React()
@@ -15,4 +17,16 @@ export const useHarvest = (farmPid: number) => {
   return { onReward: handleHarvest }
 }
 
-export default useHarvest
+export const useLootMarketsHarvest = (pid) => {
+  const dispatch = useAppDispatch()
+  const { account } = useWeb3React()
+  const lootMarketContract = useLootMarketContract(pid)
+
+  const handleHarvest = useCallback(async () => {
+    await lootMarketHarvestStaking(lootMarketContract, account)
+    dispatch(updateUserPendingReward(pid, account))
+    dispatch(updateUserBalance(pid, account))
+  }, [account, dispatch, lootMarketContract, pid])
+
+  return { onReward: handleHarvest }
+}

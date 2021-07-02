@@ -9,9 +9,15 @@ import { getBalanceAmount } from 'utils/formatBalance'
 import { BIG_ZERO } from 'utils/bigNumber'
 import useRefresh from 'hooks/useRefresh'
 import { filterFarmsByQuoteToken } from 'utils/farmsPriceHelpers'
-import { fetchFarmsPublicDataAsync, setBlock } from './actions'
-import { State, Farm, FarmsState } from './types'
+import {
+  fetchFarmsPublicDataAsync,
+  fetchLootMarketsPublicDataAsync,
+  fetchLootMarketsUserDataAsync,
+  setBlock,
+} from './actions'
+import { State, Farm, FarmsState, LootMarket } from './types'
 import { fetchFarmUserDataAsync, nonArchivedFarms } from './farms'
+import { transformLootMarket } from './lootmarket/helpers'
 
 export const usePollFarmsData = (includeArchive = false) => {
   const dispatch = useAppDispatch()
@@ -123,7 +129,48 @@ export const useLpTokenPrice = (symbol: string) => {
   return lpTokenPrice
 }
 
+// Pools
+
+export const useFetchPublicLootMarketsData = () => {
+  const dispatch = useAppDispatch()
+  const { slowRefresh } = useRefresh()
+  const web3 = getWeb3NoAccount()
+
+  useEffect(() => {
+    const fetchPoolsPublicData = async () => {
+      const blockNumber = await web3.eth.getBlockNumber()
+      dispatch(fetchLootMarketsPublicDataAsync(blockNumber))
+    }
+
+    fetchPoolsPublicData()
+  }, [dispatch, slowRefresh, web3])
+}
+
+export const useLootMarkets = (account): { lootmarkets: LootMarket[]; userDataLoaded: boolean } => {
+  const { fastRefresh } = useRefresh()
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    if (account) {
+      dispatch(fetchLootMarketsUserDataAsync(account))
+    }
+  }, [account, dispatch, fastRefresh])
+
+  const { lootmarkets, userDataLoaded } = useSelector((state: State) => ({
+    lootmarkets: state.lootmarkets.data,
+    userDataLoaded: state.lootmarkets.userDataLoaded,
+  }))
+  return { lootmarkets: lootmarkets.map(transformLootMarket), userDataLoaded }
+}
+
+export const usePoolFromPid = (pid: number): LootMarket => {
+  const market = useSelector((state: State) => state.lootmarkets.data.find((p) => p.pid === pid))
+  return transformLootMarket(market)
+}
+
+// Price
+
 export const usePriceLootBusd = (): BigNumber => {
+  // TODO rename function usePriceCakeBusd -> usePriceLootBusd
   const lootbusdFarm = useFarmFromPid(9) // loot <> busd
   return new BigNumber(lootbusdFarm.token.busdPrice)
 }

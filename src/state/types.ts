@@ -1,6 +1,7 @@
 import { ThunkAction } from 'redux-thunk'
 import { AnyAction } from '@reduxjs/toolkit'
-import { FarmConfig } from 'config/constants/types'
+import { FarmConfig, LootMarketConfig } from 'config/constants/types'
+import BigNumber from 'bignumber.js'
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, State, unknown, AnyAction>
 
@@ -49,9 +50,31 @@ export interface BlockState {
   initialBlock: number
 }
 
+// Loot Market
+export interface LootMarket extends LootMarketConfig {
+  totalStaked?: BigNumber
+  startBlock?: number
+  endBlock?: number
+  apr?: number
+  stakingTokenPrice?: number
+  earningTokenPrice?: number
+  userData?: {
+    allowance: BigNumber
+    stakingTokenBalance: BigNumber
+    stakedBalance: BigNumber
+    pendingReward: BigNumber
+  }
+}
+// Loot Market
+export interface LootMarketState {
+  data: LootMarket[]
+  userDataLoaded: boolean
+}
+
 // Global state
 
 export interface State {
   block: BlockState
   farms: FarmsState
+  lootmarkets: LootMarketState
 }

@@ -40,3 +40,23 @@ export type PageMeta = {
   description?: string
   image?: string
 }
+
+export enum LootMarketCategory {
+  'COMMUNITY' = 'Community',
+  'CORE' = 'Core',
+  'BINANCE' = 'Binance', // Pools using native BNB behave differently than pools using a token
+  'AUTO' = 'Auto',
+}
+
+export interface LootMarketConfig {
+  pid: number
+  earningToken: Token
+  stakingToken: Token
+  contractAddress: Address
+  lootMarketCategory: LootMarketCategory
+  tokenPerBlock: string
+  sortOrder?: number
+  harvest?: boolean
+  isFinished?: boolean
+  enableEmergencyWithdraw?: boolean
+}

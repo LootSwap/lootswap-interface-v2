@@ -63,3 +63,67 @@ export const harvest = async (masterChefContract, pid, account) => {
       return tx.transactionHash
     })
 }
+
+// Loot Markets
+export const lootMarketHarvestStaking = async (lootMarketContract, account) => {
+  const estGas = await lootMarketContract.methods
+    .withdraw(0)
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('lootMarketHarvestStaking().estGas failed', error)
+    })
+
+  return lootMarketContract.methods
+    .withdraw(0)
+    .send({ from: account, gas: estGas })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const lootMarketUnstake = async (lootMarketContract, amount, account) => {
+  const estGas = await lootMarketContract.methods
+    .withdraw(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('lootMarketUnstake().estGas failed', error)
+    })
+
+  return lootMarketContract.methods
+    .withdraw(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
+    .send({ from: account, gas: estGas })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const lootMarketEmergencyUnstake = async (lootMarketContract, account) => {
+  return lootMarketContract.methods
+    .emergencyWithdraw()
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const lootMarketStakingStake = async (lootMarketContract, amount, account) => {
+  const estGas = await lootMarketContract.methods
+    .deposit(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('lootMarketStakingStake().estGas failed', error)
+    })
+
+  return lootMarketContract.methods
+    .deposit(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
+    .send({ from: account, gas: estGas })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}

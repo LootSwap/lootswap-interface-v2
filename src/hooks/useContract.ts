@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import useWeb3 from 'hooks/useWeb3'
-import { getBep20Contract, getCakeContract, getMasterchefContract } from 'utils/contractHelpers'
+import { getBep20Contract, getCakeContract, getMasterchefContract, getLootMarketContract } from 'utils/contractHelpers'
 
 /**
  * Helper hooks to get specific contracts (by ABI)
@@ -18,4 +18,9 @@ export const useCake = () => {
 export const useMasterchef = () => {
   const web3 = useWeb3()
   return useMemo(() => getMasterchefContract(web3), [web3])
+}
+
+export const useLootMarketContract = (id) => {
+  const web3 = useWeb3()
+  return useMemo(() => getLootMarketContract(id, web3), [id, web3])
 }

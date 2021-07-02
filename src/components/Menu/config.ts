@@ -31,6 +31,12 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     href: '/questlog',
   },
   {
+    label: t('Loot Market'),
+    icon: 'ErrorIcon',
+    type: 'svg',
+    href: '/market',
+  },
+  {
     label: t('Guilds'),
     icon: 'GuildIcon',
     type: 'svg',

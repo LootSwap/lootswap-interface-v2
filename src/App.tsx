@@ -18,6 +18,7 @@ import history from './routerHistory'
 // EX: Home, Farms and NotFound are all imported "lazyily" because they will be the least likely for page visits
 const Home = lazy(() => import('./views/Home'))
 const Farms = lazy(() => import('./views/Farms'))
+const LootMarket = lazy(() => import('./views/LootMarkets'))
 const NotFound = lazy(() => import('./views/NotFound'))
 
 // This config is required for number formatting
@@ -43,6 +44,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/questlog">
               <Farms />
+            </Route>
+            <Route path="/market">
+              <LootMarket />
             </Route>
             {/* Redirect 
             <Route path="/staking">
