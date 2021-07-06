@@ -12,6 +12,7 @@ import ToastListener from './components/ToastListener'
 import PageLoader from './components/PageLoader'
 // import EasterEgg from './components/EasterEgg'
 import history from './routerHistory'
+import Guilds from './views/Guilds'
 
 // Route-based code splitting
 // Only do not include lazy() for other pages and only include them in the main bundle IF you expect it to be the  most visited page
@@ -48,6 +49,7 @@ const App: React.FC = () => {
             <Route path="/market">
               <LootMarket />
             </Route>
+            <Route path="/guilds/:slug" component={Guilds} />
             {/* Redirect 
             <Route path="/staking">
               <Redirect to="/pools" />

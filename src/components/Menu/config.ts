@@ -45,6 +45,10 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
         label: t('Coming Soon'),
         href: '#',
       },
+      {
+        label: t('Troll Guilds'),
+        href: '/guilds/troll',
+      },
     ],
   },
   {
