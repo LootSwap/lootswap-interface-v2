@@ -73,17 +73,8 @@ const FarmedStakingCard = () => {
         </Block>
         <Actions>
           {account ? (
-            <Button
-              id="harvest-all"
-              disabled={balancesWithValue.length <= 0 || pendingTx}
-              onClick={harvestAllFarms}
-              width="100%"
-            >
-              {pendingTx
-                ? t('Collecting LOOT')
-                : t('Harvest all (%count%)', {
-                    count: balancesWithValue.length,
-                  })}
+            <Button id="harvest-all" disabled={balancesWithValue.length && true} onClick={harvestAllFarms} width="100%">
+              {pendingTx ? t('Collecting LOOT') : 'Disabled'}
             </Button>
           ) : (
             <UnlockButton width="100%" />

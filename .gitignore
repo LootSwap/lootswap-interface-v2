@@ -32,4 +32,4 @@ yarn-debug.log*
 yarn-error.log*
 debug.log*
 
-.firebase/
+/.firebase

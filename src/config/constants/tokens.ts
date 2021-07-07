@@ -116,6 +116,42 @@ const tokens = {
     decimals: 18,
     projectLink: '//lootswap.finance/',
   },
+  troll: {
+    symbol: 'TROLL',
+    address: {
+      1666600000: '0x25dceE96FCD63Ad88B812cCE02b3Fcf7d1504F2D',
+      1666700000: '',
+    },
+    decimals: 18,
+    projectLink: '//lootswap.finance/',
+  },
+  necro: {
+    symbol: 'NECRO',
+    address: {
+      1666600000: '0x9fe8a9A6B4Af9BD656B0295bd5Ad4A65b37165aC',
+      1666700000: '',
+    },
+    decimals: 18,
+    projectLink: '//lootswap.finance/',
+  },
+  arb: {
+    symbol: 'ARB',
+    address: {
+      1666600000: '0x044246137670A03ca790D7ED20AF0C552c88117c',
+      1666700000: '',
+    },
+    decimals: 18,
+    projectLink: '//lootswap.finance/',
+  },
+  bard: {
+    symbol: 'BARD',
+    address: {
+      1666600000: '0x69f4e54C666f7DDaf66D11876f557EC21cB65F35',
+      1666700000: '',
+    },
+    decimals: 18,
+    projectLink: '//lootswap.finance/',
+  },
 }
 
 export default tokens
