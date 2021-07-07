@@ -4,13 +4,13 @@ import web3NoAccount from 'utils/web3'
 import { lootMarketConfig } from 'config/constants'
 
 // Addresses
-import { getCakeAddress, getMasterChefAddress, getAddress } from 'utils/addressHelpers'
+import { getCakeAddress, getMasterLooterAddress, getAddress } from 'utils/addressHelpers'
 
 // ABI
 import bep20Abi from 'config/abi/erc20.json'
 import lpTokenAbi from 'config/abi/lpToken.json'
 import cakeAbi from 'config/abi/governancetoken.json'
-import masterChefAbi from 'config/abi/masterchef.json'
+import masterLooterABI from 'config/abi/masterlooter.json'
 import lootMarketAbi from 'config/abi/lootmarket.json'
 
 import { DEFAULT_GAS_PRICE } from 'config'
@@ -40,7 +40,7 @@ export const getCakeContract = (web3?: Web3) => {
 
 // TODO refactor name of the function getMasterchefContract -> getMasterLooterContract
 export const getMasterchefContract = (web3?: Web3) => {
-  return getContract(masterChefAbi, getMasterChefAddress(), web3)
+  return getContract(masterLooterABI, getMasterLooterAddress(), web3)
 }
 
 export const getLootMarketContract = (id: number, web3?: Web3) => {

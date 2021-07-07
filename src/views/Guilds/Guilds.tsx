@@ -8,7 +8,7 @@ const Guilds: React.FC = () => {
   const guild = () => {
     switch (slug) {
       case 'troll':
-        return <Troll name={slug} />
+        return <Troll guildSlug={slug} />
       default:
         return <NotFound />
     }

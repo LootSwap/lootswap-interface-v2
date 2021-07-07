@@ -1,27 +1,25 @@
 import BigNumber from 'bignumber.js'
 import masterLooterABI from 'config/abi/masterlooter.json'
 import erc20 from 'config/abi/erc20.json'
-import { getAddress, getMasterLooterAddress } from 'utils/addressHelpers'
+import { getAddress, getGuildsAddress } from 'utils/addressHelpers'
 import { BIG_TEN, BIG_ZERO } from 'utils/bigNumber'
 import multicall from 'utils/multicall'
-import { Farm, SerializedBigNumber } from '../types'
+import { Guild, SerializedBigNumber } from '../types'
 
-type PublicFarmData = {
+type PublicGuildData = {
   tokenAmountMc: SerializedBigNumber
   quoteTokenAmountMc: SerializedBigNumber
   tokenAmountTotal: SerializedBigNumber
   quoteTokenAmountTotal: SerializedBigNumber
   lpTotalInQuoteToken: SerializedBigNumber
-  percentLockupBonus: number
-  percentUnlockedBonus: number
   lpTotalSupply: SerializedBigNumber
   tokenPriceVsQuote: SerializedBigNumber
   poolWeight: SerializedBigNumber
   multiplier: string
 }
 
-const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
-  const { pid, lpAddresses, token, quoteToken } = farm
+const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
+  const { pid, lpAddresses, token, quoteToken, guildSlug } = guild
   const lpAddress = getAddress(lpAddresses)
   const calls = [
     // Balance of token in the LP contract
@@ -40,7 +38,7 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
     {
       address: lpAddress,
       name: 'balanceOf',
-      params: [getMasterLooterAddress()],
+      params: [getGuildsAddress(guildSlug)],
     },
     // Total supply of LP tokens
     {
@@ -76,30 +74,24 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
   // Total staked in LP, in quote token value
   const lpTotalInQuoteToken = quoteTokenAmountMc.times(new BigNumber(2))
 
-  // Only make masterchef calls if farm has pid
-  const [info, totalAllocPoint, percentLockbonus] =
+  // Only make masterchef calls if guild has pid
+  const [info, totalAllocPoint] =
     pid || pid === 0
       ? await multicall(masterLooterABI, [
           {
-            address: getMasterLooterAddress(),
+            address: getGuildsAddress(guildSlug),
             name: 'poolInfo',
             params: [pid],
           },
           {
-            address: getMasterLooterAddress(),
+            address: getGuildsAddress(guildSlug),
             name: 'totalAllocPoint',
-          },
-          {
-            address: getMasterChefAddress(),
-            name: 'PERCENT_LOCK_BONUS_REWARD',
           },
         ])
       : [null, null]
 
   const allocPoint = info ? new BigNumber(info.allocPoint?._hex) : BIG_ZERO
   const poolWeight = totalAllocPoint ? allocPoint.div(new BigNumber(totalAllocPoint)) : BIG_ZERO
-  const percentLockupBonus = percentLockbonus ? percentLockbonus / 100 : 0
-  const percentUnlockedBonus = 1 - percentLockupBonus
 
   return {
     tokenAmountMc: tokenAmountMc.toJSON(),
@@ -108,12 +100,10 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
     quoteTokenAmountTotal: quoteTokenAmountTotal.toJSON(),
     lpTotalSupply: new BigNumber(lpTotalSupply).toJSON(),
     lpTotalInQuoteToken: lpTotalInQuoteToken.toJSON(),
-    percentLockupBonus,
-    percentUnlockedBonus,
     tokenPriceVsQuote: quoteTokenAmountTotal.div(tokenAmountTotal).toJSON(),
     poolWeight: poolWeight.toJSON(),
     multiplier: `${allocPoint.div(BIG_TEN.pow(quoteTokenDecimals)).toString()}X`,
   }
 }
 
-export default fetchFarm
+export default fetchGuild

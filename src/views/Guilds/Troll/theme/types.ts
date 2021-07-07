@@ -6,3 +6,8 @@ export type Colors = {
   success: string
   warning: string
 }
+
+export type GuildConfig = {
+  number_of_farms_visible: number
+  symbol: string
+}

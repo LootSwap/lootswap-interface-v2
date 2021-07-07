@@ -11,8 +11,14 @@ export const getAddress = (address: Address): string => {
 export const getCakeAddress = () => {
   return getAddress(tokens.loot.address)
 }
-export const getMasterChefAddress = () => {
-  return getAddress(addresses.masterChef)
+export const getMasterLooterAddress = () => {
+  return getAddress(addresses.masterLooter)
+}
+export const getGuildsAddress = (guildSlug: string) => {
+  if (guildSlug === 'troll') {
+    return getAddress(addresses.masterLooterTroll)
+  }
+  return null
 }
 export const getMulticallAddress = () => {
   return getAddress(addresses.multiCall)

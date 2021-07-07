@@ -1,10 +1,14 @@
 export default {
-  masterChef: {
+  masterLooter: {
     1666600000: '0xb96618aEBD36f8D83Fa03873FdA796264597604D',
     1666700000: '',
   },
   multiCall: {
     1666600000: '0xFE4980f62D708c2A84D3929859Ea226340759320',
     1666700000: '0xbcd3451992B923531615293Cb2b2c38ba8DE9529',
+  },
+  masterLooterTroll: {
+    1666600000: '0xb96618aEBD36f8D83Fa03873FdA796264597604D', // todo change
+    1666700000: '',
   },
 }

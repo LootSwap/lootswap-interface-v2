@@ -1,4 +1,5 @@
 export { fetchFarmsPublicDataAsync, fetchFarmUserDataAsync } from './farms'
+export { fetchGuildsPublicDataAsync, fetchGuildUserDataAsync } from './guilds'
 export {
   fetchLootMarketsPublicDataAsync,
   fetchLootMarketsUserDataAsync,

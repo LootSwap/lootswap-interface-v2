@@ -28,6 +28,22 @@ export interface FarmConfig {
   }
 }
 
+export interface GuildConfig {
+  pid: number
+  lpSymbol: string
+  lpAddresses: Address
+  token: Token
+  quoteToken: Token
+  multiplier?: string
+  isCommunity?: boolean
+  guildSlug: string
+  dual?: {
+    rewardPerBlock: number
+    earnLabel: string
+    endBlock: number
+  }
+}
+
 export type Images = {
   lg: string
   md: string
