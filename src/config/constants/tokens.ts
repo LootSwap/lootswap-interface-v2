@@ -152,7 +152,7 @@ const tokens = {
     address: {
       1666600000: '0x69f4e54C666f7DDaf66D11876f557EC21cB65F35',
       1666700000: '',
-    }
+    },
   },
   guest: {
     symbol: 'GUESTV10',
