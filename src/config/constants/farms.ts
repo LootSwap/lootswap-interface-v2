@@ -118,6 +118,50 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.bscbnb,
     isCommunity: true,
   },
+  {
+    pid: 12,
+    lpSymbol: 'LOOT-TROLL',
+    lpAddresses: {
+      1666600000: '0xa1808a54AeA27609ad55d58a0e1836Cb35fe872d',
+      1666700000: '',
+    },
+    token: tokens.troll,
+    quoteToken: tokens.loot,
+    isCommunity: true,
+  },
+  {
+    pid: 13,
+    lpSymbol: 'LOOT-NECRO',
+    lpAddresses: {
+      1666600000: '0x9D29476f95a18AF6999555bfD3134Fc442695C07',
+      1666700000: '',
+    },
+    token: tokens.necro,
+    quoteToken: tokens.loot,
+    isCommunity: true,
+  },
+  {
+    pid: 14,
+    lpSymbol: 'LOOT-ARB',
+    lpAddresses: {
+      1666600000: '0x1B17730dcefAEcA706421f81A4A0D33Fc2c8b72F',
+      1666700000: '',
+    },
+    token: tokens.arb,
+    quoteToken: tokens.loot,
+    isCommunity: true,
+  },
+  {
+    pid: 15,
+    lpSymbol: 'LOOT-BARD',
+    lpAddresses: {
+      1666600000: '0x7Fa2eD0c31F2c0d155469850cb01537726a1a541',
+      1666700000: '',
+    },
+    token: tokens.bard,
+    quoteToken: tokens.loot,
+    isCommunity: true,
+  },
 ]
 
 export default farms
