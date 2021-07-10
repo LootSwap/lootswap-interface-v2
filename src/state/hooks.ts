@@ -190,7 +190,7 @@ export const useInitialBlock = () => {
 export const usePriceGuildBusd = (guildSlug: string): BigNumber => {
   const guildlootFarm = useGuildFromPid(0, guildSlug)
   const lootPriceBusd = usePriceLootBusd()
-  const guildBusdPrice = guildlootFarm.tokenPriceVsQuote
+  const guildBusdPrice = guildlootFarm?.tokenPriceVsQuote
     ? lootPriceBusd.times(guildlootFarm.tokenPriceVsQuote)
     : BIG_ZERO
   return guildBusdPrice

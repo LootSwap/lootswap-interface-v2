@@ -19,22 +19,20 @@ import { latinise } from 'utils/latinise'
 import PageHeader from 'components/PageHeader'
 import SearchInput from 'components/SearchInput'
 import Select, { OptionProps } from 'components/Select/Select'
-import FarmCard, { FarmWithStakedValue } from '../components/FarmCard/FarmCard'
-import Table from '../components/FarmTable/FarmTable'
-import FarmTabButtons from '../components/FarmTabButtons'
-import { RowProps } from '../components/FarmTable/Row'
-import ToggleView from '../components/ToggleView/ToggleView'
-import { DesktopColumnSchema, ViewMode } from '../components/types'
-import useGuildSettings from '../hooks/useGuildSettings'
+import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
+import Table from './components/FarmTable/FarmTable'
+import FarmTabButtons from './components/FarmTabButtons'
+import { RowProps } from './components/FarmTable/Row'
+import ToggleView from './components/ToggleView/ToggleView'
+import { DesktopColumnSchema, ViewMode } from './components/types'
+import useGuildSettings from './hooks/useGuildSettings'
 
-interface ITroll {
+interface IGuildPage {
   guildSlug: string
+  footerImg: any
 }
 
-const PageGuildTheme = styled.div`
-  background: #000;
-`
-
+// #region Style
 const ControlContainer = styled.div`
   display: flex;
   width: 100%;
@@ -107,7 +105,15 @@ const StyledImage = styled(Image)`
   margin-right: auto;
   margin-top: 58px;
 `
-const Troll: React.FC<ITroll> = (props) => {
+
+const PageGuildTheme = styled.div`
+  background: ${(props) => (props.color ? props.color : 'white')};
+`
+
+// #endregion
+
+// #region Component
+const GuildPage: React.FC<IGuildPage> = (props) => {
   // Reset background
   useEffect(() => {
     document.body.style.background = 'none'
@@ -118,19 +124,20 @@ const Troll: React.FC<ITroll> = (props) => {
     }
   })
 
-  const { guildSlug } = props
+  // #region Setup
+  const { guildSlug, footerImg } = props
   const guildSettings = useGuildSettings(guildSlug)
-  const numbersOfFarmsVisible = guildSettings?.number_of_farms_visible
+  const numbersOfFarmsVisible = guildSettings?.numberOfFarmsVisible
   const { path } = useRouteMatch()
   const { pathname } = useLocation()
   const { t } = useTranslation()
 
   const { data: guildsLP, userDataLoaded } = useGuilds()
 
-  // idea stems from: https://stackoverflow.com/questions/2218999/how-to-remove-all-duplicates-from-an-array-of-objects
+  // Idea stems from: https://stackoverflow.com/questions/2218999/how-to-remove-all-duplicates-from-an-array-of-objects
   const guildsLPUnique = guildsLP.filter(
-    (v, i, a) => a.findIndex((glp) => glp.pid === v.pid && glp.guildSlug === v.guildSlug) === i,
-  ) // Filters out duplicates
+    (v, i, a) => a.findIndex((glp) => glp.pid === v.pid && glp.guildSlug === v.guildSlug) === i, // Filters out duplicates
+  )
 
   const guildTokenPrice = usePriceGuildBusd(guildSlug)
   const [query, setQuery] = useState('')
@@ -323,7 +330,9 @@ const Troll: React.FC<ITroll> = (props) => {
 
       return row
     })
+  // #endregion
 
+  // #region Markup
   const renderContent = (): JSX.Element => {
     if (viewMode === ViewMode.TABLE && rowData.length) {
       const columnSchema = DesktopColumnSchema
@@ -353,7 +362,6 @@ const Troll: React.FC<ITroll> = (props) => {
 
       return <Table data={rowData} columns={columns} userDataReady={userDataReady} guildSlug={guildSlug} />
     }
-
     return (
       <div>
         <FlexLayout>
@@ -388,13 +396,15 @@ const Troll: React.FC<ITroll> = (props) => {
       </div>
     )
   }
+  // #endregion
 
   const handleSortOptionChange = (option: OptionProps): void => {
     setSortOption(option.value)
   }
 
+  // #region html
   return (
-    <PageGuildTheme>
+    <PageGuildTheme color={guildSettings.background}>
       <PageHeader>
         <Heading as="h1" scale="xxl" color="secondary" mb="24px">
           {guildSlug.toUpperCase()} {t('Guild Quests')}
@@ -462,15 +472,12 @@ const Troll: React.FC<ITroll> = (props) => {
         </ControlContainer>
         {renderContent()}
         <div ref={loadMoreRef} />
-        <StyledImage
-          src="/images/decorations/background/loot-bg.svg"
-          alt="LootSwap illustration"
-          width={120}
-          height={103}
-        />
+        <StyledImage src={footerImg.src} alt={footerImg.alt} width={footerImg.width} height={footerImg.height} />
       </Page>
     </PageGuildTheme>
   )
 }
+// #endregion
+// #endregion
 
-export default Troll
+export default GuildPage

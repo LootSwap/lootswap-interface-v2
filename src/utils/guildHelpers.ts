@@ -7,7 +7,7 @@ const TROLL_ARCHIVED_FARMS_END_PID = 9999
 const isArchivedPid = (pid: number, guildSlug) => {
   switch (guildSlug) {
     case 'troll':
-      return pid >= TROLL_ARCHIVED_FARMS_START_PID && pid <= TROLL_ARCHIVED_FARMS_END_PID
+      return pid >= TROLL_ARCHIVED_FARMS_START_PID && pid <= TROLL_ARCHIVED_FARMS_END_PID // For Example
     default:
       return pid >= ARCHIVED_FARMS_START_PID && pid <= ARCHIVED_FARMS_END_PID
   }

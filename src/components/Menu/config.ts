@@ -49,6 +49,10 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
         label: t('Troll Guilds'),
         href: '/guilds/troll',
       },
+      {
+        label: t('Necro Guilds'),
+        href: '/guilds/necro',
+      },
     ],
   },
   {
