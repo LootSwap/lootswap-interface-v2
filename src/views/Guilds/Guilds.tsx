@@ -1,20 +1,17 @@
 import React from 'react'
-import { ThemeProvider } from 'styled-components'
 import { useParams } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
 import useTheme from 'hooks/useTheme'
 import GuildPage from './Guild'
 import useGuildSettings from './hooks/useGuildSettings'
 
 const Guilds: React.FC = () => {
   const { slug } = useParams<{ slug: string }>()
-  const globalStyle = useTheme()
   const guildSettings = useGuildSettings(slug)
-  const guildTheme = {
-    ...globalStyle.theme,
-    ...guildSettings.theme,
-  }
+  const globalSettings = useTheme()
+  console.log({ ...globalSettings.theme, ...guildSettings.guildTheme })
   return (
-    <ThemeProvider theme={guildTheme}>
+    <ThemeProvider theme={{ ...globalSettings.theme, ...guildSettings.guildTheme }}>
       <GuildPage guildSlug={slug} footerImg={guildSettings.footerImg} />
     </ThemeProvider>
   )

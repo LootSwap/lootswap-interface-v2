@@ -4,7 +4,7 @@ import { guildTheme } from './theme'
 export const config: GuildConfig = {
   numberOfFarmsVisible: 12,
   symbol: 'TROLL',
-  theme: guildTheme,
+  guildTheme,
   guildSlug: 'troll',
   footerImg: {
     src: '/images/decorations/background/loot-bg.svg',

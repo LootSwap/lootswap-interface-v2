@@ -13,17 +13,6 @@ const farms: GuildConfig[] = [
     quoteToken: tokens.loot,
     guildSlug: 'troll',
   },
-  {
-    pid: 0,
-    lpSymbol: 'LOOT-NECRO',
-    lpAddresses: {
-      1666600000: '0x9D29476f95a18AF6999555bfD3134Fc442695C07',
-      1666700000: '',
-    },
-    token: tokens.necro,
-    quoteToken: tokens.loot,
-    guildSlug: 'necro',
-  },
 ]
 
 export default farms

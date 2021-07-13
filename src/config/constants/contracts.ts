@@ -11,8 +11,4 @@ export default {
     1666600000: '0xb96618aEBD36f8D83Fa03873FdA796264597604D', // todo change
     1666700000: '',
   },
-  masterLooterNecro: {
-    1666600000: '0xb96618aEBD36f8D83Fa03873FdA796264597604D', // todo change
-    1666700000: '',
-  },
 }

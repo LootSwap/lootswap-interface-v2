@@ -18,9 +18,6 @@ export const getGuildsAddress = (guildSlug: string) => {
   if (guildSlug === 'troll') {
     return getAddress(addresses.masterLooterTroll)
   }
-  if (guildSlug === 'necro') {
-    return getAddress(addresses.masterLooterNecro)
-  }
   return null
 }
 export const getMulticallAddress = () => {
