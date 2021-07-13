@@ -1,4 +1,8 @@
 const tokens = {
+  one: {
+    symbol: 'ONE',
+    projectLink: 'https://www.harmony.one/',
+  },
   loot: {
     symbol: 'LOOT',
     address: {
