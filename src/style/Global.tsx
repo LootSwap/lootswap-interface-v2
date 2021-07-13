@@ -13,9 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     background-color: ${({ theme }) => theme.colors.background};
-    background:  url(/images/decorations/background/lootswap-bg.webp), url(/images/decorations/background/lootswap-bg.png), ${({
-      theme,
-    }) => theme.colors.background};
+    background:  url(/images/decorations/background/lootswap-v2-bg.jpg), ${({ theme }) => theme.colors.background};
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
