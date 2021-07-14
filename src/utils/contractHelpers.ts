@@ -4,7 +4,7 @@ import web3NoAccount from 'utils/web3'
 import { lootMarketConfig } from 'config/constants'
 
 // Addresses
-import { getCakeAddress, getMasterLooterAddress, getAddress } from 'utils/addressHelpers'
+import { getCakeAddress, getMasterLooterAddress, getAddress, getGuildsAddress } from 'utils/addressHelpers'
 
 // ABI
 import bep20Abi from 'config/abi/erc20.json'
@@ -46,4 +46,8 @@ export const getMasterchefContract = (web3?: Web3) => {
 export const getLootMarketContract = (id: number, web3?: Web3) => {
   const config = lootMarketConfig.find((m) => m.pid === id)
   return getContract(lootMarketAbi, getAddress(config.contractAddress), web3)
+}
+
+export const getMasterGuildLooterContract = (guildSlug: string, web3?: Web3) => {
+  return getContract(masterLooterABI, getGuildsAddress(guildSlug), web3)
 }

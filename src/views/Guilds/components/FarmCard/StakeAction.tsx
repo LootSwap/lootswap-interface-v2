@@ -8,8 +8,8 @@ import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'contexts/Localization'
 import { useAppDispatch } from 'state'
 import { fetchGuildUserDataAsync } from 'state/guilds'
-import useStake from 'hooks/useStake'
-import useUnstake from 'hooks/useUnstake'
+import { useGuildStake } from 'hooks/useStake'
+import { useGuildUnstake } from 'hooks/useUnstake'
 import { getBalanceNumber, getFullDisplayBalance } from 'utils/formatBalance'
 import DepositModal from '../DepositModal'
 import WithdrawModal from '../WithdrawModal'
@@ -39,8 +39,8 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
   guildSlug,
 }) => {
   const { t } = useTranslation()
-  const { onStake } = useStake(pid)
-  const { onUnstake } = useUnstake(pid)
+  const { onStake } = useGuildStake(pid, guildSlug)
+  const { onUnstake } = useGuildUnstake(pid, guildSlug)
   const location = useLocation()
   const dispatch = useAppDispatch()
   const { account } = useWeb3React()

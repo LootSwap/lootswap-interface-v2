@@ -10,7 +10,7 @@ import { fetchGuildUserDataAsync } from 'state/guilds'
 import { Guild } from 'state/types'
 import { useTranslation } from 'contexts/Localization'
 import useWeb3 from 'hooks/useWeb3'
-import { useApprove } from 'hooks/useApprove'
+import { useGuildApprove } from 'hooks/useApprove'
 import UnlockButton from 'components/UnlockButton'
 import StakeAction from './StakeAction'
 import HarvestAction from './HarvestAction'
@@ -51,7 +51,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
 
   const lpContract = getBep20Contract(lpAddress, web3)
 
-  const { onApprove } = useApprove(lpContract)
+  const { onApprove } = useGuildApprove(lpContract, guildSlug)
 
   const handleApprove = useCallback(async () => {
     try {

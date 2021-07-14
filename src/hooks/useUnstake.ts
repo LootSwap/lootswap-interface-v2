@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { unstake, lootMarketUnstake, lootMarketEmergencyUnstake } from 'utils/callHelpers'
+import { unstake, lootMarketUnstake, lootMarketEmergencyUnstake, unstakeGuild } from 'utils/callHelpers'
 import { updateUserStakedBalance, updateUserBalance, updateUserPendingReward } from 'state/actions'
 import { useAppDispatch } from 'state'
-import { useMasterchef, useLootMarketContract } from './useContract'
+import { useMasterchef, useLootMarketContract, useMasterGuildLooter } from './useContract'
 
 const useUnstake = (pid: number) => {
   const { account } = useWeb3React()
@@ -20,6 +20,7 @@ const useUnstake = (pid: number) => {
   return { onUnstake: handleUnstake }
 }
 
+// Loot Market
 export const useLootMarketsUnstake = (pid, enableEmergencyWithdraw = false) => {
   const dispatch = useAppDispatch()
   const { account } = useWeb3React()
@@ -38,6 +39,22 @@ export const useLootMarketsUnstake = (pid, enableEmergencyWithdraw = false) => {
       dispatch(updateUserPendingReward(pid, account))
     },
     [account, dispatch, enableEmergencyWithdraw, lootMarketContract, pid],
+  )
+
+  return { onUnstake: handleUnstake }
+}
+
+// Guilds
+export const useGuildUnstake = (pid: number, guildSlug: string) => {
+  const { account } = useWeb3React()
+  const masterGuildContract = useMasterGuildLooter(guildSlug)
+
+  const handleUnstake = useCallback(
+    async (amount: string) => {
+      const txHash = await unstakeGuild(masterGuildContract, pid, amount, account)
+      console.info(txHash)
+    },
+    [account, masterGuildContract, pid],
   )
 
   return { onUnstake: handleUnstake }

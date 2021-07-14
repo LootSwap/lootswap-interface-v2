@@ -9,14 +9,14 @@ import { useGuildUser } from 'state/hooks'
 import { fetchGuildUserDataAsync } from 'state/guilds'
 import { FarmWithStakedValue } from 'views/Guilds/components/FarmCard/FarmCard'
 import { useTranslation } from 'contexts/Localization'
-import { useApprove } from 'hooks/useApprove'
+import { useGuildApprove } from 'hooks/useApprove'
 import { getBep20Contract } from 'utils/contractHelpers'
 import { BASE_ADD_LIQUIDITY_URL } from 'config'
 import { useAppDispatch } from 'state'
 import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
 import { getBalanceNumber, getFullDisplayBalance } from 'utils/formatBalance'
-import useStake from 'hooks/useStake'
-import useUnstake from 'hooks/useUnstake'
+import { useGuildStake } from 'hooks/useStake'
+import { useGuildUnstake } from 'hooks/useUnstake'
 import useWeb3 from 'hooks/useWeb3'
 
 import DepositModal from '../../DepositModal'
@@ -44,8 +44,8 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
   const { account } = useWeb3React()
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { allowance, tokenBalance, stakedBalance } = useGuildUser(pid, guildSlug)
-  const { onStake } = useStake(pid)
-  const { onUnstake } = useUnstake(pid)
+  const { onStake } = useGuildStake(pid, guildSlug)
+  const { onUnstake } = useGuildUnstake(pid, guildSlug)
   const web3 = useWeb3()
   const location = useLocation()
 
@@ -84,7 +84,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
   )
   const lpContract = getBep20Contract(lpAddress, web3)
   const dispatch = useAppDispatch()
-  const { onApprove } = useApprove(lpContract)
+  const { onApprove } = useGuildApprove(lpContract, guildSlug)
 
   const handleApprove = useCallback(async () => {
     try {

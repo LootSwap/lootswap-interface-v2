@@ -4,7 +4,7 @@ import { Button, Flex, Heading } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { useAppDispatch } from 'state'
 import { fetchGuildUserDataAsync } from 'state/guilds'
-import { useHarvest } from 'hooks/useHarvest'
+import { useGuildHarvest } from 'hooks/useHarvest'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useWeb3React } from '@web3-react/core'
 import { usePriceLootBusd } from 'state/hooks'
@@ -21,7 +21,7 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid, guildSlu
   const { account } = useWeb3React()
   const { t } = useTranslation()
   const [pendingTx, setPendingTx] = useState(false)
-  const { onReward } = useHarvest(pid)
+  const { onReward } = useGuildHarvest(pid, guildSlug)
   const guildTokenPrice = usePriceLootBusd()
   const dispatch = useAppDispatch()
   const rawEarningsBalance = account ? getBalanceNumber(earnings) : 0

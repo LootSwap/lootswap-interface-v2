@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { stake, lootMarketStakingStake } from 'utils/callHelpers'
+import { stake, lootMarketStakingStake, stakeGuild } from 'utils/callHelpers'
 import { updateUserStakedBalance, updateUserBalance } from 'state/actions'
 import { useAppDispatch } from 'state'
-import { useMasterchef, useLootMarketContract } from './useContract'
+import { useMasterchef, useLootMarketContract, useMasterGuildLooter } from './useContract'
 
 const useStake = (pid: number) => {
   const { account } = useWeb3React()
@@ -33,6 +33,22 @@ export const useLootMarketStake = (pid: number) => {
       dispatch(updateUserBalance(pid, account))
     },
     [account, dispatch, lootMarketContract, pid],
+  )
+
+  return { onStake: handleStake }
+}
+
+// Guild
+export const useGuildStake = (pid: number, guildSlug: string) => {
+  const { account } = useWeb3React()
+  const masterGuildContract = useMasterGuildLooter(guildSlug)
+
+  const handleStake = useCallback(
+    async (amount: string) => {
+      const txHash = await stakeGuild(masterGuildContract, pid, amount, account)
+      console.info(txHash)
+    },
+    [account, masterGuildContract, pid],
   )
 
   return { onStake: handleStake }
