@@ -1,11 +1,11 @@
-import { guildSettings as trollSettings } from '../Troll/settings'
+import { guildSettings as ggSettings } from '../GG/settings'
 
 const useGuildSettings = (slug: string) => {
   switch (slug) {
-    case 'troll':
-      return trollSettings
+    case 'gg':
+      return ggSettings
     default:
-      return trollSettings // TODO create a default for guilds theme
+      return ggSettings // TODO create a default for guilds theme
   }
 }
 

@@ -15,8 +15,8 @@ export const getMasterLooterAddress = () => {
   return getAddress(addresses.masterLooter)
 }
 export const getGuildsAddress = (guildSlug: string) => {
-  if (guildSlug === 'troll') {
-    return getAddress(addresses.masterLooterTroll)
+  if (guildSlug === 'gg') {
+    return getAddress(addresses.masterLooterGG)
   }
   return null
 }

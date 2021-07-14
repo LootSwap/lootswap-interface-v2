@@ -1,5 +1,3 @@
-import { DefaultTheme } from 'styled-components'
-
 export type Gradients = {
   bubblegum: string
   lootswap: string

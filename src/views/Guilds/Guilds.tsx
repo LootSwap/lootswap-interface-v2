@@ -9,7 +9,6 @@ const Guilds: React.FC = () => {
   const { slug } = useParams<{ slug: string }>()
   const guildSettings = useGuildSettings(slug)
   const globalSettings = useTheme()
-  console.log({ ...globalSettings.theme, ...guildSettings.guildTheme })
   return (
     <ThemeProvider theme={{ ...globalSettings.theme, ...guildSettings.guildTheme }}>
       <GuildPage guildSlug={slug} footerImg={guildSettings.footerImg} />

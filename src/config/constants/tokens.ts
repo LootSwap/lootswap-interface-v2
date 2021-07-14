@@ -170,6 +170,15 @@ const tokens = {
     decimals: 18,
     projectLink: '//lootswap.finance/',
   },
+  gg: {
+    symbol: 'GOOD',
+    address: {
+      1666600000: '0x64d4Aee414CC491e8dba6B5b89EF2E798a1e1753',
+      1666700000: '',
+    },
+    decimals: 18,
+    projectLink: '//lootswap.finance/',
+  },
 }
 
 export default tokens

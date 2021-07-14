@@ -4,14 +4,14 @@ import { GuildConfig } from './types'
 const farms: GuildConfig[] = [
   {
     pid: 0,
-    lpSymbol: 'LOOT-TROLL',
+    lpSymbol: 'LOOT-GG',
     lpAddresses: {
-      1666600000: '0xa1808a54AeA27609ad55d58a0e1836Cb35fe872d',
+      1666600000: '0x19Ac428e610f52c0ed1aC927e7C55Be8BFbaA1da',
       1666700000: '',
     },
-    token: tokens.troll,
+    token: tokens.gg,
     quoteToken: tokens.loot,
-    guildSlug: 'troll',
+    guildSlug: 'gg',
   },
 ]
 
