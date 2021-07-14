@@ -6,6 +6,7 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
   {
     label: t('Home'),
     icon: 'HomeIcon',
+    type: 'svg',
     href: '/',
   },
   {
@@ -25,7 +26,7 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
   },
   {
     label: t('Quest Log'),
-    icon: 'ErrorIcon',
+    icon: 'QuestLogsIcon',
     type: 'svg',
     href: '/questlog',
   },
