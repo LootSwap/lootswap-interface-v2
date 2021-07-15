@@ -12,6 +12,9 @@ import StakedAction from './StakedAction'
 import Apr, { AprProps } from '../Apr'
 import Multiplier, { MultiplierProps } from '../Multiplier'
 import Liquidity, { LiquidityProps } from '../Liquidity'
+import { EarnedProps } from '../Earned'
+import Unlocked from '../Unlocked'
+import Locked from '../Locked'
 
 export interface ActionPanelProps {
   apr: AprProps
@@ -20,6 +23,7 @@ export interface ActionPanelProps {
   details: FarmWithStakedValue
   userDataReady: boolean
   expanded: boolean
+  earned: EarnedProps
 }
 
 const expandAnimation = keyframes`
@@ -129,6 +133,17 @@ const ValueWrapper = styled.div`
   margin: 4px 0px;
 `
 
+const EarnedContainer = styled.div`
+  display: block;
+`
+
+const EarnedWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 4px 0px;
+`
+
 const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
   details,
   apr,
@@ -136,9 +151,9 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
   liquidity,
   userDataReady,
   expanded,
+  earned
 }) => {
   const farm = details
-
   const { t } = useTranslation()
   const isActive = farm.multiplier !== '0X'
   const { quoteToken, token, dual } = farm
@@ -166,7 +181,17 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
           {dual ? <DualTag /> : null}
         </TagsContainer>
       </InfoContainer>
-      <ValueContainer>
+      <EarnedContainer>
+        <EarnedWrapper>
+          <Text>{t('Unlocked')}</Text>
+          <Unlocked {...earned} />
+        </EarnedWrapper>
+        <EarnedWrapper>
+          <Text>{t('Locked')}</Text>
+          <Locked {...earned}/>
+        </EarnedWrapper>
+      </EarnedContainer>
+      <ValueContainer>     
         <ValueWrapper>
           <Text>{t('APR')}</Text>
           <Apr {...apr} />

@@ -7,7 +7,7 @@ import { Image, RowType, Heading } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
-import { useFarms, usePollFarmsData, usePriceCakeBusd } from 'state/hooks'
+import { useFarms, usePollFarmsData, usePriceLootBusd } from 'state/hooks'
 import usePersistState from 'hooks/usePersistState'
 import { Farm } from 'state/types'
 import { useTranslation } from 'contexts/Localization'
@@ -105,7 +105,7 @@ const Farms: React.FC = () => {
   const { pathname } = useLocation()
   const { t } = useTranslation()
   const { data: farmsLP, userDataLoaded } = useFarms()
-  const cakePrice = usePriceCakeBusd()
+  const cakePrice = usePriceLootBusd()
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = usePersistState(ViewMode.TABLE, { localStorageKey: 'lootswap_farm_view' })
   const { account } = useWeb3React()
@@ -274,6 +274,8 @@ const Farms: React.FC = () => {
       earned: {
         earnings: getBalanceNumber(new BigNumber(farm.userData.earnings)),
         pid: farm.pid,
+        locked: farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings)),
+        unlocked: farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))
       },
       liquidity: {
         liquidity: farm.liquidity,
