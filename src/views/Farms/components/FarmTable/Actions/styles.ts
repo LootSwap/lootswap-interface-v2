@@ -6,7 +6,7 @@ export const ActionContainer = styled.div`
   border-radius: 16px;
   flex-grow: 1;
   flex-basis: 0;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
     margin-left: 12px;

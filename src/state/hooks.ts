@@ -123,8 +123,7 @@ export const useLpTokenPrice = (symbol: string) => {
   return lpTokenPrice
 }
 
-export const usePriceCakeBusd = (): BigNumber => {
-  // TODO rename function usePriceCakeBusd -> usePriceLootBusd
+export const usePriceLootBusd = (): BigNumber => {
   const lootbusdFarm = useFarmFromPid(9) // loot <> busd
   return new BigNumber(lootbusdFarm.token.busdPrice)
 }
