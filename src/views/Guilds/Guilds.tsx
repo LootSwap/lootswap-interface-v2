@@ -1,8 +1,11 @@
+/* eslint no-nested-ternary: 0 */
+
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import { Image } from '@pancakeswap/uikit'
 import useTheme from 'hooks/useTheme'
+import NotFound from 'views/NotFound'
 import GuildPage from './Guild'
 import useGuildSettings from './hooks/useGuildSettings'
 
@@ -30,7 +33,9 @@ const Guilds: React.FC = () => {
   }, [])
   // #endregion
 
-  return !isLoaded && guildSettings.loading ? (
+  return !guildSettings ? (
+    <NotFound />
+  ) : !isLoaded && guildSettings?.loading ? (
     <PageGuildLoadingTheme color={guildSettings.loading.backgroundColor}>
       <StyledLoadingImage
         src={guildSettings.loading.src}

@@ -5,7 +5,7 @@ const useGuildSettings = (slug: string) => {
     case 'gg':
       return ggSettings
     default:
-      return ggSettings // TODO create a default for guilds theme
+      return null // TODO create a default for guilds theme
   }
 }
 
