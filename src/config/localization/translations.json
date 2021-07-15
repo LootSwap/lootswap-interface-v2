@@ -585,6 +585,7 @@
   "Total %sym% Burned": "Total %sym% Burned",
   "%sym% Price": "%sym% Price",
   "%sym% Circ. Market Cap": "%sym% Circ. Market Cap",
-  "%sym% Total Market Cap": "%sym% Total Market Cap"
+  "%sym% Total Market Cap": "%sym% Total Market Cap",
+  "AutoLooter": "AutoLooter"
 
 }

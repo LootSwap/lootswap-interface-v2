@@ -8,7 +8,7 @@ export default {
     1666700000: '0xbcd3451992B923531615293Cb2b2c38ba8DE9529',
   },
   masterLooterGG: {
-    1666600000: '0x6683Ad9e1EC79a8c15530Fb752030056F397C94d', // todo change
+    1666600000: '0x1f27964182b470dBa3ecdA5d1A516136a864557e',
     1666700000: '',
   },
 }

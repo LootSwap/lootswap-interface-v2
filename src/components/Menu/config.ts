@@ -22,6 +22,10 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
         label: t('Liquidity'),
         href: BASE_LIQUIDITY_POOL_URL,
       },
+      {
+        label: t('AutoLooter'),
+        href: 'https://legacy.lootswap.finance/#/autoLoot',
+      },
     ],
   },
   {

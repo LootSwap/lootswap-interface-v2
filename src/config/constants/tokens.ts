@@ -171,13 +171,13 @@ const tokens = {
     projectLink: '//lootswap.finance/',
   },
   gg: {
-    symbol: 'GOOD',
+    symbol: 'GG',
     address: {
-      1666600000: '0x64d4Aee414CC491e8dba6B5b89EF2E798a1e1753',
+      1666600000: '0x463C684C0dc0a1163DB5A9b57D9847EFc28C418a',
       1666700000: '',
     },
     decimals: 18,
-    projectLink: '//lootswap.finance/',
+    projectLink: '//geriatricsgaming.com/',
   },
 }
 

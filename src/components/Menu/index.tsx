@@ -28,6 +28,9 @@ const Menu = (props) => {
       setLang={setLanguage}
       tokenPriceUsd={cakePriceUsd.toNumber()}
       links={config(t)}
+      logoSrc="https://legacy.lootswap.finance/static/media/loot_logo.5ca5dce3.png"
+      logoAlt="lootswap"
+      tokenSrc="https://lootswap.finance/images/loot.svg"
       {...props}
     />
   )
