@@ -12,7 +12,6 @@ export const config: GuildConfig = {
     width: 120,
     height: 103,
   },
-  background: '',
 }
 
 export default config

@@ -584,5 +584,12 @@
   "Guild Quests": "Guild Quests",
   "Search Guild Quests": "Search Guild Quests",
   "The multiplier represents the amount of %symbolName% rewards each quest gets": "The multiplier represents the amount of %symbolName% rewards each quest gets",
-  "For example, if a 1x quest was getting 1 %symbolName% per block, a 40x quest would be getting 40 %symbolName% per block": "For example, if a 1x quest was getting 1 %symbolName% per block, a 40x quest would be getting 40 %symbolName% per block"
+  "For example, if a 1x quest was getting 1 %symbolName% per block, a 40x quest would be getting 40 %symbolName% per block": "For example, if a 1x quest was getting 1 %symbolName% per block, a 40x quest would be getting 40 %symbolName% per block",
+  "%sym% Stats": "%sym% Stats",
+  "%sym% in Circ.": "%sym% in Circ.",
+  "Total %sym% Supply": "Total %sym% Supply",
+  "Total %sym% Burned": "Total %sym% Burned",
+  "%sym% Price": "%sym% Price",
+  "%sym% Circ. Market Cap": "%sym% Circ. Market Cap",
+  "%sym% Total Market Cap": "%sym% Total Market Cap"
 }

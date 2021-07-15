@@ -14,9 +14,15 @@ export const getCakeAddress = () => {
 export const getMasterLooterAddress = () => {
   return getAddress(addresses.masterLooter)
 }
-export const getGuildsAddress = (guildSlug: string) => {
+export const getGuildsMasterLooterAddress = (guildSlug: string) => {
   if (guildSlug === 'gg') {
     return getAddress(addresses.masterLooterGG)
+  }
+  return null
+}
+export const getGuildsTokenAddress = (guildSlug: string) => {
+  if (guildSlug === 'gg') {
+    return getAddress(tokens.gg.address)
   }
   return null
 }

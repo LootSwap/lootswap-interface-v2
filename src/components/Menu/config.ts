@@ -42,14 +42,11 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     type: 'svg',
     items: [
       {
-        label: t('Coming Soon'),
-        href: '#',
-      },
-      {
         label: t('GG Guild'),
         href: '/guilds/gg',
       },
     ],
+    calloutClass: 'rainbow',
   },
   {
     label: t('Analytics'),

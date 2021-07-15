@@ -1,5 +1,12 @@
-export const card = {
-  background: '#FAF9FA',
+import { light, dark } from '@lootswap/uikit'
+
+const isDark = true
+
+const theme = isDark ? dark : light
+
+export const lightTheme = {
+  ...theme.card,
+  background: '#f9f9f9',
   boxShadow: '0px 2px 12px -8px rgba(25, 19, 38, 0.1), 0px 1px 1px rgba(25, 19, 38, 0.05)',
   boxShadowActive: '0px 0px 0px 1px #0098A1, 0px 0px 4px 8px rgba(31, 199, 212, 0.4)',
   boxShadowSuccess: '0px 0px 0px 1px #31D0AA, 0px 0px 0px 4px rgba(49, 208, 170, 0.2)',
@@ -7,5 +14,18 @@ export const card = {
   cardHeaderBackground: 'linear-gradient(111.68deg, #F2ECF2 0%, #E8F2F6 100%)',
   dropShadow: 'drop-shadow(0px 1px 4px rgba(25, 19, 38, 0.15))',
 }
+
+const darkTheme = {
+  ...theme.card,
+  background: '#171717',
+  boxShadow: '0px 2px 12px -8px rgba(25, 19, 38, 0.1), 0px 1px 1px rgba(25, 19, 38, 0.05)',
+  boxShadowActive: '0px 0px 0px 1px #0098A1, 0px 0px 4px 8px rgba(31, 199, 212, 0.4)',
+  boxShadowSuccess: '0px 0px 0px 1px #31D0AA, 0px 0px 0px 4px rgba(49, 208, 170, 0.2)',
+  boxShadowWarning: '0px 0px 0px 1px #ED4B9E, 0px 0px 0px 4px rgba(237, 75, 158, 0.2)',
+  cardHeaderBackground: 'linear-gradient(111.68deg, #F2ECF2 0%, #E8F2F6 100%)',
+  dropShadow: 'drop-shadow(0px 1px 4px rgba(25, 19, 38, 0.15))',
+}
+
+export const card = isDark ? darkTheme : lightTheme
 
 export default card

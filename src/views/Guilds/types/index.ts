@@ -12,6 +12,13 @@ export type Image = {
   alt: string
   width: number
   height: number
+  backgroundColor?: string
+}
+
+export type Sprite = {
+  image?: string
+  width?: number
+  height?: number
 }
 
 export type GuildConfig = {
@@ -20,5 +27,6 @@ export type GuildConfig = {
   guildTheme: any
   guildSlug: string
   footerImg: Image
-  background: string
+  sprite?: Sprite
+  loading?: Image
 }

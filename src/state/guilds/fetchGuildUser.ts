@@ -2,12 +2,12 @@ import BigNumber from 'bignumber.js'
 import erc20ABI from 'config/abi/erc20.json'
 import masterLooterABI from 'config/abi/masterlooter.json'
 import multicall from 'utils/multicall'
-import { getAddress, getGuildsAddress } from 'utils/addressHelpers'
+import { getAddress, getGuildsMasterLooterAddress } from 'utils/addressHelpers'
 import { GuildConfig } from 'config/constants/types'
 
 export const fetchGuildUserAllowances = async (account: string, guildsToFetch: GuildConfig[]) => {
   const calls = guildsToFetch.map((guild) => {
-    const guildContractAddress = getGuildsAddress(guild.guildSlug)
+    const guildContractAddress = getGuildsMasterLooterAddress(guild.guildSlug)
     const lpContractAddress = getAddress(guild.lpAddresses)
     return { address: lpContractAddress, name: 'allowance', params: [account, guildContractAddress] }
   })
@@ -38,7 +38,7 @@ export const fetchGuildUserTokenBalances = async (account: string, guildsToFetch
 
 export const fetchGuildUserStakedBalances = async (account: string, guildsToFetch: GuildConfig[]) => {
   const calls = guildsToFetch.map((guild) => {
-    const guildContractAddress = getGuildsAddress(guild.guildSlug)
+    const guildContractAddress = getGuildsMasterLooterAddress(guild.guildSlug)
     return {
       address: guildContractAddress,
       name: 'userInfo',
@@ -55,7 +55,7 @@ export const fetchGuildUserStakedBalances = async (account: string, guildsToFetc
 
 export const fetchGuildUserEarnings = async (account: string, guildsToFetch: GuildConfig[]) => {
   const calls = guildsToFetch.map((guild) => {
-    const guildContractAddress = getGuildsAddress(guild.guildSlug)
+    const guildContractAddress = getGuildsMasterLooterAddress(guild.guildSlug)
     return {
       address: guildContractAddress,
       name: 'pendingReward',

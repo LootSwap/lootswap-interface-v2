@@ -3,7 +3,7 @@ import { Route, useRouteMatch, useLocation } from 'react-router-dom'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { Toggle, Text } from '@lootswap/uikit'
-import { Image, RowType, Heading } from '@pancakeswap/uikit'
+import { Image, RowType, Heading, BaseLayout } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
@@ -19,6 +19,8 @@ import { latinise } from 'utils/latinise'
 import PageHeader from 'components/PageHeader'
 import SearchInput from 'components/SearchInput'
 import Select, { OptionProps } from 'components/Select/Select'
+import AnimatedText from './components/GuildTitles/AnimatedText'
+import GuildStat from './components/GuildStats'
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
 import Table from './components/FarmTable/FarmTable'
 import FarmTabButtons from './components/FarmTabButtons'
@@ -26,6 +28,7 @@ import { RowProps } from './components/FarmTable/Row'
 import ToggleView from './components/ToggleView/ToggleView'
 import { DesktopColumnSchema, ViewMode } from './components/types'
 import useGuildSettings from './hooks/useGuildSettings'
+import WalkingSprite from './components/WalkingSprite/WalkingSprite'
 
 interface IGuildPage {
   guildSlug: string
@@ -103,11 +106,36 @@ const ViewControls = styled.div`
 const StyledImage = styled(Image)`
   margin-left: auto;
   margin-right: auto;
-  margin-top: 58px;
 `
 
 const PageGuildTheme = styled.div`
   background: ${(props) => (props.color ? props.color : 'white')};
+`
+const Cards = styled(BaseLayout)`
+  align-items: stretch;
+  justify-content: stretch;
+  margin-bottom: 24px;
+  grid-gap: 24px;
+
+  & > div {
+    grid-column: span 6;
+    width: 100%;
+  }
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    & > div {
+      grid-column: span 8;
+    }
+  }
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    margin-bottom: 32px;
+    grid-gap: 32px;
+
+    & > div {
+      grid-column: span 6;
+    }
+  }
 `
 
 // #endregion
@@ -118,6 +146,7 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
   useEffect(() => {
     document.body.style.background = 'none'
     document.body.style.opacity = '1'
+
     return () => {
       document.body.style.background = ''
       document.body.style.opacity = ''
@@ -404,30 +433,44 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
 
   // #region html
   return (
-    <PageGuildTheme color={guildSettings.background}>
+    <PageGuildTheme color={guildSettings.guildTheme.colors.background}>
       <PageHeader>
         <Heading as="h1" scale="xxl" color="secondary" mb="24px">
-          {guildSlug.toUpperCase()} {t('Guild Quests')}
+          <AnimatedText
+            textColor={guildSettings.guildTheme.colors.primary}
+            overlayColor={guildSettings.guildTheme.colors.secondary}
+            guildSymbol={guildSettings.symbol}
+          />
         </Heading>
         <Heading scale="lg" color="text">
           {t('Stake Liquidity Pool (LP) tokens to earn.')}
         </Heading>
       </PageHeader>
       <Page>
+        <div>
+          <Cards>
+            {guildSettings.sprite !== '' && (
+              <WalkingSprite
+                image={guildSettings.sprite?.image}
+                width={guildSettings.sprite?.width}
+                height={guildSettings.sprite?.height}
+              />
+            )}
+            <GuildStat />
+          </Cards>
+        </div>
         <ControlContainer>
           <ViewControls>
             <ToggleView viewMode={viewMode} onToggle={(mode: ViewMode) => setViewMode(mode)} />
             <ToggleWrapper>
               <Toggle checked={stakedOnly} onChange={() => setStakedOnly(!stakedOnly)} scale="sm" />
-              <Text color="#fff"> {t('Staked only')}</Text>
+              <Text> {t('Staked only')}</Text>
             </ToggleWrapper>
             <FarmTabButtons hasStakeInFinishedFarms={stakedInactiveFarms.length > 0} />
           </ViewControls>
           <FilterContainer>
             <LabelWrapper>
-              <Text textTransform="uppercase" color="#fff">
-                {t('Sort by')}
-              </Text>
+              <Text textTransform="uppercase">{t('Sort by')}</Text>
               <Select
                 options={[
                   {
@@ -463,9 +506,7 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
               />
             </LabelWrapper>
             <LabelWrapper style={{ marginLeft: 16 }}>
-              <Text textTransform="uppercase" color="#fff">
-                {t('Search')}
-              </Text>
+              <Text textTransform="uppercase">{t('Search')}</Text>
               <SearchInput onChange={handleChangeQuery} placeholder={t('Search Guild Quests')} />
             </LabelWrapper>
           </FilterContainer>

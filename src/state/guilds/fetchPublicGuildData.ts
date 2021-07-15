@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 import masterLooterABI from 'config/abi/masterlooter.json'
 import erc20 from 'config/abi/erc20.json'
-import { getAddress, getGuildsAddress } from 'utils/addressHelpers'
+import { getAddress, getGuildsMasterLooterAddress } from 'utils/addressHelpers'
 import { BIG_TEN, BIG_ZERO } from 'utils/bigNumber'
 import multicall from 'utils/multicall'
 import { Guild, SerializedBigNumber } from '../types'
@@ -38,7 +38,7 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
     {
       address: lpAddress,
       name: 'balanceOf',
-      params: [getGuildsAddress(guildSlug)],
+      params: [getGuildsMasterLooterAddress(guildSlug)],
     },
     // Total supply of LP tokens
     {
@@ -79,12 +79,12 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
     pid || pid === 0
       ? await multicall(masterLooterABI, [
           {
-            address: getGuildsAddress(guildSlug),
+            address: getGuildsMasterLooterAddress(guildSlug),
             name: 'poolInfo',
             params: [pid],
           },
           {
-            address: getGuildsAddress(guildSlug),
+            address: getGuildsMasterLooterAddress(guildSlug),
             name: 'totalAllocPoint',
           },
         ])

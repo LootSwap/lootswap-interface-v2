@@ -4,7 +4,7 @@ import { useFarmUser } from 'state/hooks'
 import { useTranslation } from 'contexts/Localization'
 import { Text, Image } from '@pancakeswap/uikit'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 
 export interface FarmProps {
   label: string
@@ -48,10 +48,10 @@ const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid }) => {
 
     return null
   }
-  const { slug } = useParams<{ slug: string }>()
+  // const { slug } = useParams<{ slug: string }>()
   return (
     <Container>
-      <IconImage src={`/images/${slug}/${image}.svg`} alt="icon" width={40} height={40} mr="8px" />
+      <IconImage src={`/images/questlog/${image}.svg`} alt="icon" width={40} height={40} mr="8px" />
       <div>
         {handleRenderFarming()}
         <Text bold>{label}</Text>
