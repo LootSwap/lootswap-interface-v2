@@ -6,6 +6,7 @@ export const config: GuildConfig = {
   symbol: 'TROLL',
   guildTheme,
   guildSlug: 'troll',
+  guildTokenPerBlock: 0,
   footerImg: {
     src: '/images/decorations/background/loot-bg.svg',
     alt: 'LootSwap illustration',

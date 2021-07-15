@@ -12,7 +12,7 @@ import usePersistState from 'hooks/usePersistState'
 import { Guild } from 'state/types'
 import { useTranslation } from 'contexts/Localization'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { getFarmApr } from 'utils/apr'
+import { getGuildApr } from 'utils/apr'
 import { orderBy } from 'lodash'
 import isArchivedPid from 'utils/farmHelpers'
 import { latinise } from 'utils/latinise'
@@ -220,7 +220,14 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
             return farm
           }
           const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteToken.busdPrice)
-          const apr = isActive ? getFarmApr(new BigNumber(farm.poolWeight), guildTokenPrice, totalLiquidity) : 0
+          const apr = isActive
+            ? getGuildApr(
+                new BigNumber(farm.poolWeight),
+                guildTokenPrice,
+                totalLiquidity,
+                guildSettings.guildTokenPerBlock,
+              )
+            : 0
 
           return { ...farm, apr, liquidity: totalLiquidity }
         })
@@ -233,7 +240,7 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
       }
       return farmsToDisplayWithAPR
     },
-    [guildTokenPrice, query, isActive, guildSlug],
+    [guildTokenPrice, query, isActive, guildSlug, guildSettings],
   )
 
   const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {

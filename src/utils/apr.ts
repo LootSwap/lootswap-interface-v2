@@ -34,4 +34,24 @@ export const getLootMarketApr = (
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
 
+/**
+ * Get guild APR value in %
+ * @param poolWeight allocationPoint / totalAllocationPoint
+ * @param guildPriceUsd guild price in USD
+ * @param poolLiquidityUsd Total pool liquidity in USD
+ * @param guildTokenPerBlock guilds reward per block
+ * @returns
+ */
+export const getGuildApr = (
+  poolWeight: BigNumber,
+  guildPriceUsd: BigNumber,
+  poolLiquidityUsd: BigNumber,
+  guildTokenPerBlock: number,
+): number => {
+  const tokenPerBlock = new BigNumber(guildTokenPerBlock)
+  const yearlyCakeRewardAllocation = tokenPerBlock.times(BLOCKS_PER_YEAR).times(poolWeight)
+  const apr = yearlyCakeRewardAllocation.times(guildPriceUsd).div(poolLiquidityUsd).times(100)
+  return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
+}
+
 export default null

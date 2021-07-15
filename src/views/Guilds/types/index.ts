@@ -26,6 +26,7 @@ export type GuildConfig = {
   symbol: string
   guildTheme: any
   guildSlug: string
+  guildTokenPerBlock: number
   footerImg: Image
   sprite?: Sprite
   loading?: Image
