@@ -5,6 +5,8 @@ import { Skeleton } from '@pancakeswap/uikit'
 export interface EarnedProps {
   earnings: number
   pid: number
+  locked: number
+  unlocked: number
 }
 
 interface EarnedPropsWithLoading extends EarnedProps {

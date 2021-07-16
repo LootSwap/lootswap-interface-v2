@@ -5,7 +5,7 @@ import { getBalanceNumber } from 'utils/formatBalance'
 import { useTotalSupply, useUnlockTotalSupply, useBurnedBalance } from 'hooks/useTokenBalance'
 import { useTranslation } from 'contexts/Localization'
 import { useGetStats } from 'hooks/api'
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePriceLootBusd } from 'state/hooks'
 import { getCakeAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
 import CardBusdValue from './CardBusdValue'
@@ -39,7 +39,7 @@ const CakeStats = () => {
 
   // TODO: Below think about pulling logic from graph instead of smart contract or
   // The very least make this info default in case graph is unavailable
-  const lootPrice = usePriceCakeBusd().toNumber()
+  const lootPrice = usePriceLootBusd().toNumber()
   const lootBalance = lootPrice || 0
   const unlockTotalSupply = useUnlockTotalSupply()
   const circulationSupply = unlockTotalSupply ? getBalanceNumber(unlockTotalSupply) : 0

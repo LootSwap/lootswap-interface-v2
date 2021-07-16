@@ -5,7 +5,7 @@ import { languageList } from 'config/localization/languages'
 import { useTranslation } from 'contexts/Localization'
 import useTheme from 'hooks/useTheme'
 import useAuth from 'hooks/useAuth'
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePriceLootBusd } from 'state/hooks'
 import config from './config'
 
 // TODO: Have to fork UikitMenu
@@ -13,7 +13,7 @@ const Menu = (props) => {
   const { account } = useWeb3React()
   const { login, logout } = useAuth()
   const { isDark, toggleTheme } = useTheme()
-  const cakePriceUsd = usePriceCakeBusd()
+  const cakePriceUsd = usePriceLootBusd()
   const { currentLanguage, setLanguage, t } = useTranslation()
 
   return (
