@@ -149,7 +149,9 @@ const Farms: React.FC = () => {
           return farm
         }
         const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteToken.busdPrice)
-        const apr = isActive ? getFarmApr(new BigNumber(farm.poolWeight), cakePrice, totalLiquidity) : 0
+        const apr = isActive
+          ? getFarmApr(new BigNumber(farm.poolWeight), cakePrice, totalLiquidity, new BigNumber(farm.baseEmissionRate))
+          : 0
 
         return { ...farm, apr, liquidity: totalLiquidity }
       })
@@ -275,7 +277,7 @@ const Farms: React.FC = () => {
         earnings: getBalanceNumber(new BigNumber(farm.userData.earnings)),
         pid: farm.pid,
         locked: farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings)),
-        unlocked: farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))
+        unlocked: farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings)),
       },
       liquidity: {
         liquidity: farm.liquidity,
@@ -324,17 +326,41 @@ const Farms: React.FC = () => {
         <FlexLayout>
           <Route exact path={`${path}`}>
             {farmsStakedMemoized.map((farm) => (
-              <FarmCard key={farm.pid} farm={farm} cakePrice={cakePrice} account={account} removed={false} />
+              <FarmCard
+                key={farm.pid}
+                farm={farm}
+                cakePrice={cakePrice}
+                account={account}
+                removed={false}
+                locked={farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+                unlocked={farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+              />
             ))}
           </Route>
           <Route exact path={`${path}/history`}>
             {farmsStakedMemoized.map((farm) => (
-              <FarmCard key={farm.pid} farm={farm} cakePrice={cakePrice} account={account} removed />
+              <FarmCard
+                key={farm.pid}
+                farm={farm}
+                cakePrice={cakePrice}
+                account={account}
+                removed
+                locked={farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+                unlocked={farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+              />
             ))}
           </Route>
           <Route exact path={`${path}/archived`}>
             {farmsStakedMemoized.map((farm) => (
-              <FarmCard key={farm.pid} farm={farm} cakePrice={cakePrice} account={account} removed />
+              <FarmCard
+                key={farm.pid}
+                farm={farm}
+                cakePrice={cakePrice}
+                account={account}
+                removed
+                locked={farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+                unlocked={farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+              />
             ))}
           </Route>
         </FlexLayout>

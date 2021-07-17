@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import { LOOT_PER_YEAR, BLOCKS_PER_YEAR } from 'config'
+import { BLOCKS_PER_YEAR, LOOT_PER_BLOCK } from 'config'
 
 /**
  * Get farm APR value in %
@@ -8,9 +8,15 @@ import { LOOT_PER_YEAR, BLOCKS_PER_YEAR } from 'config'
  * @param poolLiquidityUsd Total pool liquidity in USD
  * @returns
  */
-export const getFarmApr = (poolWeight: BigNumber, cakePriceUsd: BigNumber, poolLiquidityUsd: BigNumber): number => {
-  const yearlyCakeRewardAllocation = LOOT_PER_YEAR.times(poolWeight)
-  const apr = yearlyCakeRewardAllocation.times(cakePriceUsd).div(poolLiquidityUsd).times(100)
+export const getFarmApr = (
+  poolWeight: BigNumber,
+  cakePriceUsd: BigNumber,
+  poolLiquidityUsd: BigNumber,
+  baseEmissionRate: BigNumber,
+): number => {
+  // 1 * baseEmissionRate * BLOCKS_PER_YEAR * poolWeight * cakePriceUsd / poolLiquidityUsd * 100
+  const yearlyLootRewardAllocation = LOOT_PER_BLOCK.times(baseEmissionRate).times(BLOCKS_PER_YEAR).times(poolWeight)
+  const apr = yearlyLootRewardAllocation.times(cakePriceUsd).div(poolLiquidityUsd).times(100)
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
 

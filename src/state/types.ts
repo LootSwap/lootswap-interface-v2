@@ -27,6 +27,7 @@ export interface Farm extends FarmConfig {
   percentUnlockedBonus?: number
   tokenPriceVsQuote?: SerializedBigNumber
   poolWeight?: SerializedBigNumber
+  baseEmissionRate?: SerializedBigNumber
   userData?: {
     allowance: string
     tokenBalance: string

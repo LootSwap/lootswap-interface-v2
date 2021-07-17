@@ -9,7 +9,7 @@ BigNumber.config({
 export const HARMONY_BLOCK_TIME = 2
 
 // LOOT_PER_BLOCK details
-export const LOOT_PER_BLOCK = new BigNumber(40) // TODO: Why is it that changing to 31.9141 is more accurate
+export const LOOT_PER_BLOCK = new BigNumber(1) // TODO: Why is it that changing to 31.9141 is more accurate
 export const BLOCKS_PER_YEAR = new BigNumber((60 / HARMONY_BLOCK_TIME) * 60 * 24 * 365)
 export const LOOT_PER_YEAR = LOOT_PER_BLOCK.times(BLOCKS_PER_YEAR)
 

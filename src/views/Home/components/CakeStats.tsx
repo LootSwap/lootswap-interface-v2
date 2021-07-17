@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardBody, Heading, Text } from '@pancakeswap/uikit'
+import { Card, CardBody, Heading, Text, useTooltip, HelpIcon } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useTotalSupply, useUnlockTotalSupply, useBurnedBalance } from 'hooks/useTokenBalance'
@@ -29,23 +29,48 @@ const Border = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
 `
+const ReferenceElement = styled.div`
+  display: inline-block;
+`
 
 // TODO change name of component
 const CakeStats = () => {
   const { t } = useTranslation()
-  const totalSupply = useTotalSupply()
-  const burnedBalance = getBalanceNumber(useBurnedBalance(getCakeAddress()))
-  const cakeSupply = totalSupply ? getBalanceNumber(totalSupply) - burnedBalance : 0
 
+  // #region ToolTips
+  const tooltipTotalSupplyContent = <div>{t('Includes 95% of locked rewards and total burn.')}</div>
+  const {
+    targetRef: targetRefTotalSupply,
+    tooltip: toolTipTotalSupply,
+    tooltipVisible: tooltipVisibleTotalSupply,
+  } = useTooltip(tooltipTotalSupplyContent, {
+    placement: 'top-end',
+    tooltipOffset: [20, 10],
+  })
+
+  const tooltipTotalCirc = <div>{t('Includes Total Supply minus Total Burned.')}</div>
+  const {
+    targetRef: targetRefTotalCirc,
+    tooltip: toolTipTotalCirc,
+    tooltipVisible: tooltipVisibleTotalCirc,
+  } = useTooltip(tooltipTotalCirc, {
+    placement: 'top-end',
+    tooltipOffset: [20, 10],
+  })
+  // #endregion
   // TODO: Below think about pulling logic from graph instead of smart contract or
   // The very least make this info default in case graph is unavailable
-  const lootPrice = usePriceLootBusd().toNumber()
-  const lootBalance = lootPrice || 0
+  const totalSupply = useTotalSupply()
   const unlockTotalSupply = useUnlockTotalSupply()
-  const circulationSupply = unlockTotalSupply ? getBalanceNumber(unlockTotalSupply) : 0
+  const burnedBalance = getBalanceNumber(useBurnedBalance(getCakeAddress()))
+  const lootPrice = usePriceLootBusd().toNumber()
+
+  const cakeSupply = totalSupply ? getBalanceNumber(totalSupply) : 0
+  const lootBalance = lootPrice || 0
+  const circulationSupply = unlockTotalSupply ? getBalanceNumber(unlockTotalSupply) - burnedBalance : 0
   const circulationMrkCap =
     lootPrice && unlockTotalSupply ? (getBalanceNumber(unlockTotalSupply) - burnedBalance) * lootPrice : 0
-  const totalMrkCap = lootPrice && totalSupply ? (getBalanceNumber(totalSupply) - burnedBalance) * lootPrice : 0
+  // const totalMrkCap = lootPrice && totalSupply ? (getBalanceNumber(totalSupply) - burnedBalance) * lootPrice : 0
   const data = useGetStats()
   const tvl = data ? data.tvl.toLocaleString('en-US', { maximumFractionDigits: 0 }) : null
 
@@ -56,16 +81,28 @@ const CakeStats = () => {
           {t('LOOT Stats')}
         </Heading>
         <Row>
-          <Text fontSize="24px">{t('LOOT in Circ.')}</Text>
-          {circulationSupply && <CardValue fontSize="24px" value={circulationSupply} />}
-        </Row>
-        <Row>
-          <Text fontSize="24px">{t('Total LOOT Supply')}</Text>
+          <Text fontSize="24px">
+            {t('Total LOOT Supply')}
+            <ReferenceElement ref={targetRefTotalSupply}>
+              <HelpIcon color="textSubtle" />
+            </ReferenceElement>
+            {tooltipVisibleTotalSupply && toolTipTotalSupply}
+          </Text>
           {cakeSupply && <CardValue fontSize="24px" value={cakeSupply} />}
         </Row>
         <Row>
           <Text fontSize="24px">{t('Total LOOT Burned')}</Text>
           <CardValue fontSize="24px" decimals={0} value={burnedBalance} />
+        </Row>
+        <Row>
+          <Text fontSize="24px">
+            {t('LOOT in Circ.')}
+            <ReferenceElement ref={targetRefTotalCirc}>
+              <HelpIcon color="textSubtle" />
+            </ReferenceElement>
+            {tooltipVisibleTotalCirc && toolTipTotalCirc}
+          </Text>
+          {circulationSupply && <CardValue fontSize="24px" value={circulationSupply} />}
         </Row>
         <Border />
         <Row>
@@ -82,20 +119,10 @@ const CakeStats = () => {
             prefixOverride="$"
           />
         </Row>
-        <Row>
-          <Text fontSize="24px">{t('LOOT Total Market Cap')}</Text>
-          <CardBusdValue
-            fontSize="24px"
-            decimals={0}
-            color={`${({ theme }) => theme.colors.text}`}
-            value={totalMrkCap}
-            prefixOverride="$"
-          />
-        </Row>
         <Border />
         <Row>
           <Text fontSize="24px">{`${t('Total Value Locked (TVL)')} - ${t('Across All LPs')}`}</Text>
-          <CardValue fontSize="24px" decimals={0} value={Number(tvl)} />
+          {Number(tvl) > 0 ? <CardValue fontSize="24px" decimals={0} value={Number(tvl)} /> : t('Coming Soon')}
         </Row>
       </CardBody>
     </StyledCakeStats>
