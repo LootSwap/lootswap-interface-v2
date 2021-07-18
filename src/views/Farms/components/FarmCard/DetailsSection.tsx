@@ -43,7 +43,7 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
       <Flex justifyContent="space-between">
         <Text>{t('Unlocked')}:</Text>
         {totalValueFormatted ? (
-          <Text>${Number(unlocked).toLocaleString(undefined, { maximumFractionDigits: 2 }) ?? 0}</Text>
+          <Text>{Number(unlocked).toLocaleString(undefined, { maximumFractionDigits: 2 }) ?? 0}</Text>
         ) : (
           <Skeleton width={75} height={25} />
         )}
@@ -51,7 +51,7 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
       <Flex justifyContent="space-between">
         <Text>{t('Locked')}:</Text>
         {totalValueFormatted ? (
-          <Text>${Number(locked).toLocaleString(undefined, { maximumFractionDigits: 2 }) ?? 0}</Text>
+          <Text>{Number(locked).toLocaleString(undefined, { maximumFractionDigits: 2 }) ?? 0}</Text>
         ) : (
           <Skeleton width={75} height={25} />
         )}

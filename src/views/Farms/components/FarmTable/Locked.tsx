@@ -32,7 +32,7 @@ const Container = styled.div`
 const Locked: React.FunctionComponent<LockedProps> = ({ locked }) => {
   const displayLocked =
     locked && locked > 0 ? (
-      `$${Number(locked).toLocaleString(undefined, { maximumFractionDigits: 2 })}`
+      `${Number(locked).toLocaleString(undefined, { maximumFractionDigits: 2 })}`
     ) : (
       <Skeleton width={60} />
     )
