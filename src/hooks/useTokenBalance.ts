@@ -86,6 +86,23 @@ export const useUnlockTotalSupply = () => {
   return unlockTotalSupply
 }
 
+export const useLockTotalSupply = () => {
+  const { slowRefresh } = useRefresh()
+  const [lockTotalSupply, setLockedTotalSupply] = useState<BigNumber>()
+
+  useEffect(() => {
+    async function fetchLockTotalSupply() {
+      const cakeContract = getCakeContract() // TODO change getCakeContract -> getLootContract
+      const unlockTotal = await cakeContract.methods.lockedSupply().call()
+      setLockedTotalSupply(new BigNumber(unlockTotal))
+    }
+
+    fetchLockTotalSupply()
+  }, [slowRefresh])
+
+  return lockTotalSupply
+}
+
 export const useBurnedBalance = (tokenAddress: string) => {
   const [balance, setBalance] = useState(BIG_ZERO)
   const { slowRefresh } = useRefresh()

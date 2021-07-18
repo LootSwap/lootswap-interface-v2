@@ -9,6 +9,7 @@ import { useMasterchef } from 'hooks/useContract'
 import UnlockButton from 'components/UnlockButton'
 import CakeHarvestBalance from './CakeHarvestBalance'
 import CakeWalletBalance from './CakeWalletBalance'
+import LootLockBalance from './LootLockedBalance'
 
 const StyledFarmStakingCard = styled(Card)`
   background-image: url('/images/decorations/background/loot-bg.svg');
@@ -71,6 +72,7 @@ const FarmedStakingCard = () => {
           <Label>{t('LOOT in Wallet')}:</Label>
           <CakeWalletBalance />
         </Block>
+        <LootLockBalance />
         <Actions>
           {account ? (
             <Button id="harvest-all" disabled={balancesWithValue.length && true} onClick={harvestAllFarms} width="100%">

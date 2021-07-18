@@ -1,15 +1,24 @@
 import Web3 from 'web3'
 import { AbiItem } from 'web3-utils'
 import web3NoAccount from 'utils/web3'
+import { lootMarketConfig } from 'config/constants'
 
 // Addresses
-import { getCakeAddress, getMasterChefAddress } from 'utils/addressHelpers'
+import {
+  getCakeAddress,
+  getMasterLooterAddress,
+  getAddress,
+  getGuildsMasterLooterAddress,
+  getGuildsTokenAddress,
+} from 'utils/addressHelpers'
 
 // ABI
 import bep20Abi from 'config/abi/erc20.json'
 import lpTokenAbi from 'config/abi/lpToken.json'
 import cakeAbi from 'config/abi/governancetoken.json'
-import masterChef from 'config/abi/masterchef.json'
+import masterLooterABI from 'config/abi/masterlooter.json'
+import lootMarketAbi from 'config/abi/lootmarket.json'
+
 import { DEFAULT_GAS_PRICE } from 'config'
 import { getSettings, getGasPriceInWei } from './settings'
 
@@ -37,5 +46,18 @@ export const getCakeContract = (web3?: Web3) => {
 
 // TODO refactor name of the function getMasterchefContract -> getMasterLooterContract
 export const getMasterchefContract = (web3?: Web3) => {
-  return getContract(masterChef, getMasterChefAddress(), web3)
+  return getContract(masterLooterABI, getMasterLooterAddress(), web3)
+}
+
+export const getLootMarketContract = (id: number, web3?: Web3) => {
+  const config = lootMarketConfig.find((m) => m.pid === id)
+  return getContract(lootMarketAbi, getAddress(config.contractAddress), web3)
+}
+
+export const getMasterGuildLooterContract = (guildSlug: string, web3?: Web3) => {
+  return getContract(masterLooterABI, getGuildsMasterLooterAddress(guildSlug), web3)
+}
+
+export const getGuildTokenContract = (guildSlug: string, web3?: Web3) => {
+  return getContract(cakeAbi, getGuildsTokenAddress(guildSlug), web3)
 }

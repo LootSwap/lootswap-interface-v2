@@ -10,6 +10,8 @@ export interface ExpandableSectionProps {
   totalValueFormatted?: string
   lpLabel?: string
   addLiquidityUrl?: string
+  locked?: number
+  unlocked?: number
 }
 
 const Wrapper = styled.div`
@@ -27,6 +29,8 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
   totalValueFormatted,
   lpLabel,
   addLiquidityUrl,
+  locked,
+  unlocked,
 }) => {
   const { t } = useTranslation()
 
@@ -35,6 +39,22 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
       <Flex justifyContent="space-between">
         <Text>{t('Total Liquidity')}:</Text>
         {totalValueFormatted ? <Text>{totalValueFormatted}</Text> : <Skeleton width={75} height={25} />}
+      </Flex>
+      <Flex justifyContent="space-between">
+        <Text>{t('Unlocked')}:</Text>
+        {totalValueFormatted ? (
+          <Text>{Number(unlocked).toLocaleString(undefined, { maximumFractionDigits: 2 }) ?? 0}</Text>
+        ) : (
+          <Skeleton width={75} height={25} />
+        )}
+      </Flex>
+      <Flex justifyContent="space-between">
+        <Text>{t('Locked')}:</Text>
+        {totalValueFormatted ? (
+          <Text>{Number(locked).toLocaleString(undefined, { maximumFractionDigits: 2 }) ?? 0}</Text>
+        ) : (
+          <Skeleton width={75} height={25} />
+        )}
       </Flex>
       {!removed && (
         <StyledLinkExternal href={addLiquidityUrl}>{t('Get %symbol%', { symbol: lpLabel })}</StyledLinkExternal>

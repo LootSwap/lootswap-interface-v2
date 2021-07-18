@@ -3,7 +3,7 @@ import { PageMeta } from './types'
 
 export const DEFAULT_META: PageMeta = {
   title: 'LootSwap',
-  description: 'AMM and yield farm on Harmony Smart Chain',
+  description: 'AMM and yield farm on the Harmony protocol',
   image: 'https://pancakeswap.finance/images/lootswap.png',
 }
 

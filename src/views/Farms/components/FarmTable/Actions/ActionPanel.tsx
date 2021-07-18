@@ -151,7 +151,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
   liquidity,
   userDataReady,
   expanded,
-  earned
+  earned,
 }) => {
   const farm = details
   const { t } = useTranslation()
@@ -188,10 +188,10 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
         </EarnedWrapper>
         <EarnedWrapper>
           <Text>{t('Locked')}</Text>
-          <Locked {...earned}/>
+          <Locked {...earned} />
         </EarnedWrapper>
       </EarnedContainer>
-      <ValueContainer>     
+      <ValueContainer>
         <ValueWrapper>
           <Text>{t('APR')}</Text>
           <Apr {...apr} />

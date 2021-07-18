@@ -99,7 +99,6 @@ const getFarmQuoteTokenPrice = (
   return BIG_ZERO
 }
 
-// TODO need to work more on  this
 const fetchFarmsPrices = async (farms) => {
   const lootbusdFarm = farms.find((farm: Farm) => farm.pid === 9)
   const onebusdFarm = farms.find((farm: Farm) => farm.pid === 1)

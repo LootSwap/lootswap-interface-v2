@@ -11,7 +11,7 @@ export const VERSION = 1.01
 export const GAS_SETTINGS = {
   default: DEFAULT_GAS_PRICE,
   fast: 2,
-  reallyfast: 10,
+  reallyfast: 5,
 }
 
 export const getGasPriceInWei = (amountInGwei: number) => {
@@ -23,7 +23,7 @@ export const getDefaultSettings = (): UserSettings => ({
 })
 
 export const getStorageKey = (account: string) => {
-  return `pancakeswap_settings_${account}_${VERSION}`
+  return `lootswap_settings_${account}_${VERSION}`
 }
 
 export const getSettings = (account: string): UserSettings => {

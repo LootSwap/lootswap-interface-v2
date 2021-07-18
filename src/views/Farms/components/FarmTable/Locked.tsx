@@ -29,10 +29,10 @@ const Container = styled.div`
   align-items: center;
 `
 
-const Locked: React.FunctionComponent<LockedProps> = ({ locked  }) => {
+const Locked: React.FunctionComponent<LockedProps> = ({ locked }) => {
   const displayLocked =
-  locked &&  locked > 0 ? (
-      `$${Number(locked).toLocaleString(undefined, { maximumFractionDigits: 2 })}`
+    locked && locked > 0 ? (
+      `${Number(locked).toLocaleString(undefined, { maximumFractionDigits: 2 })}`
     ) : (
       <Skeleton width={60} />
     )

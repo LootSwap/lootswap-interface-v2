@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
-import masterchefABI from 'config/abi/masterchef.json'
+import masterLooterABI from 'config/abi/masterlooter.json'
 import erc20 from 'config/abi/erc20.json'
-import { getAddress, getMasterChefAddress } from 'utils/addressHelpers'
+import { getAddress, getMasterLooterAddress } from 'utils/addressHelpers'
 import { BIG_TEN, BIG_ZERO } from 'utils/bigNumber'
 import multicall from 'utils/multicall'
 import { Farm, SerializedBigNumber } from '../types'
@@ -18,6 +18,8 @@ type PublicFarmData = {
   tokenPriceVsQuote: SerializedBigNumber
   poolWeight: SerializedBigNumber
   multiplier: string
+  poolRewardsPerBlock: SerializedBigNumber
+  baseEmissionRate: SerializedBigNumber
 }
 
 const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
@@ -40,7 +42,7 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
     {
       address: lpAddress,
       name: 'balanceOf',
-      params: [getMasterChefAddress()],
+      params: [getMasterLooterAddress()],
     },
     // Total supply of LP tokens
     {
@@ -77,21 +79,31 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
   const lpTotalInQuoteToken = quoteTokenAmountMc.times(new BigNumber(2))
 
   // Only make masterchef calls if farm has pid
-  const [info, totalAllocPoint, percentLockbonus] =
+  const [info, totalAllocPoint, percentLockbonus, poolRewardsPerBlock, baseEmissionRate] =
     pid || pid === 0
-      ? await multicall(masterchefABI, [
+      ? await multicall(masterLooterABI, [
           {
-            address: getMasterChefAddress(),
+            address: getMasterLooterAddress(),
             name: 'poolInfo',
             params: [pid],
           },
           {
-            address: getMasterChefAddress(),
+            address: getMasterLooterAddress(),
             name: 'totalAllocPoint',
           },
           {
-            address: getMasterChefAddress(),
+            address: getMasterLooterAddress(),
             name: 'PERCENT_LOCK_BONUS_REWARD',
+          },
+          {
+            address: getMasterLooterAddress(),
+            name: 'getNewRewardPerBlock',
+            params: [pid + 1], // poolRewardsPerBlock indexes have to be +1'd to get the actual specific pool data
+          },
+          {
+            address: getMasterLooterAddress(),
+            name: 'getNewRewardPerBlock',
+            params: [0], // poolRewardsPerBlock indexes have to be +1'd to get the actual specific pool data
           },
         ])
       : [null, null]
@@ -100,7 +112,8 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
   const poolWeight = totalAllocPoint ? allocPoint.div(new BigNumber(totalAllocPoint)) : BIG_ZERO
   const percentLockupBonus = percentLockbonus ? percentLockbonus / 100 : 0
   const percentUnlockedBonus = 1 - percentLockupBonus
-
+  const rewardsPerBlock = new BigNumber(poolRewardsPerBlock).div(BIG_TEN.pow(quoteTokenDecimals)).toJSON()
+  const emissionRate = new BigNumber(baseEmissionRate).div(BIG_TEN.pow(quoteTokenDecimals)).toJSON()
   return {
     tokenAmountMc: tokenAmountMc.toJSON(),
     quoteTokenAmountMc: quoteTokenAmountMc.toJSON(),
@@ -113,6 +126,8 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
     tokenPriceVsQuote: quoteTokenAmountTotal.div(tokenAmountTotal).toJSON(),
     poolWeight: poolWeight.toJSON(),
     multiplier: `${allocPoint.div(BIG_TEN.pow(quoteTokenDecimals)).toString()}X`,
+    poolRewardsPerBlock: rewardsPerBlock,
+    baseEmissionRate: emissionRate,
   }
 }
 

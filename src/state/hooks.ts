@@ -3,15 +3,23 @@ import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from 'state'
-import { farmsConfig } from 'config/constants'
+import { farmsConfig, guildsConfig } from 'config/constants'
 import { getWeb3NoAccount } from 'utils/web3'
 import { getBalanceAmount } from 'utils/formatBalance'
 import { BIG_ZERO } from 'utils/bigNumber'
 import useRefresh from 'hooks/useRefresh'
 import { filterFarmsByQuoteToken } from 'utils/farmsPriceHelpers'
-import { fetchFarmsPublicDataAsync, setBlock } from './actions'
-import { State, Farm, FarmsState } from './types'
+import {
+  fetchFarmsPublicDataAsync,
+  fetchGuildsPublicDataAsync,
+  fetchLootMarketsPublicDataAsync,
+  fetchLootMarketsUserDataAsync,
+  setBlock,
+} from './actions'
+import { State, Farm, FarmsState, LootMarket, GuildState, Guild } from './types'
 import { fetchFarmUserDataAsync, nonArchivedFarms } from './farms'
+import { fetchGuildUserDataAsync, nonArchivedGuilds } from './guilds'
+import { transformLootMarket } from './lootmarket/helpers'
 
 export const usePollFarmsData = (includeArchive = false) => {
   const dispatch = useAppDispatch()
@@ -123,7 +131,48 @@ export const useLpTokenPrice = (symbol: string) => {
   return lpTokenPrice
 }
 
+// Pools
+
+export const useFetchPublicLootMarketsData = () => {
+  const dispatch = useAppDispatch()
+  const { slowRefresh } = useRefresh()
+  const web3 = getWeb3NoAccount()
+
+  useEffect(() => {
+    const fetchPoolsPublicData = async () => {
+      const blockNumber = await web3.eth.getBlockNumber()
+      dispatch(fetchLootMarketsPublicDataAsync(blockNumber))
+    }
+
+    fetchPoolsPublicData()
+  }, [dispatch, slowRefresh, web3])
+}
+
+export const useLootMarkets = (account): { lootmarkets: LootMarket[]; userDataLoaded: boolean } => {
+  const { fastRefresh } = useRefresh()
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    if (account) {
+      dispatch(fetchLootMarketsUserDataAsync(account))
+    }
+  }, [account, dispatch, fastRefresh])
+
+  const { lootmarkets, userDataLoaded } = useSelector((state: State) => ({
+    lootmarkets: state.lootmarkets.data,
+    userDataLoaded: state.lootmarkets.userDataLoaded,
+  }))
+  return { lootmarkets: lootmarkets.map(transformLootMarket), userDataLoaded }
+}
+
+export const usePoolFromPid = (pid: number): LootMarket => {
+  const market = useSelector((state: State) => state.lootmarkets.data.find((p) => p.pid === pid))
+  return transformLootMarket(market)
+}
+
+// Price
+
 export const usePriceLootBusd = (): BigNumber => {
+  // TODO rename function usePriceCakeBusd -> usePriceLootBusd
   const lootbusdFarm = useFarmFromPid(9) // loot <> busd
   return new BigNumber(lootbusdFarm.token.busdPrice)
 }
@@ -135,4 +184,85 @@ export const useBlock = () => {
 
 export const useInitialBlock = () => {
   return useSelector((state: State) => state.block.initialBlock)
+}
+
+// Guilds
+export const usePriceGuildBusd = (guildSlug: string): BigNumber => {
+  const guildlootFarm = useGuildFromPid(0, guildSlug)
+  const lootPriceBusd = usePriceLootBusd()
+  const guildBusdPrice = guildlootFarm?.tokenPriceVsQuote
+    ? lootPriceBusd.times(guildlootFarm.tokenPriceVsQuote)
+    : BIG_ZERO
+  return guildBusdPrice
+}
+
+export const usePollGuildsData = (includeArchive = false, guildSlug) => {
+  const dispatch = useAppDispatch()
+  const { slowRefresh } = useRefresh()
+  const web3 = getWeb3NoAccount()
+  const { account } = useWeb3React()
+
+  useEffect(() => {
+    const guildToFetch = includeArchive ? guildsConfig : nonArchivedGuilds
+    const guildSpecific = guildToFetch.filter((guild) => guild.guildSlug === guildSlug)
+    const pids = guildSpecific.map((gtf) => gtf.pid)
+
+    dispatch(fetchGuildsPublicDataAsync({ pids, guildSlug }))
+
+    if (account) {
+      dispatch(fetchGuildUserDataAsync({ account, pids, guildSlug }))
+    }
+  }, [includeArchive, dispatch, slowRefresh, web3, account, guildSlug])
+}
+
+export const useGuilds = (): GuildState => {
+  const guilds = useSelector((state: State) => state.guilds)
+  return guilds
+}
+
+export const useGuildFromPid = (pid, guildSlug): Guild => {
+  const guild = useSelector((state: State) => state.guilds.data.find((f) => f.pid === pid && guildSlug === f.guildSlug))
+  return guild
+}
+
+export const useGuildFromLpSymbol = (lpSymbol: string, guildSlug: string): Guild => {
+  const guild = useSelector((state: State) =>
+    state.guilds.data.find((f) => f.lpSymbol === lpSymbol && guildSlug === f.guildSlug),
+  )
+  return guild
+}
+
+export const useGuildUser = (pid, guildSlug) => {
+  const guild = useGuildFromPid(pid, guildSlug)
+
+  return {
+    allowance: guild.userData ? new BigNumber(guild.userData.allowance) : BIG_ZERO,
+    tokenBalance: guild.userData ? new BigNumber(guild.userData.tokenBalance) : BIG_ZERO,
+    stakedBalance: guild.userData ? new BigNumber(guild.userData.stakedBalance) : BIG_ZERO,
+    earnings: guild.userData ? new BigNumber(guild.userData.earnings) : BIG_ZERO,
+  }
+}
+
+// Return the base token price for a farm, from a given pid
+export const useBusdPriceFromPidGuild = (pid: number, guildSlug: string): BigNumber => {
+  const guild = useGuildFromPid(pid, guildSlug)
+  return guild && new BigNumber(guild.token.busdPrice)
+}
+
+export const useLpTokenPriceGuild = (symbol: string, guildSlug: string) => {
+  const guild = useGuildFromLpSymbol(symbol, guildSlug)
+  const guildTokenPriceInUsd = useBusdPriceFromPid(guild.pid)
+  let lpTokenPrice = BIG_ZERO
+
+  if (guild.lpTotalSupply && guild.lpTotalInQuoteToken) {
+    // Total value of base token in LP
+    const valueOfBaseTokenInGuild = guildTokenPriceInUsd.times(guild.tokenAmountTotal)
+    // Double it to get overall value in LP
+    const overallValueOfAllTokensInGuild = valueOfBaseTokenInGuild.times(2)
+    // Divide total value of all tokens, by the number of LP tokens
+    const totalLpTokens = getBalanceAmount(new BigNumber(guild.lpTotalSupply))
+    lpTokenPrice = overallValueOfAllTokensInGuild.div(totalLpTokens)
+  }
+
+  return lpTokenPrice
 }

@@ -1,6 +1,7 @@
 import { ThunkAction } from 'redux-thunk'
 import { AnyAction } from '@reduxjs/toolkit'
-import { FarmConfig } from 'config/constants/types'
+import { FarmConfig, LootMarketConfig, GuildConfig } from 'config/constants/types'
+import BigNumber from 'bignumber.js'
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, State, unknown, AnyAction>
 
@@ -26,6 +27,7 @@ export interface Farm extends FarmConfig {
   percentUnlockedBonus?: number
   tokenPriceVsQuote?: SerializedBigNumber
   poolWeight?: SerializedBigNumber
+  baseEmissionRate?: SerializedBigNumber
   userData?: {
     allowance: string
     tokenBalance: string
@@ -49,9 +51,58 @@ export interface BlockState {
   initialBlock: number
 }
 
+// Loot Market
+export interface LootMarket extends LootMarketConfig {
+  totalStaked?: BigNumber
+  startBlock?: number
+  endBlock?: number
+  apr?: number
+  stakingTokenPrice?: number
+  earningTokenPrice?: number
+  userData?: {
+    allowance: BigNumber
+    stakingTokenBalance: BigNumber
+    stakedBalance: BigNumber
+    pendingReward: BigNumber
+  }
+}
+// Loot Market
+export interface LootMarketState {
+  data: LootMarket[]
+  userDataLoaded: boolean
+}
+
+// Guilds
+export interface Guild extends GuildConfig {
+  tokenAmountMc?: SerializedBigNumber
+  quoteTokenAmountMc?: SerializedBigNumber
+  tokenAmountTotal?: SerializedBigNumber
+  quoteTokenAmountTotal?: SerializedBigNumber
+  lpTotalInQuoteToken?: SerializedBigNumber
+  lpTotalSupply?: SerializedBigNumber
+  tokenPriceVsQuote?: SerializedBigNumber
+  poolWeight?: SerializedBigNumber
+  userData?: {
+    allowance: string
+    tokenBalance: string
+    stakedBalance: string
+    earnings: string
+  }
+}
+
+// Slices states
+
+export interface GuildState {
+  data: Guild[]
+  loadArchivedGuildsData: boolean
+  userDataLoaded: boolean
+}
+
 // Global state
 
 export interface State {
   block: BlockState
   farms: FarmsState
+  lootmarkets: LootMarketState
+  guilds: GuildState
 }

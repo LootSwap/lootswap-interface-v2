@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Button, Heading, Text, LogoIcon } from '@pancakeswap/uikit'
+import { Button, Heading, Text } from '@pancakeswap/uikit'
+import { OrcCoinFlip } from '@lootswap/uikit'
 import Page from 'components/layout/Page'
 import { useTranslation } from 'contexts/Localization'
 
@@ -12,15 +13,24 @@ const StyledNotFound = styled.div`
   justify-content: center;
 `
 
+const StyledText = styled(Text)`
+  background: #f9f9f9;
+  padding: 2%;
+`
+
 const NotFound = () => {
   const { t } = useTranslation()
 
   return (
     <Page>
       <StyledNotFound>
-        <LogoIcon width="64px" mb="8px" />
+        <OrcCoinFlip />
         <Heading scale="xxl">404</Heading>
-        <Text mb="16px">{t('Oops, page not found.')}</Text>
+        <StyledText mb="16px">
+          {t(
+            '00110100 00110000 00110100 00100000 01110000 01100001 01100111 01100101 00100000 01101110 01101111 01110100 00100000 01100110 01101111 01110101 01101110 01100100',
+          )}
+        </StyledText>
         <Button as="a" href="/" scale="sm">
           {t('Back Home')}
         </Button>

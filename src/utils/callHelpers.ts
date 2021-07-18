@@ -63,3 +63,130 @@ export const harvest = async (masterChefContract, pid, account) => {
       return tx.transactionHash
     })
 }
+
+// Loot Markets
+export const lootMarketHarvestStaking = async (lootMarketContract, account) => {
+  const estGas = await lootMarketContract.methods
+    .withdraw(0)
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('lootMarketHarvestStaking().estGas failed', error)
+    })
+
+  return lootMarketContract.methods
+    .withdraw(0)
+    .send({ from: account, gas: estGas })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const lootMarketUnstake = async (lootMarketContract, amount, account) => {
+  const estGas = await lootMarketContract.methods
+    .withdraw(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('lootMarketUnstake().estGas failed', error)
+    })
+
+  return lootMarketContract.methods
+    .withdraw(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
+    .send({ from: account, gas: estGas })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const lootMarketEmergencyUnstake = async (lootMarketContract, account) => {
+  return lootMarketContract.methods
+    .emergencyWithdraw()
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const lootMarketStakingStake = async (lootMarketContract, amount, account) => {
+  const estGas = await lootMarketContract.methods
+    .deposit(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('lootMarketStakingStake().estGas failed', error)
+    })
+
+  return lootMarketContract.methods
+    .deposit(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
+    .send({ from: account, gas: estGas })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+// Guild
+
+export const approveGuild = async (lpContract, masterGuildContract, account) => {
+  return lpContract.methods
+    .approve(masterGuildContract.options.address, ethers.constants.MaxUint256)
+    .send({ from: account })
+}
+
+export const stakeGuild = async (masterGuildContract, pid, amount, account) => {
+  const referral = ZERO_ADDRESS
+  const estGas = await masterGuildContract.methods
+    .deposit(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString(), referral)
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('stakeGuild().estGas failed', error)
+    })
+
+  return masterGuildContract.methods
+    .deposit(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString(), referral)
+    .send({ from: account, gas: estGas })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const unstakeGuild = async (masterGuildContract, pid, amount, account) => {
+  const referral = ZERO_ADDRESS
+  const estGas = await masterGuildContract.methods
+    .withdraw(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString(), referral)
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('unstakeGuild().estGas failed', error)
+    })
+  return masterGuildContract.methods
+    .withdraw(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString(), referral)
+    .send({ from: account, gas: estGas })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const harvestGuild = async (masterGuildContract, pid, account) => {
+  const estGas = await masterGuildContract.methods
+    .claimReward(pid)
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('harvestGuild().estGas failed', error)
+    })
+
+  return masterGuildContract.methods
+    .claimReward(pid)
+    .send({ from: account, gas: estGas })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
