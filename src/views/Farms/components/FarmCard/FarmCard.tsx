@@ -5,6 +5,7 @@ import { Flex, Text, Skeleton } from '@pancakeswap/uikit'
 import { Farm } from 'state/types'
 import { provider as ProviderType } from 'web3-core'
 import { getHarmonyScanAddressUrl } from 'utils/harmonyscan'
+import { getBalanceNumber } from 'utils/formatBalance'
 import { useTranslation } from 'contexts/Localization'
 import ExpandableSectionButton from 'components/ExpandableSectionButton'
 import { BASE_ADD_LIQUIDITY_URL } from 'config'
@@ -133,7 +134,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account, 
       )}
       <Flex justifyContent="space-between">
         <Text>{t('Earn')}:</Text>
-        <Text bold>{earnLabel}</Text>
+        <Text bold>{`${
+          farm.userData ? getBalanceNumber(new BigNumber(farm.userData.earnings)) : 0
+        } ${earnLabel}`}</Text>
       </Flex>
       <CardActionsContainer farm={farm} account={account} addLiquidityUrl={addLiquidityUrl} />
       <Divider />

@@ -38,4 +38,5 @@ export type GuildConfig = {
   loading?: Image
   lootFarmOverride?: LootFarms
   hasLockUp?: boolean
+  tagline?: string
 }

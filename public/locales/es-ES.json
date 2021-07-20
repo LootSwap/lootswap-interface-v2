@@ -594,5 +594,6 @@
   "GG": "GG",
   "Unlocked": "Unlocked",
   "Amount of your earned total that is currently locked.": "Amount of your earned total that is currently locked.",
-  "Amount of your earned total that is currently available.": "Amount of your earned total that is currently available."
+  "Amount of your earned total that is currently available.": "Amount of your earned total that is currently available.",
+  "Stake Liquidity Pool (LP) tokens to earn %sym%.": "Stake Liquidity Pool (LP) tokens to earn %sym%."
 }

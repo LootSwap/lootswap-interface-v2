@@ -480,7 +480,9 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
           />
         </Heading>
         <Heading scale="lg" color="text">
-          {t('Stake Liquidity Pool (LP) tokens to earn.')}
+          {t('Stake Liquidity Pool (LP) tokens to earn %sym%.', { sym: guildSettings.symbol })}
+          <br />
+          {guildSettings.tagline ?? ''}
         </Heading>
       </PageHeader>
       <Page>
