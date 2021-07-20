@@ -187,11 +187,11 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
         <EarnedContainer>
           <EarnedWrapper>
             <Text>{t('Unlocked')}</Text>
-            <Unlocked unlocked={earned.unlocked} symbol={guildSettings.symbol} />
+            <Unlocked unlocked={earned.unlocked} />
           </EarnedWrapper>
           <EarnedWrapper>
             <Text>{t('Locked')}</Text>
-            <Locked locked={earned.locked} symbol={guildSettings.symbol} />
+            <Locked locked={earned.locked} />
           </EarnedWrapper>
         </EarnedContainer>
       )}

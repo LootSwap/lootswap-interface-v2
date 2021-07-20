@@ -9,7 +9,6 @@ const ReferenceElement = styled.div`
 
 export interface LockedProps {
   locked: number
-  symbol: string
 }
 
 const LockedWrapper = styled.div`
@@ -29,10 +28,10 @@ const Container = styled.div`
   align-items: center;
 `
 
-const Locked: React.FunctionComponent<LockedProps> = ({ locked, symbol }) => {
+const Locked: React.FunctionComponent<LockedProps> = ({ locked }) => {
   const displayLocked =
     locked && locked > 0 ? (
-      `${Number(locked).toLocaleString(undefined, { maximumFractionDigits: 2 })} ${symbol}`
+      `${Number(locked).toLocaleString(undefined, { maximumFractionDigits: 2 })}`
     ) : (
       <Skeleton width={60} />
     )

@@ -111,6 +111,8 @@ const FarmCard: React.FC<FarmCardProps> = ({
   })
   const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
   const isPromotedFarm = farm.token.symbol === guildSlug.toUpperCase()
+  // eslint-disable-next-line
+  const guildToUSDPrice = getBalanceNumber(new BigNumber(farm.userData.earnings).times(guildTokenPrice))
 
   // Calculating when questing starts
   const startBlock = farm.startBlock ?? 0

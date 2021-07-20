@@ -9,7 +9,6 @@ const ReferenceElement = styled.div`
 
 export interface UnlockedProps {
   unlocked: number
-  symbol: string
 }
 
 const UnlockedWrapper = styled.div`
@@ -29,10 +28,10 @@ const Container = styled.div`
   align-items: center;
 `
 
-const Unlocked: React.FunctionComponent<UnlockedProps> = ({ unlocked, symbol }) => {
+const Unlocked: React.FunctionComponent<UnlockedProps> = ({ unlocked }) => {
   const displayUnlocked =
     unlocked && unlocked > 0 ? (
-      `${Number(unlocked).toLocaleString(undefined, { maximumFractionDigits: 2 })} ${symbol}`
+      `${Number(unlocked).toLocaleString(undefined, { maximumFractionDigits: 2 })}`
     ) : (
       <Skeleton width={60} />
     )
