@@ -59,9 +59,31 @@ const getGuildBaseTokenPrice = (guild: Guild, quoteTokenFarm: Guild, lootPriceBu
   return BIG_ZERO
 }
 
-const getGuildQuoteTokenPrice = (guild: Guild, quoteTokenFarm: Guild, lootPriceBusd: BigNumber): BigNumber => {
-  if (guild.quoteToken.symbol === 'BUSD' || guild.quoteToken.symbol === 'bscBUSD') {
+const getGuildQuoteTokenPrice = (
+  guild: Guild,
+  quoteTokenFarm: Guild,
+  lootPriceBusd: BigNumber,
+  onePriceBusd: BigNumber,
+): BigNumber => {
+  if (
+    guild.quoteToken.symbol === 'BUSD' ||
+    guild.quoteToken.symbol === 'bscBUSD' ||
+    guild.quoteToken.symbol === '1USDT' ||
+    guild.quoteToken.symbol === '1USDC' ||
+    guild.quoteToken.symbol === '1DAI'
+  ) {
     return BIG_ONE
+  }
+
+  if (
+    guild.quoteToken.symbol === 'wBNB' ||
+    guild.quoteToken.symbol === 'bscBNB' ||
+    guild.quoteToken.symbol === '1ETH' ||
+    guild.quoteToken.symbol === '1WBTC'
+  ) {
+    // Converts current farm token to ONE then uses the price of BUSD from ONE <> BUSD to find the rate.
+    const tokenToOne = quoteTokenFarm.tokenPriceVsQuote
+    return new BigNumber(tokenToOne).div(onePriceBusd)
   }
 
   if (!quoteTokenFarm) {
@@ -88,15 +110,19 @@ const getGuildQuoteTokenPrice = (guild: Guild, quoteTokenFarm: Guild, lootPriceB
 }
 
 const fetchGuildsPrices = async (guilds) => {
+  // Fetching the prices from our loot farms
   const farms = await fetchFarms(farmsConfig)
   const lootbusdFarm = farms.find((f: Farm) => f.pid === 9)
+  const onebusdFarm = farms.find((farm: Farm) => farm.pid === 1)
+  const onePriceBusd = onebusdFarm?.tokenPriceVsQuote ? BIG_ONE.div(onebusdFarm.tokenPriceVsQuote) : BIG_ZERO
   const lootPriceBusd = lootbusdFarm?.tokenPriceVsQuote
     ? new BigNumber(lootbusdFarm.tokenPriceVsQuote).div(BIG_ONE)
     : BIG_ZERO
+  // --------
   const guildsWithPrices = guilds.map((g) => {
     const quoteTokenFarm = getGuildFromTokenSymbol(guilds, g.quoteToken.symbol)
     const baseTokenPrice = getGuildBaseTokenPrice(g, quoteTokenFarm, lootPriceBusd)
-    const quoteTokenPrice = getGuildQuoteTokenPrice(g, quoteTokenFarm, lootPriceBusd)
+    const quoteTokenPrice = getGuildQuoteTokenPrice(g, quoteTokenFarm, lootPriceBusd, onePriceBusd)
     const token = { ...g.token, busdPrice: baseTokenPrice.toJSON() }
     const quoteToken = { ...g.quoteToken, busdPrice: quoteTokenPrice.toJSON() }
     return { ...g, token, quoteToken }

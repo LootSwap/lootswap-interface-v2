@@ -7,7 +7,7 @@ import { FarmWithStakedValue } from 'views/Guilds/components/FarmCard/FarmCard'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useAppDispatch } from 'state'
 import { fetchGuildUserDataAsync } from 'state/guilds'
-import { usePriceLootBusd } from 'state/hooks'
+import { usePriceGuildBusd } from 'state/hooks'
 import { useGuildHarvest } from 'hooks/useHarvest'
 import { useTranslation } from 'contexts/Localization'
 import { useCountUp } from 'react-countup'
@@ -21,8 +21,15 @@ interface HarvestActionProps extends FarmWithStakedValue {
 
 const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userData, userDataReady, guildSlug }) => {
   const earningsBigNumber = new BigNumber(userData.earnings)
-  const guildTokenPrice = usePriceLootBusd()
+
   const guildSettings = useGuildSettings(guildSlug)
+  const lootFarmOverride = guildSettings?.lootFarmOverride
+  const guildTokenPrice = usePriceGuildBusd(
+    guildSlug,
+    lootFarmOverride?.useLootFarm || false,
+    lootFarmOverride?.pid || 0,
+  )
+
   let earnings = 0
   let earningsBusd = 0
   let displayBalance = userDataReady ? earnings.toLocaleString() : <Skeleton width={60} />

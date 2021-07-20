@@ -16,13 +16,13 @@ const FarmTabButtons: React.FC<FarmTabButtonsProps> = ({ hasStakeInFinishedFarms
 
   let activeIndex
   switch (location.pathname) {
-    case `/guild/${slug}`:
+    case `/guilds/${slug}`:
       activeIndex = 0
       break
-    case `/guild/${slug}/history`:
+    case `/guilds/${slug}/history`:
       activeIndex = 1
       break
-    case `/guild/${slug}/archived`:
+    case `/guilds/${slug}/archived`:
       activeIndex = 2
       break
     default:

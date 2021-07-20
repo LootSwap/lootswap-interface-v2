@@ -596,5 +596,10 @@
   "Locked balance - Your locked balance will remain locked until 00:00:00 December 25th, 2021 (UTC). Your locked tokens will thereafter gradually unlock until December 25th, 2022." : "Locked balance - Your locked balance will remain locked until 00:00:00 December 25th, 2021 (UTC). Your locked tokens will thereafter gradually unlock until December 25th, 2022.",
   "Locked Balance": "Locked Balance",
   "Includes 95% of locked rewards and total burn.": "Includes 95% of locked rewards and total burn.",
-  "Includes Total Supply minus Total Burned.": "Includes Total Supply minus Total Burned."
+  "Includes Total Supply minus Total Burned.": "Includes Total Supply minus Total Burned.",
+  "TROLL": "TROLL",
+  "GG": "GG",
+  "Unlocked": "Unlocked",
+  "Amount of your earned total that is currently locked.": "Amount of your earned total that is currently locked.",
+  "Amount of your earned total that is currently available.": "Amount of your earned total that is currently available."
 }

@@ -109,7 +109,7 @@ const StyledImage = styled(Image)`
 `
 
 const PageGuildTheme = styled.div`
-  background: ${(props) => (props.color ? props.color : 'white')};
+  background: ${({ theme }) => (theme.colors.background ? theme.colors.background : 'white')};
 `
 const Cards = styled(BaseLayout)`
   align-items: stretch;
@@ -167,8 +167,13 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
   const guildsLPUnique = guildsLP.filter(
     (v, i, a) => a.findIndex((glp) => glp.pid === v.pid && glp.guildSlug === v.guildSlug) === i, // Filters out duplicates
   )
+  const lootFarmOverride = guildSettings?.lootFarmOverride
+  const guildTokenPrice = usePriceGuildBusd(
+    guildSlug,
+    lootFarmOverride?.useLootFarm || false,
+    lootFarmOverride?.pid || 0,
+  )
 
-  const guildTokenPrice = usePriceGuildBusd(guildSlug)
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = usePersistState(ViewMode.TABLE, {
     localStorageKey: `${guildSlug}-lootswap_farm_view`,
@@ -350,10 +355,13 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
           image: farm.lpSymbol.split(' ')[0].toLocaleLowerCase(),
           label: lpLabel,
           pid: farm.pid,
+          guildSlug: farm.guildSlug,
         },
         earned: {
           earnings: getBalanceNumber(new BigNumber(farm.userData.earnings)),
           pid: farm.pid,
+          locked: farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings)),
+          unlocked: farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings)),
         },
         liquidity: {
           liquidity: farm.liquidity,
@@ -411,6 +419,9 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
                   guildTokenPrice={guildTokenPrice}
                   account={account}
                   removed={false}
+                  locked={farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+                  unlocked={farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+                  guildSlug={guildSlug}
                 />
               ))}
           </Route>
@@ -418,14 +429,32 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
             {farmsStakedMemoized
               .filter((f) => f.guildSlug === guildSlug)
               .map((farm) => (
-                <FarmCard key={farm.pid} farm={farm} guildTokenPrice={guildTokenPrice} account={account} removed />
+                <FarmCard
+                  key={farm.pid}
+                  farm={farm}
+                  guildTokenPrice={guildTokenPrice}
+                  account={account}
+                  removed
+                  locked={farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+                  unlocked={farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+                  guildSlug={guildSlug}
+                />
               ))}
           </Route>
           <Route exact path={`${path}/archived`}>
             {farmsStakedMemoized
               .filter((f) => f.guildSlug === guildSlug)
               .map((farm) => (
-                <FarmCard key={farm.pid} farm={farm} guildTokenPrice={guildTokenPrice} account={account} removed />
+                <FarmCard
+                  key={farm.pid}
+                  farm={farm}
+                  guildTokenPrice={guildTokenPrice}
+                  account={account}
+                  removed
+                  locked={farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+                  unlocked={farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+                  guildSlug={guildSlug}
+                />
               ))}
           </Route>
         </FlexLayout>
@@ -440,12 +469,12 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
 
   // #region html
   return (
-    <PageGuildTheme color={guildSettings.guildTheme.colors.background}>
+    <PageGuildTheme>
       <PageHeader>
         <Heading as="h1" scale="xxl" color="secondary" mb="24px">
           <AnimatedText
-            textColor={guildSettings.guildTheme.colors.primary}
-            overlayColor={guildSettings.guildTheme.colors.secondary}
+            textColor={guildSettings.darkTheme.colors.primary}
+            overlayColor={guildSettings.darkTheme.colors.secondary}
             guildSymbol={guildSettings.symbol}
           />
         </Heading>

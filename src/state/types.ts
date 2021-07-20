@@ -82,6 +82,8 @@ export interface Guild extends GuildConfig {
   lpTotalSupply?: SerializedBigNumber
   tokenPriceVsQuote?: SerializedBigNumber
   poolWeight?: SerializedBigNumber
+  percentLockupBonus?: number
+  percentUnlockedBonus?: number
   userData?: {
     allowance: string
     tokenBalance: string

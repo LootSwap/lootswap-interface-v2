@@ -4,7 +4,7 @@ import { FarmWithStakedValue } from 'views/Guilds/components/FarmCard/FarmCard'
 import { useMatchBreakpoints } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import useDelayedUnmount from 'hooks/useDelayedUnmount'
-import { useFarmUser } from 'state/hooks'
+import { useGuildUser } from 'state/hooks'
 
 import Apr, { AprProps } from './Apr'
 import Farm, { FarmProps } from './Farm'
@@ -70,7 +70,7 @@ const FarmMobileCell = styled.td`
 
 const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
   const { details, userDataReady } = props
-  const hasStakedAmount = !!useFarmUser(details.pid).stakedBalance.toNumber()
+  const hasStakedAmount = !!useGuildUser(details.pid, details.guildSlug).stakedBalance.toNumber()
   const [actionPanelExpanded, setActionPanelExpanded] = useState(hasStakedAmount)
   const shouldRenderChild = useDelayedUnmount(actionPanelExpanded, 300)
   const { t } = useTranslation()

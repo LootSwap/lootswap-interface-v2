@@ -75,9 +75,20 @@ interface FarmCardProps {
   guildTokenPrice?: BigNumber
   provider?: ProviderType
   account?: string
+  locked?: number
+  unlocked?: number
+  guildSlug?: string
 }
 
-const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, guildTokenPrice, account }) => {
+const FarmCard: React.FC<FarmCardProps> = ({
+  farm,
+  removed,
+  guildTokenPrice,
+  account,
+  locked,
+  unlocked,
+  guildSlug,
+}) => {
   const { t } = useTranslation()
 
   const [showExpandableSection, setShowExpandableSection] = useState(false)
@@ -85,10 +96,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, guildTokenPrice, acc
   // We assume the token name is coin pair + lp e.g. CAKE-BNB LP, LINK-BNB LP,
   // NAR-CAKE LP. The images should be cake-bnb.svg, link-bnb.svg, nar-cake.svg
   const farmImage = farm.lpSymbol.split(' ')[0].toLocaleLowerCase()
-  const totalValueFormatted =
-    farm.liquidity && farm.liquidity.gt(0)
-      ? `$${farm.liquidity.toNumber().toLocaleString(undefined, { maximumFractionDigits: 0 })}`
-      : ''
+  const totalValueFormatted = farm.liquidity
+    ? `$${farm.liquidity.toNumber().toLocaleString(undefined, { maximumFractionDigits: 2 })}`
+    : ''
 
   const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANCAKE', '')
   const earnLabel = farm.dual ? farm.dual.earnLabel : 'LOOT'
@@ -150,6 +160,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, guildTokenPrice, acc
           totalValueFormatted={totalValueFormatted}
           lpLabel={lpLabel}
           addLiquidityUrl={addLiquidityUrl}
+          locked={locked}
+          unlocked={unlocked}
+          guildSlug={guildSlug}
         />
       </ExpandingWrapper>
     </FCard>

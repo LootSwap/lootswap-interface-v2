@@ -11,4 +11,8 @@ export default {
     1666600000: '0x1f27964182b470dBa3ecdA5d1A516136a864557e',
     1666700000: '',
   },
+  masterLooterTROLL: {
+    1666600000: '0x6Bc4B5Ad205eC25a18adA781C960b9Dce1edD4a8',
+    1666700000: '',
+  },
 }

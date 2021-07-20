@@ -187,8 +187,23 @@ export const useInitialBlock = () => {
 }
 
 // Guilds
-export const usePriceGuildBusd = (guildSlug: string): BigNumber => {
-  const guildlootFarm = useGuildFromPid(0, guildSlug)
+
+export const usePriceGuildBusd = (guildSlug: string, useLootFarm: boolean, lootFarmPid?: number): BigNumber => {
+  // UseLootFarm is set in the guildSettings config. if set to true it will use a specific loot farm to determine guild price
+  // TODO: may need to refactor to take in more then one farm.
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (useLootFarm) {
+      dispatch(fetchFarmsPublicDataAsync([lootFarmPid]))
+    }
+  }, [dispatch, guildSlug, lootFarmPid, useLootFarm])
+
+  let guildlootFarm = useGuildFromPid(0, guildSlug)
+  const lootFarm = useFarmFromPid(lootFarmPid)
+  if (lootFarm.tokenPriceVsQuote) {
+    guildlootFarm = { ...lootFarm, guildSlug }
+  }
   const lootPriceBusd = usePriceLootBusd()
   const guildBusdPrice = guildlootFarm?.tokenPriceVsQuote
     ? lootPriceBusd.times(guildlootFarm.tokenPriceVsQuote)

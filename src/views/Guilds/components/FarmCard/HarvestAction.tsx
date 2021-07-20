@@ -7,7 +7,8 @@ import { fetchGuildUserDataAsync } from 'state/guilds'
 import { useGuildHarvest } from 'hooks/useHarvest'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useWeb3React } from '@web3-react/core'
-import { usePriceLootBusd } from 'state/hooks'
+import { usePriceGuildBusd } from 'state/hooks'
+import useGuildSettings from 'views/Guilds/hooks/useGuildSettings'
 import { DISPLAY_DECIMAL_FORMAT_PREF } from 'config'
 import CardBusdValue from '../../../Home/components/CardBusdValue'
 
@@ -22,7 +23,15 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid, guildSlu
   const { t } = useTranslation()
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useGuildHarvest(pid, guildSlug)
-  const guildTokenPrice = usePriceLootBusd()
+
+  const guildSettings = useGuildSettings(guildSlug)
+  const lootFarmOverride = guildSettings?.lootFarmOverride
+  const guildTokenPrice = usePriceGuildBusd(
+    guildSlug,
+    lootFarmOverride?.useLootFarm || false,
+    lootFarmOverride?.pid || 0,
+  )
+
   const dispatch = useAppDispatch()
   const rawEarningsBalance = account ? getBalanceNumber(earnings) : 0
   const displayBalance =

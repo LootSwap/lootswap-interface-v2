@@ -16,6 +16,8 @@ type PublicGuildData = {
   tokenPriceVsQuote: SerializedBigNumber
   poolWeight: SerializedBigNumber
   multiplier: string
+  percentLockupBonus: number
+  percentUnlockedBonus: number
 }
 
 const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
@@ -75,7 +77,7 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
   const lpTotalInQuoteToken = quoteTokenAmountMc.times(new BigNumber(2))
 
   // Only make masterchef calls if guild has pid
-  const [info, totalAllocPoint] =
+  const [info, totalAllocPoint, percentLockbonus] =
     pid || pid === 0
       ? await multicall(masterLooterABI, [
           {
@@ -87,11 +89,17 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
             address: getGuildsMasterLooterAddress(guildSlug),
             name: 'totalAllocPoint',
           },
+          {
+            address: getGuildsMasterLooterAddress(guildSlug),
+            name: 'PERCENT_LOCK_BONUS_REWARD',
+          },
         ])
       : [null, null]
 
   const allocPoint = info ? new BigNumber(info.allocPoint?._hex) : BIG_ZERO
   const poolWeight = totalAllocPoint ? allocPoint.div(new BigNumber(totalAllocPoint)) : BIG_ZERO
+  const percentLockupBonus = percentLockbonus ? percentLockbonus / 100 : 0
+  const percentUnlockedBonus = 1 - percentLockupBonus
 
   return {
     tokenAmountMc: tokenAmountMc.toJSON(),
@@ -102,7 +110,9 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
     lpTotalInQuoteToken: lpTotalInQuoteToken.toJSON(),
     tokenPriceVsQuote: quoteTokenAmountTotal.div(tokenAmountTotal).toJSON(),
     poolWeight: poolWeight.toJSON(),
-    multiplier: `${allocPoint.div(BIG_TEN.pow(quoteTokenDecimals)).toString()}X`,
+    multiplier: `${allocPoint.div(BIG_TEN.pow(18)).toString()}X`,
+    percentLockupBonus,
+    percentUnlockedBonus,
   }
 }
 

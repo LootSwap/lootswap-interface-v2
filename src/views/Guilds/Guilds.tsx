@@ -23,7 +23,7 @@ const Guilds: React.FC = () => {
   const { slug } = useParams<{ slug: string }>()
   const guildSettings = useGuildSettings(slug)
   const globalSettings = useTheme()
-
+  const guildTheme = globalSettings.isDark ? guildSettings.darkTheme : guildSettings.lightTheme
   // #region Force Load Screen
   const [isLoaded, setIsLoaded] = useState(false)
   useEffect(() => {
@@ -45,7 +45,7 @@ const Guilds: React.FC = () => {
       />
     </PageGuildLoadingTheme>
   ) : (
-    <ThemeProvider theme={{ ...globalSettings.theme, ...guildSettings.guildTheme }}>
+    <ThemeProvider theme={{ ...globalSettings.theme, ...guildTheme }}>
       <GuildPage guildSlug={slug} footerImg={guildSettings.footerImg} />
     </ThemeProvider>
   )

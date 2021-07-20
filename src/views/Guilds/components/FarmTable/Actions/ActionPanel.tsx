@@ -3,6 +3,7 @@ import styled, { keyframes, css } from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 import { LinkExternal, Text } from '@pancakeswap/uikit'
 import { BASE_ADD_LIQUIDITY_URL } from 'config'
+import useGuildSettings from 'views/Guilds/hooks/useGuildSettings'
 import { FarmWithStakedValue } from 'views/Guilds/components/FarmCard/FarmCard'
 import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
 import { getHarmonyScanAddressUrl } from 'utils/harmonyscan'
@@ -13,6 +14,9 @@ import StakedAction from './StakedAction'
 import Apr, { AprProps } from '../Apr'
 import Multiplier, { MultiplierProps } from '../Multiplier'
 import Liquidity, { LiquidityProps } from '../Liquidity'
+import { EarnedProps } from '../Earned'
+import Unlocked from '../Unlocked'
+import Locked from '../Locked'
 
 export interface ActionPanelProps {
   apr: AprProps
@@ -21,6 +25,7 @@ export interface ActionPanelProps {
   details: FarmWithStakedValue
   userDataReady: boolean
   expanded: boolean
+  earned: EarnedProps
 }
 
 const expandAnimation = keyframes`
@@ -129,6 +134,16 @@ const ValueWrapper = styled.div`
   justify-content: space-between;
   margin: 4px 0px;
 `
+const EarnedContainer = styled.div`
+  display: block;
+`
+
+const EarnedWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 4px 0px;
+`
 
 const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
   details,
@@ -137,6 +152,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
   liquidity,
   userDataReady,
   expanded,
+  earned,
 }) => {
   const farm = details
 
@@ -150,7 +166,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
   })
   const lpAddress = farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]
   const harmony = getHarmonyScanAddressUrl(lpAddress)
-
+  const guildSettings = useGuildSettings(guildSlug)
   return (
     <Container expanded={expanded}>
       <InfoContainer>
@@ -167,6 +183,18 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
           {dual ? <DualTag /> : null}
         </TagsContainer>
       </InfoContainer>
+      {guildSettings.hasLockUp && (
+        <EarnedContainer>
+          <EarnedWrapper>
+            <Text>{t('Unlocked')}</Text>
+            <Unlocked unlocked={earned.unlocked} symbol={guildSettings.symbol} />
+          </EarnedWrapper>
+          <EarnedWrapper>
+            <Text>{t('Locked')}</Text>
+            <Locked locked={earned.locked} symbol={guildSettings.symbol} />
+          </EarnedWrapper>
+        </EarnedContainer>
+      )}
       <ValueContainer>
         <ValueWrapper>
           <Text>{t('APR')}</Text>

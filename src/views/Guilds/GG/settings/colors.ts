@@ -1,11 +1,7 @@
 import { light, dark } from '@lootswap/uikit'
 
-const isDark = true
-
-const theme = isDark ? light : dark
-
-const lightTheme = {
-  ...theme.colors,
+export const lightTheme = {
+  ...light.colors,
   background: '#f5f5f5',
   failure: '#ed4b60',
   primary: '#0030ed',
@@ -25,8 +21,8 @@ const lightTheme = {
   },
 }
 
-const darkTheme = {
-  ...theme.colors,
+export const darkTheme = {
+  ...dark.colors,
   background: '#030303',
   failure: '#ed4b60',
   primary: '#3b53b1',
@@ -47,7 +43,3 @@ const darkTheme = {
     bubblegum: 'linear-gradient(139.73deg, #000f51 0%, #00092f 100%)',
   },
 }
-
-export const baseColors = isDark ? darkTheme : lightTheme
-
-export default baseColors

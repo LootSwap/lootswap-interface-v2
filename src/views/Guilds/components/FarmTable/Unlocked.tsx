@@ -2,25 +2,25 @@ import React from 'react'
 import styled from 'styled-components'
 import { HelpIcon, Text, Skeleton, useTooltip } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
-import BigNumber from 'bignumber.js'
 
 const ReferenceElement = styled.div`
   display: inline-block;
 `
 
-export interface LiquidityProps {
-  liquidity: BigNumber
+export interface UnlockedProps {
+  unlocked: number
+  symbol: string
 }
 
-const LiquidityWrapper = styled.div`
+const UnlockedWrapper = styled.div`
   min-width: 110px;
   font-weight: 600;
   text-align: right;
   margin-right: 14px;
-
   ${({ theme }) => theme.mediaQueries.lg} {
     text-align: left;
-    margin-right: 0;
+    margin-right: 8;
+    text-align: right;
   }
 `
 
@@ -29,23 +29,24 @@ const Container = styled.div`
   align-items: center;
 `
 
-const Liquidity: React.FunctionComponent<LiquidityProps> = ({ liquidity }) => {
-  const displayLiquidity = liquidity ? (
-    `$${Number(liquidity).toLocaleString(undefined, { maximumFractionDigits: 2 })}`
-  ) : (
-    <Skeleton width={60} />
-  )
+const Unlocked: React.FunctionComponent<UnlockedProps> = ({ unlocked, symbol }) => {
+  const displayUnlocked =
+    unlocked && unlocked > 0 ? (
+      `${Number(unlocked).toLocaleString(undefined, { maximumFractionDigits: 2 })} ${symbol}`
+    ) : (
+      <Skeleton width={60} />
+    )
   const { t } = useTranslation()
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
-    t('Total value of the funds in this quests liquidity pool'),
+    t('Amount of your earned total that is currently available.'),
     { placement: 'top-end', tooltipOffset: [20, 10] },
   )
 
   return (
     <Container>
-      <LiquidityWrapper>
-        <Text>{displayLiquidity}</Text>
-      </LiquidityWrapper>
+      <UnlockedWrapper>
+        <Text>{displayUnlocked}</Text>
+      </UnlockedWrapper>
       <ReferenceElement ref={targetRef}>
         <HelpIcon color="textSubtle" />
       </ReferenceElement>
@@ -54,4 +55,4 @@ const Liquidity: React.FunctionComponent<LiquidityProps> = ({ liquidity }) => {
   )
 }
 
-export default Liquidity
+export default Unlocked
