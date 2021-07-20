@@ -231,6 +231,7 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
                 guildTokenPrice,
                 totalLiquidity,
                 guildSettings.guildTokenPerBlock,
+                new BigNumber(farm.baseEmissionRate),
               )
             : 0
 

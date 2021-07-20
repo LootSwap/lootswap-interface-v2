@@ -41,7 +41,7 @@
   "%num% blocks until farming ends": "%num% blocks until farming ends",
   "Coming Soon...": "Coming Soon...",
   "Your Stake": "Your Stake",
-  "Questing starts in %num% Blocks": "Questing starts in %num% Blocks",
+  "Questing starts in %num% Blocks": "Questing starts in ~%num% Blocks",
   "Finished": "Finished",
   "Questing ends in %num% Blocks": "Questing ends in %num% Blocks",
   "Project site": "Project site",

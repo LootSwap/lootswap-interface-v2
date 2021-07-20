@@ -100,6 +100,7 @@ const farms: GuildConfig[] = [
     token: tokens.gtroll,
     quoteToken: tokens.wone,
     guildSlug: 'gtroll',
+    startBlock: 15425223,
   },
 ]
 

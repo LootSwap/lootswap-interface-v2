@@ -3,6 +3,7 @@ import BigNumber from 'bignumber.js'
 import styled, { keyframes } from 'styled-components'
 import { Flex, Text, Skeleton } from '@pancakeswap/uikit'
 import { Guild } from 'state/types'
+import { useBlock } from 'state/hooks'
 import { provider as ProviderType } from 'web3-core'
 import { getHarmonyScanAddressUrl } from 'utils/harmonyscan'
 import { useTranslation } from 'contexts/Localization'
@@ -90,7 +91,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
   guildSlug,
 }) => {
   const { t } = useTranslation()
-
+  const { currentBlock } = useBlock()
   const [showExpandableSection, setShowExpandableSection] = useState(false)
 
   // We assume the token name is coin pair + lp e.g. CAKE-BNB LP, LINK-BNB LP,
@@ -112,6 +113,13 @@ const FarmCard: React.FC<FarmCardProps> = ({
   const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
   const isPromotedFarm = farm.token.symbol === 'LOOT'
 
+  // Calculating when questing starts
+  const startBlock = farm.startBlock ?? 0
+  const blocksUntilStart = Math.max(startBlock - currentBlock, 0)
+  const blocksRemaining = Math.max(currentBlock - Number(farm.lastRewardBlock), 0)
+  const hasPoolStarted = blocksUntilStart === 0 && blocksRemaining > 0
+  const blocksToDisplay = hasPoolStarted ? 0 : blocksUntilStart
+
   return (
     <FCard isPromotedFarm={isPromotedFarm}>
       {isPromotedFarm && <StyledCardAccent />}
@@ -121,6 +129,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
         isCommunityFarm={farm.isCommunity}
         farmImage={farmImage}
         tokenSymbol={farm.token.symbol}
+        startBlock={blocksToDisplay}
       />
       {!removed && (
         <Flex justifyContent="space-between" alignItems="center">

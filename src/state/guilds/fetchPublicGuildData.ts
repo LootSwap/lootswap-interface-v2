@@ -18,6 +18,9 @@ type PublicGuildData = {
   multiplier: string
   percentLockupBonus: number
   percentUnlockedBonus: number
+  poolRewardsPerBlock: SerializedBigNumber
+  baseEmissionRate: SerializedBigNumber
+  lastRewardBlock: SerializedBigNumber
 }
 
 const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
@@ -77,7 +80,7 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
   const lpTotalInQuoteToken = quoteTokenAmountMc.times(new BigNumber(2))
 
   // Only make masterchef calls if guild has pid
-  const [info, totalAllocPoint, percentLockbonus] =
+  const [info, totalAllocPoint, percentLockbonus, poolRewardsPerBlock, baseEmissionRate] =
     pid || pid === 0
       ? await multicall(masterLooterABI, [
           {
@@ -93,13 +96,26 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
             address: getGuildsMasterLooterAddress(guildSlug),
             name: 'PERCENT_LOCK_BONUS_REWARD',
           },
+          {
+            address: getGuildsMasterLooterAddress(guildSlug),
+            name: 'getNewRewardPerBlock',
+            params: [pid + 1], // poolRewardsPerBlock indexes have to be +1'd to get the actual specific pool data
+          },
+          {
+            address: getGuildsMasterLooterAddress(guildSlug),
+            name: 'getNewRewardPerBlock',
+            params: [0], // baseEmission rate
+          },
         ])
       : [null, null]
 
   const allocPoint = info ? new BigNumber(info.allocPoint?._hex) : BIG_ZERO
+  const lastRewardBlock = info ? new BigNumber(info.lastRewardBlock?._hex) : BIG_ZERO
   const poolWeight = totalAllocPoint ? allocPoint.div(new BigNumber(totalAllocPoint)) : BIG_ZERO
   const percentLockupBonus = percentLockbonus ? percentLockbonus / 100 : 0
   const percentUnlockedBonus = 1 - percentLockupBonus
+  const rewardsPerBlock = new BigNumber(poolRewardsPerBlock).div(BIG_TEN.pow(18)).toJSON()
+  const emissionRate = new BigNumber(baseEmissionRate).div(BIG_TEN.pow(18)).toJSON()
 
   return {
     tokenAmountMc: tokenAmountMc.toJSON(),
@@ -113,6 +129,9 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
     multiplier: `${allocPoint.div(BIG_TEN.pow(18)).toString()}X`,
     percentLockupBonus,
     percentUnlockedBonus,
+    poolRewardsPerBlock: rewardsPerBlock,
+    baseEmissionRate: emissionRate,
+    lastRewardBlock: lastRewardBlock.toJSON(),
   }
 }
 

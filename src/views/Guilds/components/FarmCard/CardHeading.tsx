@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Tag, Flex, Heading, Image } from '@pancakeswap/uikit'
 import { CommunityTag, CoreTag } from 'components/Tags'
+import { useTranslation } from 'contexts/Localization'
+
 // import { useParams } from 'react-router-dom'
 
 export interface ExpandableSectionProps {
@@ -10,6 +12,7 @@ export interface ExpandableSectionProps {
   isCommunityFarm?: boolean
   farmImage?: string
   tokenSymbol?: string
+  startBlock?: number
 }
 
 const Wrapper = styled(Flex)`
@@ -28,8 +31,10 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({
   isCommunityFarm,
   farmImage,
   tokenSymbol,
+  startBlock,
 }) => {
   // const { slug } = useParams<{ slug: string }>()
+  const { t } = useTranslation()
   return (
     <Wrapper justifyContent="space-between" alignItems="center" mb="12px">
       <Image src={`/images/questlog/${farmImage}.svg`} alt={tokenSymbol} width={64} height={64} />
@@ -38,6 +43,7 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({
         <Flex justifyContent="center">
           {isCommunityFarm ? <CommunityTag /> : <CoreTag />}
           <MultiplierTag variant="secondary">{multiplier}</MultiplierTag>
+          {startBlock > 0 && <Tag>{`${t('Starts in')} ~${startBlock} blocks`}</Tag>}
         </Flex>
       </Flex>
     </Wrapper>

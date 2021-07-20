@@ -84,6 +84,7 @@ export interface Guild extends GuildConfig {
   poolWeight?: SerializedBigNumber
   percentLockupBonus?: number
   percentUnlockedBonus?: number
+  baseEmissionRate?: SerializedBigNumber
   userData?: {
     allowance: string
     tokenBalance: string

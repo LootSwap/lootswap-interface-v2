@@ -4,11 +4,12 @@ import { FarmWithStakedValue } from 'views/Guilds/components/FarmCard/FarmCard'
 import { useMatchBreakpoints } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import useDelayedUnmount from 'hooks/useDelayedUnmount'
-import { useGuildUser } from 'state/hooks'
+import { useGuildUser, useBlock } from 'state/hooks'
 
 import Apr, { AprProps } from './Apr'
 import Farm, { FarmProps } from './Farm'
 import Earned, { EarnedProps } from './Earned'
+import StartBlock from './StartBlock'
 import Details from './Details'
 import Multiplier, { MultiplierProps } from './Multiplier'
 import Liquidity, { LiquidityProps } from './Liquidity'
@@ -74,7 +75,7 @@ const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
   const [actionPanelExpanded, setActionPanelExpanded] = useState(hasStakedAmount)
   const shouldRenderChild = useDelayedUnmount(actionPanelExpanded, 300)
   const { t } = useTranslation()
-
+  const { currentBlock } = useBlock()
   const toggleActionPanel = () => {
     setActionPanelExpanded(!actionPanelExpanded)
   }
@@ -100,6 +101,22 @@ const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
             }
 
             switch (key) {
+              case 'earned':
+                return props.details.startBlock && props.details.startBlock > currentBlock ? (
+                  <td key={key}>
+                    <CellInner>
+                      <CellLayout label={t('Starts in')}>
+                        <StartBlock {...props.details} />
+                      </CellLayout>
+                    </CellInner>
+                  </td>
+                ) : (
+                  <CellInner>
+                    <CellLayout label={t('Earned')}>
+                      <Earned {...props.earned} userDataReady={userDataReady} />
+                    </CellLayout>
+                  </CellInner>
+                )
               case 'details':
                 return (
                   <td key={key}>

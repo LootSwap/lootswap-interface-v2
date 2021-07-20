@@ -53,10 +53,11 @@ export const getGuildApr = (
   guildPriceUsd: BigNumber,
   poolLiquidityUsd: BigNumber,
   guildTokenPerBlock: number,
+  baseEmissionRate: BigNumber,
 ): number => {
   const tokenPerBlock = new BigNumber(guildTokenPerBlock)
-  const yearlyCakeRewardAllocation = tokenPerBlock.times(BLOCKS_PER_YEAR).times(poolWeight)
-  const apr = yearlyCakeRewardAllocation.times(guildPriceUsd).div(poolLiquidityUsd).times(100)
+  const yearlyGuildRewardAllocation = tokenPerBlock.times(baseEmissionRate).times(BLOCKS_PER_YEAR).times(poolWeight)
+  const apr = yearlyGuildRewardAllocation.times(guildPriceUsd).div(poolLiquidityUsd).times(100)
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
 
