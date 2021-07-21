@@ -121,14 +121,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account, 
         <Flex justifyContent="space-between" alignItems="center">
           <Text>{t('APR')}:</Text>
           <Text bold style={{ display: 'flex', alignItems: 'center' }}>
-            {farm.apr ? (
-              <>
-                <ApyButton lpLabel={lpLabel} addLiquidityUrl={addLiquidityUrl} cakePrice={cakePrice} apr={farm.apr} />
-                {farmAPR}%
-              </>
-            ) : (
-              <Skeleton height={24} width={80} />
-            )}
+            {farm.apr ? <>{farmAPR}%</> : <Skeleton height={24} width={80} />}
           </Text>
         </Flex>
       )}
