@@ -24,7 +24,7 @@ export const config: GuildConfig = {
   lockupconfig: {
     guildIcon: '/images/tokens/troll.png',
   },
-  tagline: '95% Rewards locked up till 1st April 2022 "National Troll Day".', // use to customize the guild pages tagline
+  tagline: '', // use to customize the guild pages tagline
 }
 
 export default config
