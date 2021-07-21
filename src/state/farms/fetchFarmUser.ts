@@ -72,3 +72,70 @@ export const fetchFarmUserEarnings = async (account: string, farmsToFetch: FarmC
   })
   return parsedEarnings
 }
+
+export const fetchUserInfo = async (account: string, farmsToFetch: FarmConfig[]) => {
+  const calls = farmsToFetch.map((f) => {
+    const masterLooterAddress = getMasterLooterAddress()
+    return {
+      address: masterLooterAddress,
+      name: 'userInfo',
+      params: [f.pid, account],
+    }
+  })
+
+  const userInfo = await multicall(masterLooterABI, calls)
+  const userInfoObject = userInfo.map((user) => {
+    return {
+      blockdelta: user.blockdelta.toNumber(),
+      lastWithdrawBlock: user.lastWithdrawBlock.toNumber(),
+      firstDepositBlock: user.firstDepositBlock.toNumber(),
+      lastDepositBlock: user.lastDepositBlock.toNumber(),
+    }
+  })
+  return userInfoObject
+}
+
+export const fetchBlockDeltaStartStages = async (farmsToFetch: FarmConfig[]) => {
+  const defaultStageIndexes = farmsToFetch.map(() => {
+    return [0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
+      const masterLooterAddress = getMasterLooterAddress()
+      return {
+        address: masterLooterAddress,
+        name: 'blockDeltaStartStage',
+        params: [i],
+      }
+    })
+  })
+  const stageIndexes = defaultStageIndexes.map((contracts) => multicall(masterLooterABI, contracts))
+  return Promise.all(stageIndexes)
+}
+
+export const fetchBlockDeltaEndStages = async (farmsToFetch: FarmConfig[]) => {
+  const defaultEndIndexes = farmsToFetch.map(() => {
+    return [0, 1, 2, 3, 4, 5].map((i) => {
+      const masterLooterAddress = getMasterLooterAddress()
+      return {
+        address: masterLooterAddress,
+        name: 'blockDeltaEndStage',
+        params: [i],
+      }
+    })
+  })
+  const endIndexes = defaultEndIndexes.map((contracts) => multicall(masterLooterABI, contracts))
+  return Promise.all(endIndexes)
+}
+
+export const fetchDevFeeStages = async (farmsToFetch: FarmConfig[]) => {
+  const defaultStageIndexes = farmsToFetch.map(() => {
+    return [0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
+      const masterLooterAddress = getMasterLooterAddress()
+      return {
+        address: masterLooterAddress,
+        name: 'devFeeStage',
+        params: [i],
+      }
+    })
+  })
+  const stageIndexes = defaultStageIndexes.map((contracts) => multicall(masterLooterABI, contracts))
+  return Promise.all(stageIndexes)
+}

@@ -62,7 +62,7 @@ const ModalWithdrawalDetails: React.FC<WithdrawlDetailsProps> = ({
     withdrawalFee = (devFeeStage[4] / 100) * 100
   } else if (currentBlockDelta >= blockDeltaStartStages[5] && currentBlockDelta <= blockDeltaEndStages[4]) {
     // 0.5% fee if a user deposits and withdraws if the user withdraws after 5 days but before 2 weeks.
-    withdrawalFee = (devFeeStage[5] / 100) * 100
+    withdrawalFee = (devFeeStage[5] / 1000) * 100
   } else if (currentBlockDelta >= blockDeltaStartStages[6] && currentBlockDelta <= blockDeltaEndStages[5]) {
     // 0.25% fee if a user deposits and withdraws after 2 weeks.
     withdrawalFee = (devFeeStage[6] / 10000) * 100
@@ -79,7 +79,7 @@ const ModalWithdrawalDetails: React.FC<WithdrawlDetailsProps> = ({
       </StyledModalWithdrawalDetailsNotes>
       <StyledModalWithdrawalDetailsNotes>
         {t('Your current withdrawal fee:')}
-        <Heading as="h1" scale="xxl" color="#fff" mb="24px">{`${withdrawalFee}%`}</Heading>
+        <Heading as="h1" scale="xxl" color="#fff" mb="24px">{`${withdrawalFee ?? '...'}%`}</Heading>
         {t('Your first deposited funds or last withdrew funds at block %block%.', { block: lastActionBlock })}
       </StyledModalWithdrawalDetailsNotes>
     </StyledModalWithdrawalDetails>

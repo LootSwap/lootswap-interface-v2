@@ -2,6 +2,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import farmsConfig from 'config/constants/farms'
 import isArchivedPid from 'utils/farmHelpers'
+import BigNumber from 'bignumber.js'
 import priceHelperLpsConfig from 'config/constants/priceHelperLps'
 import fetchFarms from './fetchFarms'
 import fetchFarmsPrices from './fetchFarmsPrices'
@@ -10,6 +11,10 @@ import {
   fetchFarmUserAllowances,
   fetchFarmUserTokenBalances,
   fetchFarmUserStakedBalances,
+  fetchUserInfo,
+  fetchBlockDeltaStartStages,
+  fetchBlockDeltaEndStages,
+  fetchDevFeeStages,
 } from './fetchFarmUser'
 import { FarmsState, Farm } from '../types'
 
@@ -20,6 +25,13 @@ const noAccountFarmConfig = farmsConfig.map((farm) => ({
     tokenBalance: '0',
     stakedBalance: '0',
     earnings: '0',
+    blockdelta: 0,
+    firstDepositBlock: 0,
+    lastDepositBlock: 0,
+    lastWithdrawBlock: 0,
+    blockDeltaStartStages: [],
+    blockDeltaEndStages: [],
+    devFeeStage: [],
   },
 }))
 
@@ -54,6 +66,13 @@ interface FarmUserDataResponse {
   tokenBalance: string
   stakedBalance: string
   earnings: string
+  blockdelta: number
+  firstDepositBlock: number
+  lastDepositBlock: number
+  lastWithdrawBlock: number
+  blockDeltaStartStages: any
+  blockDeltaEndStages: any
+  devFeeStage: any
 }
 
 export const fetchFarmUserDataAsync = createAsyncThunk<FarmUserDataResponse[], { account: string; pids: number[] }>(
@@ -64,7 +83,12 @@ export const fetchFarmUserDataAsync = createAsyncThunk<FarmUserDataResponse[], {
     const userFarmTokenBalances = await fetchFarmUserTokenBalances(account, farmsToFetch)
     const userStakedBalances = await fetchFarmUserStakedBalances(account, farmsToFetch)
     const userFarmEarnings = await fetchFarmUserEarnings(account, farmsToFetch)
-
+    const userInfo = await fetchUserInfo(account, farmsToFetch)
+    // TODO: (three var below) these are getting called with every pid.
+    // we might need to create another fetchDataAsync call that only needs to call this once per guild contract
+    const blockDeltaStartStages = await fetchBlockDeltaStartStages(farmsToFetch)
+    const blockDeltaEndStages = await fetchBlockDeltaEndStages(farmsToFetch)
+    const devFeeStage = await fetchDevFeeStages(farmsToFetch)
     return userFarmAllowances.map((farmAllowance, index) => {
       return {
         pid: farmsToFetch[index].pid,
@@ -72,6 +96,13 @@ export const fetchFarmUserDataAsync = createAsyncThunk<FarmUserDataResponse[], {
         tokenBalance: userFarmTokenBalances[index],
         stakedBalance: userStakedBalances[index],
         earnings: userFarmEarnings[index],
+        blockdelta: userInfo[index].blockdelta,
+        firstDepositBlock: userInfo[index].firstDepositBlock,
+        lastDepositBlock: userInfo[index].lastDepositBlock,
+        lastWithdrawBlock: userInfo[index].lastWithdrawBlock,
+        blockDeltaStartStages: blockDeltaStartStages[index].map((bdss) => new BigNumber(bdss).toNumber()),
+        blockDeltaEndStages: blockDeltaEndStages[index].map((bdes) => new BigNumber(bdes).toNumber()),
+        devFeeStage: devFeeStage[index].map((dfs) => new BigNumber(dfs).toNumber()),
       }
     })
   },
