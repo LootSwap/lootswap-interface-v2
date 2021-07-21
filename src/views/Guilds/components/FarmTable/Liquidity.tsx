@@ -30,11 +30,10 @@ const Container = styled.div`
 `
 
 const Liquidity: React.FunctionComponent<LiquidityProps> = ({ liquidity }) => {
-  const displayLiquidity = liquidity ? (
-    `$${Number(liquidity).toLocaleString(undefined, { maximumFractionDigits: 5 })}`
-  ) : (
-    <Skeleton width={60} />
-  )
+  const liq = liquidity.gt(0)
+    ? Number(liquidity).toLocaleString(undefined, { maximumFractionDigits: 2 })
+    : Number(liquidity).toLocaleString(undefined, { maximumFractionDigits: 5 })
+  const displayLiquidity = liquidity ? `$${liq}` : <Skeleton width={60} />
   const { t } = useTranslation()
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
     t('Total value of the funds in this quests liquidity pool'),

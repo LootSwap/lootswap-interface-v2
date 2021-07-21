@@ -96,9 +96,11 @@ const FarmCard: React.FC<FarmCardProps> = ({
   // We assume the token name is coin pair + lp e.g. CAKE-BNB LP, LINK-BNB LP,
   // NAR-CAKE LP. The images should be cake-bnb.svg, link-bnb.svg, nar-cake.svg
   const farmImage = farm.lpSymbol.split(' ')[0].toLocaleLowerCase()
-  const totalValueFormatted = farm.liquidity
-    ? `$${farm.liquidity.toNumber().toLocaleString(undefined, { maximumFractionDigits: 2 })}`
-    : ''
+  const liq =
+    Number(farm.liquidity) > 0
+      ? Number(farm.liquidity).toLocaleString(undefined, { maximumFractionDigits: 2 })
+      : Number(farm.liquidity).toLocaleString(undefined, { maximumFractionDigits: 5 })
+  const totalValueFormatted = farm.liquidity ? `$${liq}` : ''
 
   const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANCAKE', '')
   const earnLabel = farm.dual ? farm.dual.earnLabel : guildSlug.toUpperCase()
