@@ -83,7 +83,7 @@ export const DesktopColumnSchema: ColumnsDefTypes[] = [
     id: 5,
     name: 'multiplier',
     sortable: true,
-    label: 'Multiplier',
+    label: 'Level',
   },
   {
     id: 6,

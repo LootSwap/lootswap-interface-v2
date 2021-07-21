@@ -6,13 +6,16 @@ import Page from 'components/layout/Page'
 import FarmStakingCard from 'views/Home/components/FarmStakingCard'
 import CakeStats from 'views/Home/components/CakeStats'
 
+const CardImage = styled.img`
+  margin-bottom: 16px;
+  padding: 0px;
+`
+
 const Hero = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: auto;
-  margin-bottom: 32px;
   text-align: center;
 `
 
@@ -49,9 +52,7 @@ const Home: React.FC = () => {
   return (
     <Page>
       <Hero>
-        <Heading as="h1" scale="xl" mb="24px" color="#2271E4">
-          {t('LootSwap')}
-        </Heading>
+        <CardImage src="/images/lootswap.png" alt="LootSwap" width={256} height={128} />
         <Text color="#FFF">{t('AMM and yield farm on Harmony Protocol.')}</Text>
       </Hero>
       <div>
