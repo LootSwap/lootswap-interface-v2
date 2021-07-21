@@ -198,7 +198,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
       <ValueContainer>
         <ValueWrapper>
           <Text>{t('APR')}</Text>
-          <Apr {...apr} />
+          <Apr {...apr} hideButton />
         </ValueWrapper>
         <ValueWrapper>
           <Text>{t('Multiplier')}</Text>

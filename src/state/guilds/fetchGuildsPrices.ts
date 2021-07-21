@@ -66,6 +66,7 @@ const getGuildQuoteTokenPrice = (
   onePriceBusd: BigNumber,
   ethPriceBusd: BigNumber,
   btcPriceBusd: BigNumber,
+  oneRenDogePriceBusd: BigNumber,
 ): BigNumber => {
   if (
     // Calculating rate for stable coins
@@ -78,9 +79,11 @@ const getGuildQuoteTokenPrice = (
     return BIG_ONE
   }
 
-  if (guild.guildSlug === 'gtroll' && quoteTokenFarm.pid === 4) {
-    console.log(quoteTokenFarm)
+  // Calculating rate for 1renDOGE base pools
+  if (guild.quoteToken.symbol === '1renDOGE' || guild.quoteToken.symbol === 'bscDOGE') {
+    return oneRenDogePriceBusd
   }
+
   // Calculating rate for 1ETH base pools
   if (guild.quoteToken.symbol === '1ETH' || guild.quoteToken.symbol === 'bscETH') {
     return ethPriceBusd
@@ -121,11 +124,15 @@ const getGuildQuoteTokenPrice = (
 }
 
 const fetchGuildsPrices = async (guilds) => {
-  // Fetching the prices from our loot farms
+  // Guild Farm Helpers
+  const onerendogeoneFarm = guilds.find((guild: Guild) => guild.helperId === 1)
+
+  // TODO we could put this in the priceGuildHelperLPs and call it from there. Dont know if its worth it if it doesnt optimize calls
+  // Fetching the prices from our Loot farms
   const farms = await fetchFarms(farmsConfig)
 
-  // Utilizing Loot Quests to fetch price rate ie 1 ETH === 29406.3 ONE
-  const lootbusdFarm = farms.find((f: Farm) => f.pid === 9)
+  // - Utilizing Loot Quests to fetch price rate ie 1 ETH === 29406.3 ONE from our Loot farms
+  const lootbusdFarm = farms.find((farm: Farm) => farm.pid === 9)
   const onebusdFarm = farms.find((farm: Farm) => farm.pid === 1)
   const ethoneFarm = farms.find((farm: Farm) => farm.pid === 2)
   const btconeFarm = farms.find((farm: Farm) => farm.pid === 4)
@@ -141,6 +148,10 @@ const fetchGuildsPrices = async (guilds) => {
   const lootPriceBusd = lootbusdFarm?.tokenPriceVsQuote
     ? new BigNumber(lootbusdFarm.tokenPriceVsQuote).div(BIG_ONE)
     : BIG_ZERO
+
+  const oneRenDogePriceBusd = onerendogeoneFarm?.tokenPriceVsQuote
+    ? new BigNumber(onerendogeoneFarm.tokenPriceVsQuote).div(onePriceBusd)
+    : BIG_ZERO
   // --------
 
   const guildsWithPrices = guilds.map((g) => {
@@ -153,6 +164,7 @@ const fetchGuildsPrices = async (guilds) => {
       onePriceBusd,
       ethPriceBusd,
       btcPriceBusd,
+      oneRenDogePriceBusd,
     )
     const token = { ...g.token, busdPrice: baseTokenPrice.toJSON() }
     const quoteToken = { ...g.quoteToken, busdPrice: quoteTokenPrice.toJSON() }

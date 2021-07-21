@@ -39,6 +39,7 @@ export interface GuildConfig {
   guildSlug: string
   startBlock?: number
   lastRewardBlock?: string
+  helperId?: number
   dual?: {
     rewardPerBlock: number
     earnLabel: string

@@ -1,6 +1,6 @@
 // import tokens from './tokens'
 import { FarmConfig } from './types'
-// TODO: might not need
+
 const priceHelperLps: FarmConfig[] = [
   /**
    * These LPs are just used to help with price calculation for MasterChef LPs (farms.ts).

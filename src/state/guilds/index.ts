@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import priceGuildHelperLpsConfig from 'config/constants/priceGuildHelperLps'
 import guildsConfig from 'config/constants/guilds'
 import isArchivedPid from 'utils/guildHelpers'
 import BigNumber from 'bignumber.js'
@@ -45,9 +46,21 @@ export const fetchGuildsPublicDataAsync = createAsyncThunk<Guild[], { pids: numb
     const guildsToFetch = guildsConfig.filter(
       (guildConfig) => pids.includes(guildConfig.pid) && guildConfig.guildSlug === guildSlug,
     )
-    const guilds = await fetchGuilds(guildsToFetch)
+    // Add price helper farms
+    const applyHelperToCurrentGuild = priceGuildHelperLpsConfig.map((helper) => {
+      return { ...helper, guildSlug }
+    })
+    const farmsWithPriceHelpers = guildsToFetch.concat(applyHelperToCurrentGuild)
+    const guilds = await fetchGuilds(farmsWithPriceHelpers)
+
     const guildsWithPrices = await fetchGuildsPrices(guilds)
-    return guildsWithPrices
+
+    // Filter out price helper LP config farms
+    const farmsWithoutHelperLps = guildsWithPrices.filter((guild: Guild) => {
+      return guild.pid || guild.pid === 0
+    })
+
+    return farmsWithoutHelperLps
   },
 )
 

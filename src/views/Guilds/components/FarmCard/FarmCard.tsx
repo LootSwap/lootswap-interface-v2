@@ -97,7 +97,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
   // NAR-CAKE LP. The images should be cake-bnb.svg, link-bnb.svg, nar-cake.svg
   const farmImage = farm.lpSymbol.split(' ')[0].toLocaleLowerCase()
   const liq =
-    Number(farm.liquidity) > 0
+    Math.floor(Number(farm.liquidity)) > 0
       ? Number(farm.liquidity).toLocaleString(undefined, { maximumFractionDigits: 2 })
       : Number(farm.liquidity).toLocaleString(undefined, { maximumFractionDigits: 5 })
   const totalValueFormatted = farm.liquidity ? `$${liq}` : ''
