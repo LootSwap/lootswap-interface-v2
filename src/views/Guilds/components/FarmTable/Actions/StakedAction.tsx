@@ -39,6 +39,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
   token,
   userDataReady,
   guildSlug,
+  userData,
 }) => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
@@ -80,7 +81,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
     <DepositModal max={tokenBalance} onConfirm={handleStake} tokenName={lpSymbol} addLiquidityUrl={addLiquidityUrl} />,
   )
   const [onPresentWithdraw] = useModal(
-    <WithdrawModal max={stakedBalance} onConfirm={handleUnstake} tokenName={lpSymbol} />,
+    <WithdrawModal max={stakedBalance} onConfirm={handleUnstake} tokenName={lpSymbol} userData={userData} />,
   )
   const lpContract = getBep20Contract(lpAddress, web3)
   const dispatch = useAppDispatch()

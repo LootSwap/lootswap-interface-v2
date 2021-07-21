@@ -73,6 +73,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
         pid={pid}
         addLiquidityUrl={addLiquidityUrl}
         guildSlug={guildSlug}
+        {...farm}
       />
     ) : (
       <Button mt="8px" width="100%" disabled={requestedApproval} onClick={handleApprove}>

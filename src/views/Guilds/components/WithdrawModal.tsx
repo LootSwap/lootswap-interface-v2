@@ -3,6 +3,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { Button, Modal } from '@pancakeswap/uikit'
 import ModalActions from 'components/ModalActions'
 import ModalInput from 'components/ModalInput'
+import ModalDetails from 'components/ModalWithdrawalDetails'
 import { useTranslation } from 'contexts/Localization'
 import { getFullDisplayBalance } from 'utils/formatBalance'
 
@@ -11,9 +12,10 @@ interface WithdrawModalProps {
   onConfirm: (amount: string) => void
   onDismiss?: () => void
   tokenName?: string
+  userData?: any
 }
 
-const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max, tokenName = '' }) => {
+const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max, tokenName = '', userData = {} }) => {
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
   const { t } = useTranslation()
@@ -39,6 +41,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
 
   return (
     <Modal title={t('Unstake LP tokens')} onDismiss={onDismiss}>
+      <ModalDetails {...userData} />
       <ModalInput
         onSelectMax={handleSelectMax}
         onChange={handleChange}

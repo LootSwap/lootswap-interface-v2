@@ -111,11 +111,13 @@ const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
                     </CellInner>
                   </td>
                 ) : (
-                  <CellInner>
-                    <CellLayout label={t('Earned')}>
-                      <Earned {...props.earned} userDataReady={userDataReady} />
-                    </CellLayout>
-                  </CellInner>
+                  <td key={key}>
+                    <CellInner>
+                      <CellLayout label={t('Earned')}>
+                        <Earned {...props.earned} userDataReady={userDataReady} />
+                      </CellLayout>
+                    </CellInner>
+                  </td>
                 )
               case 'details':
                 return (
