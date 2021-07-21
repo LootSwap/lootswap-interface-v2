@@ -64,8 +64,11 @@ const getGuildQuoteTokenPrice = (
   quoteTokenFarm: Guild,
   lootPriceBusd: BigNumber,
   onePriceBusd: BigNumber,
+  ethPriceBusd: BigNumber,
+  btcPriceBusd: BigNumber,
 ): BigNumber => {
   if (
+    // Calculating rate for stable coins
     guild.quoteToken.symbol === 'BUSD' ||
     guild.quoteToken.symbol === 'bscBUSD' ||
     guild.quoteToken.symbol === '1USDT' ||
@@ -75,12 +78,20 @@ const getGuildQuoteTokenPrice = (
     return BIG_ONE
   }
 
-  if (
-    guild.quoteToken.symbol === 'wBNB' ||
-    guild.quoteToken.symbol === 'bscBNB' ||
-    guild.quoteToken.symbol === '1ETH' ||
-    guild.quoteToken.symbol === '1WBTC'
-  ) {
+  if (guild.guildSlug === 'gtroll' && quoteTokenFarm.pid === 4) {
+    console.log(quoteTokenFarm)
+  }
+  // Calculating rate for 1ETH base pools
+  if (guild.quoteToken.symbol === '1ETH' || guild.quoteToken.symbol === 'bscETH') {
+    return ethPriceBusd
+  }
+
+  // Calculating rate for 1WBTC base pools
+  if (guild.quoteToken.symbol === '1WBTC' || guild.quoteToken.symbol === 'bscBTCB') {
+    return btcPriceBusd
+  }
+
+  if (guild.quoteToken.symbol === 'wBNB' || guild.quoteToken.symbol === 'bscBNB') {
     // Converts current farm token to ONE then uses the price of BUSD from ONE <> BUSD to find the rate.
     const tokenToOne = quoteTokenFarm.tokenPriceVsQuote
     return new BigNumber(tokenToOne).div(onePriceBusd)
@@ -112,17 +123,37 @@ const getGuildQuoteTokenPrice = (
 const fetchGuildsPrices = async (guilds) => {
   // Fetching the prices from our loot farms
   const farms = await fetchFarms(farmsConfig)
+
+  // Utilizing Loot Quests to fetch price rate ie 1 ETH === 29406.3 ONE
   const lootbusdFarm = farms.find((f: Farm) => f.pid === 9)
   const onebusdFarm = farms.find((farm: Farm) => farm.pid === 1)
+  const ethoneFarm = farms.find((farm: Farm) => farm.pid === 2)
+  const btconeFarm = farms.find((farm: Farm) => farm.pid === 4)
+
+  // Helper Price for quoteTokens
   const onePriceBusd = onebusdFarm?.tokenPriceVsQuote ? BIG_ONE.div(onebusdFarm.tokenPriceVsQuote) : BIG_ZERO
+  const ethPriceBusd = ethoneFarm?.tokenPriceVsQuote
+    ? new BigNumber(ethoneFarm.tokenPriceVsQuote).div(onePriceBusd)
+    : BIG_ZERO
+  const btcPriceBusd = ethoneFarm?.tokenPriceVsQuote
+    ? new BigNumber(btconeFarm.tokenPriceVsQuote).div(onePriceBusd)
+    : BIG_ZERO
   const lootPriceBusd = lootbusdFarm?.tokenPriceVsQuote
     ? new BigNumber(lootbusdFarm.tokenPriceVsQuote).div(BIG_ONE)
     : BIG_ZERO
   // --------
+
   const guildsWithPrices = guilds.map((g) => {
     const quoteTokenFarm = getGuildFromTokenSymbol(guilds, g.quoteToken.symbol)
     const baseTokenPrice = getGuildBaseTokenPrice(g, quoteTokenFarm, lootPriceBusd)
-    const quoteTokenPrice = getGuildQuoteTokenPrice(g, quoteTokenFarm, lootPriceBusd, onePriceBusd)
+    const quoteTokenPrice = getGuildQuoteTokenPrice(
+      g,
+      quoteTokenFarm,
+      lootPriceBusd,
+      onePriceBusd,
+      ethPriceBusd,
+      btcPriceBusd,
+    )
     const token = { ...g.token, busdPrice: baseTokenPrice.toJSON() }
     const quoteToken = { ...g.quoteToken, busdPrice: quoteTokenPrice.toJSON() }
     return { ...g, token, quoteToken }

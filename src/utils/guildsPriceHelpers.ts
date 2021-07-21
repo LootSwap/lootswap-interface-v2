@@ -8,7 +8,18 @@ import { Guild } from 'state/types'
  */
 export const filterGuildsByQuoteToken = (
   guilds: Guild[],
-  preferredQuoteTokens: string[] = ['BUSD', 'bscBUSD', 'wBNB', 'bscBNB', 'WONE', 'LOOT'],
+  preferredQuoteTokens: string[] = [
+    'BUSD',
+    'bscBUSD',
+    'wBNB',
+    'bscBNB',
+    'WONE',
+    'LOOT',
+    '1ETH',
+    '1DAI',
+    '1USDT',
+    '1USDC',
+  ],
 ): Guild => {
   const preferredGuild = guilds.find((guild) => {
     return preferredQuoteTokens.some((quoteToken) => {
