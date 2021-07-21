@@ -472,6 +472,13 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
   // #region html
   return (
     <PageGuildTheme>
+      {guildSettings.sprite !== '' && (
+        <WalkingSprite
+          image={guildSettings.sprite?.image}
+          width={guildSettings.sprite?.width}
+          height={guildSettings.sprite?.height}
+        />
+      )}
       <PageHeader>
         <Heading as="h1" scale="xxl" color="secondary" mb="24px">
           <AnimatedText
@@ -489,15 +496,8 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
       <Page>
         <div>
           <Cards>
-            {guildSettings.sprite !== '' && (
-              <WalkingSprite
-                image={guildSettings.sprite?.image}
-                width={guildSettings.sprite?.width}
-                height={guildSettings.sprite?.height}
-              />
-            )}
             <GuildStat />
-            {guildSettings.hasLockUp && <FarmedStakingCard {...guildSettings} />}
+            <FarmedStakingCard {...guildSettings} />
           </Cards>
         </div>
         <ControlContainer>

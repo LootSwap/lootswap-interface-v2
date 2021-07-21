@@ -41,7 +41,7 @@ const Actions = styled.div`
 `
 
 const FarmedStakingCard = (guildSettings) => {
-  const { symbol, lockupconfig, footerImg, guildSlug } = guildSettings
+  const { symbol, lockupconfig, footerImg, guildSlug, hasLockUp } = guildSettings
   const [pendingTx, setPendingTx] = useState(false)
   const { account } = useWeb3React()
   const { t } = useTranslation()
@@ -83,7 +83,7 @@ const FarmedStakingCard = (guildSettings) => {
           <Label>{t('%sym% in Wallet', { sym: symbol })}:</Label>
           <GuildWalletBalance {...guildSettings} />
         </Block>
-        <GuildLockedBalance {...guildSettings} />
+        {hasLockUp && <GuildLockedBalance {...guildSettings} />}
         <Actions>
           {account ? (
             <Button id="harvest-all" disabled={balancesWithValue.length && true} onClick={harvestAllFarms} width="100%">

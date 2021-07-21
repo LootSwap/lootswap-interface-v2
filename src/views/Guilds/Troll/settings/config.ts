@@ -20,7 +20,7 @@ export const config: GuildConfig = {
     pid: 12, // see src/constants/farms.ts
     useLootFarm: true,
   },
-  hasLockUp: true, // use to show lock and unlock rewards
+  hasLockUp: false, // use to show lock and unlock rewards
   lockupconfig: {
     guildIcon: '/images/tokens/troll.png',
   },

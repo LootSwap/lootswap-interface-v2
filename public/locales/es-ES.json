@@ -598,5 +598,9 @@
   "Stake Liquidity Pool (LP) tokens to earn %sym%.": "Stake Liquidity Pool (LP) tokens to earn %sym%.",
   "Important: Quests utilizes LP withdrawal fees to disincentivize short term farming and selling.": "Important: Quests utilizes LP withdrawal fees to disincentivize short term farming and selling.",
   "Your current withdrawal fee:": "Your current withdrawal fee:",
-  "Your first deposited funds or last withdrew funds at block %block%.": "Your first deposited funds or last withdrew funds at block %block%."
+  "Your first deposited funds or last withdrew funds at block %block%.": "Your first deposited funds or last withdrew funds at block %block%.",
+  "%sym% Questing Rewards": "%sym% Questing Rewards",
+  "%sym% to Harvest": "%sym% to Harvest",
+  "%sym% in Wallet": "%sym% in Wallet",
+  "Collecting %sym%": "Collecting %sym%"
 }

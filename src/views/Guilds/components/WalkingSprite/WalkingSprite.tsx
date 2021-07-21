@@ -23,9 +23,11 @@ const moveSpriteSheet = keyframes`
 const moveSpritePosition = keyframes`
     from {
         transform: translateX(0);
+        opacity:1
     }
     to {
         transform: translateX(1000px);
+        opacity:0
     }
 `
 

@@ -28,6 +28,9 @@ export const config: GuildConfig = {
     height: 250,
     backgroundColor: '#cecdcd',
   },
+  lockupconfig: {
+    guildIcon: '/images/tokens/gg.png',
+  },
 }
 
 export default config
