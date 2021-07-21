@@ -16,7 +16,7 @@ const AprRow: React.FC<AprRowProps> = ({ lootmarket, performanceFee = 0 }) => {
   const { t } = useTranslation()
   const { stakingToken, earningToken, isFinished, apr, earningTokenPrice } = lootmarket
 
-  const tooltipContent = t('This market rewards aren’t compounded automatically, so we show APR')
+  const tooltipContent = t('This market\'s rewards aren’t compounded automatically, so we show APR')
 
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, { placement: 'bottom-start' })
 

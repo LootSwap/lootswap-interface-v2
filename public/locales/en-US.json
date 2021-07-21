@@ -448,7 +448,7 @@
   "Max stake for this pool: %amount% %token%": "Max stake for this pool: %amount% %token%",
   "Maximum total stake: %amount% %token%": "Maximum total stake: %amount% %token%",
   "APY includes compounding, APR doesn’t. This market's LOOT is compounded automatically, so we show APY.": "APY includes compounding, APR doesn’t. This market's LOOT is compounded automatically, so we show APY.",
-  "This market rewards aren’t compounded automatically, so we show APR": "This market rewards aren’t compounded automatically, so we show APR",
+  "This market's rewards aren’t compounded automatically, so we show APR": "This market's rewards aren’t compounded automatically, so we show APR",
   "Auto": "Auto",
   "Manual": "Manual",
   "Earn LOOT, stake LOOT": "Earn LOOT, stake LOOT",

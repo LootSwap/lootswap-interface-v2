@@ -24,7 +24,6 @@ export const DEFAULT_GAS_LIMIT = 2000000000
 export const DEFAULT_GAS_PRICE = 1
 
 export const BASE_HARMONY_SCAN_URL = 'https://explorer.harmony.one'
-export const BASE_BSC_SCAN_URL = 'https://bscscan.com'
 
 // Additional
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'

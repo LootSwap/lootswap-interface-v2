@@ -450,7 +450,7 @@
   "Max stake for this pool: %amount% %token%": "Inversión máxima para este pool: %amount% %token%",
   "Maximum total stake: %amount% %token%": "Inversión total máxima: %amount% %token%",
   "APY includes compounding, APR doesn’t. This market's LOOT is compounded automatically, so we show APY.": "El Porcentaje de rendimiento anual (APY) incluye el cálculo del interés compuesto, pero la APR no. Como a los LOOT de este pool se les calcula el interés compuesto automáticamente, entonces mostramos el APY.",
-  "This market rewards aren’t compounded automatically, so we show APR": "A las recompensas de este pool no se les calcula el interés compuesto automáticamente, así que mostramos el APR",
+  "This market's rewards aren’t compounded automatically, so we show APR": "A las recompensas de este pool no se les calcula el interés compuesto automáticamente, así que mostramos el APR",
   "Auto": "Automático",
   "Manual": "Manual",
   "Earn LOOT, stake LOOT": "Gana LOOT, invierte en LOOT",

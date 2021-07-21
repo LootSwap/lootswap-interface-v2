@@ -80,14 +80,14 @@ const DropDownList = styled.ul`
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  z-index: ${({ theme }) => theme.zIndices.dropdown};
+z-index: ${({ theme }) => theme.zIndices.dropdown};
 `
 
 const ListItem = styled.li`
   list-style: none;
   padding: 8px 16px;
   &:hover {
-    background: ${({ theme }) => theme.colors.inputSecondary};
+    background: ${({ theme }) => theme.colors.secondary};
   }
 `
 
