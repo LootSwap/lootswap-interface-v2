@@ -21,6 +21,9 @@ export const config: GuildConfig = {
     useLootFarm: true,
   },
   hasLockUp: true, // use to show lock and unlock rewards
+  lockupconfig: {
+    guildIcon: '/images/tokens/troll.png',
+  },
   tagline: '95% Rewards locked up till 1st April 2022 "National Troll Day".', // use to customize the guild pages tagline
 }
 

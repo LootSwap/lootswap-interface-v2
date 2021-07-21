@@ -26,6 +26,10 @@ export type LootFarms = {
   useLootFarm?: boolean
 }
 
+export type LockUp = {
+  guildIcon?: string
+}
+
 export type GuildConfig = {
   numberOfFarmsVisible: number
   symbol: string
@@ -38,5 +42,6 @@ export type GuildConfig = {
   loading?: Image
   lootFarmOverride?: LootFarms
   hasLockUp?: boolean
+  lockupconfig?: LockUp
   tagline?: string
 }

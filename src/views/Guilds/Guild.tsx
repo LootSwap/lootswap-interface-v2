@@ -29,6 +29,7 @@ import ToggleView from './components/ToggleView/ToggleView'
 import { DesktopColumnSchema, ViewMode } from './components/types'
 import useGuildSettings from './hooks/useGuildSettings'
 import WalkingSprite from './components/WalkingSprite/WalkingSprite'
+import FarmedStakingCard from './components/FarmStakingCard'
 
 interface IGuildPage {
   guildSlug: string
@@ -496,6 +497,7 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
               />
             )}
             <GuildStat />
+            {guildSettings.hasLockUp && <FarmedStakingCard {...guildSettings} />}
           </Cards>
         </div>
         <ControlContainer>
