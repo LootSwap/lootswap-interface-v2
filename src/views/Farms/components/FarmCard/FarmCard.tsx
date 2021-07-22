@@ -106,7 +106,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account, 
   // const lpAddress = farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]
   const isPromotedFarm = farm.token.symbol === 'LOOT'
   // eslint-disable-next-line
-  const lootPricesBUSD = farm.liquidity.times(cakePrice)
+  const lootPricesBUSD = Number(farm.liquidity) * Number(cakePrice)
   return (
     <FCard isPromotedFarm={isPromotedFarm}>
       {isPromotedFarm && <StyledCardAccent />}
