@@ -3,10 +3,10 @@ import { darkTheme, lightTheme } from './theme'
 
 export const config: GuildConfig = {
   numberOfFarmsVisible: 12,
-  symbol: 'GTROLL', // use to label symbols dynamically
+  symbol: 'TROLL', // use to label symbols dynamically
   darkTheme,
   lightTheme,
-  guildSlug: 'gtroll',
+  guildSlug: 'troll',
   guildTokenPerBlock: 1, // use to calculate apr
   footerImg: {
     // shown on the bottom of the guilds quest

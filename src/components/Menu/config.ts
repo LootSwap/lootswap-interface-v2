@@ -45,10 +45,9 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
       },
       {
         label: t('TROLL'),
-        href: '/guilds/gtroll',
+        href: '/guilds/troll',
       },
     ],
-    calloutClass: 'rainbow',
   },
   {
     label: t('Analytics'),

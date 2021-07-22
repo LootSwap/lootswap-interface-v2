@@ -5,7 +5,7 @@ const useGuildSettings = (slug: string) => {
   switch (slug) {
     case 'gg':
       return ggSettings
-    case 'gtroll':
+    case 'troll':
       return trollSettings
     default:
       return null // TODO create a default for guilds theme
