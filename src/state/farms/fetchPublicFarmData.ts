@@ -20,6 +20,7 @@ type PublicFarmData = {
   multiplier: string
   poolRewardsPerBlock: SerializedBigNumber
   baseEmissionRate: SerializedBigNumber
+  userDepositFee: SerializedBigNumber
 }
 
 const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
@@ -79,7 +80,7 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
   const lpTotalInQuoteToken = quoteTokenAmountMc.times(new BigNumber(2))
 
   // Only make masterchef calls if farm has pid
-  const [info, totalAllocPoint, percentLockbonus, poolRewardsPerBlock, baseEmissionRate] =
+  const [info, totalAllocPoint, percentLockbonus, poolRewardsPerBlock, baseEmissionRate, userDepFee] =
     pid || pid === 0
       ? await multicall(masterLooterABI, [
           {
@@ -105,6 +106,10 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
             name: 'getNewRewardPerBlock',
             params: [0], // poolRewardsPerBlock indexes have to be +1'd to get the actual specific pool data
           },
+          {
+            address: getMasterLooterAddress(),
+            name: 'userDepFee',
+          },
         ])
       : [null, null]
 
@@ -114,6 +119,7 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
   const percentUnlockedBonus = 1 - percentLockupBonus
   const rewardsPerBlock = new BigNumber(poolRewardsPerBlock).div(BIG_TEN.pow(quoteTokenDecimals)).toJSON()
   const emissionRate = new BigNumber(baseEmissionRate).div(BIG_TEN.pow(quoteTokenDecimals)).toJSON()
+  const userDepositFee = userDepFee ? new BigNumber(userDepFee) : BIG_ZERO
   return {
     tokenAmountMc: tokenAmountMc.toJSON(),
     quoteTokenAmountMc: quoteTokenAmountMc.toJSON(),
@@ -128,6 +134,7 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
     multiplier: `${allocPoint.div(BIG_TEN.pow(quoteTokenDecimals)).toString()}X`,
     poolRewardsPerBlock: rewardsPerBlock,
     baseEmissionRate: emissionRate,
+    userDepositFee: userDepositFee.toJSON(),
   }
 }
 

@@ -609,5 +609,6 @@
   "%sym% Questing Rewards": "%sym% Questing Rewards",
   "%sym% to Harvest": "%sym% to Harvest",
   "%sym% in Wallet": "%sym% in Wallet",
-  "Collecting %sym%": "Collecting %sym%"
+  "Collecting %sym%": "Collecting %sym%",
+  "Deposit fee is:": "Deposit fee is:"
 }

@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useMemo, useState } from 'react'
+import styled from 'styled-components'
 import { Button, Modal, LinkExternal } from '@pancakeswap/uikit'
 import ModalActions from 'components/ModalActions'
 import ModalInput from 'components/ModalInput'
@@ -12,9 +13,21 @@ interface DepositModalProps {
   onDismiss?: () => void
   tokenName?: string
   addLiquidityUrl?: string
+  userDepositFee?: string
 }
 
-const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, tokenName = '', addLiquidityUrl }) => {
+const StyledDepositFee = styled.div`
+  padding-bottom: 5px;
+`
+
+const DepositModal: React.FC<DepositModalProps> = ({
+  max,
+  onConfirm,
+  onDismiss,
+  tokenName = '',
+  addLiquidityUrl,
+  userDepositFee,
+}) => {
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
   const { t } = useTranslation()
@@ -40,6 +53,7 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
 
   return (
     <Modal title={t('Stake LP tokens')} onDismiss={onDismiss}>
+      <StyledDepositFee>{`${t('Deposit fee is:')} ${Number(userDepositFee) / 10000}%`}</StyledDepositFee>
       <ModalInput
         value={val}
         onSelectMax={handleSelectMax}

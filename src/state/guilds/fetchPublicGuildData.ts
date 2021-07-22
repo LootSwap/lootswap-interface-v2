@@ -21,6 +21,7 @@ type PublicGuildData = {
   poolRewardsPerBlock: SerializedBigNumber
   baseEmissionRate: SerializedBigNumber
   lastRewardBlock: SerializedBigNumber
+  userDepositFee: SerializedBigNumber
 }
 
 const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
@@ -80,7 +81,7 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
   const lpTotalInQuoteToken = quoteTokenAmountMc.times(new BigNumber(2))
 
   // Only make masterchef calls if guild has pid
-  const [info, totalAllocPoint, percentLockbonus, poolRewardsPerBlock, baseEmissionRate] =
+  const [info, totalAllocPoint, percentLockbonus, poolRewardsPerBlock, baseEmissionRate, userDepFee] =
     pid || pid === 0
       ? await multicall(masterLooterABI, [
           {
@@ -106,6 +107,10 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
             name: 'getNewRewardPerBlock',
             params: [0], // baseEmission rate
           },
+          {
+            address: getGuildsMasterLooterAddress(guildSlug),
+            name: 'userDepFee',
+          },
         ])
       : [null, null]
 
@@ -116,6 +121,7 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
   const percentUnlockedBonus = 1 - percentLockupBonus
   const rewardsPerBlock = new BigNumber(poolRewardsPerBlock).div(BIG_TEN.pow(18)).toJSON()
   const emissionRate = new BigNumber(baseEmissionRate).div(BIG_TEN.pow(18)).toJSON()
+  const userDepositFee = userDepFee ? new BigNumber(userDepFee) : BIG_ZERO
 
   return {
     tokenAmountMc: tokenAmountMc.toJSON(),
@@ -132,6 +138,7 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
     poolRewardsPerBlock: rewardsPerBlock,
     baseEmissionRate: emissionRate,
     lastRewardBlock: lastRewardBlock.toJSON(),
+    userDepositFee: userDepositFee.toJSON(),
   }
 }
 

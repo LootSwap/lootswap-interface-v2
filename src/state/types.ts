@@ -28,6 +28,7 @@ export interface Farm extends FarmConfig {
   tokenPriceVsQuote?: SerializedBigNumber
   poolWeight?: SerializedBigNumber
   baseEmissionRate?: SerializedBigNumber
+  userDepositFee?: SerializedBigNumber
   userData?: {
     allowance: string
     tokenBalance: string
@@ -85,6 +86,7 @@ export interface Guild extends GuildConfig {
   percentLockupBonus?: number
   percentUnlockedBonus?: number
   baseEmissionRate?: SerializedBigNumber
+  userDepositFee?: SerializedBigNumber
   userData?: {
     allowance: string
     tokenBalance: string
