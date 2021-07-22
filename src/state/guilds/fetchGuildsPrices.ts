@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import { BIG_ONE, BIG_ZERO } from 'utils/bigNumber'
+import { BIG_ONE, BIG_ZERO, BIG_TEN } from 'utils/bigNumber'
 import { filterGuildsByQuoteToken } from 'utils/guildsPriceHelpers'
 import { Guild, Farm } from 'state/types'
 import fetchFarms from 'state/farms/fetchFarms'
@@ -150,7 +150,7 @@ const fetchGuildsPrices = async (guilds) => {
     : BIG_ZERO
 
   const oneRenDogePriceBusd = onerendogeoneFarm?.tokenPriceVsQuote
-    ? new BigNumber(onerendogeoneFarm.tokenPriceVsQuote).div(onePriceBusd)
+    ? new BigNumber(onerendogeoneFarm.tokenPriceVsQuote).div(onePriceBusd).times(BIG_TEN)
     : BIG_ZERO
   // --------
 
