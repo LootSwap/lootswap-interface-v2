@@ -74,7 +74,8 @@ const getGuildQuoteTokenPrice = (
     guild.quoteToken.symbol === 'bscBUSD' ||
     guild.quoteToken.symbol === '1USDT' ||
     guild.quoteToken.symbol === '1USDC' ||
-    guild.quoteToken.symbol === '1DAI'
+    guild.quoteToken.symbol === '1DAI' ||
+    guild.quoteToken.symbol === 'bscUSDC'
   ) {
     return BIG_ONE
   }
@@ -126,7 +127,6 @@ const getGuildQuoteTokenPrice = (
 const fetchGuildsPrices = async (guilds) => {
   // Guild Farm Helpers
   const onerendogeoneFarm = guilds.find((guild: Guild) => guild.helperId === 1)
-
   // TODO we could put this in the priceGuildHelperLPs and call it from there. Dont know if its worth it if it doesnt optimize calls
   // Fetching the prices from our Loot farms
   const farms = await fetchFarms(farmsConfig)

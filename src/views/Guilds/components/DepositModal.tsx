@@ -17,7 +17,13 @@ interface DepositModalProps {
 }
 
 const StyledDepositFee = styled.div`
-  padding-bottom: 5px;
+  align-items: center;
+  background-color: rgb(0, 174, 233);
+  margin: 0;
+  padding: ${(props) => props.theme.spacing[4]}px 0;
+  margin-bottom: 15px;
+  color: #fff;
+  text-align: center;
 `
 
 const DepositModal: React.FC<DepositModalProps> = ({
@@ -53,7 +59,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
 
   return (
     <Modal title={t('Stake LP tokens')} onDismiss={onDismiss}>
-      <StyledDepositFee>{`${t('Deposit fee is:')} ${Number(userDepositFee) / 10000}%`}</StyledDepositFee>
+      <StyledDepositFee>{`${t('Deposit fee is:')} ${Number(userDepositFee) / 100}%`}</StyledDepositFee>
       <ModalInput
         value={val}
         onSelectMax={handleSelectMax}
