@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import { BLOCKS_PER_YEAR, LOOT_PER_BLOCK } from 'config'
+import { BLOCKS_PER_YEAR } from 'config'
 
 /**
  * Get farm APR value in %
@@ -15,7 +15,7 @@ export const getFarmApr = (
   baseEmissionRate: BigNumber,
 ): number => {
   // 1 * baseEmissionRate * BLOCKS_PER_YEAR * poolWeight * cakePriceUsd / poolLiquidityUsd * 100
-  const yearlyLootRewardAllocation = LOOT_PER_BLOCK.times(baseEmissionRate).times(BLOCKS_PER_YEAR).times(poolWeight)
+  const yearlyLootRewardAllocation = baseEmissionRate.times(BLOCKS_PER_YEAR).times(poolWeight)
   const apr = yearlyLootRewardAllocation.times(cakePriceUsd).div(poolLiquidityUsd).times(100)
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
@@ -53,10 +53,12 @@ export const getGuildApr = (
   guildPriceUsd: BigNumber,
   poolLiquidityUsd: BigNumber,
   guildTokenPerBlock: number,
+  baseEmissionRate: BigNumber,
 ): number => {
+  // eslint-disable-next-line
   const tokenPerBlock = new BigNumber(guildTokenPerBlock)
-  const yearlyCakeRewardAllocation = tokenPerBlock.times(BLOCKS_PER_YEAR).times(poolWeight)
-  const apr = yearlyCakeRewardAllocation.times(guildPriceUsd).div(poolLiquidityUsd).times(100)
+  const yearlyGuildRewardAllocation = baseEmissionRate.times(BLOCKS_PER_YEAR).times(poolWeight)
+  const apr = yearlyGuildRewardAllocation.times(guildPriceUsd).div(poolLiquidityUsd).times(100)
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
 

@@ -37,6 +37,9 @@ export interface GuildConfig {
   multiplier?: string
   isCommunity?: boolean
   guildSlug: string
+  startBlock?: number
+  lastRewardBlock?: string
+  helperId?: number
   dual?: {
     rewardPerBlock: number
     earnLabel: string

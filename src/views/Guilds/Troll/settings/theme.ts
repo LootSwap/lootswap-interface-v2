@@ -1,9 +1,15 @@
-import { baseColors } from './colors'
-import { card } from './card'
+import { darkTheme as darkColor, lightTheme as lightColor } from './colors'
+import { darkTheme as darkCard, lightTheme as lightCard } from './card'
+import { darkTheme as darkShadows, lightTheme as lightShadows } from './shadows'
 
-export const guildTheme = {
-  colors: baseColors,
-  card,
+export const darkTheme = {
+  colors: darkColor,
+  card: darkCard,
+  shadows: darkShadows,
 }
 
-export default guildTheme
+export const lightTheme = {
+  colors: lightColor,
+  card: lightCard,
+  shadows: lightShadows,
+}

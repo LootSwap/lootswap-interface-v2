@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useFarmUser } from 'state/hooks'
+import { useGuildUser } from 'state/hooks'
 import { useTranslation } from 'contexts/Localization'
 import { Text, Image } from '@pancakeswap/uikit'
 import { getBalanceNumber } from 'utils/formatBalance'
@@ -10,6 +10,7 @@ export interface FarmProps {
   label: string
   pid: number
   image: string
+  guildSlug: string
 }
 
 const IconImage = styled(Image)`
@@ -32,8 +33,8 @@ const Container = styled.div`
   }
 `
 
-const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid }) => {
-  const { stakedBalance } = useFarmUser(pid)
+const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid, guildSlug }) => {
+  const { stakedBalance } = useGuildUser(pid, guildSlug)
   const { t } = useTranslation()
   const rawStakedBalance = getBalanceNumber(stakedBalance)
 

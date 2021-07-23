@@ -21,13 +21,27 @@ export type Sprite = {
   height?: number
 }
 
+export type LootFarms = {
+  pid?: number
+  useLootFarm?: boolean
+}
+
+export type LockUp = {
+  guildIcon?: string
+}
+
 export type GuildConfig = {
   numberOfFarmsVisible: number
   symbol: string
-  guildTheme: any
+  darkTheme: any
+  lightTheme: any
   guildSlug: string
   guildTokenPerBlock: number
   footerImg: Image
   sprite?: Sprite
   loading?: Image
+  lootFarmOverride?: LootFarms
+  hasLockUp?: boolean
+  lockupconfig?: LockUp
+  tagline?: string
 }

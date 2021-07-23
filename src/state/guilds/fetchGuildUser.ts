@@ -16,6 +16,7 @@ export const fetchGuildUserAllowances = async (account: string, guildsToFetch: G
   const parsedLpAllowances = rawLpAllowances.map((lpBalance) => {
     return new BigNumber(lpBalance).toJSON()
   })
+
   return parsedLpAllowances
 }
 
@@ -68,4 +69,71 @@ export const fetchGuildUserEarnings = async (account: string, guildsToFetch: Gui
     return new BigNumber(earnings).toJSON()
   })
   return parsedEarnings
+}
+
+export const fetchGuildUserInfo = async (account: string, guildsToFetch: GuildConfig[]) => {
+  const calls = guildsToFetch.map((guild) => {
+    const guildContractAddress = getGuildsMasterLooterAddress(guild.guildSlug)
+    return {
+      address: guildContractAddress,
+      name: 'userInfo',
+      params: [guild.pid, account],
+    }
+  })
+
+  const userInfo = await multicall(masterLooterABI, calls)
+  const userInfoObject = userInfo.map((user) => {
+    return {
+      blockdelta: user.blockdelta.toNumber(),
+      lastWithdrawBlock: user.lastWithdrawBlock.toNumber(),
+      firstDepositBlock: user.firstDepositBlock.toNumber(),
+      lastDepositBlock: user.lastDepositBlock.toNumber(),
+    }
+  })
+  return userInfoObject
+}
+
+export const fetchBlockDeltaStartStages = async (guildsToFetch: GuildConfig[]) => {
+  const defaultStageIndexes = guildsToFetch.map((guild) => {
+    return [0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
+      const guildContractAddress = getGuildsMasterLooterAddress(guild.guildSlug)
+      return {
+        address: guildContractAddress,
+        name: 'blockDeltaStartStage',
+        params: [i],
+      }
+    })
+  })
+  const stageIndexes = defaultStageIndexes.map((contracts) => multicall(masterLooterABI, contracts))
+  return Promise.all(stageIndexes)
+}
+
+export const fetchBlockDeltaEndStages = async (guildsToFetch: GuildConfig[]) => {
+  const defaultEndIndexes = guildsToFetch.map((guild) => {
+    return [0, 1, 2, 3, 4, 5].map((i) => {
+      const guildContractAddress = getGuildsMasterLooterAddress(guild.guildSlug)
+      return {
+        address: guildContractAddress,
+        name: 'blockDeltaEndStage',
+        params: [i],
+      }
+    })
+  })
+  const endIndexes = defaultEndIndexes.map((contracts) => multicall(masterLooterABI, contracts))
+  return Promise.all(endIndexes)
+}
+
+export const fetchDevFeeStages = async (guildsToFetch: GuildConfig[]) => {
+  const defaultStageIndexes = guildsToFetch.map((guild) => {
+    return [0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
+      const guildContractAddress = getGuildsMasterLooterAddress(guild.guildSlug)
+      return {
+        address: guildContractAddress,
+        name: 'devFeeStage',
+        params: [i],
+      }
+    })
+  })
+  const stageIndexes = defaultStageIndexes.map((contracts) => multicall(masterLooterABI, contracts))
+  return Promise.all(stageIndexes)
 }

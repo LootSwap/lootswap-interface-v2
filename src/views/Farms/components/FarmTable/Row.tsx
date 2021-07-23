@@ -115,7 +115,7 @@ const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
                   <td key={key}>
                     <CellInner>
                       <CellLayout label={t('APR')}>
-                        <Apr {...props.apr} hideButton={isMobile} />
+                        <Apr {...props.apr} hideButton />
                       </CellLayout>
                     </CellInner>
                   </td>

@@ -1,12 +1,13 @@
 import { GuildConfig } from '../../types'
-import { guildTheme } from './theme'
+import { darkTheme, lightTheme } from './theme'
 import spriteImg from '../images/gg-sprite.png'
 import loading from '../images/old-man.gif'
 
 export const config: GuildConfig = {
   numberOfFarmsVisible: 12,
   symbol: 'GG',
-  guildTheme,
+  darkTheme,
+  lightTheme,
   guildSlug: 'gg',
   guildTokenPerBlock: 0.159817361111111,
   footerImg: {
@@ -26,6 +27,9 @@ export const config: GuildConfig = {
     width: 250,
     height: 250,
     backgroundColor: '#cecdcd',
+  },
+  lockupconfig: {
+    guildIcon: '/images/tokens/gg.png',
   },
 }
 

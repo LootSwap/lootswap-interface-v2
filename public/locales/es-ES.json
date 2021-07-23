@@ -589,5 +589,19 @@
   "Locked balance - Your locked balance will remain locked until 00:00:00 December 25th, 2021 (UTC). Your locked tokens will thereafter gradually unlock until December 25th, 2022." : "Locked balance - Your locked balance will remain locked until 00:00:00 December 25th, 2021 (UTC). Your locked tokens will thereafter gradually unlock until December 25th, 2022.",
   "Locked Balance": "Locked Balance",
   "Includes 95% of locked rewards and total burn.": "Includes 95% of locked rewards and total burn.",
-  "Includes Total Supply minus Total Burned.": "Includes Total Supply minus Total Burned."
+  "Includes Total Supply minus Total Burned.": "Includes Total Supply minus Total Burned.",
+  "TROLL": "TROLL",
+  "GG": "GG",
+  "Unlocked": "Unlocked",
+  "Amount of your earned total that is currently locked.": "Amount of your earned total that is currently locked.",
+  "Amount of your earned total that is currently available.": "Amount of your earned total that is currently available.",
+  "Stake Liquidity Pool (LP) tokens to earn %sym%.": "Stake Liquidity Pool (LP) tokens to earn %sym%.",
+  "Important: Quests utilizes LP withdrawal fees to disincentivize short term farming and selling.": "Important: Quests utilizes LP withdrawal fees to disincentivize short term farming and selling.",
+  "Your current withdrawal fee:": "Your current withdrawal fee:",
+  "Your first deposited funds or last withdrew funds at block %block%.": "Your first deposited funds or last withdrew funds at block %block%.",
+  "%sym% Questing Rewards": "%sym% Questing Rewards",
+  "%sym% to Harvest": "%sym% to Harvest",
+  "%sym% in Wallet": "%sym% in Wallet",
+  "Collecting %sym%": "Collecting %sym%",
+  "Deposit fee is:": "Deposit fee is:"
 }

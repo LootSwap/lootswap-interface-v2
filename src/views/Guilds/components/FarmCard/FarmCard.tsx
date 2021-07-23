@@ -3,8 +3,10 @@ import BigNumber from 'bignumber.js'
 import styled, { keyframes } from 'styled-components'
 import { Flex, Text, Skeleton } from '@pancakeswap/uikit'
 import { Guild } from 'state/types'
+import { useBlock } from 'state/hooks'
 import { provider as ProviderType } from 'web3-core'
 import { getHarmonyScanAddressUrl } from 'utils/harmonyscan'
+import { getBalanceNumber } from 'utils/formatBalance'
 import { useTranslation } from 'contexts/Localization'
 import ExpandableSectionButton from 'components/ExpandableSectionButton'
 import { BASE_ADD_LIQUIDITY_URL } from 'config'
@@ -12,7 +14,6 @@ import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
 import DetailsSection from './DetailsSection'
 import CardHeading from './CardHeading'
 import CardActionsContainer from './CardActionsContainer'
-import ApyButton from './ApyButton'
 
 export interface FarmWithStakedValue extends Guild {
   apr?: number
@@ -75,23 +76,34 @@ interface FarmCardProps {
   guildTokenPrice?: BigNumber
   provider?: ProviderType
   account?: string
+  locked?: number
+  unlocked?: number
+  guildSlug?: string
 }
 
-const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, guildTokenPrice, account }) => {
+const FarmCard: React.FC<FarmCardProps> = ({
+  farm,
+  removed,
+  guildTokenPrice,
+  account,
+  locked,
+  unlocked,
+  guildSlug,
+}) => {
   const { t } = useTranslation()
-
+  const { currentBlock } = useBlock()
   const [showExpandableSection, setShowExpandableSection] = useState(false)
-
   // We assume the token name is coin pair + lp e.g. CAKE-BNB LP, LINK-BNB LP,
   // NAR-CAKE LP. The images should be cake-bnb.svg, link-bnb.svg, nar-cake.svg
   const farmImage = farm.lpSymbol.split(' ')[0].toLocaleLowerCase()
-  const totalValueFormatted =
-    farm.liquidity && farm.liquidity.gt(0)
-      ? `$${farm.liquidity.toNumber().toLocaleString(undefined, { maximumFractionDigits: 0 })}`
-      : ''
+  const liq =
+    Math.floor(Number(farm.liquidity)) > 0
+      ? Number(farm.liquidity).toLocaleString(undefined, { maximumFractionDigits: 2 })
+      : Number(farm.liquidity).toLocaleString(undefined, { maximumFractionDigits: 5 })
+  const totalValueFormatted = farm.liquidity ? `$${liq}` : ''
 
   const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANCAKE', '')
-  const earnLabel = farm.dual ? farm.dual.earnLabel : 'LOOT'
+  const earnLabel = farm.dual ? farm.dual.earnLabel : guildSlug.toUpperCase()
 
   const farmAPR = farm.apr && farm.apr.toLocaleString('en-US', { maximumFractionDigits: 2 })
 
@@ -100,7 +112,16 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, guildTokenPrice, acc
     tokenAddress: farm.token.address,
   })
   const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
-  const isPromotedFarm = farm.token.symbol === 'LOOT'
+  const isPromotedFarm = farm.token.symbol === guildSlug.toUpperCase()
+  // eslint-disable-next-line
+  const guildToUSDPrice = getBalanceNumber(new BigNumber(farm.userData.earnings).times(guildTokenPrice))
+
+  // Calculating when questing starts
+  const startBlock = farm.startBlock ?? 0
+  const blocksUntilStart = Math.max(startBlock - currentBlock, 0)
+  const blocksRemaining = Math.max(currentBlock - Number(farm.lastRewardBlock), 0)
+  const hasPoolStarted = blocksUntilStart === 0 && blocksRemaining > 0
+  const blocksToDisplay = hasPoolStarted ? 0 : blocksUntilStart
 
   return (
     <FCard isPromotedFarm={isPromotedFarm}>
@@ -111,30 +132,21 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, guildTokenPrice, acc
         isCommunityFarm={farm.isCommunity}
         farmImage={farmImage}
         tokenSymbol={farm.token.symbol}
+        startBlock={blocksToDisplay}
       />
       {!removed && (
         <Flex justifyContent="space-between" alignItems="center">
           <Text>{t('APR')}:</Text>
           <Text bold style={{ display: 'flex', alignItems: 'center' }}>
-            {farm.apr ? (
-              <>
-                <ApyButton
-                  lpLabel={lpLabel}
-                  addLiquidityUrl={addLiquidityUrl}
-                  guildTokenPrice={guildTokenPrice}
-                  apr={farm.apr}
-                />
-                {farmAPR}%
-              </>
-            ) : (
-              <Skeleton height={24} width={80} />
-            )}
+            {farm.apr ? <>{farmAPR}%</> : <Skeleton height={24} width={80} />}
           </Text>
         </Flex>
       )}
       <Flex justifyContent="space-between">
         <Text>{t('Earn')}:</Text>
-        <Text bold>{earnLabel}</Text>
+        <Text bold>{`${
+          farm.userData ? getBalanceNumber(new BigNumber(farm.userData.earnings)) : 0
+        } ${earnLabel}`}</Text>
       </Flex>
       <CardActionsContainer farm={farm} account={account} addLiquidityUrl={addLiquidityUrl} />
       <Divider />
@@ -150,6 +162,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, guildTokenPrice, acc
           totalValueFormatted={totalValueFormatted}
           lpLabel={lpLabel}
           addLiquidityUrl={addLiquidityUrl}
+          locked={locked}
+          unlocked={unlocked}
+          guildSlug={guildSlug}
         />
       </ExpandingWrapper>
     </FCard>

@@ -143,6 +143,7 @@ const tokens = {
     address: {
       1666600000: '0x044246137670A03ca790D7ED20AF0C552c88117c',
       1666700000: '',
+      decimals: 18,
     },
     decimals: 18,
     projectLink: '//lootswap.finance/',
@@ -152,6 +153,8 @@ const tokens = {
     address: {
       1666600000: '0x69f4e54C666f7DDaf66D11876f557EC21cB65F35',
       1666700000: '',
+      decimals: 18,
+      projectLink: '//lootswap.finance/',
     },
   },
   guest: {
@@ -159,6 +162,17 @@ const tokens = {
     address: {
       1666600000: '0x9563765352bBfD118C2AF57b09F56F84FB40FAE4',
       1666700000: '0x803B3fA6d17023b0f4C8513721e35785955e3075',
+      decimals: 18,
+      projectLink: '//lootswap.finance/',
+    },
+  },
+  gtroll: {
+    symbol: 'GTROLL',
+    address: {
+      1666600000: '0x0bc12BaBa4Ebae856f13d194221d78F6eb4f07aC',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '//lootswap.finance/',
     },
   },
   gg: {
@@ -169,6 +183,86 @@ const tokens = {
     },
     decimals: 18,
     projectLink: '//geriatricsgaming.com/',
+  },
+  bscdai: {
+    symbol: 'bscDAI',
+    address: {
+      1666600000: '0x1d374ED0700a0aD3cd4945D66a5B1e08e5db20A8',
+      1666700000: '',
+    },
+    decimals: 18,
+  },
+  onedai: {
+    symbol: '1DAI',
+    address: {
+      1666600000: '0xEf977d2f931C1978Db5F6747666fa1eACB0d0339',
+      1666700000: '',
+    },
+    decimals: 18,
+  },
+  bscdoge: {
+    symbol: 'bscDOGE',
+    address: {
+      1666600000: '0xf155e1a57db0ca820ae37ab4050e0e4c7cfcecd0',
+      1666700000: '',
+    },
+    decimals: 8,
+  },
+  onerendoge: {
+    symbol: '1renDOGE',
+    address: {
+      1666600000: '0x6C7bA6c44871655968e2aE85116Becb79c6AC352',
+      1666700000: '',
+    },
+    decimals: 8,
+  },
+  bscusdc: {
+    symbol: 'bscUSDC',
+    address: {
+      1666600000: '0x44cED87b9F1492Bf2DCf5c16004832569f7f6cBa',
+      1666700000: '',
+    },
+    decimals: 18,
+  },
+  oneusdc: {
+    symbol: '1USDC',
+    address: {
+      1666600000: '0x985458E523dB3d53125813eD68c274899e9DfAb4',
+      1666700000: '',
+    },
+    decimals: 18,
+  },
+  bscbtbb: {
+    symbol: 'bscBTCB',
+    address: {
+      1666600000: '0x34224dCF981dA7488FdD01c7fdd64E74Cd55DcF7',
+      1666700000: '',
+    },
+    decimals: 18,
+  },
+  bscusdt: {
+    symbol: 'bscUSDT',
+    address: {
+      1666600000: '0x9a89d0e1b051640c6704dde4df881f73adfef39a',
+      1666700000: '',
+    },
+    decimals: 18,
+  },
+  oneusdt: {
+    symbol: '1USDT',
+    address: {
+      1666600000: '0x3c2b8be99c50593081eaa2a724f0b8285f5aba8f',
+      1666700000: '',
+    },
+    decimals: 6,
+  },
+  bsceth: {
+    symbol: 'bscETH',
+    address: {
+      1666600000: '0x783ee3e955832a3d52ca4050c4c251731c156020',
+      1666700000: '',
+    },
+    decimals: 18,
   },
 }
 

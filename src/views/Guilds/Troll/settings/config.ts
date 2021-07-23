@@ -1,18 +1,30 @@
 import { GuildConfig } from '../../types'
-import { guildTheme } from './theme'
+import { darkTheme, lightTheme } from './theme'
 
 export const config: GuildConfig = {
   numberOfFarmsVisible: 12,
-  symbol: 'TROLL',
-  guildTheme,
+  symbol: 'TROLL', // use to label symbols dynamically
+  darkTheme,
+  lightTheme,
   guildSlug: 'troll',
-  guildTokenPerBlock: 0,
+  guildTokenPerBlock: 1, // use to calculate apr
   footerImg: {
-    src: '/images/decorations/background/loot-bg.svg',
+    // shown on the bottom of the guilds quest
+    src: '/images/decorations/troll-under-bridge.png',
     alt: 'LootSwap illustration',
     width: 120,
     height: 103,
   },
+  lootFarmOverride: {
+    // use to set the price of the guild token
+    pid: 12, // see src/constants/farms.ts
+    useLootFarm: true,
+  },
+  hasLockUp: false, // use to show lock and unlock rewards
+  lockupconfig: {
+    guildIcon: '/images/tokens/troll.png',
+  },
+  tagline: '', // use to customize the guild pages tagline
 }
 
 export default config

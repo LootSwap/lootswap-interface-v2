@@ -5,6 +5,7 @@ import { Flex, Text, Skeleton } from '@pancakeswap/uikit'
 import { Farm } from 'state/types'
 import { provider as ProviderType } from 'web3-core'
 import { getHarmonyScanAddressUrl } from 'utils/harmonyscan'
+import { getBalanceNumber } from 'utils/formatBalance'
 import { useTranslation } from 'contexts/Localization'
 import ExpandableSectionButton from 'components/ExpandableSectionButton'
 import { BASE_ADD_LIQUIDITY_URL } from 'config'
@@ -12,7 +13,6 @@ import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
 import DetailsSection from './DetailsSection'
 import CardHeading from './CardHeading'
 import CardActionsContainer from './CardActionsContainer'
-import ApyButton from './ApyButton'
 
 export interface FarmWithStakedValue extends Farm {
   apr?: number
@@ -105,7 +105,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account, 
   const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
   // const lpAddress = farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]
   const isPromotedFarm = farm.token.symbol === 'LOOT'
-
+  // eslint-disable-next-line
+  const lootPricesBUSD = Number(farm.liquidity) * Number(cakePrice)
   return (
     <FCard isPromotedFarm={isPromotedFarm}>
       {isPromotedFarm && <StyledCardAccent />}
@@ -120,20 +121,15 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account, 
         <Flex justifyContent="space-between" alignItems="center">
           <Text>{t('APR')}:</Text>
           <Text bold style={{ display: 'flex', alignItems: 'center' }}>
-            {farm.apr ? (
-              <>
-                <ApyButton lpLabel={lpLabel} addLiquidityUrl={addLiquidityUrl} cakePrice={cakePrice} apr={farm.apr} />
-                {farmAPR}%
-              </>
-            ) : (
-              <Skeleton height={24} width={80} />
-            )}
+            {farm.apr ? <>{farmAPR}%</> : <Skeleton height={24} width={80} />}
           </Text>
         </Flex>
       )}
       <Flex justifyContent="space-between">
         <Text>{t('Earn')}:</Text>
-        <Text bold>{earnLabel}</Text>
+        <Text bold>{`${
+          farm.userData ? getBalanceNumber(new BigNumber(farm.userData.earnings)) : 0
+        } ${earnLabel}`}</Text>
       </Flex>
       <CardActionsContainer farm={farm} account={account} addLiquidityUrl={addLiquidityUrl} />
       <Divider />
