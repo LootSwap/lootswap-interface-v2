@@ -7,7 +7,6 @@ import styled from 'styled-components'
 import { usePriceLootBusd } from 'state/hooks'
 import { getBalanceNumber } from 'utils/formatBalance'
 import useLockedBalance from 'hooks/useLockedBalance'
-import CardValue from './CardValue'
 import CardBusdValue from './CardBusdValue'
 
 const Block = styled.div`
@@ -19,6 +18,13 @@ const ReferenceElement = styled.div`
 const Label = styled.div`
   color: ${({ theme }) => theme.colors.textSubtle};
   font-size: 14px;
+`
+
+const LockedDisplay = styled.div
+`
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: bold;
 `
 
 const CakeHarvestBalance = () => {
@@ -64,7 +70,7 @@ const CakeHarvestBalance = () => {
         </ReferenceElement>
         {tooltipVisibleLocked && toolTipLocked}
       </Label>
-      <CardValue value={lockedBalanceDisplay} fontSize="24px" lineHeight="36px" />
+      <LockedDisplay>{lockedBalanceDisplay.toFixed(2)}</LockedDisplay>
       {lootPriceBusd.gt(0) && <CardBusdValue value={lockedBalanceBUSD} />}
     </Block>
   )

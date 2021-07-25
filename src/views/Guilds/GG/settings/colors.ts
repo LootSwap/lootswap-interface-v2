@@ -15,7 +15,7 @@ export const lightTheme = {
   input: '#f3f0e8',
   inputSecondary: '#e5d6ce',
   textSubtle: '#bdac7c',
-  borderColor: '#eee7e1',
+  borderColor: '#7645D9',
   gradients: {
     bubblegum: 'linear-gradient(139.73deg, #e7edfa 0%, #cfdcf6 100%)',
   },

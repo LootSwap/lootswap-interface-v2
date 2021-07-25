@@ -4,19 +4,19 @@ import { BLOCKS_PER_YEAR } from 'config'
 /**
  * Get farm APR value in %
  * @param poolWeight allocationPoint / totalAllocationPoint
- * @param cakePriceUsd Loot price in USD
+ * @param lootPriceUsd Loot price in USD
  * @param poolLiquidityUsd Total pool liquidity in USD
  * @returns
  */
 export const getFarmApr = (
   poolWeight: BigNumber,
-  cakePriceUsd: BigNumber,
+  lootPriceUsd: BigNumber,
   poolLiquidityUsd: BigNumber,
   baseEmissionRate: BigNumber,
 ): number => {
-  // 1 * baseEmissionRate * BLOCKS_PER_YEAR * poolWeight * cakePriceUsd / poolLiquidityUsd * 100
+  // 1 * baseEmissionRate * BLOCKS_PER_YEAR * poolWeight * lootPriceUsd / poolLiquidityUsd * 100
   const yearlyLootRewardAllocation = baseEmissionRate.times(BLOCKS_PER_YEAR).times(poolWeight)
-  const apr = yearlyLootRewardAllocation.times(cakePriceUsd).div(poolLiquidityUsd).times(100)
+  const apr = yearlyLootRewardAllocation.times(lootPriceUsd).div(poolLiquidityUsd).times(100)
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
 
@@ -25,7 +25,7 @@ export const getFarmApr = (
  * @param stakingTokenPrice Token price in the same quote currency
  * @param rewardTokenPrice Token price in the same quote currency
  * @param totalStaked Total amount of stakingToken in the pool
- * @param tokenPerBlock Amount of new cake allocated to the pool for each new block
+ * @param tokenPerBlock Amount of new loot allocated to the pool for each new block
  * @returns Null if the APR is NaN or infinite.
  */
 export const getLootMarketApr = (

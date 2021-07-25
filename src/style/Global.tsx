@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
     background-position: center center;
     opacity: 0.95;
     img {
-      height: auto;
+      object-fit: cover;
       max-width: 100%;
     }
 

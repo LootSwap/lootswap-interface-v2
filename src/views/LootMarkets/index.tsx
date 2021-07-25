@@ -18,7 +18,7 @@ import Select, { OptionProps } from 'components/Select/Select'
 import { LootMarket } from 'state/types'
 import LootMarketsCard from './components/LootMarketsCard'
 import LootMarketTabButtons from './components/LootMarketTabButtons'
-import HelpButton from './components/HelpButton'
+// import HelpButton from './components/HelpButton'
 import LootMarketsTable from './components/LootMarketsTable/LootMarketsTable'
 import { ViewMode } from './components/ToggleView/ToggleView'
 
@@ -185,7 +185,7 @@ const LootMarkets: React.FC = () => {
             </Heading>
           </Flex>
           <Flex flex="1" height="fit-content" justifyContent="center" alignItems="center" mt={['24px', null, '0']}>
-            <HelpButton />
+            {/* <HelpButton /> */}
           </Flex>
         </Flex>
       </PageHeader>

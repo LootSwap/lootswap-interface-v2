@@ -37,7 +37,7 @@ const Multiplier: React.FunctionComponent<MultiplierProps> = ({ multiplier }) =>
   const { t } = useTranslation()
   const tooltipContent = (
     <div>
-      {t('The multiplier represents the amount of %symbolName% rewards each quest gets', { symbolName: symbol })}
+      {t('The level represents the amount of %symbolName% rewards each quest gets', { symbolName: symbol })}
       <br />
       <br />
       {t(

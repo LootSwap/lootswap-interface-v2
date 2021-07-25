@@ -131,7 +131,7 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
     percentUnlockedBonus,
     tokenPriceVsQuote: quoteTokenAmountTotal.div(tokenAmountTotal).toJSON(),
     poolWeight: poolWeight.toJSON(),
-    multiplier: `${allocPoint.div(BIG_TEN.pow(quoteTokenDecimals)).toString()}X`,
+    multiplier: `${allocPoint.div(BIG_TEN.pow(quoteTokenDecimals)).toString()}`,
     poolRewardsPerBlock: rewardsPerBlock,
     baseEmissionRate: emissionRate,
     userDepositFee: userDepositFee.toJSON(),
