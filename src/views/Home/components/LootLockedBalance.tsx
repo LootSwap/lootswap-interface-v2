@@ -20,8 +20,7 @@ const Label = styled.div`
   font-size: 14px;
 `
 
-const LockedDisplay = styled.div
-`
+const LockedDisplay = styled.div`
   font-size: 24px;
   line-height: 36px;
   font-weight: bold;

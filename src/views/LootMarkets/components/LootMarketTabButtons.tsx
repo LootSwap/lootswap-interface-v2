@@ -1,16 +1,7 @@
 import React from 'react'
 import { useRouteMatch, Link } from 'react-router-dom'
-import {
-  ButtonMenu,
-  ButtonMenuItem,
-  NotificationDot,
-} from '@pancakeswap/uikit'
- import {
-   Toggle,
-   Text,
-   Flex,
-   useMatchBreakpoints,
- } from '@lootswap/uikit'
+import { ButtonMenu, ButtonMenuItem, NotificationDot } from '@pancakeswap/uikit'
+import { Toggle, Text, Flex, useMatchBreakpoints } from '@lootswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import ToggleView, { ViewMode } from './ToggleView/ToggleView'
 

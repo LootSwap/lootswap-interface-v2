@@ -80,7 +80,7 @@ const DropDownList = styled.ul`
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-z-index: ${({ theme }) => theme.zIndices.dropdown};
+  z-index: ${({ theme }) => theme.zIndices.dropdown};
 `
 
 const ListItem = styled.li`

@@ -37,7 +37,7 @@ const WarningBanner = styled.div`
   color: ${({ theme }) => theme.colors.primary};
   position: absolute;
   top: 0;
-  z-index: 10000; 
+  z-index: 10000;
   padding-bottom: 2px;
   padding-top: 2px;
 `
