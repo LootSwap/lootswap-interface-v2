@@ -194,16 +194,20 @@ export const usePriceGuildBusd = (guildSlug: string, useLootFarm: boolean, lootF
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (useLootFarm) {
+    let isBalance = true
+    if (useLootFarm && isBalance) {
       dispatch(fetchFarmsPublicDataAsync([lootFarmPid]))
     }
+
+    isBalance = false
   }, [dispatch, guildSlug, lootFarmPid, useLootFarm])
 
   let guildlootFarm = useGuildFromPid(0, guildSlug)
   const lootFarm = useFarmFromPid(lootFarmPid)
-  if (lootFarm.tokenPriceVsQuote) {
+  if (lootFarm?.tokenPriceVsQuote) {
     guildlootFarm = { ...lootFarm, guildSlug }
   }
+
   const lootPriceBusd = usePriceLootBusd()
   const guildBusdPrice = guildlootFarm?.tokenPriceVsQuote
     ? lootPriceBusd.times(guildlootFarm.tokenPriceVsQuote)

@@ -27,7 +27,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
   const guildTokenPrice = usePriceGuildBusd(
     guildSlug,
     lootFarmOverride?.useLootFarm || false,
-    lootFarmOverride?.pid || 0,
+    lootFarmOverride?.pid || null,
   )
 
   let earnings = 0

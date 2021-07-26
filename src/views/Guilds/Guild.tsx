@@ -172,7 +172,7 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
   const guildTokenPrice = usePriceGuildBusd(
     guildSlug,
     lootFarmOverride?.useLootFarm || false,
-    lootFarmOverride?.pid || 0,
+    lootFarmOverride?.pid || null,
   )
 
   const [query, setQuery] = useState('')

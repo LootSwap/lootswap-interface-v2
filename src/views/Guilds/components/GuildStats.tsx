@@ -42,7 +42,7 @@ const GuildStat = () => {
   // TODO: Below think about pulling logic from graph instead of smart contract or
   // The very least make this info default in case graph is unavailable
   const lootFarmOverride = guildSettings?.lootFarmOverride
-  const guildTokenPrice = usePriceGuildBusd(slug, lootFarmOverride?.useLootFarm || false, lootFarmOverride?.pid || 0)
+  const guildTokenPrice = usePriceGuildBusd(slug, lootFarmOverride?.useLootFarm || false, lootFarmOverride?.pid || null)
   const guildPrice = guildTokenPrice.toNumber()
   const lootBalance = guildPrice || 0
   const unlockTotalSupply = useGuildUnlockTotalSupply(slug)

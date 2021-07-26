@@ -26,7 +26,7 @@ const GuildLockedBalance = (guildSettings) => {
   const guildPriceBusd = usePriceGuildBusd(
     guildSlug,
     lootFarmOverride?.useLootFarm || false,
-    lootFarmOverride?.pid || 0,
+    lootFarmOverride?.pid || null,
   )
 
   const userLockedBalance = useGuildLockedBalance(guildSlug) ?? BIG_ZERO
