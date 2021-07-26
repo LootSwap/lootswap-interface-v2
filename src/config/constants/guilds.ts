@@ -23,7 +23,6 @@ const farms: GuildConfig[] = [
     token: tokens.troll,
     quoteToken: tokens.loot,
     guildSlug: 'troll',
-    startBlock: 15490489,
   },
   {
     pid: 1,
@@ -35,7 +34,6 @@ const farms: GuildConfig[] = [
     token: tokens.troll,
     quoteToken: tokens.wone,
     guildSlug: 'troll',
-    startBlock: 15490489,
   },
   {
     pid: 2,
@@ -47,7 +45,6 @@ const farms: GuildConfig[] = [
     token: tokens.troll,
     quoteToken: tokens.bscusdc,
     guildSlug: 'troll',
-    startBlock: 15490489,
   },
   {
     pid: 3,
@@ -59,7 +56,6 @@ const farms: GuildConfig[] = [
     token: tokens.bscbtbb,
     quoteToken: tokens.wbtc,
     guildSlug: 'troll',
-    startBlock: 15490489,
   },
   {
     pid: 4,
@@ -71,7 +67,6 @@ const farms: GuildConfig[] = [
     token: tokens.bsceth,
     quoteToken: tokens.ether,
     guildSlug: 'troll',
-    startBlock: 15490489,
   },
   {
     pid: 5,
@@ -83,7 +78,6 @@ const farms: GuildConfig[] = [
     token: tokens.bscdoge,
     quoteToken: tokens.onerendoge,
     guildSlug: 'troll',
-    startBlock: 15490489,
   },
   {
     pid: 6,
@@ -95,7 +89,6 @@ const farms: GuildConfig[] = [
     token: tokens.bscbusd,
     quoteToken: tokens.busd,
     guildSlug: 'troll',
-    startBlock: 15490489,
   },
   {
     pid: 7,
@@ -107,7 +100,6 @@ const farms: GuildConfig[] = [
     token: tokens.bscusdc,
     quoteToken: tokens.oneusdc,
     guildSlug: 'troll',
-    startBlock: 15490489,
   },
   {
     pid: 8,
@@ -119,7 +111,6 @@ const farms: GuildConfig[] = [
     token: tokens.bscdai,
     quoteToken: tokens.onedai,
     guildSlug: 'troll',
-    startBlock: 15490489,
   },
   {
     pid: 9,
@@ -131,7 +122,6 @@ const farms: GuildConfig[] = [
     token: tokens.bscusdt,
     quoteToken: tokens.oneusdt,
     guildSlug: 'troll',
-    startBlock: 15490489,
   },
 ]
 

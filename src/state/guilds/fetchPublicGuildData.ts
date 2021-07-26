@@ -132,7 +132,7 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
     lpTotalInQuoteToken: lpTotalInQuoteToken.toJSON(),
     tokenPriceVsQuote: quoteTokenAmountTotal.div(tokenAmountTotal).toJSON(),
     poolWeight: poolWeight.toJSON(),
-    multiplier: `${allocPoint.div(BIG_TEN.pow(18)).toString()}X`,
+    multiplier: `${allocPoint.div(BIG_TEN.pow(18)).toString()}`,
     percentLockupBonus,
     percentUnlockedBonus,
     poolRewardsPerBlock: rewardsPerBlock,
