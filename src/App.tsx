@@ -1,5 +1,4 @@
 import React, { lazy } from 'react'
-import styled from 'styled-components'
 // import { Router, Redirect, Route, Switch } from 'react-router-dom'
 import { Router, Route, Switch } from 'react-router-dom'
 import { ResetCSS } from '@pancakeswap/uikit'
@@ -29,23 +28,6 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
-const WarningBanner = styled.div`
-  width: 100%;
-  text-align: center;
-  display: block;
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.primary};
-  position: absolute;
-  top: 0;
-  z-index: 10000;
-  padding-bottom: 2px;
-  padding-top: 2px;
-`
-const HeaderWrapper = styled.div`
-  width: 100%;
-  justify-content: space-between;
-`
-
 const App: React.FC = () => {
   usePollBlockNumber()
   useEagerConnect()
@@ -55,16 +37,6 @@ const App: React.FC = () => {
     <Router history={history}>
       <ResetCSS />
       <GlobalStyle />
-      <HeaderWrapper>
-        {true && (
-          <WarningBanner>
-            Prefer legacy? Visit{' '}
-            <a href="https://legacy.lootswap.finance">
-              <u>Legacy Lootswap</u>
-            </a>
-          </WarningBanner>
-        )}
-      </HeaderWrapper>
       <Menu>
         <SuspenseWithChunkError fallback={<PageLoader />}>
           <Switch>

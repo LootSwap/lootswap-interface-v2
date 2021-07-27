@@ -1,14 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Text, BaseLayout } from '@pancakeswap/uikit'
-import { useTranslation } from 'contexts/Localization'
+import { BaseLayout } from '@pancakeswap/uikit'
 import Page from 'components/layout/Page'
 import FarmStakingCard from 'views/Home/components/FarmStakingCard'
 import CakeStats from 'views/Home/components/CakeStats'
 
 const CardImage = styled.img`
-  margin-bottom: 16px;
   padding: 0px;
+  padding-bottom: 25px;
+  border-radius: 25px;
+  ${({ theme }) => theme.mediaQueries.xs} {
+    display: none;
+  }
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    display: block;
+  }
 `
 
 const Hero = styled.div`
@@ -47,13 +54,10 @@ const Cards = styled(BaseLayout)`
 `
 
 const Home: React.FC = () => {
-  const { t } = useTranslation()
-
   return (
     <Page>
       <Hero>
-        <CardImage src="/images/lootswap.png" alt="LootSwap" width={256} height={128} />
-        <Text color="#FFF">{t('AMM and yield farm on Harmony Protocol.')}</Text>
+        <CardImage src="/images/decorations/background/lootswap-banner.jpeg" alt="LootSwap" />
       </Hero>
       <div>
         <Cards>
