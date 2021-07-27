@@ -15,6 +15,7 @@ import {
   fetchLootMarketsPublicDataAsync,
   fetchLootMarketsUserDataAsync,
   fetchGuildsMasterLooterAsync,
+  fetchMasterLooterAsync,
   setBlock,
 } from './actions'
 import { State, Farm, FarmsState, LootMarket, GuildState, Guild } from './types'
@@ -130,6 +131,23 @@ export const useLpTokenPrice = (symbol: string) => {
   }
 
   return lpTokenPrice
+}
+
+export const useMasterLooterInfo = () => {
+  const masterLooterInfo = useSelector((state: State) => state.farms.additionalInfo)
+  const { initialBlock } = useSelector((state: State) => state.block)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    let isFetchingData = true
+    if (isFetchingData && initialBlock > 0) {
+      dispatch(fetchMasterLooterAsync({ currentBlock: initialBlock }))
+    }
+
+    isFetchingData = false
+  }, [dispatch, initialBlock])
+
+  return { ...masterLooterInfo, initialBlock }
 }
 
 // Pools

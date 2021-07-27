@@ -38,11 +38,16 @@ export interface Farm extends FarmConfig {
 }
 
 // Slices states
+export interface MasterLooterState {
+  nextHalving: number
+  currentMultiplier: number
+}
 
 export interface FarmsState {
   data: Farm[]
   loadArchivedFarmsData: boolean
   userDataLoaded: boolean
+  additionalInfo: MasterLooterState
 }
 
 // Block

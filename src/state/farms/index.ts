@@ -16,6 +16,7 @@ import {
   fetchBlockDeltaEndStages,
   fetchDevFeeStages,
 } from './fetchFarmUser'
+import { fetchMultiplier, fetchNextHalving } from './fetchMasterLooterInfo'
 import { FarmsState, Farm } from '../types'
 
 const noAccountFarmConfig = farmsConfig.map((farm) => ({
@@ -35,7 +36,17 @@ const noAccountFarmConfig = farmsConfig.map((farm) => ({
   },
 }))
 
-const initialState: FarmsState = { data: noAccountFarmConfig, loadArchivedFarmsData: false, userDataLoaded: false }
+const noMasterlooterInfo = {
+  nextHalving: 0,
+  currentMultiplier: 0,
+}
+
+const initialState: FarmsState = {
+  data: noAccountFarmConfig,
+  loadArchivedFarmsData: false,
+  userDataLoaded: false,
+  additionalInfo: noMasterlooterInfo,
+}
 
 export const nonArchivedFarms = farmsConfig.filter(({ pid }) => !isArchivedPid(pid))
 
@@ -108,6 +119,24 @@ export const fetchFarmUserDataAsync = createAsyncThunk<FarmUserDataResponse[], {
   },
 )
 
+interface MasterLooterInfoDataResponse {
+  nextHalving: number
+  currentMultiplier: number
+}
+
+// Async thunks
+export const fetchMasterLooterAsync = createAsyncThunk<MasterLooterInfoDataResponse, { currentBlock: number }>(
+  'guilds/fetchMasterLooterAsync',
+  async ({ currentBlock }) => {
+    const currentMultiplier = await fetchMultiplier(currentBlock)
+    const nextHalving = await fetchNextHalving()
+    return {
+      nextHalving,
+      currentMultiplier,
+    }
+  },
+)
+
 export const farmsSlice = createSlice({
   name: 'Farms',
   initialState,
@@ -134,6 +163,12 @@ export const farmsSlice = createSlice({
         state.data[index] = { ...state.data[index], userData: userDataEl }
       })
       state.userDataLoaded = true
+    })
+
+    // Update guilds with multiplier data
+    builder.addCase(fetchMasterLooterAsync.fulfilled, (state, action) => {
+      const masterInfo = action.payload
+      state.additionalInfo = { ...state.additionalInfo, ...masterInfo }
     })
   },
 })
