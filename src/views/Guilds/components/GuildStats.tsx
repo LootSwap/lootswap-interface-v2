@@ -84,9 +84,8 @@ const GuildStat = () => {
             prefixOverride="$"
           />
         </Row>
-        <Row>
-          <GuildCurrentMultiplier />
-        </Row>
+        <Border />
+        <GuildCurrentMultiplier />
       </CardBody>
     </StyledGuildTokenStats>
   )

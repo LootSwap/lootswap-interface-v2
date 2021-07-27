@@ -5,19 +5,14 @@ import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 import { useGuildMasterLooterInfo } from 'state/hooks'
 import useGuildSettings from '../hooks/useGuildSettings'
+import CardValue from './CardValue'
 
-const EmissionsStyled = styled(Text)`
-  position: absolute;
-  bottom: 15px;
-  width: 100%;
-  text-align: center;
-`
-
-const SkeletonStyled = styled(Skeleton)`
-  position: absolute;
-  bottom: 15px;
-  width: 90%;
-  text-align: center;
+const Row = styled.div`
+  align-items: center;
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+  margin-bottom: 8px;
 `
 
 const GuildCurrentMultiplier = () => {
@@ -25,17 +20,29 @@ const GuildCurrentMultiplier = () => {
   const { slug } = useParams<{ slug: string }>()
   const guildSettings = useGuildSettings(slug)
   const { currentMultiplier, initialBlock } = useGuildMasterLooterInfo(slug)
-  const emissionRate = currentMultiplier * guildSettings.guildTokenPerBlock
+  const emissionRateWithGuild = currentMultiplier * guildSettings.guildTokenPerBlock
   if (initialBlock <= 0) {
-    return <SkeletonStyled width={75} height={25} />
+    return <Skeleton width={75} height={25} />
   }
   return (
-    <EmissionsStyled fontSize="12px">
-      {t('The base emission rate is currently %e% %sym% per block.', {
-        e: emissionRate % 1 === 0 ? emissionRate : emissionRate.toFixed(2),
-        sym: slug.toUpperCase(),
-      })}
-    </EmissionsStyled>
+    <>
+      <Row>
+        <Text fontSize="24px">{t('%sym% Base Emission', { sym: guildSettings.symbol })}</Text>
+        {emissionRateWithGuild ? (
+          <CardValue fontSize="24px" value={guildSettings.guildTokenPerBlock} decimals={4} />
+        ) : (
+          <Skeleton width={75} height={25} />
+        )}
+      </Row>
+      <Row>
+        <Text fontSize="24px">{t('Emission multiplier')}</Text>
+        {currentMultiplier ? (
+          <CardValue fontSize="24px" value={currentMultiplier} prefix="x" decimals={0} />
+        ) : (
+          <Skeleton width={75} height={25} />
+        )}
+      </Row>
+    </>
   )
 }
 

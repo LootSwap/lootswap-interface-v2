@@ -125,9 +125,8 @@ const CakeStats = () => {
           <Text fontSize="24px">{`${t('Total Value Locked (TVL)')} - ${t('Across All LPs')}`}</Text>
           {Number(tvl) > 0 ? <CardValue fontSize="24px" decimals={0} value={Number(tvl)} /> : t('Coming Soon')}
         </Row>
-        <Row>
-          <CurrentMultiplier />
-        </Row>
+        <Border />
+        <CurrentMultiplier />
       </CardBody>
     </StyledCakeStats>
   )
