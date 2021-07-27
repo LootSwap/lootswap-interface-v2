@@ -17,6 +17,7 @@ import Liquidity, { LiquidityProps } from '../Liquidity'
 import { EarnedProps } from '../Earned'
 import Unlocked from '../Unlocked'
 import Locked from '../Locked'
+import Emission, { EmissionProps } from '../Emission'
 
 export interface ActionPanelProps {
   apr: AprProps
@@ -26,6 +27,7 @@ export interface ActionPanelProps {
   userDataReady: boolean
   expanded: boolean
   earned: EarnedProps
+  emission: EmissionProps
 }
 
 const expandAnimation = keyframes`
@@ -153,6 +155,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
   userDataReady,
   expanded,
   earned,
+  emission,
 }) => {
   const farm = details
 
@@ -207,6 +210,10 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
         <ValueWrapper>
           <Text>{t('Liquidity')}</Text>
           <Liquidity {...liquidity} />
+        </ValueWrapper>
+        <ValueWrapper>
+          <Text>{t('Emission Rate')}</Text>
+          <Emission {...emission} />
         </ValueWrapper>
       </ValueContainer>
       <ActionContainer>

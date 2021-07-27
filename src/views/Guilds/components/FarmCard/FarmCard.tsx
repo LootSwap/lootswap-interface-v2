@@ -79,6 +79,7 @@ interface FarmCardProps {
   locked?: number
   unlocked?: number
   guildSlug?: string
+  emission?: string
 }
 
 const FarmCard: React.FC<FarmCardProps> = ({
@@ -89,6 +90,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
   locked,
   unlocked,
   guildSlug,
+  emission,
 }) => {
   const { t } = useTranslation()
   const { currentBlock } = useBlock()
@@ -165,6 +167,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
           locked={locked}
           unlocked={unlocked}
           guildSlug={guildSlug}
+          emission={emission}
         />
       </ExpandingWrapper>
     </FCard>

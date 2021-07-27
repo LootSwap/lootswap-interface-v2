@@ -368,6 +368,10 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
         liquidity: {
           liquidity: farm.liquidity,
         },
+        emission: {
+          guildSlug: farm.guildSlug,
+          poolRewardsPerBlock: farm.poolRewardsPerBlock,
+        },
         multiplier: {
           multiplier: farm.multiplier,
         },
@@ -424,6 +428,7 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
                   locked={farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
                   unlocked={farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
                   guildSlug={guildSlug}
+                  emission={farm.poolRewardsPerBlock}
                 />
               ))}
           </Route>
@@ -440,6 +445,7 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
                   locked={farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
                   unlocked={farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
                   guildSlug={guildSlug}
+                  emission={farm.poolRewardsPerBlock}
                 />
               ))}
           </Route>
@@ -456,6 +462,7 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
                   locked={farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
                   unlocked={farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
                   guildSlug={guildSlug}
+                  emission={farm.poolRewardsPerBlock}
                 />
               ))}
           </Route>
