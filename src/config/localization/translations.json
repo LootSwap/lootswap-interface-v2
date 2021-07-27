@@ -604,5 +604,7 @@
   "%sym% to Harvest": "%sym% to Harvest",
   "%sym% in Wallet": "%sym% in Wallet",
   "Collecting %sym%": "Collecting %sym%",
-  "Deposit fee is:": "Deposit fee is:"
+  "Deposit fee is:": "Deposit fee is:",
+  "The base emission rate is currently %e% %sym% per block.":"The base emission rate is currently %e% %sym% per block.",
+  "White Paper": "White Paper"
 }

@@ -59,6 +59,10 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     icon: 'MoreIcon',
     items: [
       {
+        label: t('White Paper'),
+        href: 'https://lootswapfinance.medium.com/lootswap-white-papers-roadmap-d48747fa69',
+      },
+      {
         label: t('Github'),
         href: 'https://github.com/LootSwap',
       },

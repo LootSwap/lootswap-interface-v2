@@ -95,12 +95,18 @@ export interface Guild extends GuildConfig {
   }
 }
 
+export interface GuildMasterLooterState {
+  nextHalving: number
+  currentMultiplier: number
+}
+
 // Slices states
 
 export interface GuildState {
   data: Guild[]
   loadArchivedGuildsData: boolean
   userDataLoaded: boolean
+  additionalInfo: GuildMasterLooterState
 }
 
 // Global state

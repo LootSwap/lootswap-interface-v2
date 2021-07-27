@@ -36,7 +36,7 @@ const useTokenBalance = (tokenAddress: string) => {
         const res = await contract.methods.balanceOf(account).call()
         setBalanceState({ balance: new BigNumber(res), fetchStatus: SUCCESS })
       } catch (e) {
-        console.error(e)
+        console.info(e)
         setBalanceState((prev) => ({
           ...prev,
           fetchStatus: FAILED,

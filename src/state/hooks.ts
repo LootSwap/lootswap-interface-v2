@@ -14,6 +14,7 @@ import {
   fetchGuildsPublicDataAsync,
   fetchLootMarketsPublicDataAsync,
   fetchLootMarketsUserDataAsync,
+  fetchGuildsMasterLooterAsync,
   setBlock,
 } from './actions'
 import { State, Farm, FarmsState, LootMarket, GuildState, Guild } from './types'
@@ -249,6 +250,23 @@ export const useGuildFromLpSymbol = (lpSymbol: string, guildSlug: string): Guild
     state.guilds.data.find((f) => f.lpSymbol === lpSymbol && guildSlug === f.guildSlug),
   )
   return guild
+}
+
+export const useGuildMasterLooterInfo = (guildSlug) => {
+  const masterLooterInfo = useSelector((state: State) => state.guilds.additionalInfo)
+  const { initialBlock } = useSelector((state: State) => state.block)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    let isFetchingData = true
+    if (isFetchingData && initialBlock > 0) {
+      dispatch(fetchGuildsMasterLooterAsync({ guildSlug, currentBlock: initialBlock }))
+    }
+
+    isFetchingData = false
+  }, [dispatch, guildSlug, initialBlock])
+
+  return { ...masterLooterInfo, initialBlock }
 }
 
 export const useGuildUser = (pid, guildSlug) => {

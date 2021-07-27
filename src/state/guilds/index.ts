@@ -16,6 +16,9 @@ import {
   fetchBlockDeltaEndStages,
   fetchDevFeeStages,
 } from './fetchGuildUser'
+
+import { fetchGuildMultiplier, fetchGuildNextHalving } from './fetchGuildMasterLooterInfo'
+
 import { GuildState, Guild } from '../types'
 
 const noAccountGuildConfig = guildsConfig.map((guild) => ({
@@ -35,7 +38,16 @@ const noAccountGuildConfig = guildsConfig.map((guild) => ({
   },
 }))
 
-const initialState: GuildState = { data: noAccountGuildConfig, loadArchivedGuildsData: false, userDataLoaded: false }
+const noMasterlooterInfo = {
+  nextHalving: 0,
+  currentMultiplier: 0,
+}
+const initialState: GuildState = {
+  data: noAccountGuildConfig,
+  loadArchivedGuildsData: false,
+  userDataLoaded: false,
+  additionalInfo: noMasterlooterInfo,
+}
 
 export const nonArchivedGuilds = guildsConfig.filter(({ pid, guildSlug }) => !isArchivedPid(pid, guildSlug))
 
@@ -63,6 +75,26 @@ export const fetchGuildsPublicDataAsync = createAsyncThunk<Guild[], { pids: numb
     return farmsWithoutHelperLps
   },
 )
+
+interface GuildMasterLooterInfoDataResponse {
+  guildSlug: string
+  nextHalving: number
+  currentMultiplier: number
+}
+
+// Async thunks
+export const fetchGuildsMasterLooterAsync = createAsyncThunk<
+  GuildMasterLooterInfoDataResponse,
+  { guildSlug: string; currentBlock: number }
+>('guilds/fetchGuildsMasterLooterAsync', async ({ guildSlug, currentBlock }) => {
+  const currentMultiplier = await fetchGuildMultiplier(guildSlug, currentBlock)
+  const nextHalving = await fetchGuildNextHalving(guildSlug)
+  return {
+    guildSlug,
+    nextHalving,
+    currentMultiplier,
+  }
+})
 
 interface GuildUserDataResponse {
   pid: number
@@ -133,6 +165,12 @@ export const guildsSlice = createSlice({
         const liveGuildData = action.payload.find((guildData) => guildData.pid === guild.pid)
         return { ...guild, ...liveGuildData }
       })
+    })
+
+    // Update guilds with multiplier data
+    builder.addCase(fetchGuildsMasterLooterAsync.fulfilled, (state, action) => {
+      const masterInfo = action.payload
+      state.additionalInfo = { ...state.additionalInfo, ...masterInfo }
     })
 
     // Update guilds with user data

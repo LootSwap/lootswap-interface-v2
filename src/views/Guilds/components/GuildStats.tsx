@@ -10,6 +10,7 @@ import useGuildSettings from '../hooks/useGuildSettings'
 import { useGuildTotalSupply, useGuildUnlockTotalSupply, useBurnedBalance } from '../hooks/useGuildTokenBalance'
 import CardValue from './CardValue'
 import CardBusdValue from './CardBusdValue'
+import GuildCurrentMultiplier from './GuildCurrentMultiplier'
 
 const StyledGuildTokenStats = styled(Card)`
   margin-left: auto;
@@ -82,6 +83,9 @@ const GuildStat = () => {
             value={circulationMrkCap}
             prefixOverride="$"
           />
+        </Row>
+        <Row>
+          <GuildCurrentMultiplier />
         </Row>
       </CardBody>
     </StyledGuildTokenStats>
