@@ -29,6 +29,7 @@ export interface Farm extends FarmConfig {
   poolWeight?: SerializedBigNumber
   baseEmissionRate?: SerializedBigNumber
   userDepositFee?: SerializedBigNumber
+  poolRewardsPerBlock?: SerializedBigNumber
   userData?: {
     allowance: string
     tokenBalance: string
