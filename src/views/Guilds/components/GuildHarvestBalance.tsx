@@ -29,7 +29,7 @@ const GuildHarvestBalance = (guildSettings) => {
   const guildPriceBusd = usePriceGuildBusd(
     guildSlug,
     lootFarmOverride?.useLootFarm || false,
-    lootFarmOverride?.pid || 0,
+    lootFarmOverride?.pid || null,
   )
   const earningsBusd = new BigNumber(earningsSum).multipliedBy(guildPriceBusd).toNumber()
 

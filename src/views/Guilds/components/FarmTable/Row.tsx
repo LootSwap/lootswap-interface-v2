@@ -13,6 +13,7 @@ import StartBlock from './StartBlock'
 import Details from './Details'
 import Multiplier, { MultiplierProps } from './Multiplier'
 import Liquidity, { LiquidityProps } from './Liquidity'
+import Emission, { EmissionProps } from './Emission'
 import ActionPanel from './Actions/ActionPanel'
 import CellLayout from './CellLayout'
 import { DesktopColumnSchema, MobileColumnSchema } from '../types'
@@ -24,6 +25,7 @@ export interface RowProps {
   multiplier: MultiplierProps
   liquidity: LiquidityProps
   details: FarmWithStakedValue
+  emission: EmissionProps
 }
 
 interface RowPropsWithLoading extends RowProps {
@@ -135,6 +137,16 @@ const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
                     <CellInner>
                       <CellLayout label={t('APR')}>
                         <Apr {...props.apr} hideButton />
+                      </CellLayout>
+                    </CellInner>
+                  </td>
+                )
+              case 'emission':
+                return (
+                  <td key={key}>
+                    <CellInner>
+                      <CellLayout label={t('Emission Rate')}>
+                        <Emission {...props.emission} />
                       </CellLayout>
                     </CellInner>
                   </td>

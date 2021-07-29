@@ -81,12 +81,18 @@ export const DesktopColumnSchema: ColumnsDefTypes[] = [
   },
   {
     id: 5,
+    name: 'emission',
+    sortable: true,
+    label: 'Emission Rate',
+  },
+  {
+    id: 6,
     name: 'multiplier',
     sortable: true,
     label: 'Multiplier',
   },
   {
-    id: 6,
+    id: 7,
     name: 'details',
     sortable: true,
     label: '',

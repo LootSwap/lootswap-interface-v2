@@ -12,6 +12,7 @@ export interface ExpandableSectionProps {
   addLiquidityUrl?: string
   locked?: number
   unlocked?: number
+  emission?: string
 }
 
 const Wrapper = styled.div`
@@ -31,11 +32,16 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
   addLiquidityUrl,
   locked,
   unlocked,
+  emission,
 }) => {
   const { t } = useTranslation()
 
   return (
     <Wrapper>
+      <Flex justifyContent="space-between">
+        <Text>{t('Emission Rate')}:</Text>
+        {emission ? <Text>{Number(emission).toFixed(4)}</Text> : <Skeleton width={75} height={25} />}
+      </Flex>
       <Flex justifyContent="space-between">
         <Text>{t('Total Liquidity')}:</Text>
         {totalValueFormatted ? <Text>{totalValueFormatted}</Text> : <Skeleton width={75} height={25} />}

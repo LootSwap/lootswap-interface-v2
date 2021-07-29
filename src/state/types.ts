@@ -29,6 +29,7 @@ export interface Farm extends FarmConfig {
   poolWeight?: SerializedBigNumber
   baseEmissionRate?: SerializedBigNumber
   userDepositFee?: SerializedBigNumber
+  poolRewardsPerBlock?: SerializedBigNumber
   userData?: {
     allowance: string
     tokenBalance: string
@@ -38,11 +39,16 @@ export interface Farm extends FarmConfig {
 }
 
 // Slices states
+export interface MasterLooterState {
+  nextHalving: number
+  currentMultiplier: number
+}
 
 export interface FarmsState {
   data: Farm[]
   loadArchivedFarmsData: boolean
   userDataLoaded: boolean
+  additionalInfo: MasterLooterState
 }
 
 // Block
@@ -87,6 +93,7 @@ export interface Guild extends GuildConfig {
   percentUnlockedBonus?: number
   baseEmissionRate?: SerializedBigNumber
   userDepositFee?: SerializedBigNumber
+  poolRewardsPerBlock?: SerializedBigNumber
   userData?: {
     allowance: string
     tokenBalance: string
@@ -95,12 +102,18 @@ export interface Guild extends GuildConfig {
   }
 }
 
+export interface GuildMasterLooterState {
+  nextHalving: number
+  currentMultiplier: number
+}
+
 // Slices states
 
 export interface GuildState {
   data: Guild[]
   loadArchivedGuildsData: boolean
   userDataLoaded: boolean
+  additionalInfo: GuildMasterLooterState
 }
 
 // Global state

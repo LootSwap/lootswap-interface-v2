@@ -47,7 +47,11 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
   const updateValue = useRef(update)
 
   useEffect(() => {
-    updateValue.current(earningsBusd)
+    let isUpdate = true
+    if (isUpdate) {
+      updateValue.current(earningsBusd)
+    }
+    isUpdate = false
   }, [earningsBusd, updateValue])
 
   return (

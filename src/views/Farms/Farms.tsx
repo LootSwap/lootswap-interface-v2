@@ -285,6 +285,9 @@ const Farms: React.FC = () => {
       multiplier: {
         multiplier: farm.multiplier,
       },
+      emission: {
+        poolRewardsPerBlock: farm.poolRewardsPerBlock,
+      },
       details: farm,
     }
 
@@ -334,6 +337,7 @@ const Farms: React.FC = () => {
                 removed={false}
                 locked={farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
                 unlocked={farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+                emission={farm.poolRewardsPerBlock}
               />
             ))}
           </Route>
@@ -347,6 +351,7 @@ const Farms: React.FC = () => {
                 removed
                 locked={farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
                 unlocked={farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+                emission={farm.poolRewardsPerBlock}
               />
             ))}
           </Route>
@@ -360,6 +365,7 @@ const Farms: React.FC = () => {
                 removed
                 locked={farm.percentLockupBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
                 unlocked={farm.percentUnlockedBonus * getBalanceNumber(new BigNumber(farm.userData.earnings))}
+                emission={farm.poolRewardsPerBlock}
               />
             ))}
           </Route>

@@ -17,7 +17,7 @@ const GuildWalletBalance = (guildSettings) => {
   const guildPriceBusd = usePriceGuildBusd(
     guildSlug,
     lootFarmOverride?.useLootFarm || false,
-    lootFarmOverride?.pid || 0,
+    lootFarmOverride?.pid || null,
   )
   const busdBalance = new BigNumber(getBalanceNumber(guildBalance)).multipliedBy(guildPriceBusd).toNumber()
   const { account } = useWeb3React()

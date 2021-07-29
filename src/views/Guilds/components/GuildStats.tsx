@@ -10,6 +10,7 @@ import useGuildSettings from '../hooks/useGuildSettings'
 import { useGuildTotalSupply, useGuildUnlockTotalSupply, useBurnedBalance } from '../hooks/useGuildTokenBalance'
 import CardValue from './CardValue'
 import CardBusdValue from './CardBusdValue'
+import GuildCurrentMultiplier from './GuildCurrentMultiplier'
 
 const StyledGuildTokenStats = styled(Card)`
   margin-left: auto;
@@ -42,7 +43,7 @@ const GuildStat = () => {
   // TODO: Below think about pulling logic from graph instead of smart contract or
   // The very least make this info default in case graph is unavailable
   const lootFarmOverride = guildSettings?.lootFarmOverride
-  const guildTokenPrice = usePriceGuildBusd(slug, lootFarmOverride?.useLootFarm || false, lootFarmOverride?.pid || 0)
+  const guildTokenPrice = usePriceGuildBusd(slug, lootFarmOverride?.useLootFarm || false, lootFarmOverride?.pid || null)
   const guildPrice = guildTokenPrice.toNumber()
   const lootBalance = guildPrice || 0
   const unlockTotalSupply = useGuildUnlockTotalSupply(slug)
@@ -83,6 +84,8 @@ const GuildStat = () => {
             prefixOverride="$"
           />
         </Row>
+        <Border />
+        <GuildCurrentMultiplier />
       </CardBody>
     </StyledGuildTokenStats>
   )

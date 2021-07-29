@@ -9,6 +9,7 @@ import { usePriceLootBusd } from 'state/hooks'
 import { getCakeAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
 import CardBusdValue from './CardBusdValue'
+import CurrentMultiplier from './CurrentMultiplier'
 
 const StyledCakeStats = styled(Card)`
   margin-left: auto;
@@ -124,6 +125,8 @@ const CakeStats = () => {
           <Text fontSize="24px">{`${t('Total Value Locked (TVL)')} - ${t('Across All LPs')}`}</Text>
           {Number(tvl) > 0 ? <CardValue fontSize="24px" decimals={0} value={Number(tvl)} /> : t('Coming Soon')}
         </Row>
+        <Border />
+        <CurrentMultiplier />
       </CardBody>
     </StyledCakeStats>
   )

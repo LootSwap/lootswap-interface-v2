@@ -14,6 +14,8 @@ import {
   fetchGuildsPublicDataAsync,
   fetchLootMarketsPublicDataAsync,
   fetchLootMarketsUserDataAsync,
+  fetchGuildsMasterLooterAsync,
+  fetchMasterLooterAsync,
   setBlock,
 } from './actions'
 import { State, Farm, FarmsState, LootMarket, GuildState, Guild } from './types'
@@ -131,6 +133,23 @@ export const useLpTokenPrice = (symbol: string) => {
   return lpTokenPrice
 }
 
+export const useMasterLooterInfo = () => {
+  const masterLooterInfo = useSelector((state: State) => state.farms.additionalInfo)
+  const { initialBlock } = useSelector((state: State) => state.block)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    let isFetchingData = true
+    if (isFetchingData && initialBlock > 0) {
+      dispatch(fetchMasterLooterAsync({ currentBlock: initialBlock }))
+    }
+
+    isFetchingData = false
+  }, [dispatch, initialBlock])
+
+  return { ...masterLooterInfo, initialBlock }
+}
+
 // Pools
 
 export const useFetchPublicLootMarketsData = () => {
@@ -194,16 +213,20 @@ export const usePriceGuildBusd = (guildSlug: string, useLootFarm: boolean, lootF
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (useLootFarm) {
+    let isBalance = true
+    if (useLootFarm && isBalance) {
       dispatch(fetchFarmsPublicDataAsync([lootFarmPid]))
     }
+
+    isBalance = false
   }, [dispatch, guildSlug, lootFarmPid, useLootFarm])
 
   let guildlootFarm = useGuildFromPid(0, guildSlug)
   const lootFarm = useFarmFromPid(lootFarmPid)
-  if (lootFarm.tokenPriceVsQuote) {
+  if (lootFarm?.tokenPriceVsQuote) {
     guildlootFarm = { ...lootFarm, guildSlug }
   }
+
   const lootPriceBusd = usePriceLootBusd()
   const guildBusdPrice = guildlootFarm?.tokenPriceVsQuote
     ? lootPriceBusd.times(guildlootFarm.tokenPriceVsQuote)
@@ -245,6 +268,23 @@ export const useGuildFromLpSymbol = (lpSymbol: string, guildSlug: string): Guild
     state.guilds.data.find((f) => f.lpSymbol === lpSymbol && guildSlug === f.guildSlug),
   )
   return guild
+}
+
+export const useGuildMasterLooterInfo = (guildSlug) => {
+  const masterLooterInfo = useSelector((state: State) => state.guilds.additionalInfo)
+  const { initialBlock } = useSelector((state: State) => state.block)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    let isFetchingData = true
+    if (isFetchingData && initialBlock > 0) {
+      dispatch(fetchGuildsMasterLooterAsync({ guildSlug, currentBlock: initialBlock }))
+    }
+
+    isFetchingData = false
+  }, [dispatch, guildSlug, initialBlock])
+
+  return { ...masterLooterInfo, initialBlock }
 }
 
 export const useGuildUser = (pid, guildSlug) => {

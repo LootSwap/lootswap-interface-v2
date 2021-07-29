@@ -77,9 +77,10 @@ interface FarmCardProps {
   account?: string
   locked?: number
   unlocked?: number
+  emission?: string
 }
 
-const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account, locked, unlocked }) => {
+const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account, locked, unlocked, emission }) => {
   const { t } = useTranslation()
 
   const [showExpandableSection, setShowExpandableSection] = useState(false)
@@ -147,6 +148,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account, 
           addLiquidityUrl={addLiquidityUrl}
           locked={locked}
           unlocked={unlocked}
+          emission={emission}
         />
       </ExpandingWrapper>
     </FCard>

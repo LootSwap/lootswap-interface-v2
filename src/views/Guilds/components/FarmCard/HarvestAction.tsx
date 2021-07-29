@@ -29,7 +29,7 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid, guildSlu
   const guildTokenPrice = usePriceGuildBusd(
     guildSlug,
     lootFarmOverride?.useLootFarm || false,
-    lootFarmOverride?.pid || 0,
+    lootFarmOverride?.pid || null,
   )
 
   const dispatch = useAppDispatch()

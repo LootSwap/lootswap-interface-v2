@@ -37,7 +37,11 @@ const CardValue: React.FC<CardValueProps> = ({
   const updateValue = useRef(update)
 
   useEffect(() => {
-    updateValue.current(value)
+    let isUpdate = true
+    if (isUpdate) {
+      updateValue.current(value)
+    }
+    isUpdate = false
   }, [value, updateValue])
 
   return (
