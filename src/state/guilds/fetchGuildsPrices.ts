@@ -118,7 +118,7 @@ const getGuildQuoteTokenPrice = (
   }
 
   if (quoteTokenFarm.quoteToken.symbol === 'WONE') {
-    return quoteTokenFarm.tokenPriceVsQuote ? lootPriceBusd.times(quoteTokenFarm.tokenPriceVsQuote) : BIG_ZERO
+    return quoteTokenFarm.tokenPriceVsQuote ? BIG_ONE.div(onePriceBusd) : BIG_ZERO
   }
 
   return BIG_ZERO

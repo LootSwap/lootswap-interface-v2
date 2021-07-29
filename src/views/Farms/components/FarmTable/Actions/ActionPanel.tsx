@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 import { LinkExternal, Text } from '@pancakeswap/uikit'
+import { BASE_ADD_LIQUIDITY_URL } from 'config'
 import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard'
 import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
 import { getHarmonyScanAddressUrl } from 'utils/harmonyscan'
@@ -173,7 +174,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
       <InfoContainer>
         {isActive && (
           <StakeContainer>
-            <StyledLinkExternal href={`https://lootswap.finance/#/add/${liquidityUrlPathParts}`}>
+            <StyledLinkExternal href={`${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`}>
               {t('Get %symbol%', { symbol: lpLabel })}
             </StyledLinkExternal>
           </StakeContainer>

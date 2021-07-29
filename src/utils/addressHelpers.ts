@@ -21,6 +21,9 @@ export const getGuildsMasterLooterAddress = (guildSlug: string) => {
   if (guildSlug === 'troll') {
     return getAddress(addresses.masterLooterTROLL)
   }
+  if (guildSlug === 'arb') {
+    return getAddress(addresses.masterLooterARB)
+  }
   return null
 }
 export const getGuildsTokenAddress = (guildSlug: string) => {
@@ -28,7 +31,10 @@ export const getGuildsTokenAddress = (guildSlug: string) => {
     return getAddress(tokens.gg.address)
   }
   if (guildSlug === 'troll') {
-    return getAddress(tokens.troll.address) // todo change before launch
+    return getAddress(tokens.troll.address)
+  }
+  if (guildSlug === 'arb') {
+    return getAddress(tokens.garb.address) // todo change before launch
   }
   return null
 }
