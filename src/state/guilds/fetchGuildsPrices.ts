@@ -67,6 +67,7 @@ const getGuildQuoteTokenPrice = (
   ethPriceBusd: BigNumber,
   btcPriceBusd: BigNumber,
   oneRenDogePriceBusd: BigNumber,
+  guildPriceBusd: BigNumber,
 ): BigNumber => {
   if (
     // Calculating rate for stable coins
@@ -121,12 +122,25 @@ const getGuildQuoteTokenPrice = (
     return quoteTokenFarm.tokenPriceVsQuote ? BIG_ONE.div(onePriceBusd) : BIG_ZERO
   }
 
+  if (
+    quoteTokenFarm.quoteToken.symbol === 'TROLL' ||
+    quoteTokenFarm.quoteToken.symbol === 'ARB' ||
+    quoteTokenFarm.quoteToken.symbol === 'GG'
+  ) {
+    return guildPriceBusd
+  }
   return BIG_ZERO
 }
 
 const fetchGuildsPrices = async (guilds) => {
   // Guild Farm Helpers
   const onerendogeoneFarm = guilds.find((guild: Guild) => guild.helperId === 1)
+
+  // Important all Guilds need to have a base pairing of GUILD<>ONE
+  const guildpriceFarm = guilds.find(
+    (guild: Guild) => guild.quoteToken.symbol === 'WONE' && guild.token.symbol === guild.guildSlug.toUpperCase(),
+  )
+
   // TODO we could put this in the priceGuildHelperLPs and call it from there. Dont know if its worth it if it doesnt optimize calls
   // Fetching the prices from our Loot farms
   const farms = await fetchFarms(farmsConfig)
@@ -152,8 +166,11 @@ const fetchGuildsPrices = async (guilds) => {
   const oneRenDogePriceBusd = onerendogeoneFarm?.tokenPriceVsQuote
     ? new BigNumber(onerendogeoneFarm.tokenPriceVsQuote).div(onePriceBusd).times(BIG_TEN)
     : BIG_ZERO
-  // --------
 
+  const guildPriceBusd = guildpriceFarm?.tokenPriceVsQuote
+    ? new BigNumber(guildpriceFarm.tokenPriceVsQuote).div(onePriceBusd)
+    : BIG_ZERO
+  // --------
   const guildsWithPrices = guilds.map((g) => {
     const quoteTokenFarm = getGuildFromTokenSymbol(guilds, g.quoteToken.symbol)
     const baseTokenPrice = getGuildBaseTokenPrice(g, quoteTokenFarm, lootPriceBusd)
@@ -165,6 +182,7 @@ const fetchGuildsPrices = async (guilds) => {
       ethPriceBusd,
       btcPriceBusd,
       oneRenDogePriceBusd,
+      guildPriceBusd,
     )
     const token = { ...g.token, busdPrice: baseTokenPrice.toJSON() }
     const quoteToken = { ...g.quoteToken, busdPrice: quoteTokenPrice.toJSON() }
