@@ -14,6 +14,17 @@ const farms: GuildConfig[] = [
     guildSlug: 'gg',
   },
   {
+    pid: 1,
+    lpSymbol: 'GG-ONE',
+    lpAddresses: {
+      1666600000: '0xb6B627662f924c66E36eDa1F2eEB2D13661337a2',
+      1666700000: '',
+    },
+    token: tokens.gg,
+    quoteToken: tokens.wone,
+    guildSlug: 'gg',
+  },
+  {
     pid: 0,
     lpSymbol: 'TROLL-LOOT',
     lpAddresses: {
