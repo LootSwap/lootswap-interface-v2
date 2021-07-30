@@ -255,16 +255,6 @@ const tokens = {
     },
     decimals: 18,
   },
-  garb: {
-    // TODO: remove after arb test
-    symbol: 'GARB',
-    address: {
-      1666600000: '0x2dD1a6F52A5863DAF707d7398F44Cd3C74735E03',
-      1666700000: '',
-      decimals: 18,
-      projectLink: '//lootswap.finance/',
-    },
-  },
   viper: {
     symbol: 'VIPER',
     address: {

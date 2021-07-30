@@ -34,7 +34,7 @@ export const getGuildsTokenAddress = (guildSlug: string) => {
     return getAddress(tokens.troll.address)
   }
   if (guildSlug === 'arb') {
-    return getAddress(tokens.garb.address) // todo change before launch
+    return getAddress(tokens.arb.address)
   }
   return null
 }

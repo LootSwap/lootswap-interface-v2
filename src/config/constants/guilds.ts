@@ -144,7 +144,7 @@ const farms: GuildConfig[] = [
     token: tokens.arb,
     quoteToken: tokens.loot,
     guildSlug: 'arb',
-    startBlock: 15656100,
+    startBlock: 15830546,
   },
   {
     pid: 1,
@@ -156,7 +156,7 @@ const farms: GuildConfig[] = [
     token: tokens.arb,
     quoteToken: tokens.wone,
     guildSlug: 'arb',
-    startBlock: 15656100,
+    startBlock: 15830546,
   },
   {
     pid: 2,
@@ -168,7 +168,7 @@ const farms: GuildConfig[] = [
     token: tokens.viper,
     quoteToken: tokens.arb,
     guildSlug: 'arb',
-    startBlock: 15656100,
+    startBlock: 15830546,
   },
   {
     pid: 3,
@@ -180,7 +180,7 @@ const farms: GuildConfig[] = [
     token: tokens.hmochi,
     quoteToken: tokens.arb,
     guildSlug: 'arb',
-    startBlock: 15656100,
+    startBlock: 15830546,
   },
   {
     pid: 4,
@@ -192,7 +192,7 @@ const farms: GuildConfig[] = [
     token: tokens.onesushi,
     quoteToken: tokens.arb,
     guildSlug: 'arb',
-    startBlock: 15656100,
+    startBlock: 15830546,
   },
   {
     pid: 5,
@@ -204,7 +204,7 @@ const farms: GuildConfig[] = [
     token: tokens.mooni,
     quoteToken: tokens.arb,
     guildSlug: 'arb',
-    startBlock: 15656100,
+    startBlock: 15830546,
     isCommunity: true,
   },
   {
@@ -217,7 +217,7 @@ const farms: GuildConfig[] = [
     token: tokens.jenn,
     quoteToken: tokens.arb,
     guildSlug: 'arb',
-    startBlock: 15656100,
+    startBlock: 15830546,
     isCommunity: true,
   },
   {
@@ -230,7 +230,7 @@ const farms: GuildConfig[] = [
     token: tokens.xya,
     quoteToken: tokens.arb,
     guildSlug: 'arb',
-    startBlock: 15656100,
+    startBlock: 15830546,
     isCommunity: true,
   },
   {
@@ -243,7 +243,7 @@ const farms: GuildConfig[] = [
     token: tokens.coink,
     quoteToken: tokens.arb,
     guildSlug: 'arb',
-    startBlock: 15656100,
+    startBlock: 15830546,
     isCommunity: true,
   },
   {
@@ -256,7 +256,7 @@ const farms: GuildConfig[] = [
     token: tokens.troll,
     quoteToken: tokens.arb,
     guildSlug: 'arb',
-    startBlock: 15656100,
+    startBlock: 15830546,
     isCommunity: true,
   },
   {
@@ -269,7 +269,7 @@ const farms: GuildConfig[] = [
     token: tokens.gg,
     quoteToken: tokens.arb,
     guildSlug: 'arb',
-    startBlock: 15656100,
+    startBlock: 15830546,
     isCommunity: true,
   },
   {
@@ -282,7 +282,7 @@ const farms: GuildConfig[] = [
     token: tokens.bard,
     quoteToken: tokens.arb,
     guildSlug: 'arb',
-    startBlock: 15656100,
+    startBlock: 15830546,
     isCommunity: true,
   },
   {
@@ -295,20 +295,7 @@ const farms: GuildConfig[] = [
     token: tokens.necro,
     quoteToken: tokens.arb,
     guildSlug: 'arb',
-    startBlock: 15656100,
-    isCommunity: true,
-  },
-  {
-    pid: 13,
-    lpSymbol: 'ARB-VINCI',
-    lpAddresses: {
-      1666600000: '0x38445429BBd3533B2cdDe5eF35830046884fd2D0',
-      1666700000: '',
-    },
-    token: tokens.vinci,
-    quoteToken: tokens.arb,
-    guildSlug: 'arb',
-    startBlock: 15656100,
+    startBlock: 15830546,
     isCommunity: true,
   },
 ]

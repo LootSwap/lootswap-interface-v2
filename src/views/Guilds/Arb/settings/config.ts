@@ -3,7 +3,7 @@ import { darkTheme, lightTheme } from './theme'
 
 export const config: GuildConfig = {
   numberOfFarmsVisible: 12,
-  symbol: 'GARB', // use to label symbols dynamically
+  symbol: 'ARB', // use to label symbols dynamically
   darkTheme,
   lightTheme,
   guildSlug: 'arb',
