@@ -16,7 +16,7 @@ export default {
     1666700000: '',
   },
   masterLooterARB: {
-    1666600000: '0xde74C25260ac25ebb96dD1Ee581Ee2B932190ED4',
+    1666600000: '0x1b1987278d7737aa6bCeD283643C314c318C3879',
     1666700000: '',
   },
 }
