@@ -31,7 +31,11 @@ const Container = styled.div`
 
 const Emission: React.FunctionComponent<EmissionProps> = ({ poolRewardsPerBlock }) => {
   const rewardsPerBlock = new BigNumber(poolRewardsPerBlock)
-  const displayEmission = rewardsPerBlock ? `${Number(rewardsPerBlock.toJSON()).toFixed(4)}` : <Skeleton width={60} />
+  const displayEmission = rewardsPerBlock.gt(0) ? (
+    `${Number(rewardsPerBlock.toJSON()).toFixed(4)}`
+  ) : (
+    <Skeleton width={60} />
+  )
   const { t } = useTranslation()
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
     t('%rewards% %sym% / block ', { rewards: rewardsPerBlock.toJSON(), sym: 'LOOT' }),

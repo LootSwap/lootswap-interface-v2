@@ -157,24 +157,6 @@ const tokens = {
       projectLink: '//lootswap.finance/',
     },
   },
-  guest: {
-    symbol: 'GUESTV10',
-    address: {
-      1666600000: '0x9563765352bBfD118C2AF57b09F56F84FB40FAE4',
-      1666700000: '0x803B3fA6d17023b0f4C8513721e35785955e3075',
-      decimals: 18,
-      projectLink: '//lootswap.finance/',
-    },
-  },
-  gtroll: {
-    symbol: 'GTROLL',
-    address: {
-      1666600000: '0x0bc12BaBa4Ebae856f13d194221d78F6eb4f07aC',
-      1666700000: '',
-      decimals: 18,
-      projectLink: '//lootswap.finance/',
-    },
-  },
   gg: {
     symbol: 'GG',
     address: {
@@ -183,6 +165,15 @@ const tokens = {
     },
     decimals: 18,
     projectLink: '//geriatricsgaming.com/',
+  },
+  guest: {
+    symbol: 'GUESTV10',
+    address: {
+      1666600000: '0x9563765352bBfD118C2AF57b09F56F84FB40FAE4',
+      1666700000: '0x803B3fA6d17023b0f4C8513721e35785955e3075',
+      decimals: 18,
+      projectLink: '//lootswap.finance/',
+    },
   },
   bscdai: {
     symbol: 'bscDAI',
@@ -263,6 +254,69 @@ const tokens = {
       1666700000: '',
     },
     decimals: 18,
+  },
+  viper: {
+    symbol: 'VIPER',
+    address: {
+      1666600000: '0xea589e93ff18b1a1f1e9bac7ef3e86ab62addc79',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '//viperswap.one/',
+    },
+  },
+  hmochi: {
+    symbol: 'hMOCHI',
+    address: {
+      1666600000: '0x0dd740db89b9fda3baadf7396ddad702b6e8d6f5',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '//mochiswap.io//',
+    },
+  },
+  onesushi: {
+    symbol: '1SUSHI',
+    address: {
+      1666600000: '0xbec775cb42abfa4288de81f387a9b1a3c4bc552a',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '//mochiswap.io//',
+    },
+  },
+  mooni: {
+    symbol: 'MOONI',
+    address: {
+      1666600000: '0x8D4F19bec883Ba20F4f295706C53F760Cd0BC2B0',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '//moonity.one/',
+    },
+  },
+  jenn: {
+    symbol: 'JENN',
+    address: {
+      1666600000: '0x2f459dd7cbcc9d8323621f6fb430cd0555411e7b',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '//tokenjenny.one/',
+    },
+  },
+  coink: {
+    symbol: 'COINK',
+    address: {
+      1666600000: '0x4970417a897cc7ae812b9b8db34bb44833c26739',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '',
+    },
+  },
+  vinci: {
+    symbol: 'VINCI',
+    address: {
+      1666600000: '0xB8E0497018c991E86311b64EFd9D57b06aEDbBAE',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '//davinci.gallery/',
+    },
   },
 }
 
