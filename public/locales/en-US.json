@@ -597,8 +597,10 @@
   "Locked Balance": "Locked Balance",
   "Includes 95% of locked rewards and total burn.": "Includes 95% of locked rewards and total burn.",
   "Includes Total Supply minus Total Burned.": "Includes Total Supply minus Total Burned.",
-  "TROLL": "TROLL",
-  "GG": "GG",
+  "Troll": "Troll",
+  "Geriatric Gaming": "Geriatric Gaming",
+  "Arbiter": "Arbiter",
+  "Bard": "Bard",
   "Unlocked": "Unlocked",
   "Amount of your earned total that is currently locked.": "Amount of your earned total that is currently locked.",
   "Amount of your earned total that is currently available.": "Amount of your earned total that is currently available.",
@@ -616,5 +618,6 @@
   "%sym% Base Emission": "%sym% Base Emission",
   "Emission multiplier": "Emission multiplier",
   "Emission Rate": "Emission Rate",
-  "%rewards% %sym% / block ": "%rewards% %sym% / block "
+  "%rewards% %sym% / block ": "%rewards% %sym% / block ",
+  "Loot Blocks": "Loot Blocks"
 }
