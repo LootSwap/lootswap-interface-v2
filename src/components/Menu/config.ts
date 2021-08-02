@@ -54,6 +54,11 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     ],
   },
   {
+    label: t('Loot Blocks'),
+    icon: 'LootBlockIcon',
+    href: 'https://lootblocks.one/0x94d3433aAe74B0B9341B0e89F4663D49235bA8C5',
+  },
+  {
     label: t('Analytics'),
     icon: 'InfoIcon',
     href: 'https://analytics.lootswap.finance/',
