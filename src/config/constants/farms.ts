@@ -162,6 +162,17 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.loot,
     isCommunity: true,
   },
+  {
+    pid: 16,
+    lpSymbol: 'VINCI-ONE',
+    lpAddresses: {
+      1666600000: '0x75903f7343918058525EBA1fc26595D174ef5D44',
+      1666700000: '',
+    },
+    token: tokens.vinci,
+    quoteToken: tokens.wone,
+    isCommunity: true,
+  },
 ]
 
 export default farms
