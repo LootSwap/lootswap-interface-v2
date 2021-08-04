@@ -53,7 +53,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
 
   return (
     <Modal title={t('Stake LP tokens')} onDismiss={onDismiss}>
-      <StyledDepositFee>{`${t('Deposit fee is:')} ${Number(userDepositFee) / 10000}%`}</StyledDepositFee>
+      <StyledDepositFee>{`${t('Deposit fee is:')} ${Number(userDepositFee) / 100}%`}</StyledDepositFee>
       <ModalInput
         value={val}
         onSelectMax={handleSelectMax}

@@ -173,6 +173,17 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.wone,
     isCommunity: true,
   },
+  {
+    pid: 17,
+    lpSymbol: 'LOOT-GG',
+    lpAddresses: {
+      1666600000: '0x0499761c54812Fd8084d75D3674097b1232B89C7',
+      1666700000: '',
+    },
+    token: tokens.gg,
+    quoteToken: tokens.loot,
+    isCommunity: true,
+  },
 ]
 
 export default farms
