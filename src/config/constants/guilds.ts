@@ -285,6 +285,18 @@ const farms: GuildConfig[] = [
     guildSlug: 'arb',
     isCommunity: true,
   },
+  {
+    pid: 13,
+    lpSymbol: 'ARB-VINCI',
+    lpAddresses: {
+      1666600000: '0x38445429BBd3533B2cdDe5eF35830046884fd2D0',
+      1666700000: '',
+    },
+    token: tokens.vinci,
+    quoteToken: tokens.arb,
+    guildSlug: 'arb',
+    isCommunity: true,
+  },
 ]
 
 export default farms
