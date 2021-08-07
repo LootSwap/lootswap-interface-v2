@@ -24,6 +24,9 @@ export const getGuildsMasterLooterAddress = (guildSlug: string) => {
   if (guildSlug === 'arb') {
     return getAddress(addresses.masterLooterARB)
   }
+  if (guildSlug === 'bard') {
+    return getAddress(addresses.masterLooterBARD)
+  }
   return null
 }
 export const getGuildsTokenAddress = (guildSlug: string) => {
@@ -35,6 +38,9 @@ export const getGuildsTokenAddress = (guildSlug: string) => {
   }
   if (guildSlug === 'arb') {
     return getAddress(tokens.arb.address)
+  }
+  if (guildSlug === 'bard') {
+    return getAddress(tokens.bard.address)
   }
   return null
 }

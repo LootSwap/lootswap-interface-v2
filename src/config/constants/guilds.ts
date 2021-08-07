@@ -297,6 +297,63 @@ const farms: GuildConfig[] = [
     guildSlug: 'arb',
     isCommunity: true,
   },
+  {
+    pid: 0,
+    lpSymbol: 'BARD-LOOT',
+    lpAddresses: {
+      1666600000: '0x7Fa2eD0c31F2c0d155469850cb01537726a1a541',
+      1666700000: '',
+    },
+    token: tokens.bard,
+    quoteToken: tokens.loot,
+    guildSlug: 'bard',
+    isCommunity: true,
+  },
+  {
+    pid: 1,
+    lpSymbol: 'BARD-ONE',
+    lpAddresses: {
+      1666600000: '0x32ea67B14a542cD58c1267badba566E5e1e8f9fa',
+      1666700000: '',
+    },
+    token: tokens.bard,
+    quoteToken: tokens.wone,
+    guildSlug: 'bard',
+    isCommunity: true,
+  },
+  {
+    pid: 2,
+    lpSymbol: 'ONE-bscETH',
+    lpAddresses: {
+      1666600000: '0xe30B387D41077A2DFebEf0a2dF0df55C755BB7f7',
+      1666700000: '',
+    },
+    token: tokens.bsceth,
+    quoteToken: tokens.wone,
+    guildSlug: 'bard',
+  },
+  {
+    pid: 3,
+    lpSymbol: 'ONE-1renDOGE',
+    lpAddresses: {
+      1666600000: '0x32931EA9E2C36b44EE8010d3840F07c704C6d4f6',
+      1666700000: '',
+    },
+    token: tokens.onerendoge,
+    quoteToken: tokens.wone,
+    guildSlug: 'bard',
+  },
+  {
+    pid: 4,
+    lpSymbol: 'ONE-bscDAI',
+    lpAddresses: {
+      1666600000: '0x2c005Cff953B0a1EA709be47b7ea806E425e9df5',
+      1666700000: '',
+    },
+    token: tokens.wone,
+    quoteToken: tokens.bscdai,
+    guildSlug: 'bard',
+  },
 ]
 
 export default farms
