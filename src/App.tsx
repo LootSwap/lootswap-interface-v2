@@ -5,6 +5,7 @@ import { ResetCSS } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
 import { usePollCoreFarmData, usePollBlockNumber } from 'state/hooks'
+import AutoLooter from 'views/AutoLooter/AutoLooter'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import SuspenseWithChunkError from './components/SuspenseWithChunkError'
@@ -43,6 +44,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/questlog">
               <Farms />
+            </Route>
+            <Route path="/autolooter">
+              <AutoLooter />
             </Route>
             {/* Redirect 
             <Route path="/staking">

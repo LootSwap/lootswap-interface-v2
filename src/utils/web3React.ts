@@ -1,7 +1,8 @@
+import { Web3Provider } from '@ethersproject/providers'
+import { Blockchain, ChainId } from '@lootswap/sdk'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { WalletLinkConnector } from '@web3-react/walletlink-connector'
-import Web3 from 'web3'
 import getNodeUrl from './getRpcUrl'
 
 export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1666700000')
@@ -37,6 +38,40 @@ export const connectorsByName: { [connectorName in ConnectorNames]: any } = {
   [ConnectorNames.WalletLink]: walletlink,
 }
 
-export const getLibrary = (provider): Web3 => {
-  return provider
+function getBlockchain(chainId: ChainId | undefined): Blockchain {
+  switch (chainId) {
+    case ChainId.MAINNET:
+    case ChainId.ROPSTEN:
+    case ChainId.RINKEBY:
+    case ChainId.GÖRLI:
+    case ChainId.KOVAN:
+      return Blockchain.ETHEREUM
+    case ChainId.BSC_MAINNET:
+    case ChainId.BSC_TESTNET:
+      return Blockchain.BINANCE_SMART_CHAIN
+    case ChainId.HARMONY_MAINNET:
+    case ChainId.HARMONY_TESTNET:
+      return Blockchain.HARMONY
+    default:
+      return Blockchain.ETHEREUM
+  }
+}
+
+export const BLOCKCHAIN: Blockchain = getBlockchain(NETWORK_CHAIN_ID)
+
+export const getLibrary = (provider): Web3Provider => {
+  // return provider
+  const library = new Web3Provider(provider, 'any')
+  switch (BLOCKCHAIN) {
+    case Blockchain.BINANCE_SMART_CHAIN:
+      library.pollingInterval = 1500
+      break
+    case Blockchain.HARMONY:
+      library.pollingInterval = 500
+      break
+    default:
+      library.pollingInterval = 15000
+      break
+  }
+  return library
 }

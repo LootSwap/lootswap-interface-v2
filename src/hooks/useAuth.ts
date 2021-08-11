@@ -20,7 +20,7 @@ const useAuth = () => {
   const { toastError } = useToast()
 
   const login = useCallback(
-    (connectorID: ConnectorNames) => {
+    (connectorID: ConnectorNames, done?: () => void) => {
       const connector = connectorsByName[connectorID]
       if (connector) {
         activate(connector, async (error: Error) => {
@@ -28,6 +28,9 @@ const useAuth = () => {
             const hasSetup = await setupNetwork()
             if (hasSetup) {
               activate(connector)
+              if (done !== undefined) {
+                done()
+              }
             }
           } else {
             window.localStorage.removeItem(connectorLocalStorageKey)
@@ -44,6 +47,9 @@ const useAuth = () => {
               toastError(t('Authorization Error'), t('Please authorize to access your account'))
             } else {
               toastError(error.name, error.message)
+            }
+            if (done !== undefined) {
+              done()
             }
           }
         })

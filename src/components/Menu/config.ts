@@ -31,6 +31,12 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     href: '/questlog',
   },
   {
+    label: t('Auto LOOT'),
+    icon: 'QuestLogsIcon',
+    type: 'svg',
+    href: '/autolooter',
+  },
+  {
     label: t('Guilds'),
     icon: 'GuildIcon',
     type: 'svg',
