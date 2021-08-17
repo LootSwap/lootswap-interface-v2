@@ -57,6 +57,11 @@ const EarningsCell: React.FC<EarningsCellProps> = ({ lootmarket, account, userDa
     onPresentCollect()
   }
 
+  let decimalFormatPrefer = 1
+  if (hasEarnings) {
+    decimalFormatPrefer = Number(earningTokenBalance.toFixed(15)) % 1 !== 0 ? 18 : DISPLAY_DECIMAL_FORMAT_PREF
+  }
+
   return (
     <StyledCell role="cell">
       <CellContent>
@@ -74,7 +79,7 @@ const EarningsCell: React.FC<EarningsCellProps> = ({ lootmarket, account, userDa
                   bold={!isXs && !isSm}
                   fontSize={isXs || isSm ? '14px' : '16px'}
                   color={hasEarnings ? 'primary' : 'textDisabled'}
-                  decimals={hasEarnings ? DISPLAY_DECIMAL_FORMAT_PREF : 1}
+                  decimals={decimalFormatPrefer}
                   value={hasEarnings ? earningTokenBalance : 0}
                 />
                 {hasEarnings ? (

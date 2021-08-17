@@ -65,6 +65,12 @@ export const harvest = async (masterChefContract, pid, account) => {
 }
 
 // Loot Markets
+export const approveLootMarket = async (lpContract, lootMarketContract, account) => {
+  return lpContract.methods
+    .approve(lootMarketContract.options.address, ethers.constants.MaxUint256)
+    .send({ from: account })
+}
+
 export const lootMarketHarvestStaking = async (lootMarketContract, account) => {
   const estGas = await lootMarketContract.methods
     .withdraw(0)

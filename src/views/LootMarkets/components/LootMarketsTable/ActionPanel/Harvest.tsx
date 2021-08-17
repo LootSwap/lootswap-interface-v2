@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button, Text, useModal, Flex, Skeleton } from '@pancakeswap/uikit'
+import { Button, Text, Flex, Skeleton } from '@pancakeswap/uikit'
+import { useModal } from '@lootswap/uikit'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { LootMarketCategory } from 'config/constants/types'
@@ -33,12 +34,20 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({
   const earningTokenBalance = getBalanceNumber(earnings, earningToken.decimals)
   const earningTokenDollarBalance = getBalanceNumber(earnings.multipliedBy(earningTokenPrice), earningToken.decimals)
   const hasEarnings = earnings.gt(0)
+
+  let decimalFormatPrefer = 1
+  if (hasEarnings) {
+    decimalFormatPrefer = Number(earningTokenBalance.toFixed(15)) % 1 !== 0 ? 18 : DISPLAY_DECIMAL_FORMAT_PREF
+  }
+
   const fullBalance = getFullDisplayBalance(earnings, earningToken.decimals)
-  const formattedBalance = formatNumber(earningTokenBalance, DISPLAY_DECIMAL_FORMAT_PREF, DISPLAY_DECIMAL_FORMAT_PREF)
+  const formattedBalance = formatNumber(earningTokenBalance, decimalFormatPrefer, decimalFormatPrefer)
   const earningsDollarValue = formatNumber(earningTokenDollarBalance)
-  const isStakingPool = lootMarketCategory === LootMarketCategory.BINANCE
+  const isStakingPool =
+    lootMarketCategory === LootMarketCategory.CORE || lootMarketCategory === LootMarketCategory.COMMUNITY
 
   const displayBalance = hasEarnings ? earningTokenBalance : 0
+
   const [onPresentCollect] = useModal(
     <CollectModal
       formattedBalance={formattedBalance}
@@ -89,7 +98,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({
       <ActionTitles>{actionTitle}</ActionTitles>
       <ActionContent>
         <Flex flex="1" pt="16px" flexDirection="column" alignSelf="flex-start">
-          <Balance lineHeight="1" bold fontSize="20px" decimals={DISPLAY_DECIMAL_FORMAT_PREF} value={displayBalance} />
+          <Balance lineHeight="1" bold fontSize="20px" decimals={decimalFormatPrefer} value={displayBalance} />
           {hasEarnings ? (
             <Balance
               display="inline"

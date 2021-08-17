@@ -11,7 +11,7 @@ export const fetchLootMarketsAllowance = async (account) => {
   const calls = lootStakingPools.map((p) => ({
     address: getAddress(p.stakingToken.address),
     name: 'allowance',
-    params: [account, getAddress(p.contractAddress)],
+    params: [account, getAddress(p.stakingToken.address)],
   }))
 
   const allowances = await multicall(erc20ABI, calls)
