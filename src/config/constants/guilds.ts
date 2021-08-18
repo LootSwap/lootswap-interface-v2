@@ -354,6 +354,17 @@ const farms: GuildConfig[] = [
     quoteToken: tokens.bscdai,
     guildSlug: 'bard',
   },
+  // {
+  //   pid: 0,
+  //   lpSymbol: '',
+  //   lpAddresses: {
+  //     1666600000: '0xa2DEBc3Cbe088Fff2bEdE17aC67eF5f285845038',
+  //     1666700000: '',
+  //   },
+  //   token: tokens.wone,
+  //   quoteToken: tokens.loot,
+  //   guildSlug: 'cosmic'
+  // },
 ]
 
 export default farms

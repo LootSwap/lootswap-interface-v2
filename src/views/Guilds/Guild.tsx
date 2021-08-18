@@ -492,6 +492,7 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
             textColor={guildSettings.darkTheme.colors.primary}
             overlayColor={guildSettings.darkTheme.colors.secondary}
             guildSymbol={guildSettings.symbol}
+            overrideText={guildSettings.overrideBannerTitle ? guildSettings.overrideBannerTitle : ''}
           />
         </Heading>
         <Heading scale="lg" color="text">

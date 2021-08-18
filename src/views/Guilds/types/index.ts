@@ -44,4 +44,5 @@ export type GuildConfig = {
   hasLockUp?: boolean
   lockupconfig?: LockUp
   tagline?: string
+  overrideBannerTitle?: string
 }

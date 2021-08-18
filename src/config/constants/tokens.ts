@@ -318,6 +318,15 @@ const tokens = {
       projectLink: '//davinci.gallery/',
     },
   },
+  cosmic: {
+    symbol: 'MAGIC',
+    address: {
+      1666600000: '0x892D81221484F690C0a97d3DD18B9144A3ECDFB7',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '',
+    },
+  },
 }
 
 export default tokens

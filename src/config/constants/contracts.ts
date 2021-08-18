@@ -23,4 +23,8 @@ export default {
     1666600000: '0x88EbD46751a94602f798e20037C5BB5ed17f78DB',
     1666700000: '',
   },
+  masterLooterCOSMIC: {
+    1666600000: '0x12dC61f46718DD00e993Da7865da15E8cb713094',
+    1666700000: '',
+  },
 }

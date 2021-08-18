@@ -6,6 +6,7 @@ interface GuildTitleViewProps {
   guildSymbol: string
   textColor: string
   overlayColor: string
+  overrideText?: string
 }
 
 interface IAnimatedTextContentClone {
@@ -54,7 +55,12 @@ const AnimatedTextContentClone: React.FunctionComponent<IAnimatedTextContentClon
   );
 `
 
-const AnimatedText: React.FunctionComponent<GuildTitleViewProps> = ({ textColor, overlayColor, guildSymbol }) => {
+const AnimatedText: React.FunctionComponent<GuildTitleViewProps> = ({
+  textColor,
+  overlayColor,
+  guildSymbol,
+  overrideText = '',
+}) => {
   const { t } = useTranslation()
   const containerElem = useRef(null)
   const initialMousePos = { x: 0, y: 0 }
@@ -74,9 +80,11 @@ const AnimatedText: React.FunctionComponent<GuildTitleViewProps> = ({ textColor,
 
   return (
     <AnimatedTextContainer onMouseMove={handleMouseMove} onMouseOut={handleMouseOut} ref={containerElem}>
-      <AnimatedTextContent color={textColor}>{`${guildSymbol} ${t('Guild')}`}</AnimatedTextContent>
+      <AnimatedTextContent color={textColor}>
+        {overrideText !== '' ? `${overrideText} ${t('Guild')}` : `${guildSymbol} ${t('Guild')}`}
+      </AnimatedTextContent>
       <AnimatedTextContentClone aria-hidden maskX={mousePos.x} maskY={mousePos.y} color={overlayColor}>
-        {`${guildSymbol} ${t('Guild')}`}
+        {overrideText !== '' ? `${overrideText} ${t('Guild')}` : `${guildSymbol} ${t('Guild')}`}
       </AnimatedTextContentClone>
     </AnimatedTextContainer>
   )
