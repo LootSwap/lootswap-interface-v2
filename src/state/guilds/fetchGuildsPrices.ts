@@ -125,7 +125,8 @@ const getGuildQuoteTokenPrice = (
   if (
     quoteTokenFarm.quoteToken.symbol === 'TROLL' ||
     quoteTokenFarm.quoteToken.symbol === 'ARB' ||
-    quoteTokenFarm.quoteToken.symbol === 'GG'
+    quoteTokenFarm.quoteToken.symbol === 'GG' ||
+    quoteTokenFarm.quoteToken.symbol === 'MAGIC'
   ) {
     return guildPriceBusd
   }
