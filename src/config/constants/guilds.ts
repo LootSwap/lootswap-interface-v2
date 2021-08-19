@@ -354,6 +354,99 @@ const farms: GuildConfig[] = [
     quoteToken: tokens.bscdai,
     guildSlug: 'bard',
   },
+  {
+    pid: 0,
+    lpSymbol: 'MAGIC-LOOT',
+    lpAddresses: {
+      1666600000: '0x86097830F2379300D77F047365CD11D95498cc70',
+      1666700000: '',
+    },
+    token: tokens.magic,
+    quoteToken: tokens.loot,
+    isCommunity: true,
+    guildSlug: 'cosmic',
+  },
+  {
+    pid: 1,
+    lpSymbol: 'MAGIC-ONE',
+    lpAddresses: {
+      1666600000: '0x7629a8782192a5b87eFd40d2eEf366E865A984ae',
+      1666700000: '',
+    },
+    token: tokens.magic,
+    quoteToken: tokens.wone,
+    guildSlug: 'cosmic',
+  },
+  {
+    pid: 2,
+    lpSymbol: 'COSMIC-ONE',
+    lpAddresses: {
+      1666600000: '0x98c2B8f03f8200FE5EaEBB8FF4CCe6718c8a4134',
+      1666700000: '',
+    },
+    token: tokens.cosmic,
+    quoteToken: tokens.wone,
+    isCommunity: true,
+    guildSlug: 'cosmic',
+  },
+  {
+    pid: 3,
+    lpSymbol: 'MAGIC-COSMIC',
+    lpAddresses: {
+      1666600000: '0x5b40F3f160e0804c5353a0b516e65De5e421f493',
+      1666700000: '',
+    },
+    token: tokens.cosmic,
+    quoteToken: tokens.magic,
+    guildSlug: 'cosmic',
+  },
+  {
+    pid: 4,
+    lpSymbol: 'MAGIC-bscBUSD',
+    lpAddresses: {
+      1666600000: '0x1014A04edd25e213598e653a3B7b658B229D3864',
+      1666700000: '',
+    },
+    token: tokens.magic,
+    quoteToken: tokens.bscbusd,
+    guildSlug: 'cosmic',
+  },
+  // {
+  //   pid: 5,
+  //   lpSymbol: 'bscBTCB-1WBTC',
+  //   lpAddresses: {
+  //     1666600000: '0x28C9AaD81cfd38Ca0f332fed9eAA1Ea2628d8A9B',
+  //     1666700000: '',
+  //   },
+  //   token: tokens.bscbtbb,
+  //   quoteToken: tokens.wbtc,
+  //   isCommunity: true,
+  //   guildSlug: 'cosmic'
+  // },
+  {
+    pid: 6,
+    lpSymbol: 'bscETH-1ETH',
+    lpAddresses: {
+      1666600000: '0xAeBB1a861194fe6aD90B6ff24dF98E204A968984',
+      1666700000: '',
+    },
+    token: tokens.bsceth,
+    quoteToken: tokens.ether,
+    isCommunity: true,
+    guildSlug: 'cosmic',
+  },
+  {
+    pid: 7,
+    lpSymbol: 'ONE-bscETH',
+    lpAddresses: {
+      1666600000: '0xe30B387D41077A2DFebEf0a2dF0df55C755BB7f7',
+      1666700000: '',
+    },
+    token: tokens.wone,
+    quoteToken: tokens.bsceth,
+    isCommunity: true,
+    guildSlug: 'cosmic',
+  },
 ]
 
 export default farms
