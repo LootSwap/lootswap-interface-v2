@@ -30,7 +30,6 @@ const EarningsCell: React.FC<EarningsCellProps> = ({ lootmarket, account, userDa
   const { isXs, isSm } = useMatchBreakpoints()
   const { pid, earningToken, lootMarketCategory, userData, earningTokenPrice } = lootmarket
   const earnings = userData?.pendingReward ? new BigNumber(userData.pendingReward) : BIG_ZERO
-
   const earningTokenBalance = getBalanceNumber(earnings, earningToken.decimals)
   const earningTokenDollarBalance = getBalanceNumber(earnings.multipliedBy(earningTokenPrice), earningToken.decimals)
   const hasEarnings = account && earnings.gt(0)

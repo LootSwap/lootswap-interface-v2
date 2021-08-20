@@ -11,10 +11,11 @@ export const fetchLootMarketsAllowance = async (account) => {
   const calls = lootStakingPools.map((p) => ({
     address: getAddress(p.stakingToken.address),
     name: 'allowance',
-    params: [account, getAddress(p.stakingToken.address)],
+    params: [account, getAddress(p.contractAddress)],
   }))
 
   const allowances = await multicall(erc20ABI, calls)
+
   return lootStakingPools.reduce(
     (acc, lootmarket, index) => ({ ...acc, [lootmarket.pid]: new BigNumber(allowances[index]).toJSON() }),
     {},

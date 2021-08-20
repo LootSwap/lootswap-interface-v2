@@ -84,3 +84,63 @@ export const fetchLootMarketsTotalStaking = async () => {
     ]
   }
 }
+
+export const fetchLootMarketsRewardBalance = async () => {
+  try {
+    const callsRewardPoolBalances = lootMarketsConfig.map((market) => {
+      return {
+        address: getAddress(market.contractAddress),
+        name: 'rewardBalance',
+      }
+    })
+
+    const lootRewardPoolBalance = await multicall(lootMarketsABI, callsRewardPoolBalances)
+
+    return [
+      ...lootMarketsConfig.map((p, index) => ({
+        pid: p.pid,
+        rewardBalance: new BigNumber(lootRewardPoolBalance[index]).toJSON(),
+      })),
+    ]
+  } catch (error) {
+    return [
+      ...lootMarketsConfig.map((p) => ({
+        pid: p.pid,
+        rewardBalance: new BigNumber(0).toJSON(),
+      })),
+    ]
+  }
+}
+
+export const fetchLootMarketsInfo = async () => {
+  try {
+    const callsPoolInfo = lootMarketsConfig.map((market) => {
+      return {
+        address: getAddress(market.contractAddress),
+        name: 'poolInfo',
+      }
+    })
+
+    const lootMarketInfo = await multicall(lootMarketsABI, callsPoolInfo)
+
+    return [
+      ...lootMarketsConfig.map((p, index) => ({
+        pid: p.pid,
+        lootMarketInfo: {
+          accRewardTokenPerShare: new BigNumber(lootMarketInfo[index].accRewardTokenPerShare).toJSON(),
+          allocPoint: new BigNumber(lootMarketInfo[index].allocPoint).toJSON(),
+        },
+      })),
+    ]
+  } catch (error) {
+    return [
+      ...lootMarketsConfig.map((p) => ({
+        pid: p.pid,
+        lootMarketInfo: {
+          accRewardTokenPerShare: new BigNumber(0).toJSON(),
+          allocPoint: new BigNumber(0).toJSON(),
+        },
+      })),
+    ]
+  }
+}
