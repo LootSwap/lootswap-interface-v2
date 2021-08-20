@@ -22,6 +22,7 @@ type PublicGuildData = {
   baseEmissionRate: SerializedBigNumber
   lastRewardBlock: SerializedBigNumber
   userDepositFee: SerializedBigNumber
+  allocPoint: SerializedBigNumber
 }
 
 const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
@@ -139,6 +140,7 @@ const fetchGuild = async (guild: Guild): Promise<PublicGuildData> => {
     baseEmissionRate: emissionRate,
     lastRewardBlock: lastRewardBlock.toJSON(),
     userDepositFee: userDepositFee.toJSON(),
+    allocPoint: allocPoint.toJSON(),
   }
 }
 

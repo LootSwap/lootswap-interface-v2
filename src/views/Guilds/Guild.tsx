@@ -198,10 +198,10 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
   }, [isActive])
 
   const activeGuildFarms = guildsLPUnique.filter(
-    (g) => g.multiplier !== '0X' && !isArchivedPid(g.pid) && g.guildSlug === guildSlug,
+    (g) => g.multiplier !== '0' && !isArchivedPid(g.pid) && g.guildSlug === guildSlug,
   )
   const inactiveGuildFarms = guildsLPUnique.filter(
-    (g) => g.multiplier === '0X' && !isArchivedPid(g.pid) && g.guildSlug === guildSlug,
+    (g) => g.multiplier === '0' && !isArchivedPid(g.pid) && g.guildSlug === guildSlug,
   )
   const archivedGuildFarms = guildsLPUnique.filter((g) => isArchivedPid(g.pid) && g.guildSlug === guildSlug)
 

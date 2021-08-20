@@ -94,6 +94,7 @@ export interface Guild extends GuildConfig {
   baseEmissionRate?: SerializedBigNumber
   userDepositFee?: SerializedBigNumber
   poolRewardsPerBlock?: SerializedBigNumber
+  allocPoint?: SerializedBigNumber
   userData?: {
     allowance: string
     tokenBalance: string
