@@ -76,7 +76,8 @@ const getGuildQuoteTokenPrice = (
     guild.quoteToken.symbol === '1USDT' ||
     guild.quoteToken.symbol === '1USDC' ||
     guild.quoteToken.symbol === '1DAI' ||
-    guild.quoteToken.symbol === 'bscUSDC'
+    guild.quoteToken.symbol === 'bscUSDC' ||
+    guild.quoteToken.symbol === 'bscDAI'
   ) {
     return BIG_ONE
   }
