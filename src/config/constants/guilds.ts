@@ -1,6 +1,6 @@
 import tokens from './tokens'
 import { GuildConfig } from './types'
-
+// CHORE: GUILD SETTINGS
 const farms: GuildConfig[] = [
   {
     pid: 0,

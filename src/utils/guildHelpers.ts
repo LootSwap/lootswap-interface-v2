@@ -5,7 +5,9 @@ const GG_ARCHIVED_FARMS_START_PID = 999
 const GG_ARCHIVED_FARMS_END_PID = 9999
 
 const isArchivedPid = (pid: number, guildSlug) => {
-  switch (guildSlug) {
+  switch (
+    guildSlug // CHORE: GUILD SETTINGS
+  ) {
     case 'gg':
       return pid >= GG_ARCHIVED_FARMS_START_PID && pid <= GG_ARCHIVED_FARMS_END_PID // For Example
     default:

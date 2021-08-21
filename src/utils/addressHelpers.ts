@@ -14,6 +14,7 @@ export const getCakeAddress = () => {
 export const getMasterLooterAddress = () => {
   return getAddress(addresses.masterLooter)
 }
+// CHORE: GUILD SETTINGS
 export const getGuildsMasterLooterAddress = (guildSlug: string) => {
   if (guildSlug === 'gg') {
     return getAddress(addresses.masterLooterGG)

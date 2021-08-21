@@ -171,9 +171,9 @@ const tokens = {
     address: {
       1666600000: '0x0bc12BaBa4Ebae856f13d194221d78F6eb4f07aC',
       1666700000: '',
-      decimals: 18,
-      projectLink: '//lootswap.finance/',
     },
+    decimals: 18,
+    projectLink: '//lootswap.finance/',
   },
   bscdai: {
     symbol: 'bscDAI',

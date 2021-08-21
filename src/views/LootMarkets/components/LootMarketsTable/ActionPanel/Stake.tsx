@@ -10,7 +10,7 @@ import { LootMarket } from 'state/types'
 import Balance from 'components/Balance'
 import { useTranslation } from 'contexts/Localization'
 import { useLootMarketApprove } from 'hooks/useApprove'
-import { fetchLootMarketsUserDataAsync, updateUserAllowance } from 'state/actions'
+import { updateUserAllowance } from 'state/actions'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { LootMarketCategory } from 'config/constants/types'
 import { BIG_ZERO } from 'utils/bigNumber'
@@ -56,7 +56,6 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ lootmarket, userD
   const allowance = userData?.allowance ? new BigNumber(userData.allowance) : BIG_ZERO
   const stakedBalance = userData?.stakedBalance ? new BigNumber(userData.stakedBalance) : BIG_ZERO
   const isNotVaultAndHasStake = stakedBalance.gt(0)
-  console.log(stakedBalance.toJSON())
   const stakingTokenBalance = userData?.stakingTokenBalance ? new BigNumber(userData.stakingTokenBalance) : BIG_ZERO
 
   const stakedTokenBalance = getBalanceNumber(stakedBalance, stakingToken.decimals)
