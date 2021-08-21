@@ -470,6 +470,18 @@ const farms: GuildConfig[] = [
     isCommunity: true,
     guildSlug: 'cosmic',
   },
+  {
+    pid: 8,
+    lpSymbol: 'ONE-BUSD',
+    lpAddresses: {
+      1666600000: '0xaa781Dc33e968A58640b27Fcd0a536A65AaEFF71',
+      1666700000: '',
+    },
+    token: tokens.wone,
+    quoteToken: tokens.busd,
+    isCommunity: true,
+    guildSlug: 'cosmic',
+  },
 ]
 
 export default farms

@@ -62,11 +62,11 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
       },
     ],
   },
-  {
-    label: t('Loot Market'),
-    icon: 'IfoIcon',
-    href: '/market',
-  },
+  // {
+  //   label: t('Loot Market'),
+  //   icon: 'IfoIcon',
+  //   href: '/market',
+  // },
   {
     label: t('Loot Blocks'),
     icon: 'LootBlockIcon',
