@@ -336,6 +336,15 @@ const tokens = {
       projectLink: '',
     },
   },
+  oswap: {
+    symbol: 'oSWAP',
+    address: {
+      1666600000: '0xc0431Ddcc0D213Bf27EcEcA8C2362c0d0208c6DC',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '',
+    },
+  },
 }
 
 export default tokens
