@@ -21,8 +21,8 @@ interface CardActionsProps {
 
 const CardActions: React.FC<CardActionsProps> = ({ lootmarket, stakedBalance }) => {
   const { pid, stakingToken, earningToken, harvest, lootMarketCategory, userData, earningTokenPrice } = lootmarket
-  // Pools using native BNB behave differently than pools using a token
-  const isStakingPool = lootMarketCategory === LootMarketCategory.BINANCE
+  const isStakingPool =
+    lootMarketCategory === LootMarketCategory.CORE || lootMarketCategory === LootMarketCategory.COMMUNITY
   const { t } = useTranslation()
   const allowance = userData?.allowance ? new BigNumber(userData.allowance) : BIG_ZERO
   const stakingTokenBalance = userData?.stakingTokenBalance ? new BigNumber(userData.stakingTokenBalance) : BIG_ZERO

@@ -67,6 +67,11 @@ export enum LootMarketCategory {
   'AUTO' = 'Auto',
 }
 
+export type LootMarketInfo = {
+  accRewardTokenPerShare: string
+  allocPoint: string
+}
+
 export interface LootMarketConfig {
   pid: number
   earningToken: Token
@@ -77,5 +82,7 @@ export interface LootMarketConfig {
   sortOrder?: number
   harvest?: boolean
   isFinished?: boolean
+  rewardBalance?: number
+  lootMarketInfo?: LootMarketInfo
   enableEmergencyWithdraw?: boolean
 }

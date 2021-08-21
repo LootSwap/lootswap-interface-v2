@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
-import { Button, useModal, IconButton, AddIcon, MinusIcon, Skeleton, Flex, Text } from '@pancakeswap/uikit'
+import { Button, IconButton, AddIcon, MinusIcon, Skeleton, Flex, Text } from '@pancakeswap/uikit'
+import { useModal } from '@lootswap/uikit'
 import UnlockButton from 'components/UnlockButton'
 import { useWeb3React } from '@web3-react/core'
+import { useAppDispatch } from 'state'
 import { LootMarket } from 'state/types'
 import Balance from 'components/Balance'
 import { useTranslation } from 'contexts/Localization'
 import { useLootMarketApprove } from 'hooks/useApprove'
+import { updateUserAllowance } from 'state/actions'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { LootMarketCategory } from 'config/constants/types'
 import { BIG_ZERO } from 'utils/bigNumber'
@@ -30,23 +33,29 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ lootmarket, userD
   const { pid, stakingToken, earningToken, isFinished, lootMarketCategory, userData, stakingTokenPrice } = lootmarket
   const { t } = useTranslation()
   const { account } = useWeb3React()
+  const [requestedApproval, setRequestedApproval] = useState(false)
+  const dispatch = useAppDispatch()
 
   const stakingTokenContract = useERC20(stakingToken.address ? getAddress(stakingToken.address) : '')
-  const { handleApprove: handlePoolApprove, requestedApproval: requestedPoolApproval } = useLootMarketApprove(
-    stakingTokenContract,
-    pid,
-    earningToken.symbol,
-  )
 
-  const handleApprove = handlePoolApprove
-  const requestedApproval = requestedPoolApproval
+  const { onApprove } = useLootMarketApprove(stakingTokenContract, pid, earningToken.symbol)
+
+  const handleApprove = useCallback(async () => {
+    try {
+      setRequestedApproval(true)
+      await onApprove()
+      dispatch(updateUserAllowance(pid, account))
+      setRequestedApproval(false)
+    } catch (e) {
+      console.error(e)
+    }
+  }, [onApprove, dispatch, account, pid])
 
   const isStakingPool =
     lootMarketCategory === LootMarketCategory.CORE || lootMarketCategory === LootMarketCategory.COMMUNITY
   const allowance = userData?.allowance ? new BigNumber(userData.allowance) : BIG_ZERO
   const stakedBalance = userData?.stakedBalance ? new BigNumber(userData.stakedBalance) : BIG_ZERO
   const isNotVaultAndHasStake = stakedBalance.gt(0)
-
   const stakingTokenBalance = userData?.stakingTokenBalance ? new BigNumber(userData.stakingTokenBalance) : BIG_ZERO
 
   const stakedTokenBalance = getBalanceNumber(stakedBalance, stakingToken.decimals)
@@ -54,7 +63,8 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ lootmarket, userD
     stakedBalance.multipliedBy(stakingTokenPrice),
     stakingToken.decimals,
   )
-  const needsApproval = !allowance.gt(0) && !isStakingPool
+
+  const needsApproval = !allowance.gt(0) && !isNotVaultAndHasStake
 
   const [onPresentTokenRequired] = useModal(<NotEnoughTokensModal tokenSymbol={stakingToken.symbol} />)
 

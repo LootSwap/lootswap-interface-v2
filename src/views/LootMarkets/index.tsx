@@ -44,6 +44,14 @@ const ControlStretch = styled(Flex)`
     flex: 1;
   }
 `
+const TextStyled = styled(Text)`
+  text-align: center;
+  background-color: ${({ theme }) => theme.card.background};
+  padding-bottom: 0px;
+  margin-bottom: 32px;
+  padding: 5px;
+  border-radius: 5px;
+`
 
 const NUMBER_OF_LOOT_MARKETS_VISIBLE = 12
 
@@ -238,9 +246,9 @@ const LootMarkets: React.FC = () => {
           </SearchSortContainer>
         </PoolControls>
         {showFinishedLootMarkets && (
-          <Text fontSize="20px" color="failure" pb="32px">
+          <TextStyled fontSize="20px" color="failure" pb="32px">
             {t('These quest are no longer distributing rewards. Please unstake your tokens.')}
-          </Text>
+          </TextStyled>
         )}
         {viewMode === ViewMode.CARD ? cardLayout : tableLayout}
         <div ref={loadMoreRef} />

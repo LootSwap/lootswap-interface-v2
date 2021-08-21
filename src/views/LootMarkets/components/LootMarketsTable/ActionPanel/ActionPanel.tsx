@@ -113,7 +113,6 @@ const ActionPanel: React.FC<ActionPanelProps> = ({ account, lootmarket, userData
   const { t } = useTranslation()
   const { currentBlock } = useBlock()
   const { isXs, isSm, isMd } = breakpoints
-
   const { shouldShowBlockCountdown, blocksUntilStart, blocksRemaining, hasPoolStarted, blocksToDisplay } =
     getLootMarketBlockInfo(lootmarket, currentBlock)
 
@@ -176,7 +175,6 @@ const ActionPanel: React.FC<ActionPanelProps> = ({ account, lootmarket, userData
       </Flex>
     </Flex>
   )
-
   return (
     <StyledActionPanel expanded={expanded}>
       <InfoSection>

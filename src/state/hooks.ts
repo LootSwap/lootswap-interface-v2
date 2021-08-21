@@ -154,7 +154,7 @@ export const useMasterLooterInfo = () => {
 
 export const useFetchPublicLootMarketsData = () => {
   const dispatch = useAppDispatch()
-  const { slowRefresh } = useRefresh()
+  const { fastRefresh } = useRefresh()
   const web3 = getWeb3NoAccount()
 
   useEffect(() => {
@@ -164,17 +164,17 @@ export const useFetchPublicLootMarketsData = () => {
     }
 
     fetchPoolsPublicData()
-  }, [dispatch, slowRefresh, web3])
+  }, [dispatch, fastRefresh, web3])
 }
 
 export const useLootMarkets = (account): { lootmarkets: LootMarket[]; userDataLoaded: boolean } => {
-  const { fastRefresh } = useRefresh()
+  const { slowRefresh } = useRefresh()
   const dispatch = useAppDispatch()
   useEffect(() => {
     if (account) {
       dispatch(fetchLootMarketsUserDataAsync(account))
     }
-  }, [account, dispatch, fastRefresh])
+  }, [account, dispatch, slowRefresh])
 
   const { lootmarkets, userDataLoaded } = useSelector((state: State) => ({
     lootmarkets: state.lootmarkets.data,

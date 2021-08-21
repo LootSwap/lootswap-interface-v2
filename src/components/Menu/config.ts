@@ -35,6 +35,7 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     href: '/questlog',
   },
   {
+    // CHORE: GUILD SETTINGS
     label: t('Guilds'),
     icon: 'GuildIcon',
     type: 'svg',
@@ -61,6 +62,11 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
       },
     ],
   },
+  // {
+  //   label: t('Loot Market'),
+  //   icon: 'IfoIcon',
+  //   href: '/market',
+  // },
   {
     label: t('Loot Blocks'),
     icon: 'LootBlockIcon',

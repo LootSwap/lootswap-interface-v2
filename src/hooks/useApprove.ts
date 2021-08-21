@@ -1,7 +1,7 @@
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { Contract } from 'web3-eth-contract'
-import { approve, approveGuild } from 'utils/callHelpers'
+import { approve, approveGuild, approveLootMarket } from 'utils/callHelpers'
 import { useTranslation } from 'contexts/Localization'
 import { useAppDispatch } from 'state'
 import { updateUserAllowance } from 'state/actions'
@@ -34,28 +34,25 @@ export const useApprove = (lpContract: Contract) => {
 
 // Approve a LootMarket
 export const useLootMarketApprove = (lpContract: Contract, pid, earningTokenSymbol) => {
-  const [requestedApproval, setRequestedApproval] = useState(false)
   const { toastSuccess, toastError } = useToast()
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const { account } = useWeb3React()
+  const dispatch = useAppDispatch()
   const lootMarketContract = useLootMarketContract(pid)
 
   const handleApprove = useCallback(async () => {
     try {
-      setRequestedApproval(true)
+      const tx = await approveLootMarket(lpContract, lootMarketContract, account)
       dispatch(updateUserAllowance(pid, account))
-      const tx = await approve(lpContract, lootMarketContract, account)
+
       if (tx) {
         toastSuccess(
           t('Contract Enabled'),
           t('You can now stake in the %symbol% pool!', { symbol: earningTokenSymbol }),
         )
-        setRequestedApproval(false)
       } else {
         // user rejected tx or didn't go thru
         toastError(t('Error'), t('Please try again. Confirm the transaction and make sure you are paying enough gas!'))
-        setRequestedApproval(false)
       }
     } catch (e) {
       console.error(e)
@@ -63,7 +60,7 @@ export const useLootMarketApprove = (lpContract: Contract, pid, earningTokenSymb
     }
   }, [account, lpContract, lootMarketContract, earningTokenSymbol, t, toastError, toastSuccess, dispatch, pid])
 
-  return { handleApprove, requestedApproval }
+  return { onApprove: handleApprove }
 }
 
 // Approve a guild

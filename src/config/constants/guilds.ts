@@ -1,6 +1,6 @@
 import tokens from './tokens'
 import { GuildConfig } from './types'
-
+// CHORE: GUILD SETTINGS
 const farms: GuildConfig[] = [
   {
     pid: 0,
@@ -467,6 +467,18 @@ const farms: GuildConfig[] = [
     },
     token: tokens.wone,
     quoteToken: tokens.bsceth,
+    isCommunity: true,
+    guildSlug: 'cosmic',
+  },
+  {
+    pid: 8,
+    lpSymbol: 'ONE-BUSD',
+    lpAddresses: {
+      1666600000: '0xaa781Dc33e968A58640b27Fcd0a536A65AaEFF71',
+      1666700000: '',
+    },
+    token: tokens.wone,
+    quoteToken: tokens.busd,
     isCommunity: true,
     guildSlug: 'cosmic',
   },

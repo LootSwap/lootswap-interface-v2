@@ -15,6 +15,7 @@ export const fetchLootMarketsAllowance = async (account) => {
   }))
 
   const allowances = await multicall(erc20ABI, calls)
+
   return lootStakingPools.reduce(
     (acc, lootmarket, index) => ({ ...acc, [lootmarket.pid]: new BigNumber(allowances[index]).toJSON() }),
     {},

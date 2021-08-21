@@ -6,7 +6,12 @@ import { LootMarketState, LootMarket, AppThunk } from 'state/types'
 import { getLootMarketApr } from 'utils/apr'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { getAddress } from 'utils/addressHelpers'
-import { fetchLootMarketsBlockLimits, fetchLootMarketsTotalStaking } from './fetchLootMarkets'
+import {
+  fetchLootMarketsBlockLimits,
+  fetchLootMarketsTotalStaking,
+  fetchLootMarketsRewardBalance,
+  fetchLootMarketsInfo,
+} from './fetchLootMarkets'
 import {
   fetchUserBalances,
   fetchUserStakeBalances,
@@ -24,12 +29,15 @@ const initialState: LootMarketState = {
 export const fetchLootMarketsPublicDataAsync = (currentBlock: number) => async (dispatch, getState) => {
   const blockLimits = await fetchLootMarketsBlockLimits()
   const totalStakings = await fetchLootMarketsTotalStaking()
-
+  const rewardBalances = await fetchLootMarketsRewardBalance()
+  const lootMarketInfos = await fetchLootMarketsInfo()
   const prices = getTokenPricesFromFarm(getState().farms.data)
 
   const liveData = lootMarketsConfig.map((market) => {
+    const rewardBalance = rewardBalances.find((entry) => entry.pid === market.pid)
     const blockLimit = blockLimits.find((entry) => entry.pid === market.pid)
     const totalStaking = totalStakings.find((entry) => entry.pid === market.pid)
+    const lootMarketInfo = lootMarketInfos.find((entry) => entry.pid === market.pid)
     const isLootMarketEndBlockExceeded =
       currentBlock > 0 && blockLimit ? currentBlock > Number(blockLimit.endBlock) : false
     const isLootMarketFinished = market.isFinished || isLootMarketEndBlockExceeded
@@ -54,8 +62,10 @@ export const fetchLootMarketsPublicDataAsync = (currentBlock: number) => async (
       : 0
 
     return {
+      ...lootMarketInfo,
       ...blockLimit,
       ...totalStaking,
+      ...rewardBalance,
       stakingTokenPrice,
       earningTokenPrice,
       apr,

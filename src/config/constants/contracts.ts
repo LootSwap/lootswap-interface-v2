@@ -1,4 +1,5 @@
 export default {
+  // CHORE: GUILD SETTINGS
   masterLooter: {
     1666600000: '0xb96618aEBD36f8D83Fa03873FdA796264597604D',
     1666700000: '',

@@ -166,14 +166,14 @@ const tokens = {
     decimals: 18,
     projectLink: '//geriatricsgaming.com/',
   },
-  guest: {
-    symbol: 'GUESTV10',
+  gtroll: {
+    symbol: 'GTROLL',
     address: {
-      1666600000: '0x9563765352bBfD118C2AF57b09F56F84FB40FAE4',
-      1666700000: '0x803B3fA6d17023b0f4C8513721e35785955e3075',
-      decimals: 18,
-      projectLink: '//lootswap.finance/',
+      1666600000: '0x0bc12BaBa4Ebae856f13d194221d78F6eb4f07aC',
+      1666700000: '',
     },
+    decimals: 18,
+    projectLink: '//lootswap.finance/',
   },
   bscdai: {
     symbol: 'bscDAI',

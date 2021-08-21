@@ -123,6 +123,7 @@ const getGuildQuoteTokenPrice = (
     return quoteTokenFarm.tokenPriceVsQuote ? BIG_ONE.div(onePriceBusd) : BIG_ZERO
   }
 
+  // CHORE: GUILD SETTINGS
   if (
     quoteTokenFarm.quoteToken.symbol === 'TROLL' ||
     quoteTokenFarm.quoteToken.symbol === 'ARB' ||
@@ -139,9 +140,14 @@ const fetchGuildsPrices = async (guilds) => {
   const onerendogeoneFarm = guilds.find((guild: Guild) => guild.helperId === 1)
 
   // Important all Guilds need to have a base pairing of GUILD<>ONE
-  const guildpriceFarm = guilds.find(
-    (guild: Guild) => guild.quoteToken.symbol === 'WONE' && guild.token.symbol === guild.guildSlug.toUpperCase(),
-  )
+  // CHORE: GUILD SETTINGS
+  const guildpriceFarm = guilds.find((guild: Guild) => {
+    // Exceptions to when a guild has a different symbol then their tokens
+    if (guild.guildSlug.toUpperCase() === 'COSMIC') {
+      return guild.quoteToken.symbol === 'WONE' && guild.token.symbol === 'MAGIC'
+    }
+    return guild.quoteToken.symbol === 'WONE' && guild.token.symbol === guild.guildSlug.toUpperCase()
+  })
 
   // TODO we could put this in the priceGuildHelperLPs and call it from there. Dont know if its worth it if it doesnt optimize calls
   // Fetching the prices from our Loot farms

@@ -10,16 +10,18 @@ import { nodes } from './getRpcUrl'
 export const setupNetwork = async () => {
   const provider = (window as WindowChain).ethereum
   if (provider) {
-    const chainId = 10
+    const chainId = 1666600000
     try {
       await provider.request({
         method: 'wallet_addEthereumChain',
         params: [
           {
+            blockTime: 2,
+            blockchain: 3,
             chainId: `0x${chainId.toString(16)}`,
             chainName: 'Harmony Mainnet',
             nativeCurrency: {
-              name: 'ONE',
+              name: 'Harmony',
               symbol: 'ONE',
               decimals: 18,
             },
