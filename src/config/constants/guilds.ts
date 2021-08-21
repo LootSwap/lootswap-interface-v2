@@ -298,6 +298,30 @@ const farms: GuildConfig[] = [
     isCommunity: true,
   },
   {
+    pid: 14,
+    lpSymbol: 'ARB-MAGIC',
+    lpAddresses: {
+      1666600000: '0x1f8768540d3220eed954ec35aa03d1d8397b8a11',
+      1666700000: '',
+    },
+    token: tokens.magic,
+    quoteToken: tokens.arb,
+    guildSlug: 'arb',
+    isCommunity: true,
+  },
+  {
+    pid: 15,
+    lpSymbol: 'ARB-oSWAP',
+    lpAddresses: {
+      1666600000: '0xb47df31d1e7a3a925e0c938472a1895c5688276c',
+      1666700000: '',
+    },
+    token: tokens.oswap,
+    quoteToken: tokens.arb,
+    guildSlug: 'arb',
+    isCommunity: true,
+  },
+  {
     pid: 0,
     lpSymbol: 'BARD-LOOT',
     lpAddresses: {
