@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components'
 import { Flex, Text, Skeleton } from '@pancakeswap/uikit'
 import { Guild } from 'state/types'
 import { useBlock } from 'state/hooks'
+import useGuildSettings from 'views/Guilds/hooks/useGuildSettings'
 import { provider as ProviderType } from 'web3-core'
 import { getHarmonyScanAddressUrl } from 'utils/harmonyscan'
 import { getBalanceNumber } from 'utils/formatBalance'
@@ -95,6 +96,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
   const { t } = useTranslation()
   const { currentBlock } = useBlock()
   const [showExpandableSection, setShowExpandableSection] = useState(false)
+  const guildSettings = useGuildSettings(guildSlug)
   // We assume the token name is coin pair + lp e.g. CAKE-BNB LP, LINK-BNB LP,
   // NAR-CAKE LP. The images should be cake-bnb.svg, link-bnb.svg, nar-cake.svg
   const farmImage = farm.lpSymbol.split(' ')[0].toLocaleLowerCase()
@@ -105,7 +107,7 @@ const FarmCard: React.FC<FarmCardProps> = ({
   const totalValueFormatted = farm.liquidity ? `$${liq}` : ''
 
   const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANCAKE', '')
-  const earnLabel = farm.dual ? farm.dual.earnLabel : guildSlug.toUpperCase()
+  const earnLabel = farm.dual ? farm.dual.earnLabel : guildSettings.symbol.toUpperCase()
 
   const farmAPR = farm.apr && farm.apr.toLocaleString('en-US', { maximumFractionDigits: 2 })
 
