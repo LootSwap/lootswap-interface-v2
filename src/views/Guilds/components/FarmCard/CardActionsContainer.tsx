@@ -10,6 +10,7 @@ import { fetchGuildUserDataAsync } from 'state/guilds'
 import { Guild } from 'state/types'
 import { useTranslation } from 'contexts/Localization'
 import useWeb3 from 'hooks/useWeb3'
+import useGuildSettings from 'views/Guilds/hooks/useGuildSettings'
 import { useGuildApprove } from 'hooks/useApprove'
 import UnlockButton from 'components/UnlockButton'
 import StakeAction from './StakeAction'
@@ -33,6 +34,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
   const { t } = useTranslation()
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { pid, lpAddresses, guildSlug } = farm
+  const guildSettings = useGuildSettings(guildSlug)
   const {
     allowance: allowanceAsString = 0,
     tokenBalance: tokenBalanceAsString = 0,
@@ -86,7 +88,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
     <Action>
       <Flex>
         <Text bold textTransform="uppercase" color="secondary" fontSize="12px" pr="3px">
-          {guildSlug.toUpperCase()}
+          {guildSettings.symbol.toUpperCase()}
         </Text>
         <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
           {t('Earned')}

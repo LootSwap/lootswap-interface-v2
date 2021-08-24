@@ -22,7 +22,7 @@ export const config: GuildConfig = {
   lockupconfig: {
     guildIcon: '/images/tokens/magic.png',
   },
-  tagline: '', // use to customize the guild pages tagline
+  tagline: 'Rewards are 95% locked up until block 21612813', // use to customize the guild pages tagline
   overrideBannerTitle: 'COSMIC', // use to change the guild banner title
 }
 
