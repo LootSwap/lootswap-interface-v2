@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Skeleton, TimerIcon, useTooltip } from '@pancakeswap/uikit'
+import { Skeleton, TimerIcon, useTooltip, Progress } from '@pancakeswap/uikit'
 import { useBlock } from 'state/hooks'
 import { useTranslation } from 'contexts/Localization'
 
 export interface IStartBlockProps {
-  startBlock?: number
   lastRewardBlock?: string
 }
 
@@ -30,13 +29,11 @@ const ReferenceElement = styled.div`
   display: inline-block;
 `
 
-const StartBlockProps: React.FunctionComponent<IStartBlockProps> = ({ startBlock, lastRewardBlock }) => {
+const StartBlockProps: React.FunctionComponent<IStartBlockProps> = ({ lastRewardBlock }) => {
   const { t } = useTranslation()
   const { currentBlock } = useBlock()
-  const blocksUntilStart = Math.max(startBlock - currentBlock, 0)
-  const blocksRemaining = Math.max(currentBlock - Number(lastRewardBlock), 0)
-  const hasPoolStarted = blocksUntilStart === 0 && blocksRemaining > 0
-  const blocksToDisplay = hasPoolStarted ? blocksRemaining : blocksUntilStart
+  const blocksRemaining = Math.max(Number(lastRewardBlock) - currentBlock, 0)
+  const blocksToDisplay = blocksRemaining > 0 ? blocksRemaining : 0
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
     t('Questing starts in %num% Blocks', { num: blocksToDisplay }),
     { placement: 'top-end', tooltipOffset: [20, 10] },
