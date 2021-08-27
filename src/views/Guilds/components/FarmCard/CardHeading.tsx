@@ -31,7 +31,7 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({
   isCommunityFarm,
   farmImage,
   tokenSymbol,
-  startBlock,
+  startBlock = 0,
 }) => {
   // const { slug } = useParams<{ slug: string }>()
   const { t } = useTranslation()

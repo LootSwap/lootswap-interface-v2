@@ -81,6 +81,20 @@ const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
   const toggleActionPanel = () => {
     setActionPanelExpanded(!actionPanelExpanded)
   }
+  const [startBlockActive, setStartBlockActive] = useState(false)
+  useEffect(() => {
+    let isSubscribed = true
+    if (isSubscribed) {
+      if (details.lastRewardBlock && Number(details.lastRewardBlock) > currentBlock) {
+        setStartBlockActive(true)
+      }
+    }
+    // component will unmount
+    return () => {
+      isSubscribed = false
+      setStartBlockActive(false)
+    }
+  }, [details, currentBlock])
 
   useEffect(() => {
     setActionPanelExpanded(hasStakedAmount)
@@ -104,7 +118,7 @@ const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
 
             switch (key) {
               case 'earned':
-                return props.details.startBlock && props.details.startBlock > currentBlock ? (
+                return startBlockActive ? (
                   <td key={key}>
                     <CellInner>
                       <CellLayout label={t('Starts in')}>

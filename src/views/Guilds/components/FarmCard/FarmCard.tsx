@@ -121,12 +121,8 @@ const FarmCard: React.FC<FarmCardProps> = ({
   const guildToUSDPrice = getBalanceNumber(new BigNumber(farm.userData.earnings).times(guildTokenPrice))
 
   // Calculating when questing starts
-  const startBlock = farm.startBlock ?? 0
-  const blocksUntilStart = Math.max(startBlock - currentBlock, 0)
-  const blocksRemaining = Math.max(currentBlock - Number(farm.lastRewardBlock), 0)
-  const hasPoolStarted = blocksUntilStart === 0 && blocksRemaining > 0
-  const blocksToDisplay = hasPoolStarted ? 0 : blocksUntilStart
-
+  const blocksRemaining = currentBlock > 0 ? Math.max(Number(farm.lastRewardBlock) - currentBlock, 0) : 0
+  const blocksToDisplay = blocksRemaining > 0 ? blocksRemaining : 0
   return (
     <FCard isPromotedFarm={isPromotedFarm}>
       {isPromotedFarm && <StyledCardAccent />}
