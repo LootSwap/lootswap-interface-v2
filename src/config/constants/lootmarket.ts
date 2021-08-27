@@ -1,4 +1,6 @@
+// eslint-disable-next-line
 import tokens from './tokens'
+// eslint-disable-next-line
 import { LootMarketConfig, LootMarketCategory } from './types'
 
 const lootMarkets: LootMarketConfig[] = [

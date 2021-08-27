@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Skeleton, TimerIcon, useTooltip, Progress } from '@pancakeswap/uikit'
+import { Skeleton, TimerIcon, useTooltip } from '@pancakeswap/uikit'
 import { useBlock } from 'state/hooks'
 import { useTranslation } from 'contexts/Localization'
 
