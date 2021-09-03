@@ -9,7 +9,7 @@ export const config: GuildConfig = {
   darkTheme,
   lightTheme,
   guildSlug: 'gg',
-  guildTokenPerBlock: 0.159817361111111,
+  guildTokenPerBlock: 0.00000000159,
   footerImg: {
     src: '/images/tokens/gg.png',
     alt: 'GG Guild',
