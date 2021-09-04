@@ -5,7 +5,7 @@ import UnlockButton from 'components/UnlockButton'
 import { useTranslation } from 'contexts/Localization'
 import { BIG_ZERO } from 'utils/bigNumber'
 import { LootMarket } from 'state/types'
-// import AprRow from './AprRow'
+import AprRow from './AprRow'
 import { StyledCard, StyledCardInner } from './StyledCard'
 import CardFooter from './CardFooter'
 import StyledCardHeader from './StyledCardHeader'
@@ -30,7 +30,7 @@ const LootMarketsCard: React.FC<{ lootmarket: LootMarket; account: string }> = (
           isFinished={isFinished && pid !== 0}
         />
         <CardBody>
-          {/* <AprRow lootmarket={lootmarket} /> */}
+          <AprRow lootmarket={lootmarket} />
           <Flex mt="24px" flexDirection="column">
             {account ? (
               <CardActions lootmarket={lootmarket} stakedBalance={stakedBalance} />

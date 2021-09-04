@@ -103,7 +103,7 @@ const fetchFarmsPrices = async (farms) => {
   const lootbusdFarm = farms.find((farm: Farm) => farm.pid === 9)
   const onebusdFarm = farms.find((farm: Farm) => farm.pid === 1)
   const onePriceBusd = onebusdFarm?.tokenPriceVsQuote ? BIG_ONE.div(onebusdFarm.tokenPriceVsQuote) : BIG_ZERO
-  const lootPriceBusd = lootbusdFarm?.tokenPriceVsQuote ? BIG_ONE.div(lootbusdFarm.tokenPriceVsQuote) : BIG_ZERO
+  const lootPriceBusd = lootbusdFarm?.tokenPriceVsQuote ? new BigNumber(lootbusdFarm.tokenPriceVsQuote) : BIG_ZERO
   const farmsWithPrices = farms.map((farm) => {
     const quoteTokenFarm = getFarmFromTokenSymbol(farms, farm.quoteToken.symbol)
     const baseTokenPrice = getFarmBaseTokenPrice(farm, quoteTokenFarm, lootPriceBusd)

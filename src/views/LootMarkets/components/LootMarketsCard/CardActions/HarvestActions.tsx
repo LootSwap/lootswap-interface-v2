@@ -68,7 +68,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
                       display="inline"
                       fontSize="12px"
                       color="textSubtle"
-                      decimals={2}
+                      decimals={3}
                       value={earningTokenDollarBalance}
                       unit=" USD"
                     />

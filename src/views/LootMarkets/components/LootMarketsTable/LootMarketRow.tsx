@@ -5,7 +5,7 @@ import { LootMarket } from 'state/types'
 import useDelayedUnmount from 'hooks/useDelayedUnmount'
 import NameCell from './Cells/NameCell'
 import EarningsCell from './Cells/EarningsCell'
-// import AprCell from './Cells/AprCell'
+import AprCell from './Cells/AprCell'
 import TotalStakedCell from './Cells/TotalStakedCell'
 import EndsInCell from './Cells/EndsInCell'
 import ExpandActionCell from './Cells/ExpandActionCell'
@@ -37,7 +37,7 @@ const LootMarketRow: React.FC<LootMarketRowProps> = ({ lootmarket, account, user
       <StyledRow role="row" onClick={toggleExpanded}>
         <NameCell lootmarket={lootmarket} />
         <EarningsCell lootmarket={lootmarket} account={account} userDataLoaded={userDataLoaded} />
-        {/* <AprCell lootmarket={lootmarket} /> */}
+        <AprCell lootmarket={lootmarket} />
         {(isLg || isXl) && <TotalStakedCell lootmarket={lootmarket} />}
         {isXl && <EndsInCell lootmarket={lootmarket} />}
         <ExpandActionCell expanded={expanded} isFullLayout={isMd || isLg || isXl} />
