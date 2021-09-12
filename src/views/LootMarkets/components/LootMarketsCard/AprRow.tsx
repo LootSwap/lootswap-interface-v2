@@ -10,9 +10,10 @@ import { getAprData } from 'views/LootMarkets/helpers'
 interface AprRowProps {
   lootmarket: LootMarket
   performanceFee?: number
+  showIcon?: boolean
 }
 
-const AprRow: React.FC<AprRowProps> = ({ lootmarket, performanceFee = 0 }) => {
+const AprRow: React.FC<AprRowProps> = ({ lootmarket, performanceFee = 0, showIcon = false }) => {
   const { t } = useTranslation()
   const { stakingToken, earningToken, isFinished, apr, earningTokenPrice } = lootmarket
 
@@ -55,9 +56,11 @@ const AprRow: React.FC<AprRowProps> = ({ lootmarket, performanceFee = 0 }) => {
             unit="%"
             bold
           />
-          <IconButton onClick={onPresentApyModal} variant="text" scale="sm">
-            <CalculateIcon color="textSubtle" width="18px" />
-          </IconButton>
+          {showIcon && (
+            <IconButton onClick={onPresentApyModal} variant="text" scale="sm">
+              <CalculateIcon color="textSubtle" width="18px" />
+            </IconButton>
+          )}
         </Flex>
       )}
     </Flex>

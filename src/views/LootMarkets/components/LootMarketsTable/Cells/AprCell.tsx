@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Text, useMatchBreakpoints } from '@pancakeswap/uikit'
+import { Text } from '@pancakeswap/uikit'
 import { LootMarket } from 'state/types'
 import { useTranslation } from 'contexts/Localization'
 import BaseCell, { CellContent } from './BaseCell'
@@ -19,14 +19,13 @@ const StyledCell = styled(BaseCell)`
 
 const AprCell: React.FC<AprCellProps> = ({ lootmarket }) => {
   const { t } = useTranslation()
-  const { isXs, isSm } = useMatchBreakpoints()
   return (
     <StyledCell role="cell">
       <CellContent>
         <Text fontSize="12px" color="textSubtle" textAlign="left">
           {t('APR')}
         </Text>
-        <Apr lootmarket={lootmarket} performanceFee={0} showIcon={!isXs && !isSm} alignItems="flex-start" />
+        <Apr lootmarket={lootmarket} performanceFee={0} showIcon={false} alignItems="flex-start" />
       </CellContent>
     </StyledCell>
   )

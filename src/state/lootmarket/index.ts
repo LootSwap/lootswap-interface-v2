@@ -32,7 +32,6 @@ export const fetchLootMarketsPublicDataAsync = (currentBlock: number) => async (
   const rewardBalances = await fetchLootMarketsRewardBalance()
   const lootMarketInfos = await fetchLootMarketsInfo()
   const prices = getTokenPricesFromFarm(getState().farms.data)
-
   const liveData = lootMarketsConfig.map((market) => {
     const rewardBalance = rewardBalances.find((entry) => entry.pid === market.pid)
     const blockLimit = blockLimits.find((entry) => entry.pid === market.pid)
@@ -51,7 +50,6 @@ export const fetchLootMarketsPublicDataAsync = (currentBlock: number) => async (
       ? getAddress(market.earningToken.address).toLowerCase()
       : null
     const earningTokenPrice = earningTokenAddress ? prices[earningTokenAddress] : 0
-
     const apr = !isLootMarketFinished
       ? getLootMarketApr(
           stakingTokenPrice,
