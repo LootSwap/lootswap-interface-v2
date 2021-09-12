@@ -135,6 +135,83 @@ const farms: GuildConfig[] = [
     guildSlug: 'troll',
   },
   {
+    pid: 10,
+    lpSymbol: 'TROLL-ARB',
+    lpAddresses: {
+      1666600000: '0x39d4928b67C8948dbe43344312Baf5fe80961f2D',
+      1666700000: '',
+    },
+    token: tokens.arb,
+    quoteToken: tokens.troll,
+    guildSlug: 'troll',
+  },
+  {
+    pid: 11,
+    lpSymbol: 'TROLL-MAGIC',
+    lpAddresses: {
+      1666600000: '0xAd245a78D895136798A5e3fd41f0c872c95d3c8b',
+      1666700000: '',
+    },
+    token: tokens.magic,
+    quoteToken: tokens.troll,
+    guildSlug: 'troll',
+  },
+  {
+    pid: 12,
+    lpSymbol: 'TROLL-$LIFE',
+    lpAddresses: {
+      1666600000: '0x9C7030A0084cd68d044815400C34a7B6115c42b9',
+      1666700000: '',
+    },
+    token: tokens.extralife,
+    quoteToken: tokens.troll,
+    guildSlug: 'troll',
+  },
+  {
+    pid: 13,
+    lpSymbol: 'TROLL-BARD',
+    lpAddresses: {
+      1666600000: '0x2F3077AD0286B51925Ec751C3c7E5811f9F14D43',
+      1666700000: '',
+    },
+    token: tokens.bard,
+    quoteToken: tokens.troll,
+    guildSlug: 'troll',
+  },
+  {
+    pid: 14,
+    lpSymbol: 'TROLL-1WBTC',
+    lpAddresses: {
+      1666600000: '0x7C543E63BC4b287C35C3048Dac7f2AC7A11C97D6',
+      1666700000: '',
+    },
+    token: tokens.troll,
+    quoteToken: tokens.wbtc,
+    guildSlug: 'troll',
+  },
+  {
+    pid: 15,
+    lpSymbol: 'TROLL-1ETH',
+    lpAddresses: {
+      1666600000: '0x9Ac61d94F8202Ff2709870922A0A876f6e0a0837',
+      1666700000: '',
+    },
+    token: tokens.troll,
+    quoteToken: tokens.ether,
+    guildSlug: 'troll',
+  },
+  {
+    pid: 16,
+    lpSymbol: 'TROLL-BUSD',
+    lpAddresses: {
+      1666600000: '0x3FC49Bf12037f28F7B27236C1BCCb2C0657Dd4D0',
+      1666700000: '',
+    },
+    token: tokens.troll,
+    quoteToken: tokens.busd,
+    guildSlug: 'troll',
+  },
+  {
     pid: 0,
     lpSymbol: 'ARB-LOOT',
     lpAddresses: {

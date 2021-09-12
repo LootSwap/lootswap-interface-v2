@@ -345,6 +345,15 @@ const tokens = {
       projectLink: '',
     },
   },
+  extralife: {
+    symbol: '$LIFE',
+    address: {
+      1666600000: '0xab965375c9c109b8e1a4c4f7422b199ee36682b0',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '',
+    },
+  },
 }
 
 export default tokens
