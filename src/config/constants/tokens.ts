@@ -354,6 +354,15 @@ const tokens = {
       projectLink: '',
     },
   },
+  loblox: {
+    symbol: 'LBLOX',
+    address: {
+      1666600000: '0xd62bd801a1cb65532def9908c67b8c00f432c1bb',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '',
+    },
+  },
 }
 
 export default tokens

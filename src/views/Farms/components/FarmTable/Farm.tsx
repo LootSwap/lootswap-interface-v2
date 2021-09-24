@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useFarmUser } from 'state/hooks'
 import { useTranslation } from 'contexts/Localization'
@@ -47,10 +47,31 @@ const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid }) => {
 
     return null
   }
+  const [iconFile, setIconFile] = useState(`${image}.svg`)
+
+  useEffect(() => {
+    // Run! Like go get some data from an API.
+    const xhr = new XMLHttpRequest()
+    // listen for `onload` event
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        // console.log('Image exists.');
+      } else {
+        // console.log('Image does not exist., replaceing', iconFile);
+        const newIconFile = `${image}.png`
+        setIconFile(newIconFile)
+      }
+    }
+    // create a `HEAD` request
+    xhr.open('HEAD', `/images/questlog/${iconFile}`)
+
+    // send request
+    xhr.send()
+  }, [iconFile, image])
 
   return (
     <Container>
-      <IconImage src={`/images/questlog/${image}.svg`} alt="icon" width={40} height={40} mr="8px" />
+      <IconImage src={`/images/questlog/${iconFile}`} alt="icon" width={40} height={40} mr="8px" />
       <div>
         {handleRenderFarming()}
         <Text bold>{label}</Text>
