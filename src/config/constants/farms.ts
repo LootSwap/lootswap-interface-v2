@@ -184,6 +184,50 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.loot,
     isCommunity: true,
   },
+  {
+    pid: 18,
+    lpSymbol: 'LOOT-$LIFE',
+    lpAddresses: {
+      1666600000: '0xD2016CEb116Dc5ed67650b70719D1F235Aec1d4a',
+      1666700000: '',
+    },
+    token: tokens.extralife,
+    quoteToken: tokens.loot,
+    isCommunity: true,
+  },
+  {
+    pid: 19,
+    lpSymbol: 'LOOT-LBLOX',
+    lpAddresses: {
+      1666600000: '0xbb158bD7B266a468e3514370Ac56B0b2f2E9b9aa',
+      1666700000: '',
+    },
+    token: tokens.loblox,
+    quoteToken: tokens.loot,
+    isCommunity: true,
+  },
+  {
+    pid: 20,
+    lpSymbol: 'ONE-$LIFE',
+    lpAddresses: {
+      1666600000: '0xD1A3b76E7A8d660c19B225932d1A9D985D51BE8A',
+      1666700000: '',
+    },
+    token: tokens.extralife,
+    quoteToken: tokens.wone,
+    isCommunity: true,
+  },
+  {
+    pid: 21,
+    lpSymbol: 'ONE-LBLOX',
+    lpAddresses: {
+      1666600000: '0x983AcE35211012aC9Fe8cafDB451A5D6A8a22Fe5',
+      1666700000: '',
+    },
+    token: tokens.loblox,
+    quoteToken: tokens.wone,
+    isCommunity: true,
+  },
 ]
 
 export default farms

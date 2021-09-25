@@ -36,7 +36,7 @@ const StyledCardHeader: React.FC<{
     const xhr = new XMLHttpRequest()
     // listen for `onload` event
     xhr.onload = () => {
-      if (xhr.status === 200) {
+      if (xhr.status === 200 && xhr.response.type !== 'text/html') {
         // console.log('Image exists.');
       } else {
         console.log('Image does not exist., replaceing', poolImageSrc)
@@ -45,8 +45,8 @@ const StyledCardHeader: React.FC<{
       }
     }
     // create a `HEAD` request
-    xhr.open('HEAD', `/images/lootmarkets/${poolImageSrc}`)
-
+    xhr.open('HEAD', `/images/lootmarkets/${poolImageSrc}`, true)
+    xhr.responseType = 'blob'
     // send request
     xhr.send()
   }, [poolImageSrc, earningTokenSymbol, stakingTokenSymbol])

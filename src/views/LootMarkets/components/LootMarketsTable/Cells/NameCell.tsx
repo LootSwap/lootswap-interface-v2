@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import { Text, Image, useMatchBreakpoints } from '@pancakeswap/uikit'
@@ -44,7 +44,7 @@ const NameCell: React.FC<NameCellProps> = ({ lootmarket }) => {
     const xhr = new XMLHttpRequest()
     // listen for `onload` event
     xhr.onload = () => {
-      if (xhr.status === 200) {
+      if (xhr.status === 200 && xhr.response.type !== 'text/html') {
         // console.log('Image exists.');
       } else {
         console.log('Image does not exist., replaceing', iconFile)
@@ -53,8 +53,8 @@ const NameCell: React.FC<NameCellProps> = ({ lootmarket }) => {
       }
     }
     // create a `HEAD` request
-    xhr.open('HEAD', `/images/lootmarkets/${iconFile}`)
-
+    xhr.open('HEAD', `/images/lootmarkets/${iconFile}`, true)
+    xhr.responseType = 'blob'
     // send request
     xhr.send()
   }, [iconFile, earningTokenSymbol, stakingTokenSymbol])

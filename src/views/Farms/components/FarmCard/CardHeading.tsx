@@ -35,7 +35,7 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({
     const xhr = new XMLHttpRequest()
     // listen for `onload` event
     xhr.onload = () => {
-      if (xhr.status === 200) {
+      if (xhr.status === 200 && xhr.response.type !== 'text/html') {
         // console.log('Image exists.');
       } else {
         // console.log('Image does not exist., replaceing', iconFile);
@@ -44,7 +44,8 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({
       }
     }
     // create a `HEAD` request
-    xhr.open('HEAD', `/images/questlog/${iconFile}`)
+    xhr.open('HEAD', `/images/questlog/${iconFile}`, true)
+    xhr.responseType = 'blob'
 
     // send request
     xhr.send()
