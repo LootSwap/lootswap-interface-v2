@@ -212,6 +212,28 @@ const farms: GuildConfig[] = [
     guildSlug: 'troll',
   },
   {
+    pid: 17,
+    lpSymbol: 'TROLL-BOOM',
+    lpAddresses: {
+      1666600000: '0x1310f38E8746C3A997637f7ed5c5b23f9D06Cd2E',
+      1666700000: '',
+    },
+    token: tokens.boom,
+    quoteToken: tokens.troll,
+    guildSlug: 'troll',
+  },
+  {
+    pid: 18,
+    lpSymbol: 'TROLL-LAZR',
+    lpAddresses: {
+      1666600000: '0x50af18f06A26E7590Cd127931ff9506b41f2C1c9',
+      1666700000: '',
+    },
+    token: tokens.lazr,
+    quoteToken: tokens.troll,
+    guildSlug: 'troll',
+  },
+  {
     pid: 0,
     lpSymbol: 'ARB-LOOT',
     lpAddresses: {

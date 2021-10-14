@@ -363,6 +363,24 @@ const tokens = {
       projectLink: '',
     },
   },
+  boom: {
+    symbol: 'BOOM',
+    address: {
+      1666600000: '0x495500b582ab72ad47eb2d301469ce799bddf9e4',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '',
+    },
+  },
+  lazr: {
+    symbol: 'LAZR',
+    address: {
+      1666600000: '0xed2a4e1577f7c90d84915250278b685bd6e498b3',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '',
+    },
+  },
 }
 
 export default tokens
