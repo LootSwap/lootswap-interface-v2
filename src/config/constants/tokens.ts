@@ -381,6 +381,15 @@ const tokens = {
       projectLink: '',
     },
   },
+  cgs: {
+    symbol: 'CGS',
+    address: {
+      1666600000: '0x6cc35220349c444c39b8e26b359757739aaec952',
+      1666700000: '',
+      decimals: 18,
+      projectLink: '//cougarswap.io/',
+    },
+  },
 }
 
 export default tokens

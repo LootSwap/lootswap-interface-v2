@@ -228,6 +228,17 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.wone,
     isCommunity: true,
   },
+  {
+    pid: 22,
+    lpSymbol: 'ONE-CGS',
+    lpAddresses: {
+      1666600000: '0xdb832406e2e71b68c877bbb853f86d3b6e475c47',
+      1666700000: '',
+    },
+    token: tokens.cgs,
+    quoteToken: tokens.wone,
+    isCommunity: true,
+  },
 ]
 
 export default farms
