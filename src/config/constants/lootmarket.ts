@@ -74,6 +74,20 @@ const lootMarkets: LootMarketConfig[] = [
     sortOrder: 1,
     isFinished: false,
   },
+  {
+    pid: 5,
+    stakingToken: tokens.loot,
+    earningToken: tokens.cgs,
+    contractAddress: {
+      1666600000: '0x14d22D2D8cfD849B87DfA67320DEf04DeA8d55b3',
+      1666700000: '',
+    },
+    lootMarketCategory: LootMarketCategory.COMMUNITY,
+    harvest: true,
+    tokenPerBlock: '0.04629',
+    sortOrder: 1,
+    isFinished: false,
+  },
 ]
 
 export default lootMarkets

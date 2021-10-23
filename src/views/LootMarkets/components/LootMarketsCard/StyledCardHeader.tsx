@@ -39,7 +39,7 @@ const StyledCardHeader: React.FC<{
       if (xhr.status === 200 && xhr.response.type !== 'text/html') {
         // console.log('Image exists.');
       } else {
-        console.log('Image does not exist., replacing', poolImageSrc)
+        console.info('Image does not exist., replacing', poolImageSrc)
         const newIconFile = `${earningTokenSymbol}-${stakingTokenSymbol}.png`.toLocaleLowerCase()
         setPoolImageSrc(newIconFile)
       }
