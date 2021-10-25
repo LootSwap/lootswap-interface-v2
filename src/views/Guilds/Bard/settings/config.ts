@@ -24,7 +24,7 @@ export const config: GuildConfig = {
   lockupconfig: {
     guildIcon: '/images/tokens/bard.png',
   },
-  tagline: '', // use to customize the guild pages tagline
+  tagline: '100% Unlocked', // use to customize the guild pages tagline
 }
 
 export default config

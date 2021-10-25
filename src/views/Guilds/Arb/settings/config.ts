@@ -24,7 +24,8 @@ export const config: GuildConfig = {
   lockupconfig: {
     guildIcon: '/images/tokens/arb.png',
   },
-  tagline: '', // use to customize the guild pages tagline
+  tagline: '100% Unlocked', // use to customize the guild pages tagline
+  overrideBannerTitle: 'Harmony Universe', // use to change the guild banner title
 }
 
 export default config
