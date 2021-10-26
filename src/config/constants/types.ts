@@ -71,6 +71,10 @@ export type LootMarketInfo = {
   allocPoint: string
 }
 
+export type OverrideLootMarketConfig = {
+  stakingTokenQuote: Token
+}
+
 export interface LootMarketConfig {
   pid: number
   earningToken: Token
@@ -84,4 +88,5 @@ export interface LootMarketConfig {
   rewardBalance?: number
   lootMarketInfo?: LootMarketInfo
   enableEmergencyWithdraw?: boolean
+  override?: OverrideLootMarketConfig
 }

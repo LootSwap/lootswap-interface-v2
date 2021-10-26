@@ -3,6 +3,15 @@ const tokens = {
     symbol: 'ONE',
     projectLink: 'https://www.harmony.one/',
   },
+  lootone: {
+    symbol: 'LOOT-LP',
+    address: {
+      1666600000: '0xa2debc3cbe088fff2bede17ac67ef5f285845038',
+      1666700000: '',
+    },
+    decimals: 18,
+    projectLink: '//lootswap.finance/',
+  },
   loot: {
     symbol: 'LOOT',
     address: {
