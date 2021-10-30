@@ -28,4 +28,8 @@ export default {
     1666600000: '0x12dC61f46718DD00e993Da7865da15E8cb713094',
     1666700000: '',
   },
+  masterLooterFOOL: {
+    1666600000: '0x12dC61f46718DD00e993Da7865da15E8cb713094', // TODO: FOOLS
+    1666700000: '',
+  },
 }

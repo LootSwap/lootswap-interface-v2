@@ -8,7 +8,6 @@ import { BIG_ZERO } from 'utils/bigNumber'
 import { formatNumber, getBalanceNumber, getFullDisplayBalance } from 'utils/formatBalance'
 import Balance from 'components/Balance'
 import { useTranslation } from 'contexts/Localization'
-import { DISPLAY_DECIMAL_FORMAT_PREF } from 'config'
 import BaseCell, { CellContent } from './BaseCell'
 import CollectModal from '../../LootMarketsCard/Modals/CollectModal'
 

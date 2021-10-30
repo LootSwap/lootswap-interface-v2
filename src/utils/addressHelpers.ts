@@ -31,6 +31,9 @@ export const getGuildsMasterLooterAddress = (guildSlug: string) => {
   if (guildSlug === 'cosmic') {
     return getAddress(addresses.masterLooterMAGIC)
   }
+  if (guildSlug === 'fool') {
+    return getAddress(addresses.masterLooterFOOL)
+  }
   return null
 }
 export const getGuildsTokenAddress = (guildSlug: string) => {
@@ -48,6 +51,9 @@ export const getGuildsTokenAddress = (guildSlug: string) => {
   }
   if (guildSlug === 'cosmic') {
     return getAddress(tokens.magic.address)
+  }
+  if (guildSlug === 'fool') {
+    return getAddress(tokens.fool.address)
   }
   return null
 }

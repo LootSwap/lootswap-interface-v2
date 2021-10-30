@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import { Text, Image, useMatchBreakpoints } from '@pancakeswap/uikit'
@@ -47,7 +47,7 @@ const NameCell: React.FC<NameCellProps> = ({ lootmarket }) => {
       if (xhr.status === 200 && xhr.response.type !== 'text/html') {
         // console.log('Image exists.');
       } else {
-        console.log('Image does not exist., replaceing', iconFile)
+        console.info('Image does not exist., replacing', iconFile)
         const newIconFile = `${earningTokenSymbol}-${stakingTokenSymbol}.png`.toLocaleLowerCase()
         setIconFile(newIconFile)
       }

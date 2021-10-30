@@ -25,6 +25,31 @@ export const config: GuildConfig = {
     guildIcon: '/images/tokens/troll.png',
   },
   tagline: '100% Unlocked', // use to customize the guild pages tagline
+  // social: [
+  //   {label: 'Website', link: ''},
+  //   {label: 'Telegram', link: ''},
+  //   {label: 'Twitter', link: ''},
+  //   {label: 'Discord', link: ''},
+  //   {label: 'Medium/WhitePaper', link: ''},
+  //   {label: 'Reddit', link: ''},
+  //   {label: 'Youtube', link: ''},
+  //   {label: 'Blockster', link: ''},
+  //   {label: 'Github', link: ''},
+  //   {label: 'Scrollpaper', link: ''},
+  // ],
+  social: [
+    { label: 'Website', link: 'https://www.trollguild.com/' },
+    { label: 'Arcade Play Now!', link: 'https://www.trollarcade.one/' },
+    { label: 'Telegram', link: 'https://t.me/trollguild' },
+    { label: 'Twitter', link: 'https://twitter.com/GuildTroll' },
+    { label: 'Discord', link: 'https://discord.gg/zC8pfeK8eV' },
+    { label: 'Medium', link: 'https://lootswapfinance.medium.com/introducing-troll-guild-34ed139d8e84' },
+    { label: 'Reddit', link: '' },
+    { label: 'Youtube', link: '' },
+    { label: 'Blockster', link: '' },
+    { label: 'Github', link: '' },
+    { label: 'Scrollpaper', link: '' },
+  ],
 }
 
 export default config

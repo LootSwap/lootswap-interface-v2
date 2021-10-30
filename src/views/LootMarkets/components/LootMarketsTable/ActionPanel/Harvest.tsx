@@ -9,7 +9,6 @@ import { useTranslation } from 'contexts/Localization'
 import Balance from 'components/Balance'
 import { BIG_ZERO } from 'utils/bigNumber'
 import { LootMarket } from 'state/types'
-import { DISPLAY_DECIMAL_FORMAT_PREF } from 'config'
 
 import { ActionContainer, ActionTitles, ActionContent } from './styles'
 import CollectModal from '../../LootMarketsCard/Modals/CollectModal'

@@ -25,6 +25,13 @@ export const config: GuildConfig = {
     guildIcon: '/images/tokens/bard.png',
   },
   tagline: '100% Unlocked', // use to customize the guild pages tagline
+  social: [
+    { label: 'Website', link: 'https://themarketplace.digital/' },
+    { label: 'Telegram', link: 'https://t.me/joinchat/Xbz_TN66v7UzZDIx' },
+    { label: 'Twitter', link: 'https://twitter.com/Marketplace_1' },
+    { label: 'Discord', link: 'https://discord.gg/VqspC3h5MT' },
+    { label: 'Medium', link: 'https://lootswapfinance.medium.com/bard-guild-introduction-1fd27ad11f75' },
+  ],
 }
 
 export default config
