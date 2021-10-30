@@ -46,10 +46,9 @@ export const fetchLootMarketsPublicDataAsync = (currentBlock: number) => async (
       ? market.override?.stakingTokenQuote.address
       : market.stakingToken.address
     const stakingTokenAddress = stakingTokenAddressOverride
-      ? getAddress(market.stakingToken.address).toLowerCase()
+      ? getAddress(stakingTokenAddressOverride).toLowerCase()
       : null
     const stakingTokenPrice = stakingTokenAddress ? prices[stakingTokenAddress] : 0
-
     const earningTokenAddress = market.earningToken.address
       ? getAddress(market.earningToken.address).toLowerCase()
       : null

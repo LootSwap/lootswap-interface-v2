@@ -35,10 +35,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({
   const earningTokenDollarBalance = getBalanceNumber(earnings.multipliedBy(earningTokenPrice), earningToken.decimals)
   const hasEarnings = earnings.gt(0)
 
-  let decimalFormatPrefer = 1
-  if (hasEarnings) {
-    decimalFormatPrefer = Number(earningTokenBalance.toFixed(15)) % 1 !== 0 ? 18 : DISPLAY_DECIMAL_FORMAT_PREF
-  }
+  const decimalFormatPrefer = 6
 
   const fullBalance = getFullDisplayBalance(earnings, earningToken.decimals)
   const formattedBalance = formatNumber(earningTokenBalance, decimalFormatPrefer, decimalFormatPrefer)
