@@ -222,15 +222,20 @@ export const usePriceGuildBusd = (guildSlug: string, useLootFarm: boolean, lootF
   }, [dispatch, guildSlug, lootFarmPid, useLootFarm])
 
   let guildlootFarm = useGuildFromPid(0, guildSlug)
+
   const lootFarm = useFarmFromPid(lootFarmPid)
   if (lootFarm?.tokenPriceVsQuote) {
     guildlootFarm = { ...lootFarm, guildSlug }
   }
 
   const lootPriceBusd = usePriceLootBusd()
-  const guildBusdPrice = guildlootFarm?.tokenPriceVsQuote
+  let guildBusdPrice = guildlootFarm?.tokenPriceVsQuote
     ? lootPriceBusd.times(guildlootFarm.tokenPriceVsQuote)
     : BIG_ZERO
+
+  if (guildlootFarm.quoteToken.symbol.toLowerCase() === 'wone') {
+    guildBusdPrice = new BigNumber(guildlootFarm?.tokenPriceVsQuote) || BIG_ZERO
+  }
   return guildBusdPrice
 }
 

@@ -400,10 +400,9 @@ const tokens = {
     projectLink: '//cougarswap.io/',
   },
   fool: {
-    // TODO: FOOLS
     symbol: 'FOOL',
     address: {
-      1666600000: '0x892D81221484F690C0a97d3DD18B9144A3ECDFB7',
+      1666600000: '0x584705c40E7DF1fcfc06cb0Ad5223E0F5BC8e6E2',
       1666700000: '',
     },
     decimals: 18,

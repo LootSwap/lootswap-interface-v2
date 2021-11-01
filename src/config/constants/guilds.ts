@@ -581,6 +581,42 @@ const farms: GuildConfig[] = [
     isCommunity: true,
     guildSlug: 'cosmic',
   },
+  {
+    pid: 0,
+    lpSymbol: 'FOOL-ONE',
+    lpAddresses: {
+      1666600000: '0x67367E49EcEe9477c2Db11D81999fbA2551B37Cf',
+      1666700000: '',
+    },
+    token: tokens.fool,
+    quoteToken: tokens.wone,
+    isCommunity: true,
+    guildSlug: 'fool',
+  },
+  {
+    pid: 1,
+    lpSymbol: 'bscBUSD-BUSD',
+    lpAddresses: {
+      1666600000: '0x63D75d38B7428A6C7a72Df9b74A14ae974B80410',
+      1666700000: '',
+    },
+    token: tokens.bscbusd,
+    quoteToken: tokens.busd,
+    isCommunity: true,
+    guildSlug: 'fool',
+  },
+  {
+    pid: 2,
+    lpSymbol: 'bscUSDC-1USDC',
+    lpAddresses: {
+      1666600000: '0x1Cb2F8e969d5e4C26596bE0E76fF9D47F2C666D4',
+      1666700000: '',
+    },
+    token: tokens.bscusdc,
+    quoteToken: tokens.oneusdc,
+    isCommunity: true,
+    guildSlug: 'fool',
+  },
 ]
 
 export default farms

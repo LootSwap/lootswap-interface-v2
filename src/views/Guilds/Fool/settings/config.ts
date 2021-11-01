@@ -10,7 +10,7 @@ export const config: GuildConfig = {
   guildTokenPerBlock: 1, // use to calculate apr
   footerImg: {
     // shown on the bottom of the guilds quest
-    src: '/images/tokens/magic.png',
+    src: '/images/tokens/fool.png',
     alt: 'Fool illustration',
     width: 80,
     height: 80,
@@ -20,9 +20,9 @@ export const config: GuildConfig = {
   },
   hasLockUp: true, // use to show lock and unlock rewards
   lockupconfig: {
-    guildIcon: '/images/tokens/magic.png',
+    guildIcon: '/images/tokens/fool.png',
   },
-  tagline: 'Rewards are 25% locked up until block 000', // use to customize the guild pages tagline
+  tagline: 'COMING SOON TO A GUILD NEAR YOU, Rewards are 25% locked up until block 25150000', // use to customize the guild pages tagline
   overrideBannerTitle: 'FOOL', // use to change the guild banner title
 }
 
