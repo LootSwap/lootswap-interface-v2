@@ -233,7 +233,7 @@ export const usePriceGuildBusd = (guildSlug: string, useLootFarm: boolean, lootF
     ? lootPriceBusd.times(guildlootFarm.tokenPriceVsQuote)
     : BIG_ZERO
 
-  if (guildlootFarm.quoteToken.symbol.toLowerCase() === 'wone') {
+  if (guildlootFarm?.quoteToken.symbol.toLowerCase() === 'wone') {
     guildBusdPrice = new BigNumber(guildlootFarm?.tokenPriceVsQuote) || BIG_ZERO
   }
   return guildBusdPrice

@@ -22,8 +22,20 @@ export const config: GuildConfig = {
   lockupconfig: {
     guildIcon: '/images/tokens/fool.png',
   },
-  tagline: 'COMING SOON TO A GUILD NEAR YOU, Rewards are 25% locked up until block 25150000', // use to customize the guild pages tagline
+  tagline: 'Rewards are 25% locked up until block 25150000', // use to customize the guild pages tagline
   overrideBannerTitle: 'FOOL', // use to change the guild banner title
+  social: [
+    { label: 'Website', link: '' },
+    { label: 'Telegram', link: '' },
+    { label: 'Twitter', link: 'https://twitter.com/TheFOOLsGuild' },
+    { label: 'Discord', link: 'https://discord.gg/u6ErGaDfke' },
+    { label: 'Medium', link: '' },
+    { label: 'Reddit', link: '' },
+    { label: 'Youtube', link: '' },
+    { label: 'Blockster', link: '' },
+    { label: 'GitBook', link: 'https://fools-guild.gitbook.io/fools-guild-1/' },
+    { label: 'Scrollpaper', link: '' },
+  ],
 }
 
 export default config

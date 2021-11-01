@@ -61,7 +61,7 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
         href: '/guilds/cosmic',
       },
       {
-        label: t('Fools (coming soon)'),
+        label: t('Fools'),
         href: '/guilds/fool',
       },
     ],
