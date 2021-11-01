@@ -6,7 +6,7 @@ import { useAppDispatch } from 'state'
 import { farmsConfig, guildsConfig } from 'config/constants'
 import { getWeb3NoAccount } from 'utils/web3'
 import { getBalanceAmount } from 'utils/formatBalance'
-import { BIG_ZERO } from 'utils/bigNumber'
+import { BIG_ZERO, BIG_ONE } from 'utils/bigNumber'
 import useRefresh from 'hooks/useRefresh'
 import { filterFarmsByQuoteToken } from 'utils/farmsPriceHelpers'
 import {
@@ -196,6 +196,11 @@ export const usePriceLootBusd = (): BigNumber => {
   return new BigNumber(lootbusdFarm.token.busdPrice)
 }
 
+export const usePriceOneBscBusd = (): BigNumber => {
+  const onebscbusdFarm = useFarmFromPid(1) // one <> bscbusd
+  return new BigNumber(onebscbusdFarm?.tokenPriceVsQuote).div(BIG_ONE)
+}
+
 // Block
 export const useBlock = () => {
   return useSelector((state: State) => state.block)
@@ -211,6 +216,7 @@ export const usePriceGuildBusd = (guildSlug: string, useLootFarm: boolean, lootF
   // UseLootFarm is set in the guildSettings config. if set to true it will use a specific loot farm to determine guild price
   // TODO: may need to refactor to take in more then one farm.
   const dispatch = useAppDispatch()
+  usePollFarmsData()
 
   useEffect(() => {
     let isBalance = true
@@ -220,7 +226,6 @@ export const usePriceGuildBusd = (guildSlug: string, useLootFarm: boolean, lootF
 
     isBalance = false
   }, [dispatch, guildSlug, lootFarmPid, useLootFarm])
-
   let guildlootFarm = useGuildFromPid(0, guildSlug)
 
   const lootFarm = useFarmFromPid(lootFarmPid)
@@ -229,12 +234,12 @@ export const usePriceGuildBusd = (guildSlug: string, useLootFarm: boolean, lootF
   }
 
   const lootPriceBusd = usePriceLootBusd()
+  const onePriceBusd = usePriceOneBscBusd()
   let guildBusdPrice = guildlootFarm?.tokenPriceVsQuote
     ? lootPriceBusd.times(guildlootFarm.tokenPriceVsQuote)
     : BIG_ZERO
-
   if (guildlootFarm?.quoteToken.symbol.toLowerCase() === 'wone') {
-    guildBusdPrice = new BigNumber(guildlootFarm?.tokenPriceVsQuote) || BIG_ZERO
+    guildBusdPrice = onePriceBusd.times(new BigNumber(guildlootFarm?.tokenPriceVsQuote)) || BIG_ZERO
   }
   return guildBusdPrice
 }
