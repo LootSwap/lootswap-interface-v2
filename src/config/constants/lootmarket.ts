@@ -46,6 +46,65 @@ const lootMarkets: LootMarketConfig[] = [
     sortOrder: 1,
     isFinished: false,
   },
+  {
+    pid: 3,
+    stakingToken: tokens.loot,
+    earningToken: tokens.loblox,
+    contractAddress: {
+      1666600000: '0x6C10302A1Fb02F2DD65182eaD6DcA090970Aa38C',
+      1666700000: '',
+    },
+    lootMarketCategory: LootMarketCategory.COMMUNITY,
+    harvest: true,
+    tokenPerBlock: '31301.2739896278000000',
+    sortOrder: 1,
+    isFinished: false,
+  },
+  {
+    pid: 4,
+    stakingToken: tokens.loot,
+    earningToken: tokens.extralife,
+    contractAddress: {
+      1666600000: '0xcFcDcFFA3d872fc609fA84639005C23580ED0070',
+      1666700000: '',
+    },
+    lootMarketCategory: LootMarketCategory.COMMUNITY,
+    harvest: true,
+    tokenPerBlock: '0.4324419991032840',
+    sortOrder: 1,
+    isFinished: false,
+  },
+  {
+    pid: 5,
+    stakingToken: tokens.loot,
+    earningToken: tokens.cgs,
+    contractAddress: {
+      1666600000: '0x14d22D2D8cfD849B87DfA67320DEf04DeA8d55b3',
+      1666700000: '',
+    },
+    lootMarketCategory: LootMarketCategory.COMMUNITY,
+    harvest: true,
+    tokenPerBlock: '0.04629',
+    sortOrder: 1,
+    isFinished: false,
+  },
+  {
+    pid: 6,
+    stakingToken: tokens.lootone,
+    earningToken: tokens.loot,
+    contractAddress: {
+      1666600000: '0x25316F983d32433fB1b421eC4f4d73aa28F42dae',
+      1666700000: '',
+    },
+    lootMarketCategory: LootMarketCategory.COMMUNITY,
+    harvest: true,
+    tokenPerBlock: '0.25',
+    sortOrder: 1,
+    isFinished: false,
+    override: {
+      stakingTokenQuote: tokens.wone,
+    },
+  },
 ]
 
 export default lootMarkets

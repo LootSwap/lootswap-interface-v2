@@ -30,6 +30,7 @@ import { DesktopColumnSchema, ViewMode } from './components/types'
 import useGuildSettings from './hooks/useGuildSettings'
 import WalkingSprite from './components/WalkingSprite/WalkingSprite'
 import FarmedStakingCard from './components/FarmStakingCard'
+import SocialMedia from './components/SocialMedia/SocialMedia'
 
 interface IGuildPage {
   guildSlug: string
@@ -500,6 +501,7 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
           <br />
           {guildSettings.tagline ?? ''}
         </Heading>
+        <SocialMedia guildSlug={guildSlug} />
       </PageHeader>
       <Page>
         <div>

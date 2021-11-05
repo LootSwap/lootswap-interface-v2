@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { CardHeader, Heading, Text, Flex, Image } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
@@ -16,7 +16,7 @@ const StyledCardHeader: React.FC<{
   isStaking?: boolean
 }> = ({ earningTokenSymbol, stakingTokenSymbol, isFinished = false, isStaking = false }) => {
   const { t } = useTranslation()
-  const poolImageSrc = `${earningTokenSymbol}-${stakingTokenSymbol}.svg`.toLocaleLowerCase()
+  // const poolImageSrc = `${earningTokenSymbol}-${stakingTokenSymbol}.svg`.toLocaleLowerCase()
   const background = isStaking ? 'bubblegum' : 'cardHeader'
 
   const getHeadingPrefix = () => {
@@ -27,6 +27,29 @@ const StyledCardHeader: React.FC<{
   const getSubHeading = () => {
     return t('Stake %symbol%', { symbol: stakingTokenSymbol })
   }
+
+  const [poolImageSrc, setPoolImageSrc] = useState(
+    `${earningTokenSymbol}-${stakingTokenSymbol}.svg`.toLocaleLowerCase(),
+  )
+  useEffect(() => {
+    // Run! Like go get some data from an API.
+    const xhr = new XMLHttpRequest()
+    // listen for `onload` event
+    xhr.onload = () => {
+      if (xhr.status === 200 && xhr.response.type !== 'text/html') {
+        // console.log('Image exists.');
+      } else {
+        console.info('Image does not exist., replacing', poolImageSrc)
+        const newIconFile = `${earningTokenSymbol}-${stakingTokenSymbol}.png`.toLocaleLowerCase()
+        setPoolImageSrc(newIconFile)
+      }
+    }
+    // create a `HEAD` request
+    xhr.open('HEAD', `/images/lootmarkets/${poolImageSrc}`, true)
+    xhr.responseType = 'blob'
+    // send request
+    xhr.send()
+  }, [poolImageSrc, earningTokenSymbol, stakingTokenSymbol])
 
   return (
     <Wrapper isFinished={isFinished} background={background}>

@@ -102,7 +102,6 @@ const getGuildQuoteTokenPrice = (
     const tokenToOne = quoteTokenFarm.tokenPriceVsQuote
     return new BigNumber(tokenToOne).div(onePriceBusd)
   }
-
   if (!quoteTokenFarm) {
     return BIG_ZERO
   }
@@ -128,7 +127,8 @@ const getGuildQuoteTokenPrice = (
     quoteTokenFarm.quoteToken.symbol === 'TROLL' ||
     quoteTokenFarm.quoteToken.symbol === 'ARB' ||
     quoteTokenFarm.quoteToken.symbol === 'GG' ||
-    quoteTokenFarm.quoteToken.symbol === 'MAGIC'
+    quoteTokenFarm.quoteToken.symbol === 'MAGIC' ||
+    quoteTokenFarm.quoteToken.symbol === 'FOOL'
   ) {
     return guildPriceBusd
   }
@@ -148,7 +148,6 @@ const fetchGuildsPrices = async (guilds) => {
     }
     return guild.quoteToken.symbol === 'WONE' && guild.token.symbol === guild.guildSlug.toUpperCase()
   })
-
   // TODO we could put this in the priceGuildHelperLPs and call it from there. Dont know if its worth it if it doesnt optimize calls
   // Fetching the prices from our Loot farms
   const farms = await fetchFarms(farmsConfig)

@@ -94,6 +94,7 @@ const ListItem = styled.li`
 export interface SelectProps {
   options: OptionProps[]
   onChange?: (option: OptionProps) => void
+  defaultList?: boolean
 }
 
 export interface OptionProps {
@@ -101,7 +102,7 @@ export interface OptionProps {
   value: any
 }
 
-const Select: React.FunctionComponent<SelectProps> = ({ options, onChange }) => {
+const Select: React.FunctionComponent<SelectProps> = ({ options, onChange, defaultList = false }) => {
   const containerRef = useRef(null)
   const dropdownRef = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
@@ -109,9 +110,16 @@ const Select: React.FunctionComponent<SelectProps> = ({ options, onChange }) => 
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 })
 
   const toggling = () => setIsOpen(!isOpen)
-
+  const clearState = () => {
+    setIsOpen(false)
+    setSelectedOptionIndex(0)
+    setContainerSize({ width: 0, height: 0 })
+  }
   const onOptionClicked = (selectedIndex: number) => () => {
     setSelectedOptionIndex(selectedIndex)
+    if (defaultList) {
+      setSelectedOptionIndex(0)
+    }
     setIsOpen(false)
 
     if (onChange) {
@@ -124,6 +132,9 @@ const Select: React.FunctionComponent<SelectProps> = ({ options, onChange }) => 
       width: dropdownRef.current.offsetWidth, // Consider border
       height: dropdownRef.current.offsetHeight,
     })
+    return () => {
+      clearState()
+    }
   }, [])
 
   return (

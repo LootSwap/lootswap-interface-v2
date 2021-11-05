@@ -3,6 +3,7 @@ import { guildSettings as trollSettings } from '../Troll/settings'
 import { guildSettings as arbSettings } from '../Arb/settings'
 import { guildSettings as bardSettings } from '../Bard/settings'
 import { guildSettings as cosmicSettings } from '../Cosmic/settings'
+import { guildSettings as foolSettings } from '../Fool/settings'
 // CHORE: GUILD SETTINGS
 const useGuildSettings = (slug: string) => {
   switch (slug) {
@@ -16,6 +17,8 @@ const useGuildSettings = (slug: string) => {
       return bardSettings
     case 'cosmic':
       return cosmicSettings
+    case 'fool':
+      return foolSettings
     default:
       return null // TODO create a default for guilds theme
   }

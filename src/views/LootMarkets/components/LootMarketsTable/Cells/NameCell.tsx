@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import { Text, Image, useMatchBreakpoints } from '@pancakeswap/uikit'
@@ -28,7 +28,7 @@ const NameCell: React.FC<NameCellProps> = ({ lootmarket }) => {
 
   const stakingTokenSymbol = stakingToken.symbol
   const earningTokenSymbol = earningToken.symbol
-  const iconFile = `${earningTokenSymbol}-${stakingTokenSymbol}.svg`.toLocaleLowerCase()
+  // let iconFile = `${earningTokenSymbol}-${stakingTokenSymbol}.svg`.toLocaleLowerCase()
 
   const stakedBalance = userData?.stakedBalance ? new BigNumber(userData.stakedBalance) : BIG_ZERO
   const isStaked = stakedBalance.gt(0)
@@ -37,6 +37,27 @@ const NameCell: React.FC<NameCellProps> = ({ lootmarket }) => {
   const title = `${t('Earn')} ${earningTokenSymbol}`
   const subtitle = `${t('Stake')} ${stakingTokenSymbol}`
   const showSubtitle = !isXs && !isSm
+  const [iconFile, setIconFile] = useState(`${earningTokenSymbol}-${stakingTokenSymbol}.svg`.toLocaleLowerCase())
+
+  useEffect(() => {
+    // Run! Like go get some data from an API.
+    const xhr = new XMLHttpRequest()
+    // listen for `onload` event
+    xhr.onload = () => {
+      if (xhr.status === 200 && xhr.response.type !== 'text/html') {
+        // console.log('Image exists.');
+      } else {
+        console.info('Image does not exist., replacing', iconFile)
+        const newIconFile = `${earningTokenSymbol}-${stakingTokenSymbol}.png`.toLocaleLowerCase()
+        setIconFile(newIconFile)
+      }
+    }
+    // create a `HEAD` request
+    xhr.open('HEAD', `/images/lootmarkets/${iconFile}`, true)
+    xhr.responseType = 'blob'
+    // send request
+    xhr.send()
+  }, [iconFile, earningTokenSymbol, stakingTokenSymbol])
 
   return (
     <StyledCell role="cell">

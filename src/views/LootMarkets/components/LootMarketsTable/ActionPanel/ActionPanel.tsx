@@ -131,7 +131,6 @@ const ActionPanel: React.FC<ActionPanelProps> = ({ account, lootmarket, userData
   } = useTooltip(t('Total amount of %symbol% staked in this pool', { symbol: stakingToken.symbol }), {
     placement: 'bottom',
   })
-
   const blocksRow =
     blocksRemaining || blocksUntilStart ? (
       <Flex mb="8px" justifyContent="space-between">

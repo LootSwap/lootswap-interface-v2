@@ -41,11 +41,14 @@ export const fetchLootMarketsPublicDataAsync = (currentBlock: number) => async (
       currentBlock > 0 && blockLimit ? currentBlock > Number(blockLimit.endBlock) : false
     const isLootMarketFinished = market.isFinished || isLootMarketEndBlockExceeded
 
-    const stakingTokenAddress = market.stakingToken.address
-      ? getAddress(market.stakingToken.address).toLowerCase()
+    // check overrides
+    const stakingTokenAddressOverride = market.override?.stakingTokenQuote
+      ? market.override?.stakingTokenQuote.address
+      : market.stakingToken.address
+    const stakingTokenAddress = stakingTokenAddressOverride
+      ? getAddress(stakingTokenAddressOverride).toLowerCase()
       : null
     const stakingTokenPrice = stakingTokenAddress ? prices[stakingTokenAddress] : 0
-
     const earningTokenAddress = market.earningToken.address
       ? getAddress(market.earningToken.address).toLowerCase()
       : null

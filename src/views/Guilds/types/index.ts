@@ -30,6 +30,11 @@ export type LockUp = {
   guildIcon?: string
 }
 
+export type SocialGuildInfo = {
+  label: string
+  link: string
+}
+
 export type GuildConfig = {
   numberOfFarmsVisible: number
   symbol: string
@@ -45,4 +50,5 @@ export type GuildConfig = {
   lockupconfig?: LockUp
   tagline?: string
   overrideBannerTitle?: string
+  social?: SocialGuildInfo[]
 }

@@ -8,7 +8,6 @@ import { BIG_ZERO } from 'utils/bigNumber'
 import { formatNumber, getBalanceNumber, getFullDisplayBalance } from 'utils/formatBalance'
 import Balance from 'components/Balance'
 import { useTranslation } from 'contexts/Localization'
-import { DISPLAY_DECIMAL_FORMAT_PREF } from 'config'
 import BaseCell, { CellContent } from './BaseCell'
 import CollectModal from '../../LootMarketsCard/Modals/CollectModal'
 
@@ -56,10 +55,7 @@ const EarningsCell: React.FC<EarningsCellProps> = ({ lootmarket, account, userDa
     onPresentCollect()
   }
 
-  let decimalFormatPrefer = 1
-  if (hasEarnings) {
-    decimalFormatPrefer = Number(earningTokenBalance.toFixed(15)) % 1 !== 0 ? 18 : DISPLAY_DECIMAL_FORMAT_PREF
-  }
+  const decimalFormatPrefer = 6
 
   return (
     <StyledCell role="cell">

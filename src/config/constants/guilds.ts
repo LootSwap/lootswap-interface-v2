@@ -212,6 +212,28 @@ const farms: GuildConfig[] = [
     guildSlug: 'troll',
   },
   {
+    pid: 17,
+    lpSymbol: 'TROLL-BOOM',
+    lpAddresses: {
+      1666600000: '0x1310f38E8746C3A997637f7ed5c5b23f9D06Cd2E',
+      1666700000: '',
+    },
+    token: tokens.boom,
+    quoteToken: tokens.troll,
+    guildSlug: 'troll',
+  },
+  {
+    pid: 18,
+    lpSymbol: 'TROLL-LAZR',
+    lpAddresses: {
+      1666600000: '0x50af18f06A26E7590Cd127931ff9506b41f2C1c9',
+      1666700000: '',
+    },
+    token: tokens.lazr,
+    quoteToken: tokens.troll,
+    guildSlug: 'troll',
+  },
+  {
     pid: 0,
     lpSymbol: 'ARB-LOOT',
     lpAddresses: {
@@ -558,6 +580,42 @@ const farms: GuildConfig[] = [
     quoteToken: tokens.busd,
     isCommunity: true,
     guildSlug: 'cosmic',
+  },
+  {
+    pid: 0,
+    lpSymbol: 'FOOL-ONE',
+    lpAddresses: {
+      1666600000: '0x67367E49EcEe9477c2Db11D81999fbA2551B37Cf',
+      1666700000: '',
+    },
+    token: tokens.fool,
+    quoteToken: tokens.wone,
+    isCommunity: true,
+    guildSlug: 'fool',
+  },
+  {
+    pid: 1,
+    lpSymbol: 'bscBUSD-BUSD',
+    lpAddresses: {
+      1666600000: '0x63D75d38B7428A6C7a72Df9b74A14ae974B80410',
+      1666700000: '',
+    },
+    token: tokens.bscbusd,
+    quoteToken: tokens.busd,
+    isCommunity: true,
+    guildSlug: 'fool',
+  },
+  {
+    pid: 2,
+    lpSymbol: 'bscUSDC-1USDC',
+    lpAddresses: {
+      1666600000: '0x1Cb2F8e969d5e4C26596bE0E76fF9D47F2C666D4',
+      1666700000: '',
+    },
+    token: tokens.bscusdc,
+    quoteToken: tokens.oneusdc,
+    isCommunity: true,
+    guildSlug: 'fool',
   },
 ]
 

@@ -3,6 +3,15 @@ const tokens = {
     symbol: 'ONE',
     projectLink: 'https://www.harmony.one/',
   },
+  lootone: {
+    symbol: 'LOOT-LP',
+    address: {
+      1666600000: '0xa2debc3cbe088fff2bede17ac67ef5f285845038',
+      1666700000: '',
+    },
+    decimals: 18,
+    projectLink: '//lootswap.finance/',
+  },
   loot: {
     symbol: 'LOOT',
     address: {
@@ -127,7 +136,7 @@ const tokens = {
       1666700000: '',
     },
     decimals: 18,
-    projectLink: '//lootswap.finance/',
+    projectLink: '//www.trollarcade.one/',
   },
   necro: {
     symbol: 'NECRO',
@@ -146,16 +155,16 @@ const tokens = {
       decimals: 18,
     },
     decimals: 18,
-    projectLink: '//lootswap.finance/',
+    projectLink: '//harmonyuniverse.one/',
   },
   bard: {
     symbol: 'BARD',
     address: {
       1666600000: '0x69f4e54C666f7DDaf66D11876f557EC21cB65F35',
       1666700000: '',
-      decimals: 18,
-      projectLink: '//lootswap.finance/',
     },
+    decimals: 18,
+    projectLink: '//themarketplace.digital/',
   },
   gg: {
     symbol: 'GG',
@@ -260,99 +269,144 @@ const tokens = {
     address: {
       1666600000: '0xea589e93ff18b1a1f1e9bac7ef3e86ab62addc79',
       1666700000: '',
-      decimals: 18,
-      projectLink: '//viperswap.one/',
     },
+    decimals: 18,
+    projectLink: '//viperswap.one/',
   },
   hmochi: {
     symbol: 'hMOCHI',
     address: {
       1666600000: '0x0dd740db89b9fda3baadf7396ddad702b6e8d6f5',
       1666700000: '',
-      decimals: 18,
-      projectLink: '//mochiswap.io//',
     },
+    decimals: 18,
+    projectLink: '//mochiswap.io//',
   },
   onesushi: {
     symbol: '1SUSHI',
     address: {
       1666600000: '0xbec775cb42abfa4288de81f387a9b1a3c4bc552a',
       1666700000: '',
-      decimals: 18,
-      projectLink: '//mochiswap.io//',
     },
+    decimals: 18,
+    projectLink: '//sushiswap.io//',
   },
   mooni: {
     symbol: 'MOONI',
     address: {
       1666600000: '0x8D4F19bec883Ba20F4f295706C53F760Cd0BC2B0',
       1666700000: '',
-      decimals: 18,
-      projectLink: '//moonity.one/',
     },
+    decimals: 18,
+    projectLink: '//moonity.one/',
   },
   jenn: {
     symbol: 'JENN',
     address: {
       1666600000: '0x2f459dd7cbcc9d8323621f6fb430cd0555411e7b',
       1666700000: '',
-      decimals: 18,
-      projectLink: '//tokenjenny.one/',
     },
+    decimals: 18,
+    projectLink: '//tokenjenny.one/',
   },
   coink: {
     symbol: 'COINK',
     address: {
       1666600000: '0x4970417a897cc7ae812b9b8db34bb44833c26739',
       1666700000: '',
-      decimals: 18,
-      projectLink: '',
     },
+    decimals: 18,
+    projectLink: '',
   },
   vinci: {
     symbol: 'VINCI',
     address: {
       1666600000: '0xB8E0497018c991E86311b64EFd9D57b06aEDbBAE',
       1666700000: '',
-      decimals: 18,
-      projectLink: '//davinci.gallery/',
     },
+    decimals: 18,
+    projectLink: '//davinci.gallery/',
   },
   magic: {
     symbol: 'MAGIC',
     address: {
       1666600000: '0x892D81221484F690C0a97d3DD18B9144A3ECDFB7',
       1666700000: '',
-      decimals: 18,
-      projectLink: '',
     },
+    decimals: 18,
+    projectLink: '//cosmicguild.one/',
   },
   cosmic: {
     symbol: 'COSMIC',
     address: {
       1666600000: '0x6008c8769bfacd92251ba838382e7e5637c7e74d',
       1666700000: '',
-      decimals: 9,
-      projectLink: '',
     },
+    decimals: 9,
+    projectLink: '//cosmicguild.one/',
   },
   oswap: {
     symbol: 'oSWAP',
     address: {
       1666600000: '0xc0431Ddcc0D213Bf27EcEcA8C2362c0d0208c6DC',
       1666700000: '',
-      decimals: 18,
-      projectLink: '',
     },
+    decimals: 18,
+    projectLink: '',
   },
   extralife: {
     symbol: '$LIFE',
     address: {
       1666600000: '0xab965375c9c109b8e1a4c4f7422b199ee36682b0',
       1666700000: '',
-      decimals: 18,
-      projectLink: '',
     },
+    decimals: 18,
+    projectLink: '',
+  },
+  loblox: {
+    symbol: 'LBLOX',
+    address: {
+      1666600000: '0xd62bd801a1cb65532def9908c67b8c00f432c1bb',
+      1666700000: '',
+    },
+    decimals: 18,
+    projectLink: '//lootblocks.one/',
+  },
+  boom: {
+    symbol: 'BOOM',
+    address: {
+      1666600000: '0x495500b582ab72ad47eb2d301469ce799bddf9e4',
+      1666700000: '',
+    },
+    decimals: 18,
+    projectLink: '',
+  },
+  lazr: {
+    symbol: 'LAZR',
+    address: {
+      1666600000: '0xed2a4e1577f7c90d84915250278b685bd6e498b3',
+      1666700000: '',
+    },
+    decimals: 18,
+    projectLink: '',
+  },
+  cgs: {
+    symbol: 'CGS',
+    address: {
+      1666600000: '0x6cc35220349c444c39b8e26b359757739aaec952',
+      1666700000: '',
+    },
+    decimals: 18,
+    projectLink: '//cougarswap.io/',
+  },
+  fool: {
+    symbol: 'FOOL',
+    address: {
+      1666600000: '0x584705c40E7DF1fcfc06cb0Ad5223E0F5BC8e6E2',
+      1666700000: '',
+    },
+    decimals: 18,
+    projectLink: '',
   },
 }
 

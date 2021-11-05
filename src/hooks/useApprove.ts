@@ -54,7 +54,7 @@ export const useLootMarketApprove = (lpContract: Contract, pid, earningTokenSymb
         // user rejected tx or didn't go thru
         toastError(t('Error'), t('Please try again. Confirm the transaction and make sure you are paying enough gas!'))
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(e)
       toastError(t('Error'), e?.message)
     }

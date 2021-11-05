@@ -10,6 +10,7 @@ export const config: GuildConfig = {
   lightTheme,
   guildSlug: 'gg',
   guildTokenPerBlock: 0.00000000159,
+  tagline: 'INACTIVE',
   footerImg: {
     src: '/images/tokens/gg.png',
     alt: 'GG Guild',

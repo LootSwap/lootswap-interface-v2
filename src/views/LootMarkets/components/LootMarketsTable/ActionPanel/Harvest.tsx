@@ -9,7 +9,6 @@ import { useTranslation } from 'contexts/Localization'
 import Balance from 'components/Balance'
 import { BIG_ZERO } from 'utils/bigNumber'
 import { LootMarket } from 'state/types'
-import { DISPLAY_DECIMAL_FORMAT_PREF } from 'config'
 
 import { ActionContainer, ActionTitles, ActionContent } from './styles'
 import CollectModal from '../../LootMarketsCard/Modals/CollectModal'
@@ -35,10 +34,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({
   const earningTokenDollarBalance = getBalanceNumber(earnings.multipliedBy(earningTokenPrice), earningToken.decimals)
   const hasEarnings = earnings.gt(0)
 
-  let decimalFormatPrefer = 1
-  if (hasEarnings) {
-    decimalFormatPrefer = Number(earningTokenBalance.toFixed(15)) % 1 !== 0 ? 18 : DISPLAY_DECIMAL_FORMAT_PREF
-  }
+  const decimalFormatPrefer = 6
 
   const fullBalance = getFullDisplayBalance(earnings, earningToken.decimals)
   const formattedBalance = formatNumber(earningTokenBalance, decimalFormatPrefer, decimalFormatPrefer)

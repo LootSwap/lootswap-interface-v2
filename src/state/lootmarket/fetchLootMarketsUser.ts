@@ -5,7 +5,9 @@ import multicall from 'utils/multicall'
 import { getAddress } from 'utils/addressHelpers'
 import BigNumber from 'bignumber.js'
 
-const lootStakingPools = lootMarketsConfig.filter((p) => p.stakingToken.symbol === 'LOOT')
+const lootStakingPools = lootMarketsConfig.filter(
+  (p) => p.stakingToken.symbol === 'LOOT' || p.stakingToken.symbol === 'LOOT-LP',
+)
 
 export const fetchLootMarketsAllowance = async (account) => {
   const calls = lootStakingPools.map((p) => ({
