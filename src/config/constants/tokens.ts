@@ -408,6 +408,15 @@ const tokens = {
     decimals: 18,
     projectLink: '',
   },
+  crv: {
+    symbol: '1CRV',
+    address: {
+      1666600000: '0x352cd428efd6f31b5cae636928b7b84149cf369f',
+      1666700000: '',
+    },
+    decimals: 18,
+    projectLink: '//harmony.curve.fi/',
+  },
 }
 
 export default tokens
