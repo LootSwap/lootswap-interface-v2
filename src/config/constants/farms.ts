@@ -239,6 +239,17 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.wone,
     isCommunity: true,
   },
+  {
+    pid: 23,
+    lpSymbol: 'LOOT-FOOL',
+    lpAddresses: {
+      1666600000: '0xE62946772ccD43F9859a8b22182B957797cc2d3f',
+      1666700000: '',
+    },
+    token: tokens.fool,
+    quoteToken: tokens.loot,
+    isCommunity: true,
+  },
 ]
 
 export default farms

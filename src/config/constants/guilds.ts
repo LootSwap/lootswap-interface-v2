@@ -641,6 +641,30 @@ const farms: GuildConfig[] = [
     isCommunity: true,
     guildSlug: 'fool',
   },
+  {
+    pid: 5,
+    lpSymbol: 'FOOL-APE',
+    lpAddresses: {
+      1666600000: '0x44BE00be3FDf0ea36242Cb0606801B776Cd98Cf1',
+      1666700000: '',
+    },
+    token: tokens.harmonape,
+    quoteToken: tokens.fool,
+    isCommunity: true,
+    guildSlug: 'fool',
+  },
+  {
+    pid: 6,
+    lpSymbol: 'APE-ONE',
+    lpAddresses: {
+      1666600000: '0x8a898f58BC82985eDcBAe2Bede0D7C812a85a1Ee',
+      1666700000: '',
+    },
+    token: tokens.harmonape,
+    quoteToken: tokens.wone,
+    isCommunity: true,
+    guildSlug: 'fool',
+  },
 ]
 
 export default farms

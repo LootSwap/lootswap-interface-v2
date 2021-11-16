@@ -417,6 +417,15 @@ const tokens = {
     decimals: 18,
     projectLink: '//harmony.curve.fi/',
   },
+  harmonape: {
+    symbol: 'APE',
+    address: {
+      1666600000: '0xd3a50c0dce15c12fe64941ffd2b864e887c9b9e1',
+      1666700000: '',
+    },
+    decimals: 9,
+    projectLink: '//www.harmonape.com/',
+  },
 }
 
 export default tokens
