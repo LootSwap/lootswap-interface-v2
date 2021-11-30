@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@ethersproject/abi": "^5.1.2",
-    "@lootswap/uikit": "^0.0.12",
+    "@lootswap/uikit": "^0.0.14",
     "@pancakeswap/uikit": "^0.37.0",
     "@reduxjs/toolkit": "^1.5.0",
     "@types/react": "^17.0.5",
