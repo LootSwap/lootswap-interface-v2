@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { useAppDispatch } from 'state'
-import { lootMarketHarvestStaking, harvest, harvestGuild } from 'utils/callHelpers'
+import { lootMarketHarvestStaking, harvest, harvestGuild, harvestAllGuild } from 'utils/callHelpers'
 import { updateUserBalance, updateUserPendingReward } from 'state/actions'
 import { useMasterchef, useLootMarketContract, useMasterGuildLooter } from './useContract'
 
@@ -44,4 +44,17 @@ export const useGuildHarvest = (farmPid: number, guildSlug: string) => {
   }, [account, farmPid, masterGuildContract])
 
   return { onReward: handleHarvest }
+}
+
+export const useGuildHarvestAll = (guildSlug: string, pids: number[]) => {
+  const { account } = useWeb3React()
+  const masterGuildContract = useMasterGuildLooter(guildSlug)
+
+  const handleHarvestAll = useCallback(async () => {
+    const txHash = await harvestAllGuild(masterGuildContract, pids, account)
+    console.info(txHash)
+    return txHash
+  }, [account, masterGuildContract, pids])
+
+  return { onReward: handleHarvestAll }
 }

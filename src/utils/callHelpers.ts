@@ -180,6 +180,42 @@ export const unstakeGuild = async (masterGuildContract, pid, amount, account) =>
     })
 }
 
+export const unlockGuild = async (guildContract, account) => {
+  const estGas = await guildContract.methods
+    .unlock()
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('unlockGuild().estGas failed', error)
+    })
+
+  return guildContract.methods
+    .unlock()
+    .send({ from: account, gas: estGas })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const harvestAllGuild = async (masterGuildContract, pids, account) => {
+  const estGas = await masterGuildContract.methods
+    .claimRewards(pids)
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('harvestAllGuild().estGas failed', error)
+    })
+
+  return masterGuildContract.methods
+    .claimRewards(pids)
+    .send({ from: account, gas: estGas })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
 export const harvestGuild = async (masterGuildContract, pid, account) => {
   const estGas = await masterGuildContract.methods
     .claimReward(pid)

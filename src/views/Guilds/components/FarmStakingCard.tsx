@@ -1,10 +1,9 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { Heading, Card, CardBody, Button } from '@pancakeswap/uikit'
-import { harvest } from 'utils/callHelpers'
 import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
-import { useMasterGuildLooter } from 'hooks/useContract'
+import { useGuildHarvestAll } from 'hooks/useHarvest'
 import UnlockButton from 'components/UnlockButton'
 import useGuildsQuestWithBalance from '../hooks/useGuildsQuestWithBalance'
 import GuildHarvestBalance from './GuildHarvestBalance'
@@ -46,22 +45,20 @@ const FarmedStakingCard = (guildSettings) => {
   const { account } = useWeb3React()
   const { t } = useTranslation()
   const farmsWithBalance = useGuildsQuestWithBalance()
-  const masterChefContract = useMasterGuildLooter(guildSlug)
-  const balancesWithValue = farmsWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
-
+  const balancesWithValue = farmsWithBalance.filter((i) => i.guildSlug === guildSlug && i.balance.toNumber() > 0)
+  const pids = balancesWithValue.map((i) => i.pid)
+  const { onReward } = useGuildHarvestAll(guildSlug, pids)
   const harvestAllFarms = useCallback(async () => {
     setPendingTx(true)
-    // eslint-disable-next-line no-restricted-syntax
-    for (const farmWithBalance of balancesWithValue) {
-      try {
-        // eslint-disable-next-line no-await-in-loop
-        await harvest(masterChefContract, farmWithBalance.pid, account)
-      } catch (error) {
-        // TODO: find a way to handle when the user rejects transaction or it fails
+    try {
+      if (account) {
+        await onReward()
       }
+    } catch (error) {
+      // TODO: find a way to handle when the user rejects transaction or it fails
     }
     setPendingTx(false)
-  }, [account, balancesWithValue, masterChefContract])
+  }, [account, onReward])
 
   return (
     <StyledFarmStakingCard src={footerImg.src}>
@@ -86,8 +83,13 @@ const FarmedStakingCard = (guildSettings) => {
         {hasLockUp && <GuildLockedBalance {...guildSettings} />}
         <Actions>
           {account ? (
-            <Button id="harvest-all" disabled={balancesWithValue.length && true} onClick={harvestAllFarms} width="100%">
-              {pendingTx ? t('Collecting %sym%', { sym: symbol }) : 'Disabled'}
+            <Button
+              id="harvest-all"
+              disabled={balancesWithValue.length <= 0 || pendingTx}
+              onClick={harvestAllFarms}
+              width="100%"
+            >
+              {pendingTx ? t('Collecting %sym%', { sym: symbol }) : 'Harvest All'}
             </Button>
           ) : (
             <UnlockButton width="100%" />
