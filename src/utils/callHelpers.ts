@@ -64,6 +64,24 @@ export const harvest = async (masterChefContract, pid, account) => {
     })
 }
 
+export const unlock = async (contract, account) => {
+  const estGas = await contract.methods
+    .unlock()
+    .estimateGas({ from: account, gasPrice: DEFAULT_GAS_PRICE }, (error, estimateGas) => {
+      return !error ? estimateGas : DEFAULT_GAS_LIMIT
+    })
+    .catch((error) => {
+      console.error('unlock().estGas failed', error)
+    })
+
+  return contract.methods
+    .unlock()
+    .send({ from: account, gas: estGas })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
 // Loot Markets
 export const approveLootMarket = async (lpContract, lootMarketContract, account) => {
   const txn = await lpContract.methods

@@ -10,6 +10,7 @@ import UnlockButton from 'components/UnlockButton'
 import CakeHarvestBalance from './CakeHarvestBalance'
 import CakeWalletBalance from './CakeWalletBalance'
 import LootLockBalance from './LootLockedBalance'
+import LootUnlockBalance from './LootUnlockedBalance'
 
 const StyledFarmStakingCard = styled(Card)`
   background-image: url('/images/decorations/background/loot-bg.svg');
@@ -73,6 +74,7 @@ const FarmedStakingCard = () => {
           <CakeWalletBalance />
         </Block>
         <LootLockBalance />
+        <LootUnlockBalance />
         <Actions>
           {account ? (
             <Button id="harvest-all" disabled={balancesWithValue.length && true} onClick={harvestAllFarms} width="100%">
