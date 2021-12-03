@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { Heading, Card, CardBody, Button } from '@pancakeswap/uikit'
-import { harvest } from 'utils/callHelpers'
 import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
 import useFarmsWithBalance from 'hooks/useFarmsWithBalance'
-import { useMasterchef } from 'hooks/useContract'
+import { useHarvestAll } from 'hooks/useHarvest'
+import useToast from 'hooks/useToast'
 import UnlockButton from 'components/UnlockButton'
 import CakeHarvestBalance from './CakeHarvestBalance'
 import CakeWalletBalance from './CakeWalletBalance'
@@ -38,25 +38,30 @@ const Actions = styled.div`
 
 const FarmedStakingCard = () => {
   const [pendingTx, setPendingTx] = useState(false)
+  const { toastSuccess } = useToast()
   const { account } = useWeb3React()
   const { t } = useTranslation()
   const farmsWithBalance = useFarmsWithBalance()
-  const masterChefContract = useMasterchef()
-  const balancesWithValue = farmsWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
-
+  const balancesWithValue = farmsWithBalance.filter((i) => i.balance.toNumber() > 0)
+  const pids = balancesWithValue.map((i) => i.pid)
+  const { onReward } = useHarvestAll(pids)
   const harvestAllFarms = useCallback(async () => {
     setPendingTx(true)
-    // eslint-disable-next-line no-restricted-syntax
-    for (const farmWithBalance of balancesWithValue) {
-      try {
-        // eslint-disable-next-line no-await-in-loop
-        await harvest(masterChefContract, farmWithBalance.pid, account)
-      } catch (error) {
-        // TODO: find a way to handle when the user rejects transaction or it fails
+    try {
+      if (account) {
+        setPendingTx(true)
+        await onReward()
+        setPendingTx(false)
+        toastSuccess(
+          `${t('Harvested')}!`,
+          t('Your %symbol% earnings have been sent to your wallet!', { symbol: 'LOOT' }),
+        )
       }
+    } catch (error) {
+      setPendingTx(false)
     }
     setPendingTx(false)
-  }, [account, balancesWithValue, masterChefContract])
+  }, [account, onReward, toastSuccess, t])
 
   return (
     <StyledFarmStakingCard>
@@ -77,8 +82,13 @@ const FarmedStakingCard = () => {
         <LootUnlockBalance />
         <Actions>
           {account ? (
-            <Button id="harvest-all" disabled={balancesWithValue.length && true} onClick={harvestAllFarms} width="100%">
-              {pendingTx ? t('Collecting LOOT') : 'Disabled'}
+            <Button
+              id="harvest-all"
+              disabled={balancesWithValue.length && pendingTx}
+              onClick={harvestAllFarms}
+              width="100%"
+            >
+              {pendingTx ? t('Collecting LOOT') : 'Harvest All'}
             </Button>
           ) : (
             <UnlockButton width="100%" />
