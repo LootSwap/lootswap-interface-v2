@@ -6,6 +6,7 @@ import {
   getMasterchefContract,
   getLootMarketContract,
   getMasterGuildLooterContract,
+  getGuildTokenContract,
 } from 'utils/contractHelpers'
 
 /**
@@ -34,4 +35,9 @@ export const useLootMarketContract = (id) => {
 export const useMasterGuildLooter = (guildSlug: string) => {
   const web3 = useWeb3()
   return useMemo(() => getMasterGuildLooterContract(guildSlug, web3), [guildSlug, web3])
+}
+
+export const useGuildToken = (guildSlug: string) => {
+  const web3 = useWeb3()
+  return useMemo(() => getGuildTokenContract(guildSlug, web3), [guildSlug, web3])
 }
