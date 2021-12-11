@@ -7,8 +7,6 @@ import { guildSettings as foolSettings } from '../Fool/settings'
 // CHORE: GUILD SETTINGS
 const useGuildSettings = (slug: string) => {
   switch (slug) {
-    case 'gg':
-      return ggSettings
     case 'troll':
       return trollSettings
     case 'arb':

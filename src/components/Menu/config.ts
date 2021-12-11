@@ -41,10 +41,6 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     type: 'svg',
     items: [
       {
-        label: t('Geriatric Gaming'),
-        href: '/guilds/gg',
-      },
-      {
         label: t('Troll'),
         href: '/guilds/troll',
       },
