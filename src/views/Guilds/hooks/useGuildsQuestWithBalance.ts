@@ -33,7 +33,11 @@ const useGuildsQuestWithBalance = () => {
     }
 
     if (account) {
-      fetchBalances()
+      try {
+        fetchBalances()
+      } catch (e) {
+        console.error(e)
+      }
     }
   }, [account, fastRefresh])
 

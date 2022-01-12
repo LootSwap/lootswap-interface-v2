@@ -7,6 +7,8 @@ import styled from 'styled-components'
 import { usePriceGuildBusd } from 'state/hooks'
 import { useGuildUnlock } from 'hooks/useUnlock'
 import { getBalanceNumber } from 'utils/formatBalance'
+import { useAppDispatch } from 'state'
+import { fetchGuildUserDataAsync } from 'state/guilds'
 import useGuildLockedBalance from '../hooks/useGuildLockedBalance'
 import { useCheckUnlockBalance, useLockupBlockLength } from '../hooks/useGuildUnlockedBalance'
 import CardValue from './CardValue'
@@ -35,6 +37,7 @@ const GuildLockedBalance = (guildSettings) => {
   const { guildSlug, lootFarmOverride } = guildSettings
   const [pendingTx, setPendingTx] = useState(false)
   const { t } = useTranslation()
+  const dispatch = useAppDispatch()
   const { account } = useWeb3React()
   const guildPriceBusd = usePriceGuildBusd(
     guildSlug,
@@ -70,10 +73,11 @@ const GuildLockedBalance = (guildSettings) => {
         <Row>
           <CardValue value={personalUnlockBalance} fontSize="24px" lineHeight="36px" />
           <Button
-            disabled={personalUnlockBalance > 0 || pendingTx}
+            disabled={personalUnlockBalance <= 0 || pendingTx}
             onClick={async () => {
               setPendingTx(true)
               await onReward()
+              dispatch(fetchGuildUserDataAsync({ account, pids: [0], guildSlug }))
               setPendingTx(false)
             }}
           >
