@@ -45,7 +45,7 @@ const GuildLockedBalance = (guildSettings) => {
   const userLockedBalance = useGuildLockedBalance(guildSlug) ?? BIG_ZERO
   const lockedBalanceDisplay = getBalanceNumber(userLockedBalance)
   const lockedBalanceBUSD = lockedBalanceDisplay * guildPriceBusd.toNumber()
-  const personalUnlockBalance = useCheckUnlockBalance(guildSlug)
+  const personalUnlockBalance = getBalanceNumber(useCheckUnlockBalance(guildSlug))
   const lockFromBlock = useLockupBlockLength(guildSlug)
   const { onReward } = useGuildUnlock(guildSlug)
   if (!account) {
@@ -68,9 +68,9 @@ const GuildLockedBalance = (guildSettings) => {
           {t('Unlocked Balance %msg%', { msg: lockFromBlock > 0 ? `(block left till unlock: ${lockFromBlock})` : '' })}
         </Label>
         <Row>
-          <CardValue value={personalUnlockBalance.toNumber()} fontSize="24px" lineHeight="36px" />
+          <CardValue value={personalUnlockBalance} fontSize="24px" lineHeight="36px" />
           <Button
-            disabled={personalUnlockBalance.gte(0) || pendingTx}
+            disabled={personalUnlockBalance > 0 || pendingTx}
             onClick={async () => {
               setPendingTx(true)
               await onReward()
