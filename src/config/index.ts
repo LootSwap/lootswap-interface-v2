@@ -21,7 +21,7 @@ export const BASE_LIQUIDITY_POOL_URL = `${BASE_EXCHANGE_URL}/#/pool`
 
 export const DEFAULT_TOKEN_DECIMAL = BIG_TEN.pow(18)
 export const DEFAULT_GAS_LIMIT = 2000000000
-export const DEFAULT_GAS_PRICE = 1
+export const DEFAULT_GAS_PRICE = 33
 
 export const BASE_HARMONY_SCAN_URL = 'https://explorer.harmony.one'
 
