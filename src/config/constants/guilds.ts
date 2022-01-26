@@ -487,6 +487,7 @@ const farms: GuildConfig[] = [
     token: tokens.magic,
     quoteToken: tokens.loot,
     guildSlug: 'cosmic',
+    isCommunity: true,
   },
   {
     pid: 1,

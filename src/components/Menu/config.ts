@@ -35,10 +35,17 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     href: '/questlog',
   },
   {
+    label: t('Troll'),
+    icon: 'QuestLogsIcon',
+    type: 'svg',
+    href: '/questlog',
+  },
+  {
     // CHORE: GUILD SETTINGS
     label: t('Guilds'),
     icon: 'GuildIcon',
     type: 'svg',
+    initialOpenState: true,
     items: [
       {
         label: t('Troll'),

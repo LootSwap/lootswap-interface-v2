@@ -2022,10 +2022,10 @@
   dependencies:
     "@json-rpc-tools/types" "^1.6.1"
 
-"@lootswap/uikit@^0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@lootswap/uikit/-/uikit-0.0.14.tgz#f4952d649a84451630a66f46fb82b5323470c1d0"
-  integrity sha512-WCZQVTx7d0Pf4G1osaO5Ew7MZH4Dxg9NL7+qbGUXrNzn/gt+AliO1OuHpo3k3kzWs7VoNgEW17VAnGzpyij8Ow==
+"@lootswap/uikit@^0.0.16":
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/@lootswap/uikit/-/uikit-0.0.16.tgz#d4f7493a2673ec11ac2a6bb6ea6ccf2d6e425d13"
+  integrity sha512-Za38UZWs5PLP9bx3+PAOYSxhQyI/uMhDrTI0EsPav/MtuGPuDUhgh8Q1D+VjAa9InhgUX6oZ/X40cidYf72R2w==
   dependencies:
     "@types/lodash" "^4.14.162"
     "@types/styled-system" "^5.1.10"
