@@ -23,7 +23,7 @@ export const config: GuildConfig = {
     guildIcon: '/images/tokens/magic.png',
   },
   tagline: 'Rewards are 95% locked up until block 21612813', // use to customize the guild pages tagline
-  overrideBannerTitle: 'COSMIC', // use to change the guild banner title
+  overrideBannerTitle: 'COSMIC Universe', // use to change the guild banner title
   social: [
     { label: 'Website', link: 'https://cosmicguild.one/' },
     { label: 'Telegram', link: 'https://t.me/cosmicguild' },
