@@ -261,9 +261,16 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
   const [observerIsSet, setObserverIsSet] = useState(false)
 
   const farmsStakedMemoized = useMemo(() => {
-    let farmsStaked = []
+    let farmsStaked = []   
 
     const sortFarms = (farms: FarmWithStakedValue[]): FarmWithStakedValue[] => {
+
+      if (guildSlug === 'cosmic' && sortOption === 'hot') {
+        const lootMagic = farms.splice(0, 1)[0];
+        farms.splice(3, 0, lootMagic);
+        return farms;
+      }
+
       switch (sortOption) {
         case 'apr':
           return orderBy(farms, (farm: FarmWithStakedValue) => farm.apr, 'desc')
@@ -309,6 +316,7 @@ const GuildPage: React.FC<IGuildPage> = (props) => {
     inactiveGuildFarms,
     archivedGuildFarms,
     isActive,
+    guildSlug,
     isInactive,
     isArchived,
     stakedArchivedFarms,
