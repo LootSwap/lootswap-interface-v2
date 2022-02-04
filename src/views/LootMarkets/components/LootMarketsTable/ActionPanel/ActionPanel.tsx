@@ -182,7 +182,7 @@ const ActionPanel: React.FC<ActionPanelProps> = ({ account, lootmarket, userData
         {shouldShowBlockCountdown && blocksRow}
         <Flex mb="8px" justifyContent={['flex-end', 'flex-end', 'flex-start']}>
           <LinkExternal
-            href={`https://analytics.lootswap.finance/token/${getAddress(earningToken.address)}`}
+            href='https://dexscreener.com/harmony/lootswap'
             bold={false}
           >
             {t('Info site')}

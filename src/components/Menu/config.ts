@@ -82,7 +82,7 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
   {
     label: t('Analytics'),
     icon: 'InfoIcon',
-    href: 'https://analytics.lootswap.finance/',
+    href: 'https://dexscreener.com/harmony/lootswap',
   },
   {
     label: t('More'),
