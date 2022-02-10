@@ -421,6 +421,28 @@ const farms: GuildConfig[] = [
     isCommunity: true,
   },
   {
+    pid: 16,
+    lpSymbol: 'ARB-JEWEL',
+    lpAddresses: {
+      1666600000: '0x3cb04aba0f04be559d52eba6b0fc96bc26dd71a1',
+      1666700000: '',
+    },
+    token: tokens.arb,
+    quoteToken: tokens.jewel,
+    guildSlug: 'arb',
+  },
+  {
+    pid: 17,
+    lpSymbol: 'ARB-1USDC',
+    lpAddresses: {
+      1666600000: '0x9ecb8de3b44a16de7ad3dd0c6581d7447be0b889',
+      1666700000: '',
+    },
+    token: tokens.arb,
+    quoteToken: tokens.oneusdc,
+    guildSlug: 'arb',
+  },
+  {
     pid: 0,
     lpSymbol: 'BARD-LOOT',
     lpAddresses: {

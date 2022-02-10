@@ -157,6 +157,16 @@ const tokens = {
     decimals: 18,
     projectLink: '//harmonyuniverse.one/',
   },
+  jewel: {
+    symbol: 'JEWEL',
+    address: {
+      1666600000: '0x72cb10c6bfa5624dd07ef608027e366bd690048f',
+      1666700000: '',
+      decimals: 18,
+    },
+    decimals: 18,
+    projectLink: '//harmonyuniverse.one/',
+  },
   bard: {
     symbol: 'BARD',
     address: {
