@@ -427,8 +427,8 @@ const farms: GuildConfig[] = [
       1666600000: '0x3cb04aba0f04be559d52eba6b0fc96bc26dd71a1',
       1666700000: '',
     },
-    token: tokens.arb,
-    quoteToken: tokens.jewel,
+    token: tokens.jewel,
+    quoteToken: tokens.arb,
     guildSlug: 'arb',
   },
   {
